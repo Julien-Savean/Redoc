@@ -1,6 +1,12 @@
-This is an **example** API to demonstrate features of the OpenAPI specification.
-
 # Introduction
+
+Welcome to the Karlia API documentation !
+
+Karlia is a powerful CRM platform that brings together everything you need to better optimize your productivity in one easy-to-use tool.
+
+The Karlia API is built around a RESTful architecture and allows you to customize, modify and integrate your Karlia organization and external services.
+
+<!-- Ceci est test pour voir si cela fonctionne
 
 This API definition is intended to to be a good starting point for
 describing your API in 
@@ -15,9 +21,7 @@ and
 the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
 the standard OpenAPI syntax, we use a few 
 
-[vendor
-extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
-
+[vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md). 
 
 # OpenAPI Specification
 
@@ -34,4 +38,4 @@ understand and interact with the remote service with a minimal amount of
 implementation logic. Similar to what
 
 interfaces have done for lower-level programming, OpenAPI removes the
-guesswork in calling the service.
+guesswork in calling the service. -->

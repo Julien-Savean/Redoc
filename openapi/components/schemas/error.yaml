@@ -1,0 +1,20 @@
+type: object
+description: >-
+  The Problem Details JSON Object
+properties:
+  code:
+    type: integer
+    description: Error code
+  status:
+    type: string 
+    description: Response status
+  message:
+    type: string
+    description: Error details
+  category_code:
+    type: integer
+    description: Category error code
+  category_message:
+    type: string
+    description: Category error
+

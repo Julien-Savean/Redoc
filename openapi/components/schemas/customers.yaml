@@ -1,0 +1,184 @@
+type: object
+required:
+  - name
+properties:
+  name:
+    description: Name for professional customer or lastname for individual customer
+    type: string
+    maxLength: 127
+    example: Society X
+  individual:
+    description: >
+      Customer type
+
+      > 0 = Professional <br />
+      1 = Individual
+    type: integer
+    example: 0
+  id_civility:
+    description: >
+      Customer civility - **Only for individual customer**
+
+      > 0 = Mr <br />
+      1 = Ms
+    type: integer
+    example: ""
+  firstname:
+    description: Customer firstname - **Only for individual customer**
+    type: string
+    maxLength: 127
+    example: ""
+  prospect:
+    description: >
+      Customer status
+
+      > 0 = Client <br />
+      1 = Prospect
+    type: integer
+    example: 0
+  phone:
+    description: Customer phone
+    type: string
+    maxLength: 30
+    example: "+33512345678"
+  mobile:
+    description: Customer mobile
+    type: string
+    maxLength: 30
+    example: 07 98 76 54 32
+  email:
+    description: Customer email
+    type: string
+    format: email
+    maxLength: 127
+    example: contact@example.com
+  id_client_manager: 
+    description:  Client manager
+    type: array
+    maxLength: 30
+    items:
+      type: integer
+      example: u213
+  langId:
+    description: >
+      Customer language
+      
+      > 1 = French <br />
+      2 = English <br />
+      3 = Spanish
+    type: integer
+    example: 1
+  siret:
+    description: Customer SIRET
+    type: string
+    maxLength: 30
+    example: 123 568 941 00056
+  siren:
+    description: Customer SIREN
+    type: integer
+    maxLength: 30
+    example: 123 568 941
+  legal_form:
+    description: Customer status
+    type: string
+    maxLength: 255
+    example: SARL
+  main_activity:
+    description: APE/NAF code
+    type: integer
+    maxLength: 255
+    example: 4616C
+  vat_number:
+    description: VAT number
+    type: string
+    maxLength: 30
+    example: FR 32 123456789
+  default_discount_percent:
+    description: Default discount
+    type: number
+    format: double
+    example: 10.5
+  id_document_template:
+    description: Id document template
+    type: integer
+    example: ""
+  description:
+    description: Customer description
+    type: string
+    maxLength: 255
+    example: A description or note about this customer
+  client_number:
+    description: Internal number
+    type: string
+    maxLength: 30
+    example: 123
+  main_address:
+    description: Main address
+    type: string
+    maxLength: 255
+    example: 55 Av. Louis Breguet
+  main_zip_code:
+    description: ZIP code of main address
+    type: string
+    maxLength: 64
+    example: 31400
+  main_city:
+    description: City of main address
+    type: string
+    maxLength: 127
+    example: Toulouse
+  main_country:
+    description: Country of main address
+    type: string
+    maxLength: 64
+    example: France
+  delivery_title:
+    description: Name or company name of delivery address
+    type: string
+    maxLength: 127
+    example: My delivery address
+  delivery_address:
+    description: Delivery address
+    type: string
+    maxLength: 255
+    example: 1 place du Capitole
+  delivery_zip_code:
+    description: ZIP code of delivery address
+    type: string
+    maxLength: 64
+    example: 31000
+  delivery_city:
+    description: City of delivery address
+    type: string
+    maxLength: 127
+    example: Toulouse
+  delivery_country:
+    description: Country of delivery address
+    type: string
+    maxLength: 64
+    example: France
+  invoice_title:
+    description: Name or company name of invoice address
+    type: string
+    maxLength: 127
+    example: My invoice address
+  invoice_address:
+    description: Invoice address
+    type: string
+    maxLength: 255
+    example: 55 Rue du Faubourg Saint-Honoré
+  invoice_zip_code:
+    description: ZIP code of invoice address
+    type: string
+    maxLength: 64
+    example: 75000
+  invoice_city:
+    description: City of invoice address
+    type: string
+    maxLength: 127
+    example: Paris
+  invoice_country:
+    description: Country of invoice address
+    type: string
+    maxLength: 64
+    example: France

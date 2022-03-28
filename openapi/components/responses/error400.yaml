@@ -1,0 +1,12 @@
+description: error 400
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/error.yaml
+    example: 
+      code: "20101"
+      status: "error"
+      message: "name field is not completed"
+      category_code: "20"
+      category_message: "Missing required field"
+  

@@ -1,51 +1,32 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Example.com
-  termsOfService: 'https://example.com/terms/'
+  title: Karlia
   contact:
-    email: contact@example.com
-    url: 'http://example.com/contact'
+    email: contact@karlia.com
+    url: 'https://karlia.fr'
   license:
-    name: Apache 2.0
+    name: Apache 2.0 ou je sais pas
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://example.com/terms/'
   x-logo:
-    url: 'https://redocly.github.io/openapi-template/logo.png'
+    url: 'https://karlia.fr/app/template/karlia/img/login/karlia-logo-1.PNG'
+    altText: Logo Karlia
   description:
     $ref: ./info-description.md
 tags:
-  - name: Echo
-    description: Example echo operations.
-  - name: User
-    description: Operations about users.
-  - name: Tag
-    description: This is a tag description.
+  - name: Customers
+    description: This section lists all the API related to the customers
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: 'https://karlia.fr/app/api/v2'
 paths:
-  '/users/{username}':
-    $ref: 'paths/users@{username}.yaml'
-  /echo:
-    $ref: paths/echo.yaml
-  /pathItem:
-    $ref: paths/path-item.yaml
-  /pathItemWithExamples:
-    $ref: paths/path-item-with-examples.yaml
+  # '/users/{username}':
+  #   $ref: 'paths/users@{username}.yaml'
+  /customers:
+    $ref: paths/customers.yaml
 components:
   securitySchemes:
-    main_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: 'http://example.com/api/oauth/dialog'
-          scopes:
-            'read:users': read users info
-            'write:users': modify or remove users
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
+    bearer_token:
       type: http
-      scheme: basic
+      scheme: bearer 
+      bearerFormat: xxxxxx-xxxxxx-xxxx-xxxxxx-xxxxxx

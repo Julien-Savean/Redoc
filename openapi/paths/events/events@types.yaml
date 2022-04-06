@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Events
+  summary: Types
+  description: Get a list of all events types 
+  operationId: Events_types
+  security:
+    - bearer_token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/events/events_types.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

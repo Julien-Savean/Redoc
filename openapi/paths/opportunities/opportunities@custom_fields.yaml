@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Opportunities
+  summary: Custom fields
+  description: Get a list of all opportunities custom fields
+  operationId: Opportunities_custom_fields_list
+  security:
+    - bearer_token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_custom_fields.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 

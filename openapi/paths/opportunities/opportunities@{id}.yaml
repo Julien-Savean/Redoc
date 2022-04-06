@@ -1,0 +1,68 @@
+get:
+  tags:
+    - Opportunities
+  summary: Show
+  description: Get one opportunity
+  operationId: Opportunities_show
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Opportunity Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Opportunities
+  summary: Update
+  description: Update a opportunity
+  operationId: Opportunities_update
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/opportunities/opportunities_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Contact Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml
+delete:
+  tags:
+    - Opportunities
+  summary: Delete
+  description: Delete a opportunity
+  operationId: Opportunities_delete
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Contact Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml

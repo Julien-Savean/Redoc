@@ -1,0 +1,46 @@
+get:
+  tags:
+    - Suppliers
+  summary: Show
+  description: Get one supplier
+  operationId: Suppliers_show
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Supplier Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/suppliers/suppliers_object.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Suppliers
+  summary: Update
+  description: Update a supplier
+  operationId: Suppliers_update
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/suppliers/suppliers_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Supplier Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/suppliers/suppliers_object.yaml      
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml  

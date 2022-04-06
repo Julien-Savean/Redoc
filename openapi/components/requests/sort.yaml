@@ -1,0 +1,35 @@
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.*   
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: integer
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z.
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    maxLength: 30
+  description: Offset for paging

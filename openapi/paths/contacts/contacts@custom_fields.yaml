@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Contacts
+  summary: Custom fields
+  description: Get a list of all contacts custom fields
+  operationId: Contacts_custom_fields_list
+  security:
+    - bearer_token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/contacts/contacts_custom_fields.yaml    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 

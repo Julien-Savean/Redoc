@@ -1,0 +1,87 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - id_user_assigned
+        properties:
+          id_user_assigned:
+            description: User Id
+            type: string
+            maxLength: 127
+            example: 213
+          id_customer_supplier:
+            description: Customer or supplier Id
+            type: integer
+            example: 28496
+          id_opportunity:
+            description: Opportunity Id
+            type: integer
+            example: 1985
+          id_event_type:
+            description: Event type Id
+            type: integer
+            example: 3021
+          id_project:
+            description: Project Id
+            type: integer
+            example: ""
+          id_project_task:
+            description: Task Id
+            type: integer
+            example: ""
+          start_date:
+            description: Start date
+            type: string
+            format: date-time
+            example: "2022-03-15 19:45:00"
+          end_date:
+            description: End date
+            type: string
+            format: date-time
+            example: "2022-03-15 20:45:00"
+          title:
+            description: Event title
+            type: string
+            maxLength: 255
+            example: "Event #1"
+          description: 
+            description: Event descritpion
+            type: string
+            example: "A description or note about this event"
+          private:
+            description: >
+              Event private status
+
+              > 0 = No <br />
+              1 = Yes
+            type: integer
+            example: 0
+          visible_in_agenda:
+            description: >
+              Visibility in the agenda
+
+              > 0 = No <br />
+              1 = Yes
+            type: integer
+            example: 1
+          use_time:
+            description: >
+              Event used for time
+
+              > 0 = No <br />
+              1 = Yes
+            type: integer
+            example: 1
+          time_id_type:
+            description: Time type Id
+            type: integer
+            example: 0
+          time_billable:
+            description: >
+              Billable time
+
+              > 0 = No <br />
+              1 = Billable
+            type: integer
+            example: 0

@@ -1,0 +1,12 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - field_value
+        properties:
+          field_value:
+            description: Custom field value
+            type: string
+            maxLength: 255
+            example: 5911

@@ -1,0 +1,153 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+        properties:
+          name:
+            description: Supplier name
+            type: string
+            maxLength: 127
+            example: Society Y
+          phone:
+            description: Supplier phone number
+            type: string
+            maxLength: 30
+            example: "+33512345678"
+          mobile:
+            description: Supplier mobile number
+            type: string
+            maxLength: 30
+            example: 07 98 76 54 32
+          email:
+            description: Supplier email address
+            type: string
+            format: email
+            maxLength: 127
+            example: contact@example.com
+          id_client_manager: 
+            description:  Client manager
+            type: array
+            maxLength: 30
+            items:
+              type: string
+              example: u213
+          langId:
+            description: >
+              Supplier language
+              
+              > 1 = French <br />
+              2 = English <br />
+              3 = Spanish
+            type: integer
+            example: 1
+          siret:
+            description: Supplier SIRET
+            type: string
+            maxLength: 30
+            example: 123 568 941 00056
+          siren:
+            description: Supplier SIREN
+            type: integer
+            maxLength: 30
+            example: 123 568 941
+          legal_form:
+            description: Supplier status
+            type: string
+            maxLength: 255
+            example: SARL
+          main_activity:
+            description: APE/NAF code
+            type: integer
+            maxLength: 255
+            example: 4616C
+          vat_number:
+            description: VAT number
+            type: string
+            maxLength: 30
+            example: FR 32 123456789
+          id_document_template:
+            description: Id document template
+            type: integer
+            example: ""
+          description:
+            description: Supplier description
+            type: string
+            maxLength: 255
+            example: A description or note about this supplier
+          client_number:
+            description: Internal number
+            type: string
+            maxLength: 30
+            example: 123
+          main_address:
+            description: Main address
+            type: string
+            maxLength: 255
+            example: 55 Av. Louis Breguet
+          main_zip_code:
+            description: ZIP code of main address
+            type: string
+            maxLength: 64
+            example: 31400
+          main_city:
+            description: City of main address
+            type: string
+            maxLength: 127
+            example: Toulouse
+          main_country:
+            description: Country of main address
+            type: string
+            maxLength: 64
+            example: France
+          delivery_title:
+            description: Name or company name of delivery address
+            type: string
+            maxLength: 127
+            example: My delivery address
+          delivery_address:
+            description: Delivery address
+            type: string
+            maxLength: 255
+            example: 1 place du Capitole
+          delivery_zip_code:
+            description: ZIP code of delivery address
+            type: string
+            maxLength: 64
+            example: 31000
+          delivery_city:
+            description: City of delivery address
+            type: string
+            maxLength: 127
+            example: Toulouse
+          delivery_country:
+            description: Country of delivery address
+            type: string
+            maxLength: 64
+            example: France
+          invoice_title:
+            description: Name or company name of invoice address
+            type: string
+            maxLength: 127
+            example: My invoice address
+          invoice_address:
+            description: Invoice address
+            type: string
+            maxLength: 255
+            example: 55 Rue du Faubourg Saint-Honoré
+          invoice_zip_code:
+            description: ZIP code of invoice address
+            type: string
+            maxLength: 64
+            example: 75000
+          invoice_city:
+            description: City of invoice address
+            type: string
+            maxLength: 127
+            example: Paris
+          invoice_country:
+            description: Country of invoice address
+            type: string
+            maxLength: 64
+            example: France

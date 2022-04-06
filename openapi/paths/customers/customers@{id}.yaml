@@ -1,0 +1,46 @@
+get:
+  tags:
+    - Customers
+  summary: Show
+  description: Get one customer
+  operationId: Customers_show
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Customer Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/customers/customers_object.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Customers
+  summary: Update
+  description: Update a customer
+  operationId: Customers_update
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/customers/customers_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Customer Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/customers/customers_object.yaml      
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml  

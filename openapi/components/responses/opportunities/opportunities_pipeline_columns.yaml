@@ -1,0 +1,32 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Pipeline column Id
+                type: integer
+              title:
+                description: Pipeline column title
+                type: string
+          example: 
+            - id: "1"
+              title: "Prospecting"
+            - id: "2"
+              title: "Proposal"
+            - id: "3"
+              title: "Negotiation"
+            - id: "4"
+              title: "Sales"
+

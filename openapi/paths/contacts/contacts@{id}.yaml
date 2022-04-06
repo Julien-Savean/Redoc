@@ -1,0 +1,46 @@
+get:
+  tags:
+    - Contacts
+  summary: Show
+  description: Get one contact
+  operationId: Contacts_show
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Contact Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/contacts/contacts_object.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Contacts
+  summary: Update
+  description: Update a contact
+  operationId: Contacts_update
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/contacts/contacts_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Contact Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/contacts/contacts_object.yaml      
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml  

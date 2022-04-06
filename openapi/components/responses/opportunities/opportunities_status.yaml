@@ -1,0 +1,31 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Id of the opportunity status
+                type: integer
+              title:
+                description: Title of the opportunity status
+                type: string
+          example: 
+            - id: "0"
+              title: "Open"
+            - id: "1"
+              title: "Won"
+            - id: "2"
+              title: "Lost"
+            - id: "3"
+              title: "Cancelled"

@@ -1,0 +1,33 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Opportunity custom field Id
+                type: integer
+                example: "3413"
+              title:
+                description: Opportunity custom field title
+                type: string
+                example: "Source"
+              type:
+                description: Opportunity custom field type
+                type: string
+                example: "Dropdown list"
+              with_values:
+                description: Opportunity field with values
+                type: boolean
+                example: "true"
+              

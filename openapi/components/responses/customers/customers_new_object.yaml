@@ -1,0 +1,155 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        id:
+          description: Customer Id
+          type: integer
+          example: "48560"
+        title:
+          description: Name for professional customer *or civility + lastname + firstname for individual customer*
+          type: string
+          example: "Society X"
+        individual:
+          description: Customer type
+          type: integer
+          example: "0"
+        prospect:
+          description: Customer status
+          type: integer
+          example: "0"
+        id_client_manager: 
+          description:  Customer manager
+          type: array
+          items:
+            type: string
+            example: "u213"
+        phone:
+          description: Customer phone number
+          type: string
+          example: "+33512345678"
+        mobile:
+          description: Customer mobile number
+          type: string
+          example: "07 98 76 54 32"
+        email:
+          description: Customer email
+          type: string
+          format: email
+          example: "contact@example.com"
+        langId:
+          description: Customer language
+          type: integer
+          example: "1"
+        siret:
+          description: Customer SIRET
+          type: string
+          example: "123 568 941 00056"
+        siren:
+          description: Customer SIREN
+          type: integer
+          example: "123 568 941"
+        legal_form:
+          description: Customer status
+          type: string
+          example: "SARL"
+        main_activity:
+          description: APE/NAF code
+          type: integer
+          example: "4616C"
+        vat_number:
+          description: VAT number
+          type: string
+          example: "FR 32 123456789"
+        id_parent:
+          description: Id parent
+          type: integer
+          example: "0"
+        id_products_prices_category:
+          description: Id document template
+          type: integer
+          example: "0"
+        description:
+          description: Customer description
+          type: string
+          example: "A description or note about this customer"
+        client_number:
+          description: Internal number
+          type: integer
+          example: "123"
+        address_list:
+          description: List of main address, delivery address and/or invoince address
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              type:
+                type: string
+              address:
+                type: string
+              zip_code:
+                type: string
+              city:
+                type: string
+              country:
+                type: string
+              is_defaukt:
+                type: boolean
+          example:
+            - id: "17894"
+              type: "main"
+              title: ""
+              address: "55 Av. Louis Breguet"
+              zip_code: "31400"
+              city: "Toulouse"
+              country: "France"
+              is_defaut: true
+            - id: "17895"
+              type: "delivery"
+              title: "My delivery address"
+              address: "1 place du Capitole"
+              zip_code: "31000"
+              city: "Toulouse"
+              country: "France"
+              is_defaut: false
+            - id: "17896"
+              type: "invoice"
+              title: "My invoice address"
+              address: "55 Rue du Faubourg Saint-Honoré"
+              zip_code: "75000"
+              city: "Paris"
+              country:  "France"
+              is_defaut: false
+        contacts_list:
+          description: List of contacts
+          type: array
+        custom_fields_list:
+          description: List of custom fields
+          type: array
+        opportunities_list: 
+          description: List of opportunities
+          type: array
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"
+
+

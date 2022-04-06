@@ -16,14 +16,80 @@ info:
     $ref: ./info-description.md
 tags:
   - name: Customers
-    description: This section lists all the API related to the customers
+    description: This section lists all customer-related APIs.
+  - name: Suppliers
+    description: This section lists all supplier-related APIs.
+  - name: Contacts
+    description: This section lists all contact-related APIs.
+  - name: Opportunities
+    description: This section lists all opportunity-related APIS.
+  - name: Events
+    description: This section lists all event-related APIS.
+  - name: Notes
+    description: This section lists all note-related APIS.
 servers:
   - url: 'https://karlia.fr/app/api/v2'
 paths:
-  # '/users/{username}':
-  #   $ref: 'paths/users@{username}.yaml'
   /customers:
-    $ref: paths/customers.yaml
+    $ref: paths/customers/customers.yaml
+  /customers/{id}:
+    $ref: paths/customers/customers@{id}.yaml
+  /customers/custom-fields:
+    $ref: paths/customers/customers@custom_fields.yaml
+  /customers/custom-fields/{field_id}:
+    $ref: paths/customers/customers@custom_fields@{field_id}.yaml
+  /customers/{id}/custom-fields/{field_id}:
+    $ref: paths/customers/customers@{id}@custom_fields@{field_id}.yaml 
+  /suppliers:
+    $ref: paths/suppliers/suppliers.yaml
+  /suppliers/{id}:
+    $ref: paths/suppliers/suppliers@{id}.yaml
+  /suppliers/custom-fields:
+    $ref: paths/suppliers/suppliers@custom_fields.yaml
+  /suppliers/custom-fields/{field_id}:
+    $ref: paths/suppliers/suppliers@custom_fields@{field_id}.yaml
+  /suppliers/{id}/custom-fields/{field_id}:
+    $ref: paths/suppliers/suppliers@{id}@custom_fields@{field_id}.yaml
+  /contacts:
+    $ref: paths/contacts/contacts.yaml
+  /contacts/{id}:
+    $ref: paths/contacts/contacts@{id}.yaml
+  /contacts/custom-fields:
+    $ref: paths/contacts/contacts@custom_fields.yaml
+  /contacts/custom-fields/{field_id}:
+    $ref: paths/contacts/contacts@custom_fields@{field_id}.yaml
+  /contacts/{id}/custom-fields/{field_id}:
+    $ref: paths/contacts/contacts@{id}@custom_fields@{field_id}.yaml
+  /opportunities:
+    $ref: paths/opportunities/opportunities.yaml
+  /opportunities/{id}:
+    $ref: paths/opportunities/opportunities@{id}.yaml
+  /opportunities/custom-fields:
+    $ref: paths/opportunities/opportunities@custom_fields.yaml
+  /opportunities/custom-fields/{field_id}:
+    $ref: paths/opportunities/opportunities@custom_fields@{field_id}.yaml
+  /opportunities/{id}/custom-fields/{field_id}:
+    $ref: paths/opportunities/opportunities@{id}@custom_fields@{field_id}.yaml
+  /opportunities/pipelines:
+    $ref: paths/opportunities/opportunities@pipelines.yaml
+  /opportunities/pipelines/{id}/columns:
+    $ref: paths/opportunities/opportunities@pipelines@{id}@columns.yaml
+  /opportunities/status:
+    $ref: paths/opportunities/opportunities@status.yaml
+  /opportunities/status-lost:
+    $ref: paths/opportunities/opportunities@status_lost.yaml
+  /opportunities/status-canceled:
+    $ref: paths/opportunities/opportunities@status_canceled.yaml
+  /events:
+    $ref: paths/events/events.yaml
+  /events/{id}:
+    $ref: paths/events/events@{id}.yaml
+  /events/types:
+    $ref: paths/events/events@types.yaml
+  /notes:
+    $ref: paths/notes/notes.yaml
+  /notes/{id}:
+    $ref: paths/notes/notes@{id}.yaml
 components:
   securitySchemes:
     bearer_token:

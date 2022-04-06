@@ -1,0 +1,68 @@
+get:
+  tags:
+    - Notes
+  summary: Show
+  description: Get one note
+  operationId: Notes_show
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Note Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/notes/notes_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Notes
+  summary: Update
+  description: Update a note
+  operationId: Notes_update
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/notes/notes_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Note Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/notes/notes_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml
+delete:
+  tags:
+    - Notes
+  summary: Delete
+  description: Delete a note
+  operationId: Notes_delete
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Event Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml

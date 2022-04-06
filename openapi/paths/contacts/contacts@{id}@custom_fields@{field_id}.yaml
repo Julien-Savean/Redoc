@@ -1,0 +1,32 @@
+post:
+  tags:
+    - Contacts
+  summary: Add/Update custom fields
+  description:  Values of contacts custom field
+  operationId: Contacts_custom_field_values_add_update
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Contact Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: field_id
+    description: Contact custom field Id
+    schema:
+      type: integer
+    required: true
+  requestBody:
+    $ref: ../../components/requests/contacts/contacts_custom_field.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/contacts/contacts_object.yaml
+    '400':
+      $ref: ../../components/responses/errors/400_custom_field.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

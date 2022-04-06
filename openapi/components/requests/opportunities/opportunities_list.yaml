@@ -1,0 +1,84 @@
+- in: query
+  name: pipeline
+  schema:
+    type: integer
+  description: Search by pipeline Id
+- in: query
+  name: id_customer
+  schema:
+    type: integer
+  description: Search by customer Id
+- in: query
+  name: title
+  schema:
+    type: string
+    maxLength: 127
+  description: Search by title
+- in: query
+  name: column_number
+  schema:
+    type: integer
+  description: Search by opportunity stage
+- in: query
+  name: id_user_assigned
+  schema:
+    type: string
+    maxLength: 30
+  description: Search by user assigned
+- in: query
+  name: id_status    
+  schema:
+    type: integer
+  description: Search by opportunity status Id
+- in: query
+  name: id_status_lost
+  schema:
+    type: integer
+  description: Search by reason Id for cancellation
+- in: query
+  name: id_status_canceled
+  schema:
+    type: integer
+  description: Search by reason Id for loss
+- in: query
+  name: archived
+  schema:
+    type: integer
+  description: Search by opportunity condition
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.* <br />
+    **Each field must be separated by a comma without space.**
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: string
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z. <br />
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    default: 0
+  description: Offset for paging
+

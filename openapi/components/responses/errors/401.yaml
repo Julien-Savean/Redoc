@@ -1,12 +1,12 @@
-description: error 401
+description: Unauthorized
 content:
   application/json:
     schema:
-      $ref: ../schemas/error.yaml
+      $ref: ../../requests/error.yaml
     example: 
       code: "11001"
       status: "error"
       message: "Bearer token field is not completed"
       category_code: "11"
       category_message: "Authentification failed"
-  
+

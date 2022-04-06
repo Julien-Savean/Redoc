@@ -1,0 +1,32 @@
+post:
+  tags:
+    - Opportunities
+  summary: Add/Update custom fields
+  description:  Values of opportunities custom field
+  operationId: Opportunities_custom_field_values_add_update
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Opportunity Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: field_id
+    description: Opportunity custom field Id
+    schema:
+      type: integer
+    required: true
+  requestBody:
+    $ref: ../../components/requests/opportunities/opportunities_custom_field.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_object.yaml
+    '400':
+      $ref: ../../components/responses/errors/400_custom_field.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

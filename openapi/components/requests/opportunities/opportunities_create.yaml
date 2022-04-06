@@ -1,0 +1,54 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - pipeline
+          - id_customer
+        properties:
+          pipeline:
+            description: Pipeline Id
+            type: integer
+            example: 1934
+          id_customer:
+            description: Customer Id
+            type: integer
+            example: 48560
+          title:
+            description: Opportunity title
+            type: string
+            maxLength: 127
+            example: "Opportunity #1"
+          column_number:
+            description: Opportunity stage
+            type: integer
+            example: 1
+          id_user_assigned:
+            description: Opportunity client mamager
+            type: array
+            maxLength: 30
+            items:
+              type: string
+              example: u213
+          id_status:
+            description: Opportunity Id status
+            type: integer
+            example: 0
+          id_status_lost:
+            description: Reason Id for loss. **Only if status is lost**
+            type: integer
+            format: email
+            example: ""
+          id_status_canceled:
+            description: Reason Id for cancellation. **Only if status is cancelled**
+            type: integer
+            example: ""
+          archived:
+            description: >
+              Opportunity condition
+
+              > 0 = Active <br />
+              1 = Archived
+            type: integer
+            example: 0
+         

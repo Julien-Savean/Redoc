@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Opportunities
+  summary: Status
+  description: Get a list of all status
+  operationId: Opportunities_status
+  security:
+    - bearer_token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_status.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml

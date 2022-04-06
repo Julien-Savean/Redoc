@@ -1,0 +1,32 @@
+get:
+  tags:
+    - Opportunities
+  summary: List
+  description: Get a list of all opportunities
+  operationId: Opportunities_list
+  security:
+    - bearer_token: []
+  parameters:
+    $ref: ../../components/requests/opportunities/opportunities_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_objects.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+post:
+  tags:
+    - Opportunities
+  summary: Create
+  description: Create a opportunity
+  operationId: Opportunities_create
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/opportunities/opportunities_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/opportunities/opportunities_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400_name.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml

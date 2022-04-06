@@ -1,0 +1,34 @@
+get:
+  tags:
+    - Suppliers
+  summary: List
+  description: Get a list of all suppliers
+  operationId: Suppliers_list
+  security:
+    - bearer_token: []
+  parameters:
+    $ref: ../../components/requests/suppliers/suppliers_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/suppliers/suppliers_objects.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+post:
+  tags:
+    - Suppliers
+  summary: Create
+  description: Create a supplier
+  operationId: Suppliers_create
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/suppliers/suppliers_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/suppliers/suppliers_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400_name.yaml        
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+
+

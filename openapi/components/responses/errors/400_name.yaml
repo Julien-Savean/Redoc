@@ -1,8 +1,8 @@
-description: error 400
+description: Bad Request
 content:
   application/json:
     schema:
-      $ref: ../schemas/error.yaml
+      $ref: ../../requests/error.yaml
     example: 
       code: "20101"
       status: "error"

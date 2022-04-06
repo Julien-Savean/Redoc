@@ -1,0 +1,104 @@
+- in: query
+  name: quick_search
+  schema:
+    type: string
+    maxLength: 127
+  description: >
+    Quick search field. <br />
+    *If this field is filled in, the other search fields are not taken into account.
+    The search is then performed in the entire customer database.*
+- in: query
+  name: id_customer_supplier
+  schema:
+    type: integer
+    maxLength: 127
+  description: Search by customer/supplier Id
+- in: query
+  name: id_civility
+  schema:
+    type: integer
+  description: >
+    Search by status
+
+    > 1 = Mr <br />
+    2 = Ms
+- in: query
+  name: lastname
+  schema:
+    type: string
+    maxLength: 127
+  description: Search by lastname
+- in: query
+  name: firstname
+  schema:
+    type: string
+    maxLength: 127
+  description: Search by firstname
+- in: query
+  name: position_title    
+  schema:
+    type: string 
+    maxLength: 127
+  description: Search by position title 
+- in: query
+  name: email
+  schema:
+    type: string
+    format: email
+    maxLength: 127
+  description: Search by email
+- in: query
+  name: phone
+  schema:
+    type: string
+    maxLength: 30
+  description: Search by phone number
+- in: query
+  name: mobile
+  schema:
+    type: string
+    maxLength: 30
+  description: Search by mobile number
+- in: query
+  name: client_number
+  schema:
+    type: string
+    maxLength: 30
+  description: Search by client number
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.* <br />
+    **Each field must be separated by a comma without space.**
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: string
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z. <br />
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    default: 0
+  description: Offset for paging
+

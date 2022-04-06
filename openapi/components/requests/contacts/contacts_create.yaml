@@ -1,0 +1,60 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - id_customer_supplier
+        properties:
+          id_customer_supplier:
+            description: Customer or supplier Id
+            type: integer
+            example: 28496
+          id_civility:
+            description: >
+              Contact civility
+
+              > 1 = Mr <br />
+              2 = Ms
+            type: integer
+            example: ""
+          lastname:
+            description: Contact lastname
+            type: string
+            maxLength: 127
+            example: Dupont
+          firstname:
+            description: Contact firstname
+            type: string
+            maxLength: 127
+            example: Jean
+          position_title:
+            description: Contact position title
+            type: string
+            maxLength: 127
+            example: CEO
+          email:
+            description: Contact email address
+            type: string
+            format: email
+            maxLength: 127
+            example: contact@example.com
+          phone:
+            description: Contact phone number
+            type: string
+            maxLength: 30
+            example: "+33512345678"
+          mobile:
+            description: Contact mobile number
+            type: string
+            maxLength: 30
+            example: 07 98 76 54 32
+          description:
+            description: Contact description
+            type: string
+            maxLength: 255
+            example: A description or note about this contact
+          client_number:
+            description: Internal number
+            type: string
+            maxLength: 30
+            example: 123

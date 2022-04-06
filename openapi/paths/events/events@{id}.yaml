@@ -1,0 +1,68 @@
+get:
+  tags:
+    - Events
+  summary: Show
+  description: Get one event
+  operationId: Events_show
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Event Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/events/events_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Events
+  summary: Update
+  description: Update an event
+  operationId: Events_update
+  security:
+    - bearer_token: []
+  requestBody:
+    $ref: ../../components/requests/events/events_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Contact Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/events/events_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml
+delete:
+  tags:
+    - Events
+  summary: Delete
+  description: Delete an event
+  operationId: Events_delete
+  security:
+    - bearer_token: []
+  parameters:
+  - in: path
+    name: id
+    description: Event Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml

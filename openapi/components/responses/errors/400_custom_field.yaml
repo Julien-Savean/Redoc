@@ -1,0 +1,12 @@
+description: Bad Request
+content:
+  application/json:
+    schema:
+      $ref: ../../requests/error.yaml
+    example: 
+      code: "40501"
+      status: "error"
+      message: "Custom field has not been found"
+      category_code: "40"
+      category_message: "External error"
+  

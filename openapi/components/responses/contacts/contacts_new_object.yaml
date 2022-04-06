@@ -1,0 +1,82 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        id:
+          description: Contact Id
+          type: integer
+          example: "48560"
+        id_customer_supplier:
+          description: Customer or supplier Id
+          type: integer
+          example: "28496"
+        supplier: 
+          description: Supplier status of the contact
+          type: integer 
+          example: "0"
+        title:
+          description: Civility + lastname + firstname contact
+          type: string
+          example: "Mr Jean Dupont"
+        id_civility:
+          description: Contact civility
+          type: integer
+          example: "1"
+        lastname: 
+          description: Contact lastname
+          type: string
+          example: "Dupont"
+        firstname: 
+          description: Contact firstname
+          type: string
+          example: "Jean"
+        position_title: 
+          description: Contact position title
+          type: string
+          example: "CEO"
+        email:
+          description: Contact email
+          type: string
+          format: email
+          example: "jeandupont@example.com"
+        phone:
+          description: Contact phone number
+          type: string
+          example: "02 45 68 37 98"
+        mobile:
+          description: Contact mobile number
+          type: string
+          example: "06 94 31 81 31"
+        description:
+          description: Contact description
+          type: string
+          example: "A description or note about this contact"
+        client_number:
+          description: Internal number
+          type: integer
+          example: "123"
+        custom_fields_list:
+          description: List of custom fields
+          type: array
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"
+
+

@@ -1,25 +1,34 @@
 openapi: 3.1.0
 info:
-  version: 1.1.0
-  title: Example.com
-  termsOfService: https://example.com/terms/
+  version: 1.0.0
+  title: Karlia
   contact:
-    email: contact@example.com
-    url: http://example.com/contact
+    email: contact@karlia.com
+    url: https://karlia.fr
   license:
-    name: Apache 2.0
+    name: Apache 2.0 ou je sais pas
     url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://example.com/terms/
   x-logo:
-    url: https://redocly.github.io/openapi-template/logo.png
+    url: https://karlia.fr/app/template/karlia/img/login/karlia-logo-1.PNG
+    altText: Logo Karlia
   description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
-
-
     # Introduction
 
 
-    Ceci est test pour voir si cela fonctionne
+    Welcome to the Karlia API documentation !
+
+
+    Karlia is a powerful CRM platform that brings together everything you need
+    to better optimize your productivity in one easy-to-use tool.
+
+
+    The Karlia API is built around a RESTful architecture and allows you to
+    customize, modify and integrate your Karlia organization and external
+    services.
+
+
+    <!-- Ceci est test pour voir si cela fonctionne
 
 
     This API definition is intended to to be a good starting point for
@@ -45,9 +54,7 @@ info:
 
 
     [vendor
-
-    extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
-
+    extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md). 
 
 
     # OpenAPI Specification
@@ -75,497 +82,5148 @@ info:
 
     interfaces have done for lower-level programming, OpenAPI removes the
 
-    guesswork in calling the service.
+    guesswork in calling the service. -->
 tags:
-  - name: Echo
-    description: Example echo operations.
-  - name: User
-    description: Operations about users.
-  - name: Tag
-    description: This is a tag description.
+  - name: Customers
+    description: This section lists all customer-related APIs.
+  - name: Suppliers
+    description: This section lists all supplier-related APIs.
+  - name: Contacts
+    description: This section lists all contact-related APIs.
+  - name: Opportunities
+    description: This section lists all opportunity-related APIS.
+  - name: Events
+    description: This section lists all event-related APIS.
+  - name: Notes
+    description: This section lists all note-related APIS.
 servers:
-  - url: http://example.com/api/v1
-  - url: https://example.com/api/v1
+  - url: https://karlia.fr/app/api/v2
 paths:
-  /users/{username}:
-    parameters:
-      - name: pretty_print
-        in: query
-        description: Pretty print response
-        schema:
-          type: boolean
+  /customers:
     get:
       tags:
-        - User
-      summary: Get user by user name
-      description: |
-        Some description of the operation.
-        You can use `Markdown` here.
-      operationId: getUserByName
+        - Customers
+      summary: List
+      description: Get a list of all customers
+      operationId: Customers_list
+      security:
+        - bearer_token: []
       parameters:
-        - name: username
-          in: path
-          description: The name that needs to be fetched
-          required: true
+        - in: query
+          name: quick_search
           schema:
             type: string
-        - name: with_email
-          in: query
-          description: Filter users without email
+            maxLength: 127
+          description: >
+            Quick search field. <br /> *If this field is filled in, the other
+            search fields are not taken into account. The search is then
+            performed in the entire customer database.*
+        - in: query
+          name: name
           schema:
-            type: boolean
-      security:
-        - main_auth:
-            - read:users
-        - api_key: []
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              example:
-                username: user1
-                email: user@example.com
-        '403':
-          description: Forbidden
-          $ref: '#/components/responses/Problem'
-        '404':
-          description: User not found
-          $ref: '#/components/responses/Problem'
-    put:
-      tags:
-        - User
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be updated
-          required: true
+            type: integer
+            maxLength: 127
+          description: Search by name
+        - in: query
+          name: prospect
+          schema:
+            type: integer
+          description: |
+            Search by status
+            > 0 = Client <br /> 1 = Prospect
+        - in: query
+          name: individual
+          schema:
+            type: integer
+          description: |
+            Search by type
+            > 0 = Professional <br /> 1 = Individual
+        - in: query
+          name: client_number
           schema:
             type: string
-      security:
-        - main_auth:
-            - write:users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Updated user object
-        required: true
+            maxLength: 30
+          description: Search by client number
+        - in: query
+          name: phone
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by phone number
+        - in: query
+          name: mobile
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by mobile number
+        - in: query
+          name: email
+          schema:
+            type: string
+            format: email
+            maxLength: 127
+          description: Search by email
+        - in: query
+          name: id_client_manager
+          schema:
+            type: integer
+          description: Search by client manager
+        - in: query
+          name: langId
+          schema:
+            type: integer
+          description: |
+            Search by language
+            > 1 = French <br /> 2 = English <br /> 3 = Spanish 
+        - in: query
+          name: siret
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by SIRET
+        - in: query
+          name: siren
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by SIREN
+        - in: query
+          name: vat_number
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by VAT number
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
       responses:
         '200':
-          description: OK
-        '400':
-          description: Invalid user supplied
-          $ref: '#/components/responses/Problem'
-        '404':
-          description: User not found
-          $ref: '#/components/responses/Problem'
-  /echo:
+          $ref: '#/components/responses/customers_objects'
+        '401':
+          $ref: '#/components/responses/401'
     post:
       tags:
-        - Echo
-      summary: Echo test
-      description: Receive the exact message you've sent
-      operationId: echo
+        - Customers
+      summary: Create
+      description: Create a customer
+      operationId: Customers_create
       security:
-        - api_key: []
-        - basic_auth: []
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/customers_create'
       responses:
         '200':
-          description: OK
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                type: string
-              examples:
-                response:
-                  value: Hello world!
-            application/xml:
-              schema:
-                type: string
-            text/csv:
-              schema:
-                type: string
+          $ref: '#/components/responses/customers_new_object'
         '400':
-          description: Unauthorized
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-              example: Hello world!
-          application/xml:
-            schema:
-              type: string
-              example: Hello world!
-        description: Echo payload
-        required: true
-      x-codeSamples:
-        - lang: C#
-          source: |
-            API.v1.Echo echo = new API.v1.Echo();
-            echo.message = "Hello World!");
-            EchoResponse response = echo.post();
-            if (response.statusCode == HttpStatusCode.Created)
-            {
-              // Success
-            }
-            else
-            {
-              // Something wrong -- check response for errors
-              Console.WriteLine(response.getRawResponse());
-            }
-        - lang: PHP
-          source: |
-            $form = new \API\Entities\Echo();
-            $form->setMessage("Hello World!");
-            try {
-                $pet = $client->echo()->post($form);
-            } catch (UnprocessableEntityException $e) {
-                var_dump($e->getErrors());
-            }
-  /pathItem:
+          $ref: '#/components/responses/400_name'
+        '401':
+          $ref: '#/components/responses/401'
+  /customers/{id}:
+    get:
+      tags:
+        - Customers
+      summary: Show
+      description: Get one customer
+      operationId: Customers_show
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Customer Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/customers_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
-        - Tag
-      summary: Operation summary
-      description: |
-        Operation description **Markdown**.
-      operationId: operationId
+        - Customers
+      summary: Update
+      description: Update a customer
+      operationId: Customers_update
       security:
-        - api_key: []
-        - basic_auth: []
+        - bearer_token: []
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Schema'
-        description: requestBody description
-        required: true
+        $ref: '#/components/requestBodies/customers_create'
+      parameters:
+        - in: path
+          name: id
+          description: Customer Id
+          schema:
+            type: integer
+          required: true
       responses:
         '200':
-          description: OK
-          headers:
-            X-Rate-Limit:
-              description: Calls per hour allowed by the user.
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Schema'
+          $ref: '#/components/responses/customers_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /customers/custom-fields:
+    get:
+      tags:
+        - Customers
+      summary: Custom fields
+      description: Get a list of all customers custom fields
+      operationId: Customers_custom_fields_list
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/customers_custom_fields'
+        '401':
+          $ref: '#/components/responses/401'
+  /customers/custom-fields/{field_id}:
+    get:
+      tags:
+        - Customers
+      summary: Custom field values
+      description: Get values of customers custom field
+      operationId: Customers_custom_field_values_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: Customer custom field Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/customers_custom_field_values'
         '400':
-          $ref: '#/components/responses/Problem'
-  /pathItemWithExamples:
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+  /customers/{id}/custom-fields/{field_id}:
     post:
       tags:
-        - Tag
-      summary: Operation summary with examples
-      description: |
-        Operation description **markdown**.
-      operationId: postPathItemWithExamples
+        - Customers
+      summary: Add/Update custom fields
+      description: Values of customers custom field
+      operationId: Customers_custom_field_values_add_update
       security:
-        - api_key: []
-        - basic_auth: []
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Customer Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: Customer custom field Id
+          schema:
+            type: integer
+          required: true
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Schema'
-            examples:
-              mapName:
-                summary: My first example
-                description: My first example's description.
-                value:
-                  stringProperty: tada
-              mapNameDoesNotShowInDocsUnlessSummaryIsNotProvided:
-                value:
-                  stringProperty: checkmark
-        description: requestBody description
-        required: true
+        $ref: '#/components/requestBodies/customers_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/customers_object'
+        '400':
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /suppliers:
+    get:
+      tags:
+        - Suppliers
+      summary: List
+      description: Get a list of all suppliers
+      operationId: Suppliers_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: query
+          name: quick_search
+          schema:
+            type: string
+            maxLength: 127
+          description: >
+            Quick search field. <br /> *If this field is filled in, the other
+            search fields are not taken into account. The search is then
+            performed in the entire supplier database.*
+        - in: query
+          name: name
+          schema:
+            type: integer
+            maxLength: 127
+          description: Search by name
+        - in: query
+          name: client_number
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by client number
+        - in: query
+          name: phone
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by phone number
+        - in: query
+          name: mobile
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by mobile number
+        - in: query
+          name: email
+          schema:
+            type: string
+            format: email
+            maxLength: 127
+          description: Search by email
+        - in: query
+          name: id_client_manager
+          schema:
+            type: integer
+          description: Search by client manager
+        - in: query
+          name: langId
+          schema:
+            type: integer
+          description: |
+            Search by language
+            > 1 = French <br /> 2 = English <br /> 3 = Spanish 
+        - in: query
+          name: siret
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by SIRET
+        - in: query
+          name: siren
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by SIREN
+        - in: query
+          name: vat_number
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by VAT number
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_objects'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - Suppliers
+      summary: Create
+      description: Create a supplier
+      operationId: Suppliers_create
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/suppliers_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_new_object'
+        '400':
+          $ref: '#/components/responses/400_name'
+        '401':
+          $ref: '#/components/responses/401'
+  /suppliers/{id}:
+    get:
+      tags:
+        - Suppliers
+      summary: Show
+      description: Get one supplier
+      operationId: Suppliers_show
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Supplier Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Suppliers
+      summary: Update
+      description: Update a supplier
+      operationId: Suppliers_update
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/suppliers_create'
+      parameters:
+        - in: path
+          name: id
+          description: Supplier Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /suppliers/custom-fields:
+    get:
+      tags:
+        - Suppliers
+      summary: Custom fields
+      description: Get a list of all suppliers custom fields
+      operationId: Suppliers_custom_fields_list
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_custom_fields'
+        '401':
+          $ref: '#/components/responses/401'
+  /suppliers/custom-fields/{field_id}:
+    get:
+      tags:
+        - Suppliers
+      summary: Custom field values
+      description: Get values of suppliers custom field
+      operationId: Suppliers_custom_field_values_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: Supplier custom field Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+  /suppliers/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Suppliers
+      summary: Add/Update custom fields
+      description: Values of suppliers custom field
+      operationId: Suppliers_custom_field_values_add_update
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Supplier Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: Supplier custom field Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/suppliers_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/suppliers_object'
+        '400':
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /contacts:
+    get:
+      tags:
+        - Contacts
+      summary: List
+      description: Get a list of all contacts
+      operationId: Contacts_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: query
+          name: quick_search
+          schema:
+            type: string
+            maxLength: 127
+          description: >
+            Quick search field. <br /> *If this field is filled in, the other
+            search fields are not taken into account. The search is then
+            performed in the entire customer database.*
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+            maxLength: 127
+          description: Search by customer/supplier Id
+        - in: query
+          name: id_civility
+          schema:
+            type: integer
+          description: |
+            Search by status
+            > 1 = Mr <br /> 2 = Ms
+        - in: query
+          name: lastname
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by lastname
+        - in: query
+          name: firstname
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by firstname
+        - in: query
+          name: position_title
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by position title
+        - in: query
+          name: email
+          schema:
+            type: string
+            format: email
+            maxLength: 127
+          description: Search by email
+        - in: query
+          name: phone
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by phone number
+        - in: query
+          name: mobile
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by mobile number
+        - in: query
+          name: client_number
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by client number
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_objects'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - Contacts
+      summary: Create
+      description: Create a contact
+      operationId: Contacts_create
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/contacts_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_new_object'
+        '400':
+          $ref: '#/components/responses/400_name'
+          message: Customer has not been found
+        '401':
+          $ref: '#/components/responses/401'
+  /contacts/{id}:
+    get:
+      tags:
+        - Contacts
+      summary: Show
+      description: Get one contact
+      operationId: Contacts_show
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Contact Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Contacts
+      summary: Update
+      description: Update a contact
+      operationId: Contacts_update
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/contacts_create'
+      parameters:
+        - in: path
+          name: id
+          description: Contact Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /contacts/custom-fields:
+    get:
+      tags:
+        - Contacts
+      summary: Custom fields
+      description: Get a list of all contacts custom fields
+      operationId: Contacts_custom_fields_list
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_custom_fields'
+        '401':
+          $ref: '#/components/responses/401'
+  /contacts/custom-fields/{field_id}:
+    get:
+      tags:
+        - Contacts
+      summary: Custom field values
+      description: Get values of contacts custom field
+      operationId: Contacts_custom_field_values_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: Contact custom field Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+  /contacts/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Contacts
+      summary: Add/Update custom fields
+      description: Values of contacts custom field
+      operationId: Contacts_custom_field_values_add_update
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Contact Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: Contact custom field Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/contacts_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/contacts_object'
+        '400':
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities:
+    get:
+      tags:
+        - Opportunities
+      summary: List
+      description: Get a list of all opportunities
+      operationId: Opportunities_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: query
+          name: pipeline
+          schema:
+            type: integer
+          description: Search by pipeline Id
+        - in: query
+          name: id_customer
+          schema:
+            type: integer
+          description: Search by customer Id
+        - in: query
+          name: title
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by title
+        - in: query
+          name: column_number
+          schema:
+            type: integer
+          description: Search by opportunity stage
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by user assigned
+        - in: query
+          name: id_status
+          schema:
+            type: integer
+          description: Search by opportunity status Id
+        - in: query
+          name: id_status_lost
+          schema:
+            type: integer
+          description: Search by reason Id for cancellation
+        - in: query
+          name: id_status_canceled
+          schema:
+            type: integer
+          description: Search by reason Id for loss
+        - in: query
+          name: archived
+          schema:
+            type: integer
+          description: Search by opportunity condition
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_objects'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - Opportunities
+      summary: Create
+      description: Create a opportunity
+      operationId: Opportunities_create
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/opportunities_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_new_object'
+        '400':
+          $ref: '#/components/responses/400_name'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/{id}:
+    get:
+      tags:
+        - Opportunities
+      summary: Show
+      description: Get one opportunity
+      operationId: Opportunities_show
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Opportunity Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Opportunities
+      summary: Update
+      description: Update a opportunity
+      operationId: Opportunities_update
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/opportunities_create'
+      parameters:
+        - in: path
+          name: id
+          description: Contact Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Opportunities
+      summary: Delete
+      description: Delete a opportunity
+      operationId: Opportunities_delete
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Contact Id
+          schema:
+            type: integer
+          required: true
       responses:
         '200':
           description: OK
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Schema'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/custom-fields:
+    get:
+      tags:
+        - Opportunities
+      summary: Custom fields
+      description: Get a list of all opportunities custom fields
+      operationId: Opportunities_custom_fields_list
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_custom_fields'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/custom-fields/{field_id}:
+    get:
+      tags:
+        - Opportunities
+      summary: Custom field values
+      description: Get values of opportunities custom field
+      operationId: Opportunities_custom_field_values_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: Opportunity custom field Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_custom_field_values'
         '400':
-          $ref: '#/components/responses/Problem'
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Opportunities
+      summary: Add/Update custom fields
+      description: Values of opportunities custom field
+      operationId: Opportunities_custom_field_values_add_update
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Opportunity Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: Opportunity custom field Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/opportunities_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_object'
+        '400':
+          $ref: '#/components/responses/400_custom_field'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/pipelines:
+    get:
+      tags:
+        - Opportunities
+      summary: Pipelines
+      description: Get a list of all opportunity pipelines
+      operationId: Opportunities_list_pipelines
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_pipelines'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/pipelines/{id}/columns:
+    get:
+      tags:
+        - Opportunities
+      summary: Pipelines columns
+      description: Get opportunity pipeline columns
+      operationId: Opportunities_list_pipelines_columns
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Pipeline Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_pipeline_columns'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/status:
+    get:
+      tags:
+        - Opportunities
+      summary: Status
+      description: Get a list of all status
+      operationId: Opportunities_status
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_status'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/status-lost:
+    get:
+      tags:
+        - Opportunities
+      summary: Status lost
+      description: Get a list of all lost statuses
+      operationId: Opportunities_status_lost
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_status_lost'
+        '401':
+          $ref: '#/components/responses/401'
+  /opportunities/status-canceled:
+    get:
+      tags:
+        - Opportunities
+      summary: Status canceled
+      description: Get a list of all canceled statuses
+      operationId: Opportunities_status_canceled
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_status_canceled'
+        '401':
+          $ref: '#/components/responses/401'
+  /events:
+    get:
+      tags:
+        - Events
+      summary: List
+      description: Get a list of all events
+      operationId: Events_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: integer
+          description: User Id
+          required: true
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Search by start date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Search by end date
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: Search by customer or supplier Id
+        - in: query
+          name: id_opportunity
+          schema:
+            type: integer
+          description: Search by opportunity Id
+        - in: query
+          name: id_event_type
+          schema:
+            type: integer
+          description: Search by event type Id
+        - in: query
+          name: id_project
+          schema:
+            type: integer
+          description: Search by project Id
+        - in: query
+          name: id_project_task
+          schema:
+            type: integer
+          description: Search by task Id
+        - in: query
+          name: title
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by title
+        - in: query
+          name: private
+          schema:
+            type: integer
+          description: |
+            Search by private status
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: visible_in_agenda
+          schema:
+            type: integer
+          description: |
+            Search by visibility
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: synchronized
+          schema:
+            type: integer
+          description: |
+            Search by synchronization
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: use_time
+          schema:
+            type: integer
+          description: |
+            Search by event used for time
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: time_id_type
+          schema:
+            type: integer
+          description: Search by time type Id
+        - in: query
+          name: time_billable
+          schema:
+            type: integer
+          description: |
+            Search by time billable
+            > 0 = No <br /> 1 = Billable <br /> 2 = Billed
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/events_objects'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - Events
+      summary: Create
+      description: Create an event
+      operationId: Events_create
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/events_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/events_new_object'
+        '400':
+          $ref: '#/components/responses/400_name'
+        '401':
+          $ref: '#/components/responses/401'
+  /events/{id}:
+    get:
+      tags:
+        - Events
+      summary: Show
+      description: Get one event
+      operationId: Events_show
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Event Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/events_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Events
+      summary: Update
+      description: Update an event
+      operationId: Events_update
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/events_create'
+      parameters:
+        - in: path
+          name: id
+          description: Contact Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/events_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Events
+      summary: Delete
+      description: Delete an event
+      operationId: Events_delete
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Event Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /events/types:
+    get:
+      tags:
+        - Events
+      summary: Types
+      description: Get a list of all events types
+      operationId: Events_types
+      security:
+        - bearer_token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/events_types'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /notes:
+    get:
+      tags:
+        - Notes
+      summary: List
+      description: Get a list of all notes
+      operationId: Notes_list
+      security:
+        - bearer_token: []
+      parameters:
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: integer
+          description: User Id
+          required: true
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Search by start date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Search by end date
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: Search by customer or supplier Id
+        - in: query
+          name: id_opportunity
+          schema:
+            type: integer
+          description: Search by opportunity Id
+        - in: query
+          name: id_project
+          schema:
+            type: integer
+          description: Search by project Id
+        - in: query
+          name: id_project_task
+          schema:
+            type: integer
+          description: Search by task Id
+        - in: query
+          name: title
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by title
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/notes_objects'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - Notes
+      summary: Create
+      description: Create a note
+      operationId: Notes_create
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/notes_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/notes_new_object'
+        '400':
+          $ref: '#/components/responses/400_name'
+        '401':
+          $ref: '#/components/responses/401'
+  /notes/{id}:
+    get:
+      tags:
+        - Notes
+      summary: Show
+      description: Get one note
+      operationId: Notes_show
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Note Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/notes_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Notes
+      summary: Update
+      description: Update a note
+      operationId: Notes_update
+      security:
+        - bearer_token: []
+      requestBody:
+        $ref: '#/components/requestBodies/notes_create'
+      parameters:
+        - in: path
+          name: id
+          description: Note Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/notes_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Notes
+      summary: Delete
+      description: Delete a note
+      operationId: Notes_delete
+      security:
+        - bearer_token: []
+      parameters:
+        - in: path
+          name: id
+          description: Event Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   securitySchemes:
-    main_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://example.com/api/oauth/dialog
-          scopes:
-            read:users: read users info
-            write:users: modify or remove users
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
+    bearer_token:
       type: http
-      scheme: basic
-  schemas:
-    Email:
-      description: User email address
-      type: string
-      format: test
-      example: john.smith@example.com
-    User:
-      type: object
-      properties:
-        username:
-          description: User supplied username
-          type: string
-          minLength: 4
-          example: John78
-        firstName:
-          description: User first name
-          type: string
-          minLength: 1
-          example: John
-        lastName:
-          description: User last name
-          type: string
-          minLength: 1
-          example: Smith
-        email:
-          $ref: '#/components/schemas/Email'
-    Problem:
-      type: object
-      additionalProperties: true
-      minProperties: 1
-      description: >-
-        The Problem Details JSON Object
-        [[RFC7807](https://tools.ietf.org/html/rfc7807)].
-      properties:
-        type:
-          type: string
-          description: >-
-            A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)]
-            that identifies the problem type. It should provide human-readable
-            documentation for the problem type. When this member is not present,
-            its value is assumed to be "about:blank".
-          format: uri
-        title:
-          type: string
-          description: >-
-            A short, human-readable summary of the problem type. It SHOULD NOT
-            change from occurrence to occurrence of the problem, except for
-            purposes of localization.
-        status:
-          type: integer
-          description: The HTTP status code.
-          minimum: 400
-          maximum: 599
-        detail:
-          type: string
-          description: >-
-            A human-readable explanation specific to this occurrence of the
-            problem.
-        instance:
-          type: string
-          description: >-
-            A URI reference that identifies the specific occurrence of the
-            problem.  It may or may not yield further information if
-            dereferenced.
-    Schema:
-      type: object
-      title: Scalars
-      properties:
-        stringProperty:
-          description: Property name's description (type is string)
-          type: string
-          examples:
-            - example
-            - sample
-        readOnlyStringProperty:
-          description: Notice this only appears in the response.
-          type: string
-          readOnly: true
-          examples:
-            - example
-        writeOnlyStringProperty:
-          description: Notice this only appears in the request.
-          type: string
-          writeOnly: true
-          examples:
-            - example
-        minLengthString:
-          description: Property name's description (type is string)
-          type: string
-          minLength: 4
-          examples:
-            - example
-        maxLengthString:
-          description: Property name's description (type is string)
-          type: string
-          maxLength: 140
-          examples:
-            - example
-        minAndMaxLengthString:
-          description: Property name's description (type is string)
-          type: string
-          minLength: 4
-          maxLength: 140
-          examples:
-            - example
-        nullableOrStringProperty:
-          description: Property name's description (type is string or null)
-          type:
-            - string
-            - null
-          examples:
-            - example
-        stringEnumValues:
-          description: Property name's description (type is string)
-          type: string
-          enum:
-            - sample
-            - example
-            - specimen
-            - case
-            - instance
-            - illustration
-        stringDateTime:
-          description: Property name's description (type is string, format is date-time)
-          type: string
-          format: date-time
-        stringDate:
-          description: Property name's description (type is string, format is date-time)
-          type: string
-          format: date
-        stringEmail:
-          description: Property name's description (type is string, format is email)
-          type: string
-          format: email
-        stringIpAddressV4:
-          description: Property name's description (type is string, format is ipv4 address)
-          type: string
-          format: ipv4
-        stringIpAddressV6:
-          description: Property name's description (type is string, format is ipv6 address)
-          type: string
-          format: ipv6
-        stringPassword:
-          description: Property name's description (type is string, format is password)
-          type: string
-          format: password
-        stringHostname:
-          description: Property name's description (type is string, format is hostname)
-          type: string
-          format: hostname
-        stringUri:
-          description: Property name's description (type is string, format is uri)
-          type: string
-          format: uri
-        stringUuid:
-          description: Property name's description (type is string, format is uuid)
-          type: string
-          format: uuid
-        numberProperty:
-          description: Property name's description (type is number)
-          type: number
-          example: 8
-        numberFloat:
-          description: Property name's description (type is number, format is float)
-          type: number
-          format: float
-        numberDouble:
-          description: Property name's description (type is number, format is double)
-          type: number
-          format: double
-        numberGreaterThanOrEquals:
-          description: Property name's description (type is number)
-          type: number
-          minimum: 5
-        numberGreaterThan:
-          description: Property name's description (type is number)
-          type: number
-          exclusiveMinimum: 5
-        numberLessThan:
-          description: Property name's description (type is number)
-          type: number
-          exclusiveMaximum: 8
-        numberLessThanOrEquals:
-          description: Property name's description (type is number)
-          type: number
-          maximum: 8
-        numberRange:
-          description: Property name's description (type is number)
-          type: number
-          minimum: 5
-          maximum: 8
-        numberRangeExclusiveMaximum:
-          description: Property name's description (type is number)
-          type: number
-          minimum: 5
-          exclusiveMaximum: 8
-        numberRangeExclusiveMinimumAndMaximum:
-          description: Property name's description (type is number)
-          type: number
-          exclusiveMinimum: 5
-          exclusiveMaximum: 8
-        numberMultipleOf:
-          description: Property name's description (type is number)
-          type: number
-          multipleOf: 2
-        integerType:
-          description: Property name's description (type is integer)
-          type: integer
-        integer32bit:
-          description: Property name's description (type is integer, format is int32)
-          type: integer
-          format: int32
-        integer64bit:
-          description: Property name's description (type is integer, format is int64)
-          type: integer
-          format: int64
-        booleanProperty:
-          description: Property name's description (type is boolean)
-          type: boolean
+      scheme: bearer
+      bearerFormat: xxxxxx-xxxxxx-xxxx-xxxxxx-xxxxxx
   responses:
-    Problem:
-      description: Problem
+    '401':
+      description: Unauthorized
       content:
-        application/problem+json:
+        application/json:
           schema:
-            $ref: '#/components/schemas/Problem'
-  headers:
-    ExpiresAfter:
-      description: date in UTC when token expires
-      schema:
-        type: string
-        format: date-time
+            $ref: '#/components/schemas/error'
+          example:
+            code: '11001'
+            status: error
+            message: Bearer token field is not completed
+            category_code: '11'
+            category_message: Authentification failed
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          example:
+            code: '40101'
+            status: error
+            message: Customer has not been found
+            category_code: '40'
+            category_message: External error
+    customers_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '14'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Customer Id
+                      type: integer
+                      example: '48560'
+                    title:
+                      description: >-
+                        Name for professional customer *or civility + lastname +
+                        firstname for individual customer*
+                      type: string
+                      example: Society X
+                    individual:
+                      description: Customer type
+                      type: integer
+                      example: '0'
+                    prospect:
+                      description: Customer status
+                      type: integer
+                      example: '0'
+                    id_client_manager:
+                      description: Customer manager
+                      type: array
+                      items:
+                        type: string
+                        example: u213
+                    phone:
+                      description: Customer phone number
+                      type: string
+                      example: '+33512345678'
+                    mobile:
+                      description: Customer mobile number
+                      type: string
+                      example: 07 98 76 54 32
+                    email:
+                      description: Customer email address
+                      type: string
+                      format: email
+                      example: contact@example.com
+                    langId:
+                      description: Customer language
+                      type: integer
+                      example: '1'
+                    siret:
+                      description: Customer SIRET
+                      type: string
+                      example: 123 568 941 00056
+                    siren:
+                      description: Customer SIREN
+                      type: integer
+                      example: 123 568 941
+                    legal_form:
+                      description: Customer status
+                      type: string
+                      example: SARL
+                    main_activity:
+                      description: APE/NAF code
+                      type: integer
+                      example: 4616C
+                    vat_number:
+                      description: VAT number
+                      type: string
+                      example: FR 32 123456789
+                    id_parent:
+                      description: Id parent
+                      type: integer
+                      example: '0'
+                    id_products_prices_category:
+                      description: Id document template
+                      type: integer
+                      example: '0'
+                    description:
+                      description: Customer description
+                      type: string
+                      example: A description or note about this customer
+                    client_number:
+                      description: Internal number
+                      type: integer
+                      example: '123'
+                    address_list:
+                      description: >-
+                        List of main address, delivery address and/or invoince
+                        address
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Address Id
+                            type: integer
+                          type:
+                            description: Address type
+                            type: string
+                          address:
+                            description: Number of the house and name of the road
+                            type: string
+                          zip_code:
+                            description: ZIP code
+                            type: string
+                          city:
+                            description: City name
+                            type: string
+                          country:
+                            description: Country name
+                            type: string
+                          is_default:
+                            description: Default choice
+                            type: boolean
+                      example:
+                        - id: '17894'
+                          type: main
+                          title: ''
+                          address: 55 Av. Louis Breguet
+                          zip_code: '31400'
+                          city: Toulouse
+                          country: France
+                          is_defaut: true
+                        - id: '17895'
+                          type: delivery
+                          title: My delivery address
+                          address: 1 place du Capitole
+                          zip_code: '31000'
+                          city: Toulouse
+                          country: France
+                          is_defaut: false
+                        - id: '17896'
+                          type: invoice
+                          title: My invoice address
+                          address: 55 Rue du Faubourg Saint-Honoré
+                          zip_code: '75000'
+                          city: Paris
+                          country: France
+                          is_defaut: false
+                    contacts_list:
+                      description: List of contacts
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Contact Id
+                            type: integer
+                          civility:
+                            description: Civility of contact
+                            type: string
+                          lastname:
+                            description: Contact lastname
+                            type: string
+                          firstname:
+                            description: Contact firstname
+                            type: string
+                          position_title:
+                            description: Contact position title
+                            type: string
+                          email:
+                            description: Contact email address
+                            type: string
+                            format: email
+                          phone:
+                            description: Contact phone number
+                            type: string
+                          mobile:
+                            description: Contact mobile number
+                            type: string
+                          description:
+                            description: Contact description
+                            type: string
+                      example:
+                        - id: '4700'
+                          civility: Mr
+                          lastname: Dupont
+                          firstname: Jean
+                          position_title: CEO
+                          email: jeandupont@example.com
+                          phone: 02 45 68 37 98
+                          mobile: 06 94 31 81 31
+                          description: A description or note about this contact
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3345'
+                          title: Source d'acquisition
+                          value: '5900'
+                          value_text: Facebook
+                    opportunities_list:
+                      description: List of opportunities
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Opportunity Id
+                            type: integer
+                          pipeline:
+                            description: Pipeline number
+                            type: integer
+                          title:
+                            description: Opportunity title
+                            type: string
+                          archived:
+                            description: Opportunity status
+                            type: integer
+                      example:
+                        - id: '1947'
+                          pipeline: '1924'
+                          title: 'Opportunity #1'
+                          archived: '0'
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    customers_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Customer Id
+                type: integer
+                example: '48560'
+              title:
+                description: >-
+                  Name for professional customer *or civility + lastname +
+                  firstname for individual customer*
+                type: string
+                example: Society X
+              individual:
+                description: Customer type
+                type: integer
+                example: '0'
+              prospect:
+                description: Customer status
+                type: integer
+                example: '0'
+              id_client_manager:
+                description: Customer manager
+                type: array
+                items:
+                  type: string
+                  example: u213
+              phone:
+                description: Customer phone number
+                type: string
+                example: '+33512345678'
+              mobile:
+                description: Customer mobile number
+                type: string
+                example: 07 98 76 54 32
+              email:
+                description: Customer email
+                type: string
+                format: email
+                example: contact@example.com
+              langId:
+                description: Customer language
+                type: integer
+                example: '1'
+              siret:
+                description: Customer SIRET
+                type: string
+                example: 123 568 941 00056
+              siren:
+                description: Customer SIREN
+                type: integer
+                example: 123 568 941
+              legal_form:
+                description: Customer status
+                type: string
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: integer
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                example: FR 32 123456789
+              id_parent:
+                description: Id parent
+                type: integer
+                example: '0'
+              id_products_prices_category:
+                description: Id document template
+                type: integer
+                example: '0'
+              description:
+                description: Customer description
+                type: string
+                example: A description or note about this customer
+              client_number:
+                description: Internal number
+                type: integer
+                example: '123'
+              address_list:
+                description: List of main address, delivery address and/or invoince address
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                    address:
+                      type: string
+                    zip_code:
+                      type: string
+                    city:
+                      type: string
+                    country:
+                      type: string
+                    is_defaukt:
+                      type: boolean
+                example:
+                  - id: '17894'
+                    type: main
+                    title: ''
+                    address: 55 Av. Louis Breguet
+                    zip_code: '31400'
+                    city: Toulouse
+                    country: France
+                    is_defaut: true
+                  - id: '17895'
+                    type: delivery
+                    title: My delivery address
+                    address: 1 place du Capitole
+                    zip_code: '31000'
+                    city: Toulouse
+                    country: France
+                    is_defaut: false
+                  - id: '17896'
+                    type: invoice
+                    title: My invoice address
+                    address: 55 Rue du Faubourg Saint-Honoré
+                    zip_code: '75000'
+                    city: Paris
+                    country: France
+                    is_defaut: false
+              contacts_list:
+                description: List of contacts
+                type: array
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+              opportunities_list:
+                description: List of opportunities
+                type: array
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    400_name:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          example:
+            code: '20101'
+            status: error
+            message: name field is not completed
+            category_code: '20'
+            category_message: Missing required field
+    customers_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Customer Id
+                type: integer
+                example: '48560'
+              title:
+                description: >-
+                  Name for professional customer *or civility + lastname +
+                  firstname for individual customer*
+                type: string
+                example: Society X
+              individual:
+                description: Customer type
+                type: integer
+                example: '0'
+              prospect:
+                description: Customer status
+                type: integer
+                example: '0'
+              id_client_manager:
+                description: Customer manager
+                type: array
+                items:
+                  type: string
+                  example: u213
+              phone:
+                description: Customer phone number
+                type: string
+                example: '+33512345678'
+              mobile:
+                description: Customer mobile number
+                type: string
+                example: 07 98 76 54 32
+              email:
+                description: Customer email address
+                type: string
+                format: email
+                example: contact@example.com
+              langId:
+                description: Customer language
+                type: integer
+                example: '1'
+              siret:
+                description: Customer SIRET
+                type: string
+                example: 123 568 941 00056
+              siren:
+                description: Customer SIREN
+                type: integer
+                example: 123 568 941
+              legal_form:
+                description: Customer status
+                type: string
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: integer
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                example: FR 32 123456789
+              id_parent:
+                description: Id parent
+                type: integer
+                example: '0'
+              id_products_prices_category:
+                description: Id document template
+                type: integer
+                example: '0'
+              description:
+                description: Customer description
+                type: string
+                example: A description or note about this customer
+              client_number:
+                description: Internal number
+                type: integer
+                example: '123'
+              address_list:
+                description: List of main address, delivery address and/or invoince address
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Address Id
+                      type: integer
+                    type:
+                      description: Address type
+                      type: string
+                    address:
+                      description: Number of the house and name of the road
+                      type: string
+                    zip_code:
+                      description: ZIP code
+                      type: string
+                    city:
+                      description: City name
+                      type: string
+                    country:
+                      description: Country name
+                      type: string
+                    is_default:
+                      description: Default choice
+                      type: boolean
+                example:
+                  - id: '17894'
+                    type: main
+                    title: ''
+                    address: 55 Av. Louis Breguet
+                    zip_code: '31400'
+                    city: Toulouse
+                    country: France
+                    is_defaut: true
+                  - id: '17895'
+                    type: delivery
+                    title: My delivery address
+                    address: 1 place du Capitole
+                    zip_code: '31000'
+                    city: Toulouse
+                    country: France
+                    is_defaut: false
+                  - id: '17896'
+                    type: invoice
+                    title: My invoice address
+                    address: 55 Rue du Faubourg Saint-Honoré
+                    zip_code: '75000'
+                    city: Paris
+                    country: France
+                    is_defaut: false
+              contacts_list:
+                description: List of contacts
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Contact Id
+                      type: integer
+                    civility:
+                      description: Civility of contact
+                      type: string
+                    lastname:
+                      description: Contact lastname
+                      type: string
+                    firstname:
+                      description: Contact firstname
+                      type: string
+                    position_title:
+                      description: Contact position title
+                      type: string
+                    email:
+                      description: Contact email address
+                      type: string
+                      format: email
+                    phone:
+                      description: Contact phone number
+                      type: string
+                    mobile:
+                      description: Contact mobile number
+                      type: string
+                    description:
+                      description: Contact description
+                      type: string
+                example:
+                  - id: '4700'
+                    civility: Mr
+                    lastname: Dupont
+                    firstname: Jean
+                    position_title: CEO
+                    email: jeandupont@example.com
+                    phone: 02 45 68 37 98
+                    mobile: 06 94 31 81 31
+                    description: A description or note about this contact
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3345'
+                    title: Source d'acquisition
+                    value: '5900'
+                    value_text: Facebook
+              opportunities_list:
+                description: List of opportunities
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Opportunity Id
+                      type: integer
+                    pipeline:
+                      description: Pipeline number
+                      type: integer
+                    title:
+                      description: Opportunity title
+                      type: string
+                    archived:
+                      description: Opportunity status
+                      type: integer
+                example:
+                  - id: '1947'
+                    pipeline: '1924'
+                    title: 'Opportunity #1'
+                    archived: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    customers_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Customer custom field Id
+                      type: integer
+                      example: '3346'
+                    title:
+                      description: Customer custom field title
+                      type: string
+                      example: Source of acquisition
+                    type:
+                      description: Customer custom field type
+                      type: string
+                      example: Dropdown list
+                    with_values:
+                      description: Custom field with values
+                      type: boolean
+                      example: 'true'
+    customers_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Customer custom field value Id
+                      type: integer
+                    title:
+                      description: Customer custom field value title
+                      type: string
+                example:
+                  - id: '5899'
+                    title: Facebook
+                  - id": '5900'
+                    title: Google AdWords
+                  - id: '5901'
+                    title: Website
+    400_custom_field:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          example:
+            code: '40501'
+            status: error
+            message: Custom field has not been found
+            category_code: '40'
+            category_message: External error
+    suppliers_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '5'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Supplier Id
+                      type: integer
+                      example: '48560'
+                    title:
+                      description: Supplier name
+                      type: string
+                      example: Society Y
+                    id_client_manager:
+                      description: Supplier manager
+                      type: array
+                      items:
+                        type: string
+                        example: u213
+                    phone:
+                      description: Supplier phone number
+                      type: string
+                      example: '+33512345678'
+                    mobile:
+                      description: Supplier mobile number
+                      type: string
+                      example: 07 98 76 54 32
+                    email:
+                      description: Supplier email address
+                      type: string
+                      format: email
+                      example: contact@example.com
+                    langId:
+                      description: Supplier language
+                      type: integer
+                      example: '1'
+                    siret:
+                      description: Supplier SIRET
+                      type: string
+                      example: 123 568 941 00056
+                    siren:
+                      description: Supplier SIREN
+                      type: integer
+                      example: 123 568 941
+                    legal_form:
+                      description: Supplier status
+                      type: string
+                      example: SARL
+                    main_activity:
+                      description: APE/NAF code
+                      type: integer
+                      example: 4616C
+                    vat_number:
+                      description: VAT number
+                      type: string
+                      example: FR 32 123456789
+                    id_parent:
+                      description: Id parent
+                      type: integer
+                      example: '0'
+                    id_products_prices_category:
+                      description: Id document template
+                      type: integer
+                      example: '0'
+                    description:
+                      description: Supplier description
+                      type: string
+                      example: A description or note about this supplier
+                    client_number:
+                      description: Internal number
+                      type: integer
+                      example: '123'
+                    address_list:
+                      description: >-
+                        List of main address, delivery address and/or invoince
+                        address
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Address Id
+                            type: integer
+                          type:
+                            description: Address type
+                            type: string
+                          address:
+                            description: Number of the house and name of the road
+                            type: string
+                          zip_code:
+                            description: ZIP code
+                            type: string
+                          city:
+                            description: City name
+                            type: string
+                          country:
+                            description: Country name
+                            type: string
+                          is_default:
+                            description: Default choice
+                            type: boolean
+                      example:
+                        - id: '17894'
+                          type: main
+                          title: ''
+                          address: 55 Av. Louis Breguet
+                          zip_code: '31400'
+                          city: Toulouse
+                          country: France
+                          is_defaut: true
+                        - id: '17895'
+                          type: delivery
+                          title: My delivery address
+                          address: 1 place du Capitole
+                          zip_code: '31000'
+                          city: Toulouse
+                          country: France
+                          is_defaut: false
+                        - id: '17896'
+                          type: invoice
+                          title: My invoice address
+                          address: 55 Rue du Faubourg Saint-Honoré
+                          zip_code: '75000'
+                          city: Paris
+                          country: France
+                          is_defaut: false
+                    contacts_list:
+                      description: List of contacts
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Contact Id
+                            type: integer
+                          civility:
+                            description: Civility of contact
+                            type: string
+                          lastname:
+                            description: Contact lastname
+                            type: string
+                          firstname:
+                            description: Contact firstname
+                            type: string
+                          position_title:
+                            description: Contact position title
+                            type: string
+                          email:
+                            description: Contact email address
+                            type: string
+                            format: email
+                          phone:
+                            description: Contact phone number
+                            type: string
+                          mobile:
+                            description: Contact mobile number
+                            type: string
+                          description:
+                            description: Contact description
+                            type: string
+                      example:
+                        - id: '4700'
+                          civility: Mr
+                          lastname: Dupont
+                          firstname: Jean
+                          position_title: CEO
+                          email: jeandupont@example.com
+                          phone: 02 45 68 37 98
+                          mobile: 06 94 31 81 31
+                          description: A description or note about this contact
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3352'
+                          title: Payment condition
+                          value: '5911'
+                          value_text: 30 days
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    suppliers_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Supplier Id
+                type: integer
+                example: '48560'
+              title:
+                description: Supplier name
+                type: string
+                example: Society Y
+              id_client_manager:
+                description: Supplier manager
+                type: array
+                items:
+                  type: string
+                  example: u213
+              phone:
+                description: Supplier phone number
+                type: string
+                example: '+33512345678'
+              mobile:
+                description: Supplier mobile number
+                type: string
+                example: 07 98 76 54 32
+              email:
+                description: Supplier email
+                type: string
+                format: email
+                example: contact@example.com
+              langId:
+                description: Supplier language
+                type: integer
+                example: '1'
+              siret:
+                description: Supplier SIRET
+                type: string
+                example: 123 568 941 00056
+              siren:
+                description: Supplier SIREN
+                type: integer
+                example: 123 568 941
+              legal_form:
+                description: Supplier status
+                type: string
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: integer
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                example: FR 32 123456789
+              id_parent:
+                description: Id parent
+                type: integer
+                example: '0'
+              id_products_prices_category:
+                description: Id document template
+                type: integer
+                example: '0'
+              description:
+                description: Supplier description
+                type: string
+                example: A description or note about this supplier
+              client_number:
+                description: Internal number
+                type: integer
+                example: '123'
+              address_list:
+                description: List of main address, delivery address and/or invoince address
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    type:
+                      type: string
+                    address:
+                      type: string
+                    zip_code:
+                      type: string
+                    city:
+                      type: string
+                    country:
+                      type: string
+                    is_defaukt:
+                      type: boolean
+                example:
+                  - id: '17894'
+                    type: main
+                    title: ''
+                    address: 55 Av. Louis Breguet
+                    zip_code: '31400'
+                    city: Toulouse
+                    country: France
+                    is_defaut: true
+                  - id: '17895'
+                    type: delivery
+                    title: My delivery address
+                    address: 1 place du Capitole
+                    zip_code: '31000'
+                    city: Toulouse
+                    country: France
+                    is_defaut: false
+                  - id: '17896'
+                    type: invoice
+                    title: My invoice address
+                    address: 55 Rue du Faubourg Saint-Honoré
+                    zip_code: '75000'
+                    city: Paris
+                    country: France
+                    is_defaut: false
+              contacts_list:
+                description: List of contacts
+                type: array
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    suppliers_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Supplier Id
+                type: integer
+                example: '48560'
+              title:
+                description: Supplier name
+                type: string
+                example: Society Y
+              id_client_manager:
+                description: Supplier manager
+                type: array
+                items:
+                  type: string
+                  example: u213
+              phone:
+                description: Supplier phone number
+                type: string
+                example: '+33512345678'
+              mobile:
+                description: Supplier mobile number
+                type: string
+                example: 07 98 76 54 32
+              email:
+                description: Supplier email address
+                type: string
+                format: email
+                example: contact@example.com
+              langId:
+                description: Supplier language
+                type: integer
+                example: '1'
+              siret:
+                description: Supplier SIRET
+                type: string
+                example: 123 568 941 00056
+              siren:
+                description: Supplier SIREN
+                type: integer
+                example: 123 568 941
+              legal_form:
+                description: Supplier status
+                type: string
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: integer
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                example: FR 32 123456789
+              id_parent:
+                description: Id parent
+                type: integer
+                example: '0'
+              id_products_prices_category:
+                description: Id document template
+                type: integer
+                example: '0'
+              description:
+                description: Supplier description
+                type: string
+                example: A description or note about this supplier
+              client_number:
+                description: Internal number
+                type: integer
+                example: '123'
+              address_list:
+                description: List of main address, delivery address and/or invoince address
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Address Id
+                      type: integer
+                    type:
+                      description: Address type
+                      type: string
+                    address:
+                      description: Number of the house and name of the road
+                      type: string
+                    zip_code:
+                      description: ZIP code
+                      type: string
+                    city:
+                      description: City name
+                      type: string
+                    country:
+                      description: Country name
+                      type: string
+                    is_default:
+                      description: Default choice
+                      type: boolean
+                example:
+                  - id: '17894'
+                    type: main
+                    title: ''
+                    address: 55 Av. Louis Breguet
+                    zip_code: '31400'
+                    city: Toulouse
+                    country: France
+                    is_defaut: true
+                  - id: '17895'
+                    type: delivery
+                    title: My delivery address
+                    address: 1 place du Capitole
+                    zip_code: '31000'
+                    city: Toulouse
+                    country: France
+                    is_defaut: false
+                  - id: '17896'
+                    type: invoice
+                    title: My invoice address
+                    address: 55 Rue du Faubourg Saint-Honoré
+                    zip_code: '75000'
+                    city: Paris
+                    country: France
+                    is_defaut: false
+              contacts_list:
+                description: List of contacts
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Contact Id
+                      type: integer
+                    civility:
+                      description: Civility of contact
+                      type: string
+                    lastname:
+                      description: Contact lastname
+                      type: string
+                    firstname:
+                      description: Contact firstname
+                      type: string
+                    position_title:
+                      description: Contact position title
+                      type: string
+                    email:
+                      description: Contact email address
+                      type: string
+                      format: email
+                    phone:
+                      description: Contact phone number
+                      type: string
+                    mobile:
+                      description: Contact mobile number
+                      type: string
+                    description:
+                      description: Contact description
+                      type: string
+                example:
+                  - id: '4700'
+                    civility: Mr
+                    lastname: Dupont
+                    firstname: Jean
+                    position_title: CEO
+                    email: jeandupont@example.com
+                    phone: 02 45 68 37 98
+                    mobile: 06 94 31 81 31
+                    description: A description or note about this contact
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3352'
+                    title: Payment condition
+                    value: '5911'
+                    value_text: 30 days
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    suppliers_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Supplier custom field Id
+                      type: integer
+                      example: '3352'
+                    title:
+                      description: Supplier custom field title
+                      type: string
+                      example: Payment condition
+                    type:
+                      description: Supplier custom field type
+                      type: string
+                      example: Dropdown list
+                    with_values:
+                      description: Custom field with values
+                      type: boolean
+                      example: 'true'
+    suppliers_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Supplier custom field value Id
+                      type: integer
+                    title:
+                      description: Supplier custom field value title
+                      type: string
+                example:
+                  - id: '5911'
+                    title: 30 days
+                  - id": '5912'
+                    title: 45 days end of month
+    contacts_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '3'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Contact Id
+                      type: integer
+                      example: '48560'
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    supplier:
+                      description: Supplier status of the contact
+                      type: integer
+                      example: '0'
+                    title:
+                      description: Civility + lastname + firstname contact
+                      type: string
+                      example: Mr Jean Dupont
+                    id_civility:
+                      description: Contact civility
+                      type: integer
+                      example: '1'
+                    lastname:
+                      description: Contact lastname
+                      type: string
+                      example: Dupont
+                    firstname:
+                      description: Contact firstname
+                      type: string
+                      example: Jean
+                    position_title:
+                      description: Contact position title
+                      type: string
+                      example: CEO
+                    email:
+                      description: Contact email
+                      type: string
+                      format: email
+                      example: jeandupont@example.com
+                    phone:
+                      description: Contact phone number
+                      type: string
+                      example: 02 45 68 37 98
+                    mobile:
+                      description: Contact mobile number
+                      type: string
+                      example: 06 94 31 81 31
+                    description:
+                      description: Contact description
+                      type: string
+                      example: A description or note about this contact
+                    client_number:
+                      description: Internal number
+                      type: integer
+                      example: '123'
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3407'
+                          title: Contact type
+                          value: '5994'
+                          value_text: Decision-maker contact
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    contacts_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Contact Id
+                type: integer
+                example: '48560'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              supplier:
+                description: Supplier status of the contact
+                type: integer
+                example: '0'
+              title:
+                description: Civility + lastname + firstname contact
+                type: string
+                example: Mr Jean Dupont
+              id_civility:
+                description: Contact civility
+                type: integer
+                example: '1'
+              lastname:
+                description: Contact lastname
+                type: string
+                example: Dupont
+              firstname:
+                description: Contact firstname
+                type: string
+                example: Jean
+              position_title:
+                description: Contact position title
+                type: string
+                example: CEO
+              email:
+                description: Contact email
+                type: string
+                format: email
+                example: jeandupont@example.com
+              phone:
+                description: Contact phone number
+                type: string
+                example: 02 45 68 37 98
+              mobile:
+                description: Contact mobile number
+                type: string
+                example: 06 94 31 81 31
+              description:
+                description: Contact description
+                type: string
+                example: A description or note about this contact
+              client_number:
+                description: Internal number
+                type: integer
+                example: '123'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    contacts_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Contact Id
+                type: integer
+                example: '48560'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              supplier:
+                description: Supplier status of the contact
+                type: integer
+                example: '0'
+              title:
+                description: Civility + lastname + firstname contact
+                type: string
+                example: Mr Jean Dupont
+              id_civility:
+                description: Contact civility
+                type: integer
+                example: '1'
+              lastname:
+                description: Contact lastname
+                type: string
+                example: Dupont
+              firstname:
+                description: Contact firstname
+                type: string
+                example: Jean
+              position_title:
+                description: Contact position title
+                type: string
+                example: CEO
+              email:
+                description: Contact email
+                type: string
+                format: email
+                example: jeandupont@example.com
+              phone:
+                description: Contact phone number
+                type: string
+                example: 02 45 68 37 98
+              mobile:
+                description: Contact mobile number
+                type: string
+                example: 06 94 31 81 31
+              description:
+                description: Contact description
+                type: string
+                example: A description or note about this contact
+              client_number:
+                description: Internal number
+                type: integer
+                example: '123'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3407'
+                    title: Contact type
+                    value: '5994'
+                    value_text: Decision-maker contact
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    contacts_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Contact custom field Id
+                      type: integer
+                      example: '3407'
+                    title:
+                      description: Contact custom field title
+                      type: string
+                      example: Contact type
+                    type:
+                      description: Contact custom field type
+                      type: string
+                      example: Tags (separated by a comma)
+                    with_values:
+                      description: Custom field with values
+                      type: boolean
+                      example: 'true'
+    contacts_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Contact custom field value Id
+                      type: integer
+                    title:
+                      description: Contact custom field value title
+                      type: string
+                example:
+                  - id: '5991'
+                    title: Commercial contact
+                  - id: '5992'
+                    title: Accounting contact
+                  - id: '5993'
+                    title: Decision-maker contact
+                  - id: '5994'
+                    title: Delivery contact
+    opportunities_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '3'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Contact Id
+                      type: integer
+                      example: '48560'
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    supplier:
+                      description: Supplier status of the contact
+                      type: integer
+                      example: '0'
+                    title:
+                      description: Civility + lastname + firstname contact
+                      type: string
+                      example: Mr Jean Dupont
+                    id_civility:
+                      description: Contact civility
+                      type: integer
+                      example: '1'
+                    lastname:
+                      description: Contact lastname
+                      type: string
+                      example: Dupont
+                    firstname:
+                      description: Contact firstname
+                      type: string
+                      example: Jean
+                    position_title:
+                      description: Contact position title
+                      type: string
+                      example: CEO
+                    email:
+                      description: Contact email
+                      type: string
+                      format: email
+                      example: jeandupont@example.com
+                    phone:
+                      description: Contact phone number
+                      type: string
+                      example: 02 45 68 37 98
+                    mobile:
+                      description: Contact mobile number
+                      type: string
+                      example: 06 94 31 81 31
+                    description:
+                      description: Contact description
+                      type: string
+                      example: A description or note about this contact
+                    client_number:
+                      description: Internal number
+                      type: integer
+                      example: '123'
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3407'
+                          title: Contact type
+                          value: '5994'
+                          value_text: Decision-maker contact
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    opportunities_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              pipeline:
+                description: Pipeline Id
+                type: integer
+                example: '1934'
+              column_number:
+                description: Opportunity stage
+                type: integer
+                example: '1'
+              column_number_last_update:
+                description: Last update date of opportunity stage
+                type: string
+                format: date-time
+                example: '2022-04-04 09:44:49'
+              position:
+                description: Opportunity position
+                type: integer
+                example: '1'
+              id_customer:
+                description: Customer Id
+                type: string
+                example: '28496'
+              title:
+                description: Contact position title
+                type: string
+                example: 'Opportunity #1'
+              id_status:
+                description: Opportunity status Id
+                type: integer
+                example: '0'
+              id_status_lost:
+                description: Reason Id for loss
+                type: integer
+                example: '0'
+              id_status_canceled:
+                description: Reason Id for cancellation
+                type: integer
+                example: '0'
+              id_user_assigned:
+                description: Opportunity client mamager
+                type: array
+                items:
+                  type: string
+                  example: Jean Dupont
+              archived:
+                description: Opportunity condition
+                type: integer
+                example: '0'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    opportunities_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              pipeline:
+                description: Pipeline Id
+                type: integer
+                example: '1934'
+              column_number:
+                description: Opportunity stage
+                type: integer
+                example: '1'
+              column_number_last_update:
+                description: Last update date of opportunity stage
+                type: string
+                format: date-time
+                example: '2022-04-04 09:44:49'
+              position:
+                description: Opportunity position
+                type: integer
+                example: '1'
+              id_customer:
+                description: Customer Id
+                type: string
+                example: '28496'
+              title:
+                description: Contact position title
+                type: string
+                example: 'Opportunity #1'
+              id_status:
+                description: Opportunity status Id
+                type: integer
+                example: '0'
+              opportunity_status:
+                description: Opportunity status
+                type: string
+                example: Open
+              id_status_lost:
+                description: Reason Id for loss
+                type: integer
+                example: '0'
+              opportunity_status_lost:
+                description: Opportunity status lost
+                type: string
+                example: ''
+              id_status_canceled:
+                description: Reason Id for cancellation
+                type: integer
+                example: '0'
+              opportunity_status_canceled:
+                description: Opportunity status canceled
+                type: integer
+                example: ''
+              id_user_assigned:
+                description: Opportunity client mamager
+                type: array
+                items:
+                  type: string
+                  example: Jean Dupont
+              archived:
+                description: Opportunity condition
+                type: integer
+                example: '0'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3413'
+                    title: Source
+                    value: '5995'
+                    value_text: Website
+              proposals:
+                description: Opportunity proposal
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Proposal Id
+                      type: integer
+                    number:
+                      description: Proposal number
+                      type: integer
+                    description:
+                      description: Proposal description
+                      type: string
+                    files_list:
+                      description: Proposal files list
+                      type: array
+                example:
+                  - id: '3413'
+                    number: '1'
+                    description: ''
+                    files_list: []
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    opportunities_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Opportunity custom field Id
+                      type: integer
+                      example: '3413'
+                    title:
+                      description: Opportunity custom field title
+                      type: string
+                      example: Source
+                    type:
+                      description: Opportunity custom field type
+                      type: string
+                      example: Dropdown list
+                    with_values:
+                      description: Opportunity field with values
+                      type: boolean
+                      example: 'true'
+    opportunities_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Opportunity custom field value Id
+                      type: integer
+                    title:
+                      description: Opportunity custom field value title
+                      type: string
+                example:
+                  - id: '5995'
+                    title: Phone
+                  - id: '5996'
+                    title: Website
+    opportunities_pipelines:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Pipeline Id
+                      type: integer
+                    title:
+                      description: Pipeline title
+                      type: string
+                    title_en:
+                      description: English pipeline title
+                      type: string
+                    title_es:
+                      description: Spanish pipeline title
+                      type: string
+                example:
+                  - id: '1934'
+                    title: Tableau
+                    title_en: Table
+                    title_es: Cuadro
+    opportunities_pipeline_columns:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Pipeline column Id
+                      type: integer
+                    title:
+                      description: Pipeline column title
+                      type: string
+                example:
+                  - id: '1'
+                    title: Prospecting
+                  - id: '2'
+                    title: Proposal
+                  - id: '3'
+                    title: Negotiation
+                  - id: '4'
+                    title: Sales
+    opportunities_status:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of the opportunity status
+                      type: integer
+                    title:
+                      description: Title of the opportunity status
+                      type: string
+                example:
+                  - id: '0'
+                    title: Open
+                  - id: '1'
+                    title: Won
+                  - id: '2'
+                    title: Lost
+                  - id: '3'
+                    title: Cancelled
+    opportunities_status_lost:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of lost opportunity statutes
+                      type: integer
+                    title:
+                      description: French title of lost opportunity statutes
+                      type: string
+                    title_en:
+                      description: English title of lost opportunity statutes
+                      type: string
+                    title_es:
+                      description: Spanish title of lost opportunity statutes
+                      type: string
+                example:
+                  - id: '1090'
+                    title: Concurrence
+                    title_en: Competition
+                    title_es: Competencia
+                  - id: '1091'
+                    title: Non qualifié
+                    title_en: Unqualified
+                    title_es: No calificado
+                  - id: '1092'
+                    title: Pas adapté
+                    title_en: Not suitable
+                    title_es: No apto
+                  - id: '1093'
+                    title: Trop cher
+                    title_en: Too expensive
+                    title_es: Demasiado caro
+    opportunities_status_canceled:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of lost opportunity statutes
+                      type: integer
+                    title:
+                      description: French title of lost opportunity statutes
+                      type: string
+                    title_en:
+                      description: English title of lost opportunity statutes
+                      type: string
+                    title_es:
+                      description: Spanish title of lost opportunity statutes
+                      type: string
+    events_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '14'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Event Id
+                      type: integer
+                      example: '10722'
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_event_type:
+                      description: Event type Id
+                      type: integer
+                      example: '3021'
+                    id_project:
+                      description: Project Id
+                      type: integer
+                      example: '0'
+                    id_project_task:
+                      description: Task Id
+                      type: integer
+                      example: '0'
+                    start_date:
+                      description: Start date
+                      type: string
+                      format: date-time
+                      example: +2022-03-15 19:45:00
+                    end_date:
+                      description: End date
+                      type: string
+                      format: date-time
+                      example: '2022-03-15 20:45:00'
+                    title:
+                      description: Event title
+                      type: string
+                      example: 'Event #1'
+                    description:
+                      description: Event description
+                      type: string
+                      example: A description or note about this event
+                    private:
+                      description: Event private status
+                      type: string
+                      example: '0'
+                    visible_in_agenda:
+                      description: Visibility in the agenda
+                      type: integer
+                      example: '1'
+                    synchronized:
+                      description: Event synchronization
+                      type: string
+                      example: '0'
+                    use_time:
+                      description: Event used for time
+                      type: integer
+                      example: '1'
+                    time_duration:
+                      description: Time duration
+                      type: string
+                      example: '01:00:00'
+                    time_id_type:
+                      description: Time type Id
+                      type: integer
+                      example: '0'
+                    time_billable:
+                      description: Billable time
+                      type: integer
+                      example: '0'
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    events_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Event Id
+                type: integer
+                example: '10722'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_event_type:
+                description: Event type Id
+                type: integer
+                example: '3021'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '0'
+              id_project_task:
+                description: Task Id
+                type: integer
+                example: '0'
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: +2022-03-15 19:45:00
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Event title
+                type: string
+                example: 'Event #1'
+              description:
+                description: Event description
+                type: string
+                example: A description or note about this event
+              private:
+                description: Event private status
+                type: string
+                example: '0'
+              visible_in_agenda:
+                description: Visibility in the agenda
+                type: integer
+                example: '1'
+              synchronized:
+                description: Event synchronization
+                type: string
+                example: '0'
+              use_time:
+                description: Event used for time
+                type: integer
+                example: '1'
+              time_duration:
+                description: Time duration
+                type: string
+                example: '01:00:00'
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: '0'
+              time_billable:
+                description: Billable time
+                type: integer
+                example: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    events_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Event Id
+                type: integer
+                example: '10722'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_event_type:
+                description: Event type Id
+                type: integer
+                example: '3021'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '0'
+              id_project_task:
+                description: Task Id
+                type: integer
+                example: '0'
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: +2022-03-15 19:45:00
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Event title
+                type: string
+                example: 'Event #1'
+              description:
+                description: Event description
+                type: string
+                example: A description or note about this event
+              private:
+                description: Event private status
+                type: string
+                example: '0'
+              visible_in_agenda:
+                description: Visibility in the agenda
+                type: integer
+                example: '1'
+              synchronized:
+                description: Event synchronization
+                type: string
+                example: '0'
+              use_time:
+                description: Event used for time
+                type: integer
+                example: '1'
+              time_duration:
+                description: Time duration
+                type: string
+                example: '01:00:00'
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: '0'
+              time_billable:
+                description: Billable time
+                type: integer
+                example: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    events_types:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of event type
+                      type: integer
+                    title:
+                      description: French title of event type
+                      type: string
+                    title_en:
+                      description: English title of event type
+                      type: string
+                    title_es:
+                      description: Spanish title of event type
+                      type: string
+                example:
+                  - id: '3019'
+                    title: Appel téléphonique
+                    title_en: Phone call
+                    title_es: Llamada telefónica
+                  - id: '3020'
+                    title: Echange de mail
+                    title_en: Mail exchange
+                    title_es: Intercambio de correo electrónico
+                  - id: '3021'
+                    title: Rendez-vous
+                    title_en: Appointment
+                    title_es: Cita
+                  - id: '3022'
+                    title: Echange de courrier
+                    title_en: Letter exchange
+                    title_es: Intercambio de correo
+    notes_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '14'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Note Id
+                      type: integer
+                      example: '10730'
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_project:
+                      description: Project Id
+                      type: integer
+                      example: '0'
+                    id_project_task:
+                      description: Task Id
+                      type: integer
+                      example: '0'
+                    date:
+                      description: Note date
+                      type: string
+                      format: date-time
+                      example: '2022-04-06 16:15:00'
+                    title:
+                      description: Note title
+                      type: string
+                      example: 'Note #1'
+                    description:
+                      description: Note description
+                      type: string
+                      example: A description or note about this note
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    notes_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Note Id
+                type: integer
+                example: '10730'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '0'
+              id_project_task:
+                description: Task Id
+                type: integer
+                example: '0'
+              date:
+                description: Note date
+                type: string
+                format: date-time
+                example: '2022-04-06 16:15:00'
+              title:
+                description: Note title
+                type: string
+                example: 'Note #1'
+              description:
+                description: Note description
+                type: string
+                example: A description or note about this note
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    notes_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Note Id
+                type: integer
+                example: '10730'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '0'
+              id_project_task:
+                description: Task Id
+                type: integer
+                example: '0'
+              date:
+                description: Note date
+                type: string
+                format: date-time
+                example: '2022-04-06 16:15:00'
+              title:
+                description: Note title
+                type: string
+                example: 'Note #1'
+              description:
+                description: Note description
+                type: string
+                example: A description or note about this note
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+  schemas:
+    error:
+      type: object
+      description: The Problem Details JSON Object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        status:
+          type: string
+          description: Response status
+        message:
+          type: string
+          description: Error details
+        category_code:
+          type: integer
+          description: Category error code
+        category_message:
+          type: string
+          description: Category error
+  requestBodies:
+    customers_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: >-
+                  Name for professional customer or lastname for individual
+                  customer
+                type: string
+                maxLength: 127
+                example: Society X
+              individual:
+                description: |
+                  Customer type
+                  > 0 = Professional <br /> 1 = Individual
+                type: integer
+                example: 0
+              id_civility:
+                description: |
+                  Customer civility - **Only for individual customer**
+                  > 1 = Mr <br /> 2 = Ms
+                type: integer
+                example: ''
+              firstname:
+                description: Customer firstname - **Only for individual customer**
+                type: string
+                maxLength: 127
+                example: ''
+              prospect:
+                description: |
+                  Customer status
+                  > 0 = Client <br /> 1 = Prospect
+                type: integer
+                example: 0
+              phone:
+                description: Customer phone number
+                type: string
+                maxLength: 30
+                example: '+33512345678'
+              mobile:
+                description: Customer mobile number
+                type: string
+                maxLength: 30
+                example: 07 98 76 54 32
+              email:
+                description: Customer email address
+                type: string
+                format: email
+                maxLength: 127
+                example: contact@example.com
+              id_client_manager:
+                description: Client manager
+                type: array
+                maxLength: 30
+                items:
+                  type: string
+                  example: u213
+              langId:
+                description: |
+                  Customer language
+                  > 1 = French <br /> 2 = English <br /> 3 = Spanish
+                type: integer
+                example: 1
+              siret:
+                description: Customer SIRET
+                type: string
+                maxLength: 30
+                example: 123 568 941 00056
+              siren:
+                description: Customer SIREN
+                type: integer
+                maxLength: 30
+                example: 123 568 941
+              legal_form:
+                description: Customer status
+                type: string
+                maxLength: 255
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: integer
+                maxLength: 255
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                maxLength: 30
+                example: FR 32 123456789
+              default_discount_percent:
+                description: Default discount
+                type: number
+                format: double
+                example: 10.5
+              id_document_template:
+                description: Id document template
+                type: integer
+                example: ''
+              description:
+                description: Customer description
+                type: string
+                maxLength: 255
+                example: A description or note about this customer
+              client_number:
+                description: Internal number
+                type: string
+                maxLength: 30
+                example: 123
+              main_address:
+                description: Main address
+                type: string
+                maxLength: 255
+                example: 55 Av. Louis Breguet
+              main_zip_code:
+                description: ZIP code of main address
+                type: string
+                maxLength: 64
+                example: 31400
+              main_city:
+                description: City of main address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              main_country:
+                description: Country of main address
+                type: string
+                maxLength: 64
+                example: France
+              delivery_title:
+                description: Name or company name of delivery address
+                type: string
+                maxLength: 127
+                example: My delivery address
+              delivery_address:
+                description: Delivery address
+                type: string
+                maxLength: 255
+                example: 1 place du Capitole
+              delivery_zip_code:
+                description: ZIP code of delivery address
+                type: string
+                maxLength: 64
+                example: 31000
+              delivery_city:
+                description: City of delivery address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              delivery_country:
+                description: Country of delivery address
+                type: string
+                maxLength: 64
+                example: France
+              invoice_title:
+                description: Name or company name of invoice address
+                type: string
+                maxLength: 127
+                example: My invoice address
+              invoice_address:
+                description: Invoice address
+                type: string
+                maxLength: 255
+                example: 55 Rue du Faubourg Saint-Honoré
+              invoice_zip_code:
+                description: ZIP code of invoice address
+                type: string
+                maxLength: 64
+                example: 75000
+              invoice_city:
+                description: City of invoice address
+                type: string
+                maxLength: 127
+                example: Paris
+              invoice_country:
+                description: Country of invoice address
+                type: string
+                maxLength: 64
+                example: France
+    customers_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: Custom field value
+                type: string
+                maxLength: 255
+                example: 5900
+    suppliers_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: Supplier name
+                type: string
+                maxLength: 127
+                example: Society Y
+              phone:
+                description: Supplier phone number
+                type: string
+                maxLength: 30
+                example: '+33512345678'
+              mobile:
+                description: Supplier mobile number
+                type: string
+                maxLength: 30
+                example: 07 98 76 54 32
+              email:
+                description: Supplier email address
+                type: string
+                format: email
+                maxLength: 127
+                example: contact@example.com
+              id_client_manager:
+                description: Client manager
+                type: array
+                maxLength: 30
+                items:
+                  type: string
+                  example: u213
+              langId:
+                description: |
+                  Supplier language
+                  > 1 = French <br /> 2 = English <br /> 3 = Spanish
+                type: integer
+                example: 1
+              siret:
+                description: Supplier SIRET
+                type: string
+                maxLength: 30
+                example: 123 568 941 00056
+              siren:
+                description: Supplier SIREN
+                type: integer
+                maxLength: 30
+                example: 123 568 941
+              legal_form:
+                description: Supplier status
+                type: string
+                maxLength: 255
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: integer
+                maxLength: 255
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                maxLength: 30
+                example: FR 32 123456789
+              id_document_template:
+                description: Id document template
+                type: integer
+                example: ''
+              description:
+                description: Supplier description
+                type: string
+                maxLength: 255
+                example: A description or note about this supplier
+              client_number:
+                description: Internal number
+                type: string
+                maxLength: 30
+                example: 123
+              main_address:
+                description: Main address
+                type: string
+                maxLength: 255
+                example: 55 Av. Louis Breguet
+              main_zip_code:
+                description: ZIP code of main address
+                type: string
+                maxLength: 64
+                example: 31400
+              main_city:
+                description: City of main address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              main_country:
+                description: Country of main address
+                type: string
+                maxLength: 64
+                example: France
+              delivery_title:
+                description: Name or company name of delivery address
+                type: string
+                maxLength: 127
+                example: My delivery address
+              delivery_address:
+                description: Delivery address
+                type: string
+                maxLength: 255
+                example: 1 place du Capitole
+              delivery_zip_code:
+                description: ZIP code of delivery address
+                type: string
+                maxLength: 64
+                example: 31000
+              delivery_city:
+                description: City of delivery address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              delivery_country:
+                description: Country of delivery address
+                type: string
+                maxLength: 64
+                example: France
+              invoice_title:
+                description: Name or company name of invoice address
+                type: string
+                maxLength: 127
+                example: My invoice address
+              invoice_address:
+                description: Invoice address
+                type: string
+                maxLength: 255
+                example: 55 Rue du Faubourg Saint-Honoré
+              invoice_zip_code:
+                description: ZIP code of invoice address
+                type: string
+                maxLength: 64
+                example: 75000
+              invoice_city:
+                description: City of invoice address
+                type: string
+                maxLength: 127
+                example: Paris
+              invoice_country:
+                description: Country of invoice address
+                type: string
+                maxLength: 64
+                example: France
+    suppliers_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: Custom field value
+                type: string
+                maxLength: 255
+                example: 5911
+    contacts_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_customer_supplier
+            properties:
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: 28496
+              id_civility:
+                description: |
+                  Contact civility
+                  > 1 = Mr <br /> 2 = Ms
+                type: integer
+                example: ''
+              lastname:
+                description: Contact lastname
+                type: string
+                maxLength: 127
+                example: Dupont
+              firstname:
+                description: Contact firstname
+                type: string
+                maxLength: 127
+                example: Jean
+              position_title:
+                description: Contact position title
+                type: string
+                maxLength: 127
+                example: CEO
+              email:
+                description: Contact email address
+                type: string
+                format: email
+                maxLength: 127
+                example: contact@example.com
+              phone:
+                description: Contact phone number
+                type: string
+                maxLength: 30
+                example: '+33512345678'
+              mobile:
+                description: Contact mobile number
+                type: string
+                maxLength: 30
+                example: 07 98 76 54 32
+              description:
+                description: Contact description
+                type: string
+                maxLength: 255
+                example: A description or note about this contact
+              client_number:
+                description: Internal number
+                type: string
+                maxLength: 30
+                example: 123
+    contacts_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: Custom field value
+                type: string
+                maxLength: 255
+                example: 5900
+    opportunities_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - pipeline
+              - id_customer
+            properties:
+              pipeline:
+                description: Pipeline Id
+                type: integer
+                example: 1934
+              id_customer:
+                description: Customer Id
+                type: integer
+                example: 48560
+              title:
+                description: Opportunity title
+                type: string
+                maxLength: 127
+                example: 'Opportunity #1'
+              column_number:
+                description: Opportunity stage
+                type: integer
+                example: 1
+              id_user_assigned:
+                description: Opportunity client mamager
+                type: array
+                maxLength: 30
+                items:
+                  type: string
+                  example: u213
+              id_status:
+                description: Opportunity Id status
+                type: integer
+                example: 0
+              id_status_lost:
+                description: Reason Id for loss. **Only if status is lost**
+                type: integer
+                format: email
+                example: ''
+              id_status_canceled:
+                description: Reason Id for cancellation. **Only if status is cancelled**
+                type: integer
+                example: ''
+              archived:
+                description: |
+                  Opportunity condition
+                  > 0 = Active <br /> 1 = Archived
+                type: integer
+                example: 0
+    opportunities_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: Custom field value
+                type: string
+                maxLength: 255
+                example: 5995
+    events_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_user_assigned
+            properties:
+              id_user_assigned:
+                description: User Id
+                type: string
+                maxLength: 127
+                example: 213
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: 1985
+              id_event_type:
+                description: Event type Id
+                type: integer
+                example: 3021
+              id_project:
+                description: Project Id
+                type: integer
+                example: ''
+              id_project_task:
+                description: Task Id
+                type: integer
+                example: ''
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Event title
+                type: string
+                maxLength: 255
+                example: 'Event #1'
+              description:
+                description: Event descritpion
+                type: string
+                example: A description or note about this event
+              private:
+                description: |
+                  Event private status
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 0
+              visible_in_agenda:
+                description: |
+                  Visibility in the agenda
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              use_time:
+                description: |
+                  Event used for time
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: 0
+              time_billable:
+                description: |
+                  Billable time
+                  > 0 = No <br /> 1 = Billable
+                type: integer
+                example: 0
+    notes_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_user_assigned
+            properties:
+              id_user_assigned:
+                description: User Id
+                type: string
+                maxLength: 127
+                example: 213
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: 1985
+              id_project:
+                description: Project Id
+                type: integer
+                example: ''
+              id_project_task:
+                description: Task Id
+                type: integer
+                example: ''
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              title:
+                description: Note title
+                type: string
+                maxLength: 255
+                example: 'Event #1'
+              description:
+                description: Note descritpion
+                type: string
+                example: A description or note about this note

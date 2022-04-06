@@ -1,0 +1,57 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        id:
+          description: Note Id
+          type: integer
+          example: "10730"
+        id_customer_supplier:
+          description: Customer or supplier Id
+          type: integer
+          example: "28496"
+        id_opportunity:
+          description: Opportunity Id
+          type: integer
+          example: "1985"
+        id_project:
+          description: Project Id
+          type: integer
+          example: "0"
+        id_project_task: 
+          description: Task Id
+          type: integer
+          example: "0"
+        date:
+          description: Note date
+          type: string
+          format: date-time
+          example: "2022-04-06 16:15:00"
+        title:
+          description: Note title
+          type: string
+          example: "Note #1"
+        description: 
+          description: Note description
+          type: string
+          example: "A description or note about this note"
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

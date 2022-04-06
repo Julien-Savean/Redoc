@@ -1,0 +1,137 @@
+- in: query
+  name: id_user_assigned
+  schema:
+    type: integer
+  description: User Id
+  required: true
+- in: query
+  name: from
+  schema:
+    type: string
+    format: date-time
+  description: Search by start date
+- in: query
+  name: to
+  schema:
+    type: string
+    format: date-time
+  description: Search by end date
+- in: query
+  name: id_customer_supplier
+  schema:
+    type: integer
+  description: Search by customer or supplier Id
+- in: query
+  name: id_opportunity    
+  schema:
+    type: integer
+  description: Search by opportunity Id
+- in: query
+  name: id_event_type
+  schema:
+    type: integer
+  description: Search by event type Id
+- in: query
+  name: id_project
+  schema:
+    type: integer
+  description: Search by project Id
+- in: query
+  name: id_project_task
+  schema:
+    type: integer
+  description: Search by task Id
+- in: query
+  name: title
+  schema:
+    type: string
+    maxLength: 127
+  description: Search by title
+- in: query
+  name: private
+  schema:
+    type: integer
+  description: >
+    Search by private status
+
+    > 0 = No <br />
+    1 = Yes
+- in: query
+  name: visible_in_agenda
+  schema:
+    type: integer
+  description: >
+    Search by visibility
+
+    > 0 = No <br />
+    1 = Yes
+- in: query
+  name: synchronized
+  schema:
+    type: integer
+  description: >
+    Search by synchronization
+
+    > 0 = No <br />
+    1 = Yes
+- in: query
+  name: use_time
+  schema:
+    type: integer
+  description: >
+    Search by event used for time
+
+    > 0 = No <br />
+    1 = Yes
+- in: query
+  name: time_id_type
+  schema:
+    type: integer
+  description: Search by time type Id
+- in: query
+  name: time_billable
+  schema:
+    type: integer
+  description: >
+    Search by time billable
+    
+    > 0 = No <br />
+    1 = Billable <br />
+    2 = Billed
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.* <br />
+    **Each field must be separated by a comma without space.**
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: string
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z. <br />
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    default: 0
+  description: Offset for paging
+

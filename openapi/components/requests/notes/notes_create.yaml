@@ -1,0 +1,42 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - id_user_assigned
+        properties:
+          id_user_assigned:
+            description: User Id
+            type: string
+            maxLength: 127
+            example: 213
+          id_customer_supplier:
+            description: Customer or supplier Id
+            type: integer
+            example: 28496
+          id_opportunity:
+            description: Opportunity Id
+            type: integer
+            example: 1985
+          id_project:
+            description: Project Id
+            type: integer
+            example: ""
+          id_project_task:
+            description: Task Id
+            type: integer
+            example: ""
+          date:
+            description: Start date
+            type: string
+            format: date-time
+            example: "2022-03-15 19:45:00"
+          title:
+            description: Note title
+            type: string
+            maxLength: 255
+            example: "Event #1"
+          description: 
+            description: Note descritpion
+            type: string
+            example: "A description or note about this note"

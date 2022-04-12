@@ -5,7 +5,7 @@ get:
   description: Get a list of all customers
   operationId: Customers_list
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
     $ref: ../../components/requests/customers/customers_list.yaml
   responses:
@@ -20,7 +20,7 @@ post:
   description: Create a customer
   operationId: Customers_create
   security:
-    - bearer_token: []
+    - Bearer token: []
   requestBody:
     $ref: ../../components/requests/customers/customers_create.yaml
   # x-codeSamples:

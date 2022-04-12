@@ -5,7 +5,7 @@ get:
   description: Get one note
   operationId: Notes_show
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id
@@ -27,7 +27,7 @@ post:
   description: Update a note
   operationId: Notes_update
   security:
-    - bearer_token: []
+    - Bearer token: []
   requestBody:
     $ref: ../../components/requests/notes/notes_create.yaml
   parameters:
@@ -51,7 +51,7 @@ delete:
   description: Delete a note
   operationId: Notes_delete
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id

@@ -7,12 +7,12 @@
     Quick search field. <br />
     *If this field is filled in, the other search fields are not taken into account.
     The search is then performed in the entire customer database.*
-- in: query
-  name: id_customer_supplier
-  schema:
-    type: integer
-    maxLength: 127
-  description: Search by customer/supplier Id
+# - in: query
+#   name: id_customer_supplier
+#   schema:
+#     type: integer
+#     maxLength: 127
+#   description: Search by customer/supplier Id
 - in: query
   name: id_civility
   schema:

@@ -15,15 +15,15 @@ content:
             total: 
               description: Number of results objects per response
               type: integer
-              example: "14"
+              example: 14
             limit: 
               description: Limit of objects per response
               type: integer
-              example: "100"
+              example: 100
             offset: 
               description: Offset of objects in the response
               type: integer
-              example: "0"
+              example: 0
         data:
           description: Response of the request
           type: array

@@ -1,0 +1,94 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        id:
+          description: Task Id
+          type: integer
+          example: "10722"
+        id_customer_supplier:
+          description: Customer or supplier Id
+          type: integer
+          example: "28496"
+        id_opportunity:
+          description: Opportunity Id
+          type: integer
+          example: "1985"
+        id_task_type:
+          description: Task type Id
+          type: integer
+          example: "3021"
+        id_project:
+          description: Project Id
+          type: integer
+          example: "0"
+        id_project_task: 
+          description: Project task Id
+          type: integer
+          example: "0"
+        start_date:
+          description: Start date
+          type: string
+          format: date-time
+          example: "2022-03-15 19:45:00"
+        end_date:
+          description: End date
+          type: string
+          format: date-time
+          example: "2022-03-15 20:45:00"
+        title:
+          description: Task title
+          type: string
+          example: "Task #1"
+        description: 
+          description: Task description
+          type: string
+          example: "A description or note about this task"
+        private:
+          description: Task private status
+          type: string
+          example: "0"
+        visible_in_agenda:
+          description: Visibility in the agenda
+          type: integer
+          example: "1"
+        synchronized:
+          description: Task synchronization 
+          type: string
+          example: "0"
+        use_time:
+          description: Task used for time
+          type: integer
+          example: "1"
+        time_duration:
+          description: Time duration
+          type: string
+          example: "01:00:00"
+        time_id_type:
+          description: Time type Id
+          type: integer
+          example: "0"
+        time_billable:
+          description: Billable time
+          type: integer
+          example: "0"
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

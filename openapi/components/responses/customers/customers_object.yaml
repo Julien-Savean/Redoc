@@ -58,7 +58,7 @@ content:
           example: "SARL"
         main_activity:
           description: APE/NAF code
-          type: integer
+          type: string
           example: "4616C"
         vat_number:
           description: VAT number

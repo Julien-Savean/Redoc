@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Projects
+  summary: Phases of project tasks
+  description: Get a list of all phases of project tasks
+  operationId: Projects_tasks_phases
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: Project Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_tasks_phases.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

@@ -1,0 +1,53 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Id of projects tasks status
+                type: integer
+              title:
+                description: Title of projects tasks status
+                type: string
+              title_en:
+                description: English title of projects tasks status
+                type: string
+              title_es:
+                description: Spanish title of projects tasks status
+                type: string
+              status_type:
+                description: Id status type of projects tasks status
+                type: integer
+              status_type_title:
+                description: Title status type of projects tasks status
+                type: string
+          example: 
+            - id : "89"
+              title : "En attente"
+              title_en : "Pending"
+              title_es : "Pendiente"
+              status_type : "1"
+              status_type_title : "En attente"
+            - id : "90"
+              title : "En cours"
+              title_en : "In progress"
+              title_es : "En curso"
+              status_type : "2"
+              status_type_title : "En cours"
+            - id : "91"
+              title : "Terminé"
+              title_en : "Completed"
+              title_es : "Completado"
+              status_type : "3"
+              status_type_title : "Terminé"        

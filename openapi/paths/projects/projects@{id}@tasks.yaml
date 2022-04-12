@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Projects
+  summary: Project tasks
+  description: Get a list of all project tasks
+  operationId: Projects_tasks_list
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: Project Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_tasks_objects.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Users
+  summary: Users
+  description: Get a list of all users
+  operationId: Users
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/users/users_objects.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml

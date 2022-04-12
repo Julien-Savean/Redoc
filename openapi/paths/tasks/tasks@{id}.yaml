@@ -1,0 +1,68 @@
+get:
+  tags:
+    - Tasks
+  summary: Show
+  description: Get one task
+  operationId: Tasks_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: Task Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/tasks/tasks_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Tasks
+  summary: Update
+  description: Update a task
+  operationId: Tasks_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/tasks/tasks_create.yaml
+  parameters:
+  - in: path
+    name: id
+    description: Task Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/tasks/tasks_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml
+delete:
+  tags:
+    - Tasks
+  summary: Delete
+  description: Delete a task
+  operationId: Tasks_delete
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: Task Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml

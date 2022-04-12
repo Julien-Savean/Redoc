@@ -5,7 +5,7 @@ get:
   description: Get a list of all events types 
   operationId: Events_types
   security:
-    - bearer_token: []
+    - Bearer token: []
   responses:
     '200':
       $ref: ../../components/responses/events/events_types.yaml

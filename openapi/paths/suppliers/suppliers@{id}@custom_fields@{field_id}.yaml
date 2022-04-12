@@ -5,7 +5,7 @@ post:
   description:  Values of suppliers custom field
   operationId: Suppliers_custom_field_values_add_update
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id

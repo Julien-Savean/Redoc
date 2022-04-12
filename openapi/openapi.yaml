@@ -1,16 +1,12 @@
 openapi: 3.1.0
 info:
-  version: 1.0.0
-  title: Karlia
+  # version: 1.0.0
+  title: API Documentation
   contact:
     email: contact@karlia.com
     url: 'https://karlia.fr'
-  license:
-    name: Apache 2.0 ou je sais pas
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: 'https://example.com/terms/'
   x-logo:
-    url: 'https://karlia.fr/app/template/karlia/img/login/karlia-logo-1.PNG'
+    url: 'https://i.ibb.co/2YRmPqB/Logo-Karlia.png'
     altText: Logo Karlia
   description:
     $ref: ./info-description.md
@@ -27,6 +23,14 @@ tags:
     description: This section lists all event-related APIS.
   - name: Notes
     description: This section lists all note-related APIS.
+  - name: Tasks
+    description: This section lists all task-related APIS.
+  - name: Times
+    description: This section lists all time-related APIS.
+  - name: Projects
+    description: This section lists all project-related APIS.
+  - name: Users
+    description: This section lists all user-related APIS.
 servers:
   - url: 'https://karlia.fr/app/api/v2'
 paths:
@@ -90,9 +94,47 @@ paths:
     $ref: paths/notes/notes.yaml
   /notes/{id}:
     $ref: paths/notes/notes@{id}.yaml
+  /tasks:
+    $ref: paths/tasks/tasks.yaml
+  /tasks/{id}:
+    $ref: paths/tasks/tasks@{id}.yaml
+  /tasks/types:
+    $ref: paths/tasks/tasks@types.yaml
+  /times/types:
+    $ref: paths/times/types.yaml
+  /projects:
+   $ref: paths/projects/projects.yaml
+  /projects/{id}:
+   $ref: paths/projects/projects@{id}.yaml
+  /projects/status:
+   $ref: paths/projects/projects@status.yaml
+  /projects/{id}/tasks:
+   $ref: paths/projects/projects@{id}@tasks.yaml
+  /projects/tasks/status:
+   $ref: paths/projects/projects@tasks@status.yaml
+  /projects/{id}/tasks/status:
+   $ref: paths/projects/projects@{id}@tasks@status.yaml
+  /projects/{id}/tasks/phases:
+   $ref: paths/projects/projects@{id}@tasks@phases.yaml
+  /projects/tasks/priorities:
+   $ref: paths/projects/projects@tasks@priorities.yaml
+  /users:
+    $ref: paths/users/users.yaml
+  /users/groups:
+    $ref: paths/users/groups.yaml
+  /users/list-with-groups:
+    $ref: paths/users/users_with_groups.yaml
 components:
   securitySchemes:
-    bearer_token:
+    Bearer token:
+      description: >
+        In order to log in, you need to generate an API key via the Karlia website:  <br />
+          1. Sign in with your existing account. <br />
+          2. Once logged in, click on your initial in the upper right corner.  <br />
+          3. Select "Settings".  <br />
+          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br />
+
+        The API use Bearer Authorization in request header.
       type: http
-      scheme: bearer 
+      scheme: bearer
       bearerFormat: xxxxxx-xxxxxx-xxxx-xxxxxx-xxxxxx

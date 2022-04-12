@@ -5,7 +5,7 @@ post:
   description:  Values of opportunities custom field
   operationId: Opportunities_custom_field_values_add_update
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id

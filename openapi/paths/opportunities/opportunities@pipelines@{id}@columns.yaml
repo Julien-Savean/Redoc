@@ -5,7 +5,7 @@ get:
   description: Get opportunity pipeline columns
   operationId: Opportunities_list_pipelines_columns
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id

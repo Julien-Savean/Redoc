@@ -5,7 +5,7 @@ get:
   description: Get a list of all status
   operationId: Opportunities_status
   security:
-    - bearer_token: []
+    - Bearer token: []
   responses:
     '200':
       $ref: ../../components/responses/opportunities/opportunities_status.yaml

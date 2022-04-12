@@ -1,18 +1,13 @@
 openapi: 3.1.0
 info:
-  version: 1.0.0
-  title: Karlia
+  title: API Documentation
   contact:
     email: contact@karlia.com
     url: https://karlia.fr
-  license:
-    name: Apache 2.0 ou je sais pas
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: https://example.com/terms/
   x-logo:
-    url: https://karlia.fr/app/template/karlia/img/login/karlia-logo-1.PNG
+    url: https://i.ibb.co/2YRmPqB/Logo-Karlia.png
     altText: Logo Karlia
-  description: >
+  description: >-
     # Introduction
 
 
@@ -26,63 +21,6 @@ info:
     The Karlia API is built around a RESTful architecture and allows you to
     customize, modify and integrate your Karlia organization and external
     services.
-
-
-    <!-- Ceci est test pour voir si cela fonctionne
-
-
-    This API definition is intended to to be a good starting point for
-
-    describing your API in 
-
-
-    [OpenAPI/Swagger
-
-    format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
-
-
-    It also demonstrates features of the
-
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-
-    and 
-
-
-    the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-
-    the standard OpenAPI syntax, we use a few 
-
-
-    [vendor
-    extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md). 
-
-
-    # OpenAPI Specification
-
-
-    The goal of The OpenAPI Specification is to define a standard,
-
-    language-agnostic interface to REST APIs which
-
-
-    allows both humans and computers to discover and understand the capabilities
-
-    of the service without access to source
-
-
-    code, documentation, or through network traffic inspection. When properly
-
-    defined via OpenAPI, a consumer can 
-
-
-    understand and interact with the remote service with a minimal amount of
-
-    implementation logic. Similar to what
-
-
-    interfaces have done for lower-level programming, OpenAPI removes the
-
-    guesswork in calling the service. -->
 tags:
   - name: Customers
     description: This section lists all customer-related APIs.
@@ -96,6 +34,14 @@ tags:
     description: This section lists all event-related APIS.
   - name: Notes
     description: This section lists all note-related APIS.
+  - name: Tasks
+    description: This section lists all task-related APIS.
+  - name: Times
+    description: This section lists all time-related APIS.
+  - name: Projects
+    description: This section lists all project-related APIS.
+  - name: Users
+    description: This section lists all user-related APIS.
 servers:
   - url: https://karlia.fr/app/api/v2
 paths:
@@ -107,7 +53,7 @@ paths:
       description: Get a list of all customers
       operationId: Customers_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: query
           name: quick_search
@@ -166,8 +112,10 @@ paths:
         - in: query
           name: id_client_manager
           schema:
-            type: integer
-          description: Search by client manager
+            type: string
+          description: >-
+            Search by [User with group](/#operation/Users_with_group) Id
+            associated with the customer
         - in: query
           name: langId
           schema:
@@ -242,7 +190,7 @@ paths:
       description: Create a customer
       operationId: Customers_create
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/customers_create'
       responses:
@@ -260,7 +208,7 @@ paths:
       description: Get one customer
       operationId: Customers_show
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -282,7 +230,7 @@ paths:
       description: Update a customer
       operationId: Customers_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/customers_create'
       parameters:
@@ -307,7 +255,7 @@ paths:
       description: Get a list of all customers custom fields
       operationId: Customers_custom_fields_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/customers_custom_fields'
@@ -321,7 +269,7 @@ paths:
       description: Get values of customers custom field
       operationId: Customers_custom_field_values_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: field_id
@@ -344,7 +292,7 @@ paths:
       description: Values of customers custom field
       operationId: Customers_custom_field_values_add_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -377,7 +325,7 @@ paths:
       description: Get a list of all suppliers
       operationId: Suppliers_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: query
           name: quick_search
@@ -422,8 +370,10 @@ paths:
         - in: query
           name: id_client_manager
           schema:
-            type: integer
-          description: Search by client manager
+            type: string
+          description: >-
+            Search by [User with group](/#operation/Users_with_group) associated
+            with the supplier
         - in: query
           name: langId
           schema:
@@ -498,7 +448,7 @@ paths:
       description: Create a supplier
       operationId: Suppliers_create
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/suppliers_create'
       responses:
@@ -516,7 +466,7 @@ paths:
       description: Get one supplier
       operationId: Suppliers_show
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -538,7 +488,7 @@ paths:
       description: Update a supplier
       operationId: Suppliers_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/suppliers_create'
       parameters:
@@ -563,7 +513,7 @@ paths:
       description: Get a list of all suppliers custom fields
       operationId: Suppliers_custom_fields_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/suppliers_custom_fields'
@@ -577,7 +527,7 @@ paths:
       description: Get values of suppliers custom field
       operationId: Suppliers_custom_field_values_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: field_id
@@ -600,7 +550,7 @@ paths:
       description: Values of suppliers custom field
       operationId: Suppliers_custom_field_values_add_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -633,7 +583,7 @@ paths:
       description: Get a list of all contacts
       operationId: Contacts_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: query
           name: quick_search
@@ -644,12 +594,6 @@ paths:
             Quick search field. <br /> *If this field is filled in, the other
             search fields are not taken into account. The search is then
             performed in the entire customer database.*
-        - in: query
-          name: id_customer_supplier
-          schema:
-            type: integer
-            maxLength: 127
-          description: Search by customer/supplier Id
         - in: query
           name: id_civility
           schema:
@@ -749,7 +693,7 @@ paths:
       description: Create a contact
       operationId: Contacts_create
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/contacts_create'
       responses:
@@ -768,7 +712,7 @@ paths:
       description: Get one contact
       operationId: Contacts_show
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -790,7 +734,7 @@ paths:
       description: Update a contact
       operationId: Contacts_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/contacts_create'
       parameters:
@@ -815,7 +759,7 @@ paths:
       description: Get a list of all contacts custom fields
       operationId: Contacts_custom_fields_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/contacts_custom_fields'
@@ -829,7 +773,7 @@ paths:
       description: Get values of contacts custom field
       operationId: Contacts_custom_field_values_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: field_id
@@ -852,7 +796,7 @@ paths:
       description: Values of contacts custom field
       operationId: Contacts_custom_field_values_add_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -885,7 +829,7 @@ paths:
       description: Get a list of all opportunities
       operationId: Opportunities_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: query
           name: pipeline
@@ -913,7 +857,9 @@ paths:
           schema:
             type: string
             maxLength: 30
-          description: Search by user assigned
+          description: >-
+            Search by [User](/#operation/Users) Id associated with the
+            opportunity
         - in: query
           name: id_status
           schema:
@@ -983,7 +929,7 @@ paths:
       description: Create a opportunity
       operationId: Opportunities_create
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/opportunities_create'
       responses:
@@ -1001,7 +947,7 @@ paths:
       description: Get one opportunity
       operationId: Opportunities_show
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1023,7 +969,7 @@ paths:
       description: Update a opportunity
       operationId: Opportunities_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/opportunities_create'
       parameters:
@@ -1047,7 +993,7 @@ paths:
       description: Delete a opportunity
       operationId: Opportunities_delete
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1070,7 +1016,7 @@ paths:
       description: Get a list of all opportunities custom fields
       operationId: Opportunities_custom_fields_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/opportunities_custom_fields'
@@ -1084,7 +1030,7 @@ paths:
       description: Get values of opportunities custom field
       operationId: Opportunities_custom_field_values_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: field_id
@@ -1107,7 +1053,7 @@ paths:
       description: Values of opportunities custom field
       operationId: Opportunities_custom_field_values_add_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1140,7 +1086,7 @@ paths:
       description: Get a list of all opportunity pipelines
       operationId: Opportunities_list_pipelines
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/opportunities_pipelines'
@@ -1154,7 +1100,7 @@ paths:
       description: Get opportunity pipeline columns
       operationId: Opportunities_list_pipelines_columns
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1175,7 +1121,7 @@ paths:
       description: Get a list of all status
       operationId: Opportunities_status
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/opportunities_status'
@@ -1189,7 +1135,7 @@ paths:
       description: Get a list of all lost statuses
       operationId: Opportunities_status_lost
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/opportunities_status_lost'
@@ -1203,7 +1149,7 @@ paths:
       description: Get a list of all canceled statuses
       operationId: Opportunities_status_canceled
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/opportunities_status_canceled'
@@ -1217,7 +1163,7 @@ paths:
       description: Get a list of all events
       operationId: Events_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: query
           name: id_user_assigned
@@ -1357,7 +1303,7 @@ paths:
       description: Create an event
       operationId: Events_create
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/events_create'
       responses:
@@ -1375,7 +1321,7 @@ paths:
       description: Get one event
       operationId: Events_show
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1397,13 +1343,13 @@ paths:
       description: Update an event
       operationId: Events_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/events_create'
       parameters:
         - in: path
           name: id
-          description: Contact Id
+          description: Event Id
           schema:
             type: integer
           required: true
@@ -1421,7 +1367,7 @@ paths:
       description: Delete an event
       operationId: Events_delete
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1444,7 +1390,7 @@ paths:
       description: Get a list of all events types
       operationId: Events_types
       security:
-        - bearer_token: []
+        - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/events_types'
@@ -1460,7 +1406,7 @@ paths:
       description: Get a list of all notes
       operationId: Notes_list
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: query
           name: id_user_assigned
@@ -1555,7 +1501,7 @@ paths:
       description: Create a note
       operationId: Notes_create
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/notes_create'
       responses:
@@ -1573,7 +1519,7 @@ paths:
       description: Get one note
       operationId: Notes_show
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1595,7 +1541,7 @@ paths:
       description: Update a note
       operationId: Notes_update
       security:
-        - bearer_token: []
+        - Bearer token: []
       requestBody:
         $ref: '#/components/requestBodies/notes_create'
       parameters:
@@ -1619,7 +1565,7 @@ paths:
       description: Delete a note
       operationId: Notes_delete
       security:
-        - bearer_token: []
+        - Bearer token: []
       parameters:
         - in: path
           name: id
@@ -1634,9 +1580,540 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: List
+      description: Get a list of all tasks
+      operationId: Tasks_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: integer
+          description: |
+            [User](/#operation/Users) associated with the task
+          required: true
+        - in: query
+          name: status
+          schema:
+            type: integer
+          description: Task status
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Search by start date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Search by end date
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: Search by customer or supplier Id
+        - in: query
+          name: id_opportunity
+          schema:
+            type: integer
+          description: Search by opportunity Id
+        - in: query
+          name: id_event_type
+          schema:
+            type: integer
+          description: Search by event type Id
+        - in: query
+          name: id_project
+          schema:
+            type: integer
+          description: Search by project Id
+        - in: query
+          name: id_project_task
+          schema:
+            type: integer
+          description: Search by project task Id
+        - in: query
+          name: title
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by title
+        - in: query
+          name: private
+          schema:
+            type: integer
+          description: |
+            Search by private status
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: visible_in_agenda
+          schema:
+            type: integer
+          description: |
+            Search by visibility
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: synchronized
+          schema:
+            type: integer
+          description: |
+            Search by synchronization
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: use_time
+          schema:
+            type: integer
+          description: |
+            Search by task used for time
+            > 0 = No <br /> 1 = Yes
+        - in: query
+          name: time_id_type
+          schema:
+            type: integer
+          description: Search by time type Id
+        - in: query
+          name: time_billable
+          schema:
+            type: integer
+          description: |
+            Search by time billable
+            > 0 = No <br /> 1 = Billable <br /> 2 = Billed
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/tasks_objects'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+        - Tasks
+      summary: Create
+      description: Create a task
+      operationId: Tasks_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/tasks_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/tasks_new_object'
+        '400':
+          $ref: '#/components/responses/400_name'
+        '401':
+          $ref: '#/components/responses/401'
+  /tasks/{id}:
+    get:
+      tags:
+        - Tasks
+      summary: Show
+      description: Get one task
+      operationId: Tasks_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: Task Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/tasks_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Tasks
+      summary: Update
+      description: Update a task
+      operationId: Tasks_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/tasks_create'
+      parameters:
+        - in: path
+          name: id
+          description: Task Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/tasks_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Tasks
+      summary: Delete
+      description: Delete a task
+      operationId: Tasks_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: Task Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /tasks/types:
+    get:
+      tags:
+        - Tasks
+      summary: Types
+      description: Get a list of all tasks types
+      operationId: Tasks_types
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/tasks_types'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /times/types:
+    get:
+      tags:
+        - Times
+      summary: Types
+      description: Get a list of all times types
+      operationId: Times_types
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/types'
+        '401':
+          $ref: '#/components/responses/401'
+  /projects:
+    get:
+      tags:
+        - Projects
+      summary: List
+      description: Get a list of all projects
+      operationId: Projects_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Search by project title
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: Search by customer or supplier Id
+        - in: query
+          name: id_opportunity
+          schema:
+            type: integer
+          description: Search by opportunity Id
+        - in: query
+          name: id_status
+          schema:
+            type: integer
+          description: Search by status Id
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: integer
+          description: |
+            [User](/#operation/Users) associated with the project  
+        - in: query
+          name: archived
+          schema:
+            type: integer
+          description: Search by archived
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_objects'
+        '401':
+          $ref: '#/components/responses/401'
+  /projects/{id}:
+    get:
+      tags:
+        - Projects
+      summary: Show
+      description: Get one project
+      operationId: Projects_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: Project Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/status:
+    get:
+      tags:
+        - Projects
+      summary: Status
+      description: Get a list of all status
+      operationId: Projects_status
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_status'
+        '401':
+          $ref: '#/components/responses/401'
+  /projects/{id}/tasks:
+    get:
+      tags:
+        - Projects
+      summary: Project tasks
+      description: Get a list of all project tasks
+      operationId: Projects_tasks_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: Project Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/tasks/status:
+    get:
+      tags:
+        - Projects
+      summary: Status of projects tasks
+      description: Get a list of all status of projects tasks
+      operationId: Projects_tasks_status_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_status'
+        '401':
+          $ref: '#/components/responses/401'
+  /projects/{id}/tasks/status:
+    get:
+      tags:
+        - Projects
+      summary: Status of project tasks
+      description: Get a list of all status of one project task
+      operationId: Projects_tasks_status
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: Project Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_status'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}/tasks/phases:
+    get:
+      tags:
+        - Projects
+      summary: Phases of project tasks
+      description: Get a list of all phases of project tasks
+      operationId: Projects_tasks_phases
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: Project Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_phases'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/tasks/priorities:
+    get:
+      tags:
+        - Projects
+      summary: Priorities of projects tasks
+      description: Get a list of all priorities
+      operationId: Projects_priorities
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_priorities'
+        '401':
+          $ref: '#/components/responses/401'
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Users
+      description: Get a list of all users
+      operationId: Users
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/users_objects'
+        '401':
+          $ref: '#/components/responses/401'
+  /users/groups:
+    get:
+      tags:
+        - Users
+      summary: Groups
+      description: Get a list of all groups
+      operationId: Users_groups
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/groups_objects'
+        '401':
+          $ref: '#/components/responses/401'
+  /users/list-with-groups:
+    get:
+      tags:
+        - Users
+      summary: Users with groups
+      description: Get a list of all users with groups
+      operationId: Users_with_group
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/users_with_groups_objects'
+        '401':
+          $ref: '#/components/responses/401'
 components:
   securitySchemes:
-    bearer_token:
+    Bearer token:
+      description: >
+        In order to log in, you need to generate an API key via the Karlia
+        website:  <br />
+          1. Sign in with your existing account. <br />
+          2. Once logged in, click on your initial in the upper right corner.  <br />
+          3. Select "Settings".  <br />
+          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br />
+
+        The API use Bearer Authorization in request header.
       type: http
       scheme: bearer
       bearerFormat: xxxxxx-xxxxxx-xxxx-xxxxxx-xxxxxx
@@ -1683,15 +2160,15 @@ components:
                   total:
                     description: Number of results objects per response
                     type: integer
-                    example: '14'
+                    example: 14
                   limit:
                     description: Limit of objects per response
                     type: integer
-                    example: '100'
+                    example: 100
                   offset:
                     description: Offset of objects in the response
                     type: integer
-                    example: '0'
+                    example: 0
               data:
                 description: Response of the request
                 type: array
@@ -1753,7 +2230,7 @@ components:
                       example: SARL
                     main_activity:
                       description: APE/NAF code
-                      type: integer
+                      type: string
                       example: 4616C
                     vat_number:
                       description: VAT number
@@ -1999,7 +2476,7 @@ components:
                 example: SARL
               main_activity:
                 description: APE/NAF code
-                type: integer
+                type: string
                 example: 4616C
               vat_number:
                 description: VAT number
@@ -2168,7 +2645,7 @@ components:
                 example: SARL
               main_activity:
                 description: APE/NAF code
-                type: integer
+                type: string
                 example: 4616C
               vat_number:
                 description: VAT number
@@ -2443,15 +2920,15 @@ components:
                   total:
                     description: Number of results objects per response
                     type: integer
-                    example: '5'
+                    example: 5
                   limit:
                     description: Limit of objects per response
                     type: integer
-                    example: '100'
+                    example: 100
                   offset:
                     description: Offset of objects in the response
                     type: integer
-                    example: '0'
+                    example: 0
               data:
                 description: Response of the request
                 type: array
@@ -2503,7 +2980,7 @@ components:
                       example: SARL
                     main_activity:
                       description: APE/NAF code
-                      type: integer
+                      type: string
                       example: 4616C
                     vat_number:
                       description: VAT number
@@ -2716,7 +3193,7 @@ components:
                 example: SARL
               main_activity:
                 description: APE/NAF code
-                type: integer
+                type: string
                 example: 4616C
               vat_number:
                 description: VAT number
@@ -2860,7 +3337,7 @@ components:
                 example: SARL
               main_activity:
                 description: APE/NAF code
-                type: integer
+                type: string
                 example: 4616C
               vat_number:
                 description: VAT number
@@ -3098,15 +3575,15 @@ components:
                   total:
                     description: Number of results objects per response
                     type: integer
-                    example: '3'
+                    example: 3
                   limit:
                     description: Limit of objects per response
                     type: integer
-                    example: '100'
+                    example: 100
                   offset:
                     description: Offset of objects in the response
                     type: integer
-                    example: '0'
+                    example: 0
               data:
                 description: Response of the request
                 type: array
@@ -3473,15 +3950,15 @@ components:
                   total:
                     description: Number of results objects per response
                     type: integer
-                    example: '3'
+                    example: 3
                   limit:
                     description: Limit of objects per response
                     type: integer
-                    example: '100'
+                    example: 100
                   offset:
                     description: Offset of objects in the response
                     type: integer
-                    example: '0'
+                    example: 0
               data:
                 description: Response of the request
                 type: array
@@ -4047,15 +4524,15 @@ components:
                   total:
                     description: Number of results objects per response
                     type: integer
-                    example: '14'
+                    example: 14
                   limit:
                     description: Limit of objects per response
                     type: integer
-                    example: '100'
+                    example: 100
                   offset:
                     description: Offset of objects in the response
                     type: integer
-                    example: '0'
+                    example: 0
               data:
                 description: Response of the request
                 type: array
@@ -4083,14 +4560,14 @@ components:
                       type: integer
                       example: '0'
                     id_project_task:
-                      description: Task Id
+                      description: Project task Id
                       type: integer
                       example: '0'
                     start_date:
                       description: Start date
                       type: string
                       format: date-time
-                      example: +2022-03-15 19:45:00
+                      example: '2022-03-15 19:45:00'
                     end_date:
                       description: End date
                       type: string
@@ -4178,14 +4655,14 @@ components:
                 type: integer
                 example: '0'
               id_project_task:
-                description: Task Id
+                description: Project task Id
                 type: integer
                 example: '0'
               start_date:
                 description: Start date
                 type: string
                 format: date-time
-                example: +2022-03-15 19:45:00
+                example: '2022-03-15 19:45:00'
               end_date:
                 description: End date
                 type: string
@@ -4274,14 +4751,14 @@ components:
                 type: integer
                 example: '0'
               id_project_task:
-                description: Task Id
+                description: Project task Id
                 type: integer
                 example: '0'
               start_date:
                 description: Start date
                 type: string
                 format: date-time
-                example: +2022-03-15 19:45:00
+                example: '2022-03-15 19:45:00'
               end_date:
                 description: End date
                 type: string
@@ -4405,15 +4882,15 @@ components:
                   total:
                     description: Number of results objects per response
                     type: integer
-                    example: '14'
+                    example: 14
                   limit:
                     description: Limit of objects per response
                     type: integer
-                    example: '100'
+                    example: 100
                   offset:
                     description: Offset of objects in the response
                     type: integer
-                    example: '0'
+                    example: 0
               data:
                 description: Response of the request
                 type: array
@@ -4588,6 +5065,1043 @@ components:
                 description: Id of the updater
                 type: integer
                 example: '213'
+    tasks_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 14
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Task Id
+                      type: integer
+                      example: '10722'
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_task_type:
+                      description: Task type Id
+                      type: integer
+                      example: '3021'
+                    id_project:
+                      description: Project Id
+                      type: integer
+                      example: '0'
+                    id_project_task:
+                      description: Project task Id
+                      type: integer
+                      example: '0'
+                    start_date:
+                      description: Start date
+                      type: string
+                      format: date-time
+                      example: '2022-03-15 19:45:00'
+                    end_date:
+                      description: End date
+                      type: string
+                      format: date-time
+                      example: '2022-03-15 20:45:00'
+                    title:
+                      description: Task title
+                      type: string
+                      example: 'Task #1'
+                    description:
+                      description: Task description
+                      type: string
+                      example: A description or note about this task
+                    private:
+                      description: Task private status
+                      type: string
+                      example: '0'
+                    visible_in_agenda:
+                      description: Visibility in the agenda
+                      type: integer
+                      example: '1'
+                    synchronized:
+                      description: Task synchronization
+                      type: string
+                      example: '0'
+                    use_time:
+                      description: Task used for time
+                      type: integer
+                      example: '1'
+                    time_duration:
+                      description: Time duration
+                      type: string
+                      example: '01:00:00'
+                    time_id_type:
+                      description: Time type Id
+                      type: integer
+                      example: '0'
+                    time_billable:
+                      description: Billable time
+                      type: integer
+                      example: '0'
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    tasks_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Task Id
+                type: integer
+                example: '10722'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_task_type:
+                description: Task type Id
+                type: integer
+                example: '3021'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '0'
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: '0'
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Task title
+                type: string
+                example: 'Task #1'
+              description:
+                description: Task description
+                type: string
+                example: A description or note about this task
+              private:
+                description: Task private status
+                type: string
+                example: '0'
+              visible_in_agenda:
+                description: Visibility in the agenda
+                type: integer
+                example: '1'
+              synchronized:
+                description: Task synchronization
+                type: string
+                example: '0'
+              use_time:
+                description: Task used for time
+                type: integer
+                example: '1'
+              time_duration:
+                description: Time duration
+                type: string
+                example: '01:00:00'
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: '0'
+              time_billable:
+                description: Billable time
+                type: integer
+                example: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    tasks_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Task Id
+                type: integer
+                example: '10722'
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_task_type:
+                description: Task type Id
+                type: integer
+                example: '3021'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '0'
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: '0'
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Task title
+                type: string
+                example: 'Task #1'
+              description:
+                description: Task description
+                type: string
+                example: A description or note about this task
+              private:
+                description: Task private status
+                type: string
+                example: '0'
+              visible_in_agenda:
+                description: Visibility in the agenda
+                type: integer
+                example: '1'
+              synchronized:
+                description: Task synchronization
+                type: string
+                example: '0'
+              use_time:
+                description: Task used for time
+                type: integer
+                example: '1'
+              time_duration:
+                description: Time duration
+                type: string
+                example: '01:00:00'
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: '0'
+              time_billable:
+                description: Billable time
+                type: integer
+                example: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    tasks_types:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of task type
+                      type: integer
+                    title:
+                      description: French title of task type
+                      type: string
+                    title_en:
+                      description: English title of task type
+                      type: string
+                    title_es:
+                      description: Spanish title of task type
+                      type: string
+                example:
+                  - id: '3019'
+                    title: Appel téléphonique
+                    title_en: Phone call
+                    title_es: Llamada telefónica
+                  - id: '3020'
+                    title: Echange de mail
+                    title_en: Mail exchange
+                    title_es: Intercambio de correo electrónico
+                  - id: '3021'
+                    title: Rendez-vous
+                    title_en: Appointment
+                    title_es: Cita
+                  - id: '3022'
+                    title: Echange de courrier
+                    title_en: Letter exchange
+                    title_es: Intercambio de correo
+    types:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of time type
+                      type: integer
+                    title:
+                      description: French title of time type
+                      type: string
+                    title_en:
+                      description: English title of time type
+                      type: string
+                    title_es:
+                      description: Spanish title of time type
+                      type: string
+                example:
+                  - id: '7'
+                    title: Commercial
+                    title_en: Commercial
+                    title_es: Comercial
+                  - id: '8'
+                    title: Support
+                    title_en: Support
+                    title_es: Soporte
+    projects_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 14
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Project Id
+                      type: integer
+                      example: '435'
+                    title:
+                      description: Project title
+                      type: string
+                      example: 'Project #1'
+                    columns:
+                      description: Project columns
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Column Id
+                            type: integer
+                          title:
+                            description: Column title
+                            type: string
+                      example:
+                        - id: '1'
+                          title: To do
+                        - id: '2'
+                          title: Pending
+                        - id: '3'
+                          title: In progress
+                        - id: '4'
+                          title: A tester
+                        - id: '5'
+                          title: Completed
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    starting_date:
+                      description: Starting date
+                      type: string
+                      format: date-time
+                      example: '2022-03-15 19:45:00'
+                    due_date:
+                      description: Due date
+                      type: string
+                      format: date-time
+                      example: null
+                    id_status:
+                      description: Status Id
+                      type: integer
+                      example: '1'
+                    id_user_assigned:
+                      description: User assigned of the project
+                      type: array
+                      items:
+                        type: string
+                        example: '213'
+                    archived:
+                      description: Archived status of the project
+                      type: integer
+                      example: '0'
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    projects_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Project Id
+                type: integer
+                example: '435'
+              title:
+                description: Project title
+                type: string
+                example: 'Project #1'
+              columns:
+                description: Project columns
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Column Id
+                      type: integer
+                    title:
+                      description: Column title
+                      type: string
+                example:
+                  - id: '1'
+                    title: To do
+                  - id: '2'
+                    title: Pending
+                  - id: '3'
+                    title: In progress
+                  - id: '4'
+                    title: To test
+                  - id: '5'
+                    title: Completed
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              starting_date:
+                description: Starting date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              due_date:
+                description: Due date
+                type: string
+                format: date-time
+                example: null
+              id_status:
+                description: Status Id
+                type: integer
+                example: '1'
+              id_user_assigned:
+                description: User assigned of the project
+                type: array
+                items:
+                  type: string
+                  example: '213'
+              archived:
+                description: Archived status of the project
+                type: integer
+                example: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    projects_status:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of the project status
+                      type: integer
+                    title:
+                      description: Title of the project status
+                      type: string
+                example:
+                  - id: '1'
+                    title: New
+                  - id: '2'
+                    title: Planned
+                  - id: '3'
+                    title: In progress
+                  - id: '4'
+                    title: Closed
+    projects_tasks_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '14'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Project Id
+                      type: integer
+                      example: '435'
+                    number:
+                      description: Number
+                      type: integer
+                      example: '1'
+                    column_number:
+                      description: Column number
+                      type: integer
+                      example: '5'
+                    column_number_last_update:
+                      description: Update date of column number
+                      type: string
+                      format: date-time
+                      example: '2022-04-04 09:44:49'
+                    milestone:
+                      description: Milestone
+                      type: integer
+                      example: '0'
+                    status:
+                      description: Id status of project task
+                      type: integer
+                      example: '91'
+                    position:
+                      description: Position
+                      type: integer
+                      example: '1'
+                    title:
+                      description: Project task title
+                      type: string
+                      example: 'Project task #1'
+                    description:
+                      description: Description
+                      type: string
+                      example: A description or note about this project task
+                    priority:
+                      description: Priority Id
+                      type: integer
+                      example: '0'
+                    color:
+                      description: Color
+                      type: string
+                      example: 95a5a6
+                    starting_date:
+                      description: Starting date
+                      type: string
+                      format: date-time
+                      example: '2022-03-15 19:45:00'
+                    due_date:
+                      description: Due date
+                      type: string
+                      format: date-time
+                      example: null
+                    estimation_time:
+                      description: Estimation time
+                      type: number
+                      format: double
+                      example: '5.00'
+                    working_time:
+                      description: Working time
+                      type: number
+                      format: double
+                      example: '0.00'
+                    id_user_assigned:
+                      description: User assigned of the project
+                      type: array
+                      items:
+                        type: string
+                        example: '213'
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_phase:
+                      description: Phase Id
+                      type: integer
+                      example: '0'
+                    skills:
+                      description: Skills
+                      type: array
+                      example: []
+                    custom_fields_list:
+                      description: Custom fields
+                      type: array
+                      example: []
+                    nb_subtask:
+                      description: Number of subtasks
+                      type: integer
+                      example: '0'
+                    nb_subtask_complete:
+                      description: Number of subtasks complete
+                      type: integer
+                      example: '0'
+                    nb_comment:
+                      description: Number of comments
+                      type: integer
+                      example: '0'
+                    nb_files:
+                      description: Number of files
+                      type: integer
+                      example: '0'
+                    nb_events:
+                      description: Number of events
+                      type: integer
+                      example: '0'
+                    nb_events_notes:
+                      description: Number of events notes
+                      type: integer
+                      example: '0'
+                    nb_events_tasks:
+                      description: Number of events tasks
+                      type: integer
+                      example: '0'
+                    nb_conversations_emails:
+                      description: Number of conversations emails
+                      type: integer
+                      example: '0'
+                    archived:
+                      description: Archived status of the project tasks
+                      type: integer
+                      example: '0'
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    projects_tasks_status:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of projects tasks status
+                      type: integer
+                    title:
+                      description: Title of projects tasks status
+                      type: string
+                    title_en:
+                      description: English title of projects tasks status
+                      type: string
+                    title_es:
+                      description: Spanish title of projects tasks status
+                      type: string
+                    status_type:
+                      description: Id status type of projects tasks status
+                      type: integer
+                    status_type_title:
+                      description: Title status type of projects tasks status
+                      type: string
+                example:
+                  - id: '89'
+                    title: En attente
+                    title_en: Pending
+                    title_es: Pendiente
+                    status_type: '1'
+                    status_type_title: En attente
+                  - id: '90'
+                    title: En cours
+                    title_en: In progress
+                    title_es: En curso
+                    status_type: '2'
+                    status_type_title: En cours
+                  - id: '91'
+                    title: Terminé
+                    title_en: Completed
+                    title_es: Completado
+                    status_type: '3'
+                    status_type_title: Terminé
+    projects_tasks_phases:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of projects tasks phases
+                      type: integer
+                    title:
+                      description: Title of projects tasks phases
+                      type: string
+                    title_en:
+                      description: English title of projects tasks phases
+                      type: string
+                    title_es:
+                      description: Spanish title of projects tasks phases
+                      type: string
+                    starting_date:
+                      description: Starting date of projects tasks phases
+                      type: string
+                    due_date:
+                      description: Due date of projects tasks phases
+                      type: string
+                example:
+                  - id: '10'
+                    title: 'Phase #1'
+                    title_en: 'Phase #1'
+                    title_es: 'Fase #1'
+                    starting_date: '2022-04-11'
+                    due_date: '2022-04-15'
+                  - id: '11'
+                    title: 'Phase #2'
+                    title_en: 'Phase #2'
+                    title_es: 'Fase #2'
+                    starting_date: '2022-04-18'
+                    due_date: '2022-04-22'
+                  - id: '12'
+                    title: 'Phase #3'
+                    title_en: 'Phase #3'
+                    title_es: 'Fase #3'
+                    starting_date: '2022-04-25'
+                    due_date: '2022-04-29'
+    projects_tasks_priorities:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of projects tasks priorities
+                      type: integer
+                    title:
+                      description: Title of projects tasks priorities
+                      type: string
+                example:
+                  - id: '0'
+                    title: Undefined
+                  - id: '1'
+                    title: Low
+                  - id: '2'
+                    title: Medium
+                  - id: '3'
+                    title: High
+    users_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: User Id
+                      type: integer
+                    title:
+                      description: Firstname and lastname of user
+                      type: string
+                example:
+                  - id: '213'
+                    title: Jean Dupont
+                  - id: '214'
+                    title: Sandra Nicouette
+    groups_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Group Id
+                      type: integer
+                    title:
+                      description: Group title
+                      type: string
+                example:
+                  - id: '18'
+                    title: Business
+                  - id: '19'
+                    title: Support
+    users_with_groups_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of user with group
+                      type: integer
+                    title:
+                      description: Title of user or group
+                      type: string
+                example:
+                  - id: u213
+                    title: Jean Dupont
+                  - id: u214
+                    title: Sandra Nicouette
+                  - id: g18
+                    title: Business
+                  - id: g19
+                    title: Support
   schemas:
     error:
       type: object
@@ -4664,7 +6178,9 @@ components:
                 maxLength: 127
                 example: contact@example.com
               id_client_manager:
-                description: Client manager
+                description: >
+                  [Users with group](/#operation/Users_with_group) Id associated
+                  with the customer
                 type: array
                 maxLength: 30
                 items:
@@ -4693,7 +6209,7 @@ components:
                 example: SARL
               main_activity:
                 description: APE/NAF code
-                type: integer
+                type: string
                 maxLength: 255
                 example: 4616C
               vat_number:
@@ -4833,7 +6349,9 @@ components:
                 maxLength: 127
                 example: contact@example.com
               id_client_manager:
-                description: Client manager
+                description: >
+                  [Users with group](/#operation/Users_with_group) associated
+                  with the supplier
                 type: array
                 maxLength: 30
                 items:
@@ -4862,7 +6380,7 @@ components:
                 example: SARL
               main_activity:
                 description: APE/NAF code
-                type: integer
+                type: string
                 maxLength: 255
                 example: 4616C
               vat_number:
@@ -5066,7 +6584,8 @@ components:
                 type: integer
                 example: 1
               id_user_assigned:
-                description: Opportunity client mamager
+                description: |
+                  [User](/#operation/Users) Id associated with the opportunity
                 type: array
                 maxLength: 30
                 items:
@@ -5113,7 +6632,7 @@ components:
               - id_user_assigned
             properties:
               id_user_assigned:
-                description: User Id
+                description: https://dev.karlia.fr/
                 type: string
                 maxLength: 127
                 example: 213
@@ -5227,3 +6746,88 @@ components:
                 description: Note descritpion
                 type: string
                 example: A description or note about this note
+    tasks_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_user_assigned
+            properties:
+              id_user_assigned:
+                description: |
+                  [User](/#operation/Users) associated with the task
+                type: string
+                maxLength: 127
+                example: 213
+              status:
+                description: Task status
+                type: integer
+                example: 0
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: 1985
+              id_task_type:
+                description: Task type Id
+                type: integer
+                example: 3021
+              id_project:
+                description: Project Id
+                type: integer
+                example: ''
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: ''
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Task title
+                type: string
+                maxLength: 255
+                example: 'Task #1'
+              description:
+                description: Task descritpion
+                type: string
+                example: A description or note about this task
+              private:
+                description: |
+                  Task private status
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 0
+              visible_in_agenda:
+                description: |
+                  Visibility in the agenda
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              use_time:
+                description: |
+                  Task used for time
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: 0
+              time_billable:
+                description: |
+                  Billable time
+                  > 0 = No <br /> 1 = Billable
+                type: integer
+                example: 0

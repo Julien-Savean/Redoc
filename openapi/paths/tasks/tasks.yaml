@@ -1,0 +1,32 @@
+get:
+  tags:
+    - Tasks
+  summary: List
+  description: Get a list of all tasks
+  operationId: Tasks_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/tasks/tasks_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/tasks/tasks_objects.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+post:
+  tags:
+    - Tasks
+  summary: Create
+  description: Create a task
+  operationId: Tasks_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/tasks/tasks_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/tasks/tasks_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400_name.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml

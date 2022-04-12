@@ -1,0 +1,13 @@
+get:
+  tags:
+    - Projects
+  summary: Status
+  description: Get a list of all status
+  operationId: Projects_status
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_status.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml

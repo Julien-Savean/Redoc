@@ -15,15 +15,15 @@ content:
             total: 
               description: Number of results objects per response
               type: integer
-              example: "14"
+              example: 14
             limit: 
               description: Limit of objects per response
               type: integer
-              example: "100"
+              example: 100
             offset: 
               description: Offset of objects in the response
               type: integer
-              example: "0"
+              example: 0
         data:
           description: Response of the request
           type: array
@@ -51,14 +51,14 @@ content:
                 type: integer
                 example: "0"
               id_project_task: 
-                description: Task Id
+                description: Project task Id
                 type: integer
                 example: "0"
               start_date:
                 description: Start date
                 type: string
                 format: date-time
-                example: "+2022-03-15 19:45:00"
+                example: "2022-03-15 19:45:00"
               end_date:
                 description: End date
                 type: string

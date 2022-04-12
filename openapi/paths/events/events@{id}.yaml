@@ -5,7 +5,7 @@ get:
   description: Get one event
   operationId: Events_show
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id
@@ -27,13 +27,13 @@ post:
   description: Update an event
   operationId: Events_update
   security:
-    - bearer_token: []
+    - Bearer token: []
   requestBody:
     $ref: ../../components/requests/events/events_create.yaml
   parameters:
   - in: path
     name: id
-    description: Contact Id
+    description: Event Id
     schema:
       type: integer
     required: true
@@ -51,7 +51,7 @@ delete:
   description: Delete an event
   operationId: Events_delete
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id

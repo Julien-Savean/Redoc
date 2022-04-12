@@ -41,8 +41,8 @@
 - in: query
   name: id_client_manager
   schema:
-    type: integer
-  description: Search by client manager
+    type: string
+  description: Search by [User with group](/#operation/Users_with_group) associated with the supplier
 - in: query
   name: langId
   schema:

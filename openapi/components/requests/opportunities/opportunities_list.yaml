@@ -24,7 +24,7 @@
   schema:
     type: string
     maxLength: 30
-  description: Search by user assigned
+  description:  Search by [User](/#operation/Users) Id associated with the opportunity
 - in: query
   name: id_status    
   schema:

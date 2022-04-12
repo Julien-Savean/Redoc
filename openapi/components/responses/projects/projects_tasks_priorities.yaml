@@ -1,0 +1,31 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Id of projects tasks priorities
+                type: integer
+              title:
+                description: Title of projects tasks priorities
+                type: string
+          example: 
+            - id: "0"
+              title: "Undefined"
+            - id: "1"
+              title: "Low"
+            - id: "2"
+              title: "Medium"
+            - id: "3"
+              title: "High"

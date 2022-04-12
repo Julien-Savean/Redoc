@@ -56,7 +56,8 @@ content:
             maxLength: 127
             example: contact@example.com
           id_client_manager: 
-            description:  Client manager
+            description: > 
+              [Users with group](/#operation/Users_with_group) Id associated with the customer
             type: array
             maxLength: 30
             items:
@@ -88,7 +89,7 @@ content:
             example: SARL
           main_activity:
             description: APE/NAF code
-            type: integer
+            type: string
             maxLength: 255
             example: 4616C
           vat_number:

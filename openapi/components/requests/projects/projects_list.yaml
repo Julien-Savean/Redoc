@@ -1,0 +1,68 @@
+- in: query
+  name: title
+  schema:
+    type: string
+  description: Search by project title
+- in: query
+  name: id_customer_supplier
+  schema:
+    type: integer
+  description: Search by customer or supplier Id
+- in: query
+  name: id_opportunity    
+  schema:
+    type: integer
+  description: Search by opportunity Id
+- in: query
+  name: id_status
+  schema:
+    type: integer
+  description: Search by status Id
+- in: query
+  name: id_user_assigned
+  schema:
+    type: integer
+  description:  > 
+    [User](/#operation/Users) associated with the project  
+- in: query
+  name: archived
+  schema:
+    type: integer
+  description: Search by archived
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.* <br />
+    **Each field must be separated by a comma without space.**
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: string
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z. <br />
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    default: 0
+  description: Offset for paging
+

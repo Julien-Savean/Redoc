@@ -5,7 +5,7 @@ get:
   description: Get one opportunity
   operationId: Opportunities_show
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id
@@ -27,7 +27,7 @@ post:
   description: Update a opportunity
   operationId: Opportunities_update
   security:
-    - bearer_token: []
+    - Bearer token: []
   requestBody:
     $ref: ../../components/requests/opportunities/opportunities_create.yaml
   parameters:
@@ -51,7 +51,7 @@ delete:
   description: Delete a opportunity
   operationId: Opportunities_delete
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id

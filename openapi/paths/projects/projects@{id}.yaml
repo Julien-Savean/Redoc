@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Projects
+  summary: Show
+  description: Get one project
+  operationId: Projects_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: Project Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

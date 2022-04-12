@@ -5,7 +5,7 @@ get:
   description: Get values of customers custom field
   operationId: Customers_custom_field_values_list
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: field_id

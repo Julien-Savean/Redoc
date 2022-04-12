@@ -1,0 +1,92 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - id_user_assigned
+        properties:
+          id_user_assigned:
+            description: > 
+              [User](/#operation/Users) associated with the task
+            type: string
+            maxLength: 127
+            example: 213
+          status: 
+            description: Task status
+            type: integer
+            example: 0
+          id_customer_supplier:
+            description: Customer or supplier Id
+            type: integer
+            example: 28496
+          id_opportunity:
+            description: Opportunity Id
+            type: integer
+            example: 1985
+          id_task_type:
+            description: Task type Id
+            type: integer
+            example: 3021
+          id_project:
+            description: Project Id
+            type: integer
+            example: ""
+          id_project_task:
+            description: Project task Id
+            type: integer
+            example: ""
+          start_date:
+            description: Start date
+            type: string
+            format: date-time
+            example: "2022-03-15 19:45:00"
+          end_date:
+            description: End date
+            type: string
+            format: date-time
+            example: "2022-03-15 20:45:00"
+          title:
+            description: Task title
+            type: string
+            maxLength: 255
+            example: "Task #1"
+          description: 
+            description: Task descritpion
+            type: string
+            example: "A description or note about this task"
+          private:
+            description: >
+              Task private status
+
+              > 0 = No <br />
+              1 = Yes
+            type: integer
+            example: 0
+          visible_in_agenda:
+            description: >
+              Visibility in the agenda
+
+              > 0 = No <br />
+              1 = Yes
+            type: integer
+            example: 1
+          use_time:
+            description: >
+              Task used for time
+
+              > 0 = No <br />
+              1 = Yes
+            type: integer
+            example: 1
+          time_id_type:
+            description: Time type Id
+            type: integer
+            example: 0
+          time_billable:
+            description: >
+              Billable time
+
+              > 0 = No <br />
+              1 = Billable
+            type: integer
+            example: 0

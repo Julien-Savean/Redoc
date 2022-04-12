@@ -5,7 +5,7 @@ get:
   description: Get one customer
   operationId: Customers_show
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
   - in: path
     name: id
@@ -27,7 +27,7 @@ post:
   description: Update a customer
   operationId: Customers_update
   security:
-    - bearer_token: []
+    - Bearer token: []
   requestBody:
     $ref: ../../components/requests/customers/customers_create.yaml
   parameters:

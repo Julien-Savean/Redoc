@@ -5,7 +5,7 @@ get:
   description: Get a list of all lost statuses 
   operationId: Opportunities_status_lost
   security:
-    - bearer_token: []
+    - Bearer token: []
   responses:
     '200':
       $ref: ../../components/responses/opportunities/opportunities_status_lost.yaml

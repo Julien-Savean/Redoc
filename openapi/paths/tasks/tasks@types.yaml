@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Tasks
+  summary: Types
+  description: Get a list of all tasks types 
+  operationId: Tasks_types
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/tasks/tasks_types.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

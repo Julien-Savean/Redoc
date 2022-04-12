@@ -6,7 +6,7 @@ content:
           - id_user_assigned
         properties:
           id_user_assigned:
-            description: User Id
+            description: https://dev.karlia.fr/
             type: string
             maxLength: 127
             example: 213

@@ -5,7 +5,7 @@ get:
   description: Get a list of all suppliers
   operationId: Suppliers_list
   security:
-    - bearer_token: []
+    - Bearer token: []
   parameters:
     $ref: ../../components/requests/suppliers/suppliers_list.yaml
   responses:
@@ -20,7 +20,7 @@ post:
   description: Create a supplier
   operationId: Suppliers_create
   security:
-    - bearer_token: []
+    - Bearer token: []
   requestBody:
     $ref: ../../components/requests/suppliers/suppliers_create.yaml
   responses:

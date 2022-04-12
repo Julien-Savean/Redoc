@@ -24,7 +24,8 @@ content:
             type: integer
             example: 1
           id_user_assigned:
-            description: Opportunity client mamager
+            description: > 
+              [User](/#operation/Users) Id associated with the opportunity
             type: array
             maxLength: 30
             items:

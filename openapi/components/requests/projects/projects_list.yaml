@@ -7,28 +7,31 @@
   name: id_customer_supplier
   schema:
     type: integer
-  description: Search by customer or supplier Id
+  description: Search by <u>[customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
 - in: query
   name: id_opportunity    
   schema:
     type: integer
-  description: Search by opportunity Id
+  description: Search by <u>[opportunity](/#operation/Opportunities_list)</u> Id
 - in: query
   name: id_status
   schema:
     type: integer
-  description: Search by status Id
+  description: Search by <u>[status](/#operation/Projects_status)</u> Id
 - in: query
   name: id_user_assigned
   schema:
     type: integer
-  description:  > 
-    [User](/#operation/Users) associated with the project  
+  description: Search by <u>[user](/#operation/Users)</u> associated with the project  
 - in: query
   name: archived
   schema:
     type: integer
-  description: Search by archived
+  description: >
+    Search by project condition
+
+    > 0 = Active <br />
+    1 = Archived
 - in: query
   name: fields
   schema:

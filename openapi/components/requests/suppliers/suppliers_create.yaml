@@ -27,8 +27,7 @@ content:
             maxLength: 127
             example: contact@example.com
           id_client_manager: 
-            description: > 
-              [Users with group](/#operation/Users_with_group) associated with the supplier
+            description: <u>[Users with group](/#operation/Users_with_group)</u> associated with the supplier
             type: array
             maxLength: 30
             items:

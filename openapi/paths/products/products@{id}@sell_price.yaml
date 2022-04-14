@@ -1,0 +1,35 @@
+get:
+  tags:
+    - Products
+  summary: Sell price
+  description: Get the unit sell cost of a product.
+  operationId: Products_sell_price
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Product](/#operation/Products_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: query
+    name: quantity
+    schema:
+      type: number
+      format: float
+    description: Quantity
+  - in: query
+    name: id_products_prices_category
+    schema:
+      type: integer
+    description: <u>[Price category](/#operation/Products_list_sells_prices_categories)</u> Id
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_sell_price.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

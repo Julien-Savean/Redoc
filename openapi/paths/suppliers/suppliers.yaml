@@ -2,7 +2,7 @@ get:
   tags:
     - Suppliers
   summary: List
-  description: Get a list of all suppliers
+  description: Get a list of all suppliers.
   operationId: Suppliers_list
   security:
     - Bearer token: []
@@ -10,9 +10,11 @@ get:
     $ref: ../../components/requests/suppliers/suppliers_list.yaml
   responses:
     '200':
-      $ref: ../../components/responses/suppliers/suppliers_objects.yaml       
+      $ref: ../../components/responses/suppliers/suppliers_objects.yaml      
     '401':
       $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Suppliers
@@ -27,8 +29,9 @@ post:
     '200':
       $ref: ../../components/responses/suppliers/suppliers_new_object.yaml
     '400': 
-      $ref: ../../components/responses/errors/400_name.yaml        
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
-
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 

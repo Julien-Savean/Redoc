@@ -2,67 +2,73 @@ get:
   tags:
     - Events
   summary: Show
-  description: Get one event
+  description: Get one event.
   operationId: Events_show
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Event Id
+    description: <u>[Event](/#operation/Events_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/events/events_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
     '500':
-      $ref: ../../components/responses/errors/500.yaml
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Events
   summary: Update
-  description: Update an event
+  description: Update an event.
   operationId: Events_update
   security:
     - Bearer token: []
   requestBody:
-    $ref: ../../components/requests/events/events_create.yaml
+    $ref: ../../components/requests/events/events_update.yaml
   parameters:
   - in: path
     name: id
-    description: Event Id
+    description: <u>[Event](/#operation/Events_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/events/events_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
-    '500': 
-      $ref: ../../components/responses/errors/500.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 delete:
   tags:
     - Events
   summary: Delete
-  description: Delete an event
+  description: Delete an event.
   operationId: Events_delete
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Event Id
+    description: <u>[Event](/#operation/Events_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       description: OK    
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
-    '500': 
-      $ref: ../../components/responses/errors/500.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

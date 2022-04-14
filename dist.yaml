@@ -30,6 +30,8 @@ tags:
     description: This section lists all contact-related APIs.
   - name: Opportunities
     description: This section lists all opportunity-related APIS.
+  - name: Products
+    description: This section lists all product-related APIS.
   - name: Events
     description: This section lists all event-related APIS.
   - name: Notes
@@ -50,7 +52,7 @@ paths:
       tags:
         - Customers
       summary: List
-      description: Get a list of all customers
+      description: Get a list of all customers.
       operationId: Customers_list
       security:
         - Bearer token: []
@@ -61,7 +63,7 @@ paths:
             type: string
             maxLength: 127
           description: >
-            Quick search field. <br /> *If this field is filled in, the other
+            Quick search field <br /> *If this field is filled in, the other
             search fields are not taken into account. The search is then
             performed in the entire customer database.*
         - in: query
@@ -114,7 +116,7 @@ paths:
           schema:
             type: string
           description: >-
-            Search by [User with group](/#operation/Users_with_group) Id
+            Search by <u>[user with group](/#operation/Users_with_group)</u> Id
             associated with the customer
         - in: query
           name: langId
@@ -181,13 +183,15 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/customers_objects'
-        '401':
-          $ref: '#/components/responses/401'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Customers
       summary: Create
-      description: Create a customer
+      description: Create a customer.
       operationId: Customers_create
       security:
         - Bearer token: []
@@ -197,28 +201,32 @@ paths:
         '200':
           $ref: '#/components/responses/customers_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /customers/{id}:
     get:
       tags:
         - Customers
       summary: Show
-      description: Get one customer
+      description: Get one customer.
       operationId: Customers_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Customer Id
+          description: <u>[Customer](/#operation/Customers_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/customers_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -227,22 +235,24 @@ paths:
       tags:
         - Customers
       summary: Update
-      description: Update a customer
+      description: Update a customer.
       operationId: Customers_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/customers_create'
+        $ref: '#/components/requestBodies/customers_update'
       parameters:
         - in: path
           name: id
-          description: Customer Id
+          description: <u>[Customer](/#operation/Customers_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/customers_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -252,28 +262,34 @@ paths:
       tags:
         - Customers
       summary: Custom fields
-      description: Get a list of all customers custom fields
+      description: Get a list of all customers custom fields.
       operationId: Customers_custom_fields_list
       security:
         - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/customers_custom_fields'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /customers/custom-fields/{field_id}:
     get:
       tags:
         - Customers
       summary: Custom field values
-      description: Get values of customers custom field
+      description: Get values of customers custom field.
       operationId: Customers_custom_field_values_list
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: field_id
-          description: Customer custom field Id
+          description: >-
+            Customer <u>[custom
+            field](/#operation/Customers_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
@@ -281,28 +297,32 @@ paths:
         '200':
           $ref: '#/components/responses/customers_custom_field_values'
         '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /customers/{id}/custom-fields/{field_id}:
     post:
       tags:
         - Customers
       summary: Add/Update custom fields
-      description: Values of customers custom field
+      description: Values of customers custom field.
       operationId: Customers_custom_field_values_add_update
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Customer Id
+          description: <u>[Customer](/#operation/Customers_list)</u> Id
           schema:
             type: integer
           required: true
         - in: path
           name: field_id
-          description: Customer custom field Id
+          description: >-
+            Customer <u>[custom
+            field](/#operation/Customers_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
@@ -312,7 +332,7 @@ paths:
         '200':
           $ref: '#/components/responses/customers_object'
         '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -322,7 +342,7 @@ paths:
       tags:
         - Suppliers
       summary: List
-      description: Get a list of all suppliers
+      description: Get a list of all suppliers.
       operationId: Suppliers_list
       security:
         - Bearer token: []
@@ -333,7 +353,7 @@ paths:
             type: string
             maxLength: 127
           description: >
-            Quick search field. <br /> *If this field is filled in, the other
+            Quick search field <br /> *If this field is filled in, the other
             search fields are not taken into account. The search is then
             performed in the entire supplier database.*
         - in: query
@@ -372,8 +392,8 @@ paths:
           schema:
             type: string
           description: >-
-            Search by [User with group](/#operation/Users_with_group) associated
-            with the supplier
+            Search by <u>[user with group](/#operation/Users_with_group)</u>
+            associated with the supplier
         - in: query
           name: langId
           schema:
@@ -441,6 +461,8 @@ paths:
           $ref: '#/components/responses/suppliers_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Suppliers
@@ -455,28 +477,32 @@ paths:
         '200':
           $ref: '#/components/responses/suppliers_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /suppliers/{id}:
     get:
       tags:
         - Suppliers
       summary: Show
-      description: Get one supplier
+      description: Get one supplier.
       operationId: Suppliers_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Supplier Id
+          description: <u>[Supplier](/#operation/Suppliers_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/suppliers_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -485,22 +511,24 @@ paths:
       tags:
         - Suppliers
       summary: Update
-      description: Update a supplier
+      description: Update a supplier.
       operationId: Suppliers_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/suppliers_create'
+        $ref: '#/components/requestBodies/suppliers_update'
       parameters:
         - in: path
           name: id
-          description: Supplier Id
+          description: <u>[Supplier](/#operation/Suppliers_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/suppliers_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -510,7 +538,7 @@ paths:
       tags:
         - Suppliers
       summary: Custom fields
-      description: Get a list of all suppliers custom fields
+      description: Get a list of all suppliers custom fields.
       operationId: Suppliers_custom_fields_list
       security:
         - Bearer token: []
@@ -519,19 +547,23 @@ paths:
           $ref: '#/components/responses/suppliers_custom_fields'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /suppliers/custom-fields/{field_id}:
     get:
       tags:
         - Suppliers
       summary: Custom field values
-      description: Get values of suppliers custom field
+      description: Get values of suppliers custom field.
       operationId: Suppliers_custom_field_values_list
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: field_id
-          description: Supplier custom field Id
+          description: >-
+            Supplier <u>[custom
+            field](/#operation/Suppliers_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
@@ -539,28 +571,32 @@ paths:
         '200':
           $ref: '#/components/responses/suppliers_custom_field_values'
         '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /suppliers/{id}/custom-fields/{field_id}:
     post:
       tags:
         - Suppliers
       summary: Add/Update custom fields
-      description: Values of suppliers custom field
+      description: Values of suppliers custom field.
       operationId: Suppliers_custom_field_values_add_update
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Supplier Id
+          description: <u>[Supplier](/#operation/Suppliers_list)</u> Id
           schema:
             type: integer
           required: true
         - in: path
           name: field_id
-          description: Supplier custom field Id
+          description: >-
+            Supplier <u>[custom
+            field](/#operation/Suppliers_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
@@ -570,7 +606,7 @@ paths:
         '200':
           $ref: '#/components/responses/suppliers_object'
         '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -580,7 +616,7 @@ paths:
       tags:
         - Contacts
       summary: List
-      description: Get a list of all contacts
+      description: Get a list of all contacts.
       operationId: Contacts_list
       security:
         - Bearer token: []
@@ -591,9 +627,17 @@ paths:
             type: string
             maxLength: 127
           description: >
-            Quick search field. <br /> *If this field is filled in, the other
+            Quick search field <br /> *If this field is filled in, the other
             search fields are not taken into account. The search is then
             performed in the entire customer database.*
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+            maxLength: 127
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
         - in: query
           name: id_civility
           schema:
@@ -684,13 +728,15 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/contacts_objects'
-        '401':
-          $ref: '#/components/responses/401'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Contacts
       summary: Create
-      description: Create a contact
+      description: Create a contact.
       operationId: Contacts_create
       security:
         - Bearer token: []
@@ -700,29 +746,32 @@ paths:
         '200':
           $ref: '#/components/responses/contacts_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
-          message: Customer has not been found
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /contacts/{id}:
     get:
       tags:
         - Contacts
       summary: Show
-      description: Get one contact
+      description: Get one contact.
       operationId: Contacts_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Contact Id
+          description: <u>[Contact](/#operation/Contacts_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/contacts_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -731,22 +780,24 @@ paths:
       tags:
         - Contacts
       summary: Update
-      description: Update a contact
+      description: Update a contact.
       operationId: Contacts_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/contacts_create'
+        $ref: '#/components/requestBodies/contacts_update'
       parameters:
         - in: path
           name: id
-          description: Contact Id
+          description: <u>[Contact](/#operation/Contacts_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/contacts_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -756,28 +807,34 @@ paths:
       tags:
         - Contacts
       summary: Custom fields
-      description: Get a list of all contacts custom fields
+      description: Get a list of all contacts custom fields.
       operationId: Contacts_custom_fields_list
       security:
         - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/contacts_custom_fields'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /contacts/custom-fields/{field_id}:
     get:
       tags:
         - Contacts
       summary: Custom field values
-      description: Get values of contacts custom field
+      description: Get values of contacts custom field.
       operationId: Contacts_custom_field_values_list
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: field_id
-          description: Contact custom field Id
+          description: >-
+            Contact <u>[custom
+            field](/#operation/Contacts_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
@@ -785,28 +842,32 @@ paths:
         '200':
           $ref: '#/components/responses/contacts_custom_field_values'
         '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /contacts/{id}/custom-fields/{field_id}:
     post:
       tags:
         - Contacts
       summary: Add/Update custom fields
-      description: Values of contacts custom field
+      description: Values of contacts custom field.
       operationId: Contacts_custom_field_values_add_update
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Contact Id
+          description: <u>[Contact](/#operation/Contacts_list)</u> Id
           schema:
             type: integer
           required: true
         - in: path
           name: field_id
-          description: Contact custom field Id
+          description: >-
+            Contact <u>[custom
+            field](/#operation/Contacts_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
@@ -816,7 +877,7 @@ paths:
         '200':
           $ref: '#/components/responses/contacts_object'
         '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -826,7 +887,7 @@ paths:
       tags:
         - Opportunities
       summary: List
-      description: Get a list of all opportunities
+      description: Get a list of all opportunities.
       operationId: Opportunities_list
       security:
         - Bearer token: []
@@ -835,12 +896,14 @@ paths:
           name: pipeline
           schema:
             type: integer
-          description: Search by pipeline Id
+          description: >-
+            Search by
+            <u>[pipeline](/#operation/Opportunities_list_pipelines)</u> Id
         - in: query
           name: id_customer
           schema:
             type: integer
-          description: Search by customer Id
+          description: Search by <u>[customer](/#operation/Customers_list)</u> Id
         - in: query
           name: title
           schema:
@@ -851,35 +914,45 @@ paths:
           name: column_number
           schema:
             type: integer
-          description: Search by opportunity stage
+          description: >-
+            Search by <u>[pipeline
+            column](/#operation/Opportunities_list_pipelines_columns)</u> Id
         - in: query
           name: id_user_assigned
           schema:
             type: string
             maxLength: 30
           description: >-
-            Search by [User](/#operation/Users) Id associated with the
-            opportunity
+            Search by [user with group](/#operation/Users_with_group) Id
+            associated with the opportunity
         - in: query
           name: id_status
           schema:
             type: integer
-          description: Search by opportunity status Id
+          description: >-
+            Search by opportunity
+            <u>[status](/#operation/Opportunities_status)</u> Id
         - in: query
           name: id_status_lost
           schema:
             type: integer
-          description: Search by reason Id for cancellation
+          description: >-
+            Search by reason Id for <u>[status
+            loss](/#operation/Opportunities_status_lost)</u>
         - in: query
           name: id_status_canceled
           schema:
             type: integer
-          description: Search by reason Id for loss
+          description: >-
+            Search by reason Id for <u>[status
+            cancellation](/#operation/Opportunities_status_canceled)</u>
         - in: query
           name: archived
           schema:
             type: integer
-          description: Search by opportunity condition
+          description: |
+            Search by opportunity condition
+            > 0 = Active <br /> 1 = Archived
         - in: query
           name: fields
           schema:
@@ -922,11 +995,13 @@ paths:
           $ref: '#/components/responses/opportunities_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Opportunities
       summary: Create
-      description: Create a opportunity
+      description: Create an opportunity.
       operationId: Opportunities_create
       security:
         - Bearer token: []
@@ -936,22 +1011,24 @@ paths:
         '200':
           $ref: '#/components/responses/opportunities_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /opportunities/{id}:
     get:
       tags:
         - Opportunities
       summary: Show
-      description: Get one opportunity
+      description: Get one opportunity.
       operationId: Opportunities_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Opportunity Id
+          description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
           schema:
             type: integer
           required: true
@@ -966,22 +1043,24 @@ paths:
       tags:
         - Opportunities
       summary: Update
-      description: Update a opportunity
+      description: Update an opportunity.
       operationId: Opportunities_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/opportunities_create'
+        $ref: '#/components/requestBodies/opportunities_update'
       parameters:
         - in: path
           name: id
-          description: Contact Id
+          description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/opportunities_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -990,14 +1069,331 @@ paths:
       tags:
         - Opportunities
       summary: Delete
-      description: Delete a opportunity
+      description: Delete an opportunity.
       operationId: Opportunities_delete
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Contact Id
+          description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/custom-fields:
+    get:
+      tags:
+        - Opportunities
+      summary: Custom fields
+      description: Get a list of all opportunities custom fields.
+      operationId: Opportunities_custom_fields_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_custom_fields'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/custom-fields/{field_id}:
+    get:
+      tags:
+        - Opportunities
+      summary: Custom field values
+      description: Get values of opportunities custom field.
+      operationId: Opportunities_custom_field_values_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: >-
+            Opportunity <u>[custom
+            field](/#operation/Opportunities_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Opportunities
+      summary: Add/Update custom fields
+      description: Values of opportunities custom field.
+      operationId: Opportunities_custom_field_values_add_update
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: >-
+            Opportunity <u>[custom
+            field](/#operation/Opportunities_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/opportunities_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/pipelines:
+    get:
+      tags:
+        - Opportunities
+      summary: Pipelines
+      description: Get a list of all opportunity pipelines.
+      operationId: Opportunities_list_pipelines
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_pipelines'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/pipelines/{id}/columns:
+    get:
+      tags:
+        - Opportunities
+      summary: Pipelines columns
+      description: Get opportunity pipeline columns.
+      operationId: Opportunities_list_pipelines_columns
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_pipeline_columns'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/status:
+    get:
+      tags:
+        - Opportunities
+      summary: Status
+      description: Get a list of all status.
+      operationId: Opportunities_status
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_status'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/status-lost:
+    get:
+      tags:
+        - Opportunities
+      summary: Status lost
+      description: Get a list of all lost statuses.
+      operationId: Opportunities_status_lost
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_status_lost'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /opportunities/status-canceled:
+    get:
+      tags:
+        - Opportunities
+      summary: Status canceled
+      description: Get a list of all canceled statuses.
+      operationId: Opportunities_status_canceled
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/opportunities_status_canceled'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products:
+    get:
+      tags:
+        - Products
+      summary: List
+      description: Get a list of all products.
+      operationId: Products_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/products_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Products
+      summary: Create
+      description: Create a product
+      operationId: Products_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/products_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/products_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/{id}:
+    get:
+      tags:
+        - Products
+      summary: Show
+      description: Get one product.
+      operationId: Products_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Product](/#operation/Products_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/products_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Products
+      summary: Update
+      description: Update a product.
+      operationId: Products_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/products_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Product](/#operation/Products_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/products_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Products
+      summary: Delete
+      description: Delete a product.
+      operationId: Products_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Product](/#operation/Products_list)</u> Id
           schema:
             type: integer
           required: true
@@ -1008,159 +1404,369 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
-  /opportunities/custom-fields:
+  /products/custom-fields:
     get:
       tags:
-        - Opportunities
+        - Products
       summary: Custom fields
-      description: Get a list of all opportunities custom fields
-      operationId: Opportunities_custom_fields_list
+      description: Get a list of all products custom fields.
+      operationId: Products_custom_fields_list
       security:
         - Bearer token: []
       responses:
         '200':
-          $ref: '#/components/responses/opportunities_custom_fields'
-        '401':
-          $ref: '#/components/responses/401'
-  /opportunities/custom-fields/{field_id}:
-    get:
-      tags:
-        - Opportunities
-      summary: Custom field values
-      description: Get values of opportunities custom field
-      operationId: Opportunities_custom_field_values_list
-      security:
-        - Bearer token: []
-      parameters:
-        - in: path
-          name: field_id
-          description: Opportunity custom field Id
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          $ref: '#/components/responses/opportunities_custom_field_values'
-        '400':
-          $ref: '#/components/responses/400_custom_field'
-        '401':
-          $ref: '#/components/responses/401'
-  /opportunities/{id}/custom-fields/{field_id}:
-    post:
-      tags:
-        - Opportunities
-      summary: Add/Update custom fields
-      description: Values of opportunities custom field
-      operationId: Opportunities_custom_field_values_add_update
-      security:
-        - Bearer token: []
-      parameters:
-        - in: path
-          name: id
-          description: Opportunity Id
-          schema:
-            type: integer
-          required: true
-        - in: path
-          name: field_id
-          description: Opportunity custom field Id
-          schema:
-            type: integer
-          required: true
-      requestBody:
-        $ref: '#/components/requestBodies/opportunities_custom_field'
-      responses:
-        '200':
-          $ref: '#/components/responses/opportunities_object'
-        '400':
-          $ref: '#/components/responses/400_custom_field'
+          $ref: '#/components/responses/products_custom_fields'
         '401':
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
-  /opportunities/pipelines:
+  /products/custom-fields/{field_id}:
     get:
       tags:
-        - Opportunities
-      summary: Pipelines
-      description: Get a list of all opportunity pipelines
-      operationId: Opportunities_list_pipelines
-      security:
-        - Bearer token: []
-      responses:
-        '200':
-          $ref: '#/components/responses/opportunities_pipelines'
-        '401':
-          $ref: '#/components/responses/401'
-  /opportunities/pipelines/{id}/columns:
-    get:
-      tags:
-        - Opportunities
-      summary: Pipelines columns
-      description: Get opportunity pipeline columns
-      operationId: Opportunities_list_pipelines_columns
+        - Products
+      summary: Custom field values
+      description: Get values of products custom field.
+      operationId: Products_custom_field_values_list
       security:
         - Bearer token: []
       parameters:
         - in: path
-          name: id
-          description: Pipeline Id
+          name: field_id
+          description: >-
+            Product <u>[custom
+            field](/#operation/Products_custom_fields_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
-          $ref: '#/components/responses/opportunities_pipeline_columns'
+          $ref: '#/components/responses/products_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
-  /opportunities/status:
+        '500':
+          $ref: '#/components/responses/500'
+  /products/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Products
+      summary: Add/Update custom fields
+      description: Values of products custom field.
+      operationId: Products_custom_field_values_add_update
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Product](/#operation/Products_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: >-
+            Products <u>[custom
+            field](/#operation/Products_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/products_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/products_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/{id}/cost-price:
     get:
       tags:
-        - Opportunities
-      summary: Status
-      description: Get a list of all status
-      operationId: Opportunities_status
+        - Products
+      summary: Cost price
+      description: Get the unit purchase cost of a product.
+      operationId: Products_cost_price
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Product](/#operation/Products_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: quantity
+          schema:
+            type: number
+            format: float
+          description: Quantity
+      responses:
+        '200':
+          $ref: '#/components/responses/products_cost_price'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/{id}/sell-price:
+    get:
+      tags:
+        - Products
+      summary: Sell price
+      description: Get the unit sell cost of a product.
+      operationId: Products_sell_price
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Product](/#operation/Products_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: quantity
+          schema:
+            type: number
+            format: float
+          description: Quantity
+        - in: query
+          name: id_products_prices_category
+          schema:
+            type: integer
+          description: >-
+            <u>[Price
+            category](/#operation/Products_list_sells_prices_categories)</u> Id
+      responses:
+        '200':
+          $ref: '#/components/responses/products_sell_price'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/sells-prices-categories:
+    get:
+      tags:
+        - Products
+      summary: List sells prices categories
+      description: Get a list of all sells prices categories of products.
+      operationId: Products_list_sells_prices_categories
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/products_sells_prices_categories'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/categories:
+    get:
+      tags:
+        - Products
+      summary: List categories
+      description: Get a list of all categories.
+      operationId: Products_categories_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/products_categories_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Products
+      summary: Create category
+      description: Create a product category
+      operationId: Products_categories_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/products_categories_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/products_categories_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/categories/{id}:
+    get:
+      tags:
+        - Products
+      summary: Show category
+      description: Get one product category.
+      operationId: Products_categories_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Category](/#operation/Products_categories_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/products_categories_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Products
+      summary: Update category
+      description: Update a product category.
+      operationId: Products_categories_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/products_categories_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Category](/#operation/Products_categories_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/products_categories_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /products/vat:
+    get:
+      tags:
+        - Products
+      summary: VAT
+      description: Get a list of all 'Value Added Tax'.
+      operationId: Products_vat_list
       security:
         - Bearer token: []
       responses:
         '200':
-          $ref: '#/components/responses/opportunities_status'
+          $ref: '#/components/responses/products_vat'
         '401':
           $ref: '#/components/responses/401'
-  /opportunities/status-lost:
+        '500':
+          $ref: '#/components/responses/500'
+  /products/units:
     get:
       tags:
-        - Opportunities
-      summary: Status lost
-      description: Get a list of all lost statuses
-      operationId: Opportunities_status_lost
+        - Products
+      summary: Units
+      description: Get a list of all units.
+      operationId: Products_units_list
       security:
         - Bearer token: []
       responses:
         '200':
-          $ref: '#/components/responses/opportunities_status_lost'
+          $ref: '#/components/responses/products_units'
         '401':
           $ref: '#/components/responses/401'
-  /opportunities/status-canceled:
-    get:
-      tags:
-        - Opportunities
-      summary: Status canceled
-      description: Get a list of all canceled statuses
-      operationId: Opportunities_status_canceled
-      security:
-        - Bearer token: []
-      responses:
-        '200':
-          $ref: '#/components/responses/opportunities_status_canceled'
-        '401':
-          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /events:
     get:
       tags:
         - Events
       summary: List
-      description: Get a list of all events
+      description: Get a list of all events.
       operationId: Events_list
       security:
         - Bearer token: []
@@ -1169,7 +1775,7 @@ paths:
           name: id_user_assigned
           schema:
             type: integer
-          description: User Id
+          description: <u>[User](/#operation/Users)</u> Id associated with the event
           required: true
         - in: query
           name: from
@@ -1187,27 +1793,29 @@ paths:
           name: id_customer_supplier
           schema:
             type: integer
-          description: Search by customer or supplier Id
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
         - in: query
           name: id_opportunity
           schema:
             type: integer
-          description: Search by opportunity Id
+          description: Search by <u>[opportunity](/#operation/Opportunities_list)</u> Id
         - in: query
           name: id_event_type
           schema:
             type: integer
-          description: Search by event type Id
+          description: Search by event <u>[type](/#operation/Events_types)</u> Id
         - in: query
           name: id_project
           schema:
             type: integer
-          description: Search by project Id
+          description: Search by <u>[project](/#operation/Projects_list)</u> Id
         - in: query
           name: id_project_task
           schema:
             type: integer
-          description: Search by task Id
+          description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
         - in: query
           name: title
           schema:
@@ -1246,7 +1854,7 @@ paths:
           name: time_id_type
           schema:
             type: integer
-          description: Search by time type Id
+          description: Search by <u>[time type](/#operation/Times_types)</u> Id
         - in: query
           name: time_billable
           schema:
@@ -1294,8 +1902,12 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/events_objects'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Events
@@ -1310,28 +1922,32 @@ paths:
         '200':
           $ref: '#/components/responses/events_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /events/{id}:
     get:
       tags:
         - Events
       summary: Show
-      description: Get one event
+      description: Get one event.
       operationId: Events_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Event Id
+          description: <u>[Event](/#operation/Events_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/events_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1340,22 +1956,24 @@ paths:
       tags:
         - Events
       summary: Update
-      description: Update an event
+      description: Update an event.
       operationId: Events_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/events_create'
+        $ref: '#/components/requestBodies/events_update'
       parameters:
         - in: path
           name: id
-          description: Event Id
+          description: <u>[Event](/#operation/Events_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/events_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1364,20 +1982,22 @@ paths:
       tags:
         - Events
       summary: Delete
-      description: Delete an event
+      description: Delete an event.
       operationId: Events_delete
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Event Id
+          description: <u>[Event](/#operation/Events_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1387,13 +2007,15 @@ paths:
       tags:
         - Events
       summary: Types
-      description: Get a list of all events types
+      description: Get a list of all events types.
       operationId: Events_types
       security:
         - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/events_types'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1403,7 +2025,7 @@ paths:
       tags:
         - Notes
       summary: List
-      description: Get a list of all notes
+      description: Get a list of all notes.
       operationId: Notes_list
       security:
         - Bearer token: []
@@ -1412,7 +2034,7 @@ paths:
           name: id_user_assigned
           schema:
             type: integer
-          description: User Id
+          description: <u>[User](/#operation/Users)</u> Id associated with the note
           required: true
         - in: query
           name: from
@@ -1430,22 +2052,24 @@ paths:
           name: id_customer_supplier
           schema:
             type: integer
-          description: Search by customer or supplier Id
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
         - in: query
           name: id_opportunity
           schema:
             type: integer
-          description: Search by opportunity Id
+          description: Search by <u>[opportunity](/#operation/Opportunities_list)</u> Id
         - in: query
           name: id_project
           schema:
             type: integer
-          description: Search by project Id
+          description: Search by <u>[project](/#operation/Projects_list)</u> Id
         - in: query
           name: id_project_task
           schema:
             type: integer
-          description: Search by task Id
+          description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
         - in: query
           name: title
           schema:
@@ -1492,13 +2116,17 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/notes_objects'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Notes
       summary: Create
-      description: Create a note
+      description: Create a note.
       operationId: Notes_create
       security:
         - Bearer token: []
@@ -1508,28 +2136,32 @@ paths:
         '200':
           $ref: '#/components/responses/notes_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /notes/{id}:
     get:
       tags:
         - Notes
       summary: Show
-      description: Get one note
+      description: Get one note.
       operationId: Notes_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Note Id
+          description: <u>[Note](/#operation/Notes_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/notes_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1538,22 +2170,24 @@ paths:
       tags:
         - Notes
       summary: Update
-      description: Update a note
+      description: Update a note.
       operationId: Notes_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/notes_create'
+        $ref: '#/components/requestBodies/notes_update'
       parameters:
         - in: path
           name: id
-          description: Note Id
+          description: <u>[Note](/#operation/Notes_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/notes_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1562,20 +2196,22 @@ paths:
       tags:
         - Notes
       summary: Delete
-      description: Delete a note
+      description: Delete a note.
       operationId: Notes_delete
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Event Id
+          description: <u>[Note](/#operation/Notes_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1585,7 +2221,7 @@ paths:
       tags:
         - Tasks
       summary: List
-      description: Get a list of all tasks
+      description: Get a list of all tasks.
       operationId: Tasks_list
       security:
         - Bearer token: []
@@ -1594,14 +2230,15 @@ paths:
           name: id_user_assigned
           schema:
             type: integer
-          description: |
-            [User](/#operation/Users) associated with the task
+          description: <u>[User](/#operation/Users)</u> Id associated with the task
           required: true
         - in: query
           name: status
           schema:
             type: integer
-          description: Task status
+          description: |
+            Search by task status
+            > 0 = Open <br /> 1 = Close
         - in: query
           name: from
           schema:
@@ -1618,27 +2255,29 @@ paths:
           name: id_customer_supplier
           schema:
             type: integer
-          description: Search by customer or supplier Id
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
         - in: query
           name: id_opportunity
           schema:
             type: integer
-          description: Search by opportunity Id
+          description: Search by <u>[opportunity](/#operation/Opportunities_list)</u> Id
         - in: query
           name: id_event_type
           schema:
             type: integer
-          description: Search by event type Id
+          description: Search by <u>[task type](/#operation/Tasks_types)</u> Id
         - in: query
           name: id_project
           schema:
             type: integer
-          description: Search by project Id
+          description: Search by <u>[project](/#operation/Projects_list)</u> Id
         - in: query
           name: id_project_task
           schema:
             type: integer
-          description: Search by project task Id
+          description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
         - in: query
           name: title
           schema:
@@ -1727,6 +2366,8 @@ paths:
           $ref: '#/components/responses/tasks_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
     post:
       tags:
         - Tasks
@@ -1741,28 +2382,32 @@ paths:
         '200':
           $ref: '#/components/responses/tasks_new_object'
         '400':
-          $ref: '#/components/responses/400_name'
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /tasks/{id}:
     get:
       tags:
         - Tasks
       summary: Show
-      description: Get one task
+      description: Get one task.
       operationId: Tasks_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Task Id
+          description: <u>[Task](/#operation/Tasks_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/tasks_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1771,22 +2416,24 @@ paths:
       tags:
         - Tasks
       summary: Update
-      description: Update a task
+      description: Update a task.
       operationId: Tasks_update
       security:
         - Bearer token: []
       requestBody:
-        $ref: '#/components/requestBodies/tasks_create'
+        $ref: '#/components/requestBodies/tasks_update'
       parameters:
         - in: path
           name: id
-          description: Task Id
+          description: <u>[Task](/#operation/Tasks_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/tasks_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1795,20 +2442,22 @@ paths:
       tags:
         - Tasks
       summary: Delete
-      description: Delete a task
+      description: Delete a task.
       operationId: Tasks_delete
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Task Id
+          description: <u>[Task](/#operation/Tasks_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1818,7 +2467,7 @@ paths:
       tags:
         - Tasks
       summary: Types
-      description: Get a list of all tasks types
+      description: Get a list of all tasks types.
       operationId: Tasks_types
       security:
         - Bearer token: []
@@ -1834,7 +2483,7 @@ paths:
       tags:
         - Times
       summary: Types
-      description: Get a list of all times types
+      description: Get a list of all times types.
       operationId: Times_types
       security:
         - Bearer token: []
@@ -1843,12 +2492,14 @@ paths:
           $ref: '#/components/responses/types'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects:
     get:
       tags:
         - Projects
       summary: List
-      description: Get a list of all projects
+      description: Get a list of all projects.
       operationId: Projects_list
       security:
         - Bearer token: []
@@ -1862,28 +2513,33 @@ paths:
           name: id_customer_supplier
           schema:
             type: integer
-          description: Search by customer or supplier Id
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
         - in: query
           name: id_opportunity
           schema:
             type: integer
-          description: Search by opportunity Id
+          description: Search by <u>[opportunity](/#operation/Opportunities_list)</u> Id
         - in: query
           name: id_status
           schema:
             type: integer
-          description: Search by status Id
+          description: Search by <u>[status](/#operation/Projects_status)</u> Id
         - in: query
           name: id_user_assigned
           schema:
             type: integer
-          description: |
-            [User](/#operation/Users) associated with the project  
+          description: >-
+            Search by <u>[user](/#operation/Users)</u> associated with the
+            project
         - in: query
           name: archived
           schema:
             type: integer
-          description: Search by archived
+          description: |
+            Search by project condition
+            > 0 = Active <br /> 1 = Archived
         - in: query
           name: fields
           schema:
@@ -1926,25 +2582,29 @@ paths:
           $ref: '#/components/responses/projects_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects/{id}:
     get:
       tags:
         - Projects
       summary: Show
-      description: Get one project
+      description: Get one project.
       operationId: Projects_show
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Project Id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/projects_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1954,7 +2614,7 @@ paths:
       tags:
         - Projects
       summary: Status
-      description: Get a list of all status
+      description: Get a list of all status.
       operationId: Projects_status
       security:
         - Bearer token: []
@@ -1963,25 +2623,29 @@ paths:
           $ref: '#/components/responses/projects_status'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects/{id}/tasks:
     get:
       tags:
         - Projects
       summary: Project tasks
-      description: Get a list of all project tasks
+      description: Get a list of all project tasks.
       operationId: Projects_tasks_list
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Project Id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/projects_tasks_objects'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1991,7 +2655,7 @@ paths:
       tags:
         - Projects
       summary: Status of projects tasks
-      description: Get a list of all status of projects tasks
+      description: Get a list of all status of projects tasks.
       operationId: Projects_tasks_status_list
       security:
         - Bearer token: []
@@ -2000,25 +2664,29 @@ paths:
           $ref: '#/components/responses/projects_tasks_status'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects/{id}/tasks/status:
     get:
       tags:
         - Projects
       summary: Status of project tasks
-      description: Get a list of all status of one project task
+      description: Get a list of all status of one project task.
       operationId: Projects_tasks_status
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Project Id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/projects_tasks_status'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -2028,20 +2696,22 @@ paths:
       tags:
         - Projects
       summary: Phases of project tasks
-      description: Get a list of all phases of project tasks
+      description: Get a list of all phases of project tasks.
       operationId: Projects_tasks_phases
       security:
         - Bearer token: []
       parameters:
         - in: path
           name: id
-          description: Project Id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
           schema:
             type: integer
           required: true
       responses:
         '200':
           $ref: '#/components/responses/projects_tasks_phases'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -2051,7 +2721,7 @@ paths:
       tags:
         - Projects
       summary: Priorities of projects tasks
-      description: Get a list of all priorities
+      description: Get a list of all priorities.
       operationId: Projects_priorities
       security:
         - Bearer token: []
@@ -2060,12 +2730,14 @@ paths:
           $ref: '#/components/responses/projects_tasks_priorities'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /users:
     get:
       tags:
         - Users
       summary: Users
-      description: Get a list of all users
+      description: Get a list of all users.
       operationId: Users
       security:
         - Bearer token: []
@@ -2074,12 +2746,14 @@ paths:
           $ref: '#/components/responses/users_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /users/groups:
     get:
       tags:
         - Users
       summary: Groups
-      description: Get a list of all groups
+      description: Get a list of all groups.
       operationId: Users_groups
       security:
         - Bearer token: []
@@ -2088,12 +2762,14 @@ paths:
           $ref: '#/components/responses/groups_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /users/list-with-groups:
     get:
       tags:
         - Users
       summary: Users with groups
-      description: Get a list of all users with groups
+      description: Get a list of all users with groups.
       operationId: Users_with_group
       security:
         - Bearer token: []
@@ -2102,6 +2778,8 @@ paths:
           $ref: '#/components/responses/users_with_groups_objects'
         '401':
           $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
 components:
   securitySchemes:
     Bearer token:
@@ -2111,13 +2789,25 @@ components:
           1. Sign in with your existing account. <br />
           2. Once logged in, click on your initial in the upper right corner.  <br />
           3. Select "Settings".  <br />
-          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br />
+          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br /> <br />
 
         The API use Bearer Authorization in request header.
       type: http
       scheme: bearer
       bearerFormat: xxxxxx-xxxxxx-xxxx-xxxxxx-xxxxxx
   responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          example:
+            code: XXXXX
+            status: error
+            message: This field is not completed
+            category_code: XX
+            category_message: Missing required field
     '401':
       description: Unauthorized
       content:
@@ -2132,16 +2822,6 @@ components:
             category_message: Authentification failed
     '500':
       description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-          example:
-            code: '40101'
-            status: error
-            message: Customer has not been found
-            category_code: '40'
-            category_message: External error
     customers_objects:
       description: OK
       content:
@@ -2570,18 +3250,6 @@ components:
                 description: Id of the updater
                 type: integer
                 example: '213'
-    400_name:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-          example:
-            code: '20101'
-            status: error
-            message: name field is not completed
-            category_code: '20'
-            category_message: Missing required field
     customers_object:
       description: OK
       content:
@@ -2890,18 +3558,6 @@ components:
                     title: Google AdWords
                   - id: '5901'
                     title: Website
-    400_custom_field:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-          example:
-            code: '40501'
-            status: error
-            message: Custom field has not been found
-            category_code: '40'
-            category_message: External error
     suppliers_objects:
       description: OK
       content:
@@ -3966,58 +4622,74 @@ components:
                   type: object
                   properties:
                     id:
-                      description: Contact Id
+                      description: Opportunity Id
                       type: integer
-                      example: '48560'
-                    id_customer_supplier:
-                      description: Customer or supplier Id
+                      example: '1985'
+                    pipeline:
+                      description: Pipeline Id
                       type: integer
-                      example: '28496'
-                    supplier:
-                      description: Supplier status of the contact
-                      type: integer
-                      example: '0'
-                    title:
-                      description: Civility + lastname + firstname contact
-                      type: string
-                      example: Mr Jean Dupont
-                    id_civility:
-                      description: Contact civility
+                      example: '1934'
+                    column_number:
+                      description: Opportunity stage
                       type: integer
                       example: '1'
-                    lastname:
-                      description: Contact lastname
+                    column_number_last_update:
+                      description: Last update date of opportunity stage
                       type: string
-                      example: Dupont
-                    firstname:
-                      description: Contact firstname
+                      format: date-time
+                      example: '2022-04-04 09:44:49'
+                    position:
+                      description: Opportunity position
+                      type: integer
+                      example: '1'
+                    id_customer:
+                      description: Customer Id
                       type: string
-                      example: Jean
-                    position_title:
+                      example: '28496'
+                    title:
                       description: Contact position title
                       type: string
-                      example: CEO
-                    email:
-                      description: Contact email
-                      type: string
-                      format: email
-                      example: jeandupont@example.com
-                    phone:
-                      description: Contact phone number
-                      type: string
-                      example: 02 45 68 37 98
-                    mobile:
-                      description: Contact mobile number
-                      type: string
-                      example: 06 94 31 81 31
-                    description:
-                      description: Contact description
-                      type: string
-                      example: A description or note about this contact
-                    client_number:
-                      description: Internal number
+                      example: 'Opportunity #1'
+                    id_status:
+                      description: Opportunity status Id
                       type: integer
-                      example: '123'
+                      example: '0'
+                    opportunity_status:
+                      description: Opportunity status
+                      type: string
+                      example: Open
+                    id_status_lost:
+                      description: Reason Id for loss
+                      type: integer
+                      example: '0'
+                    opportunity_status_lost:
+                      description: Opportunity status lost
+                      type: string
+                      example: ''
+                    id_status_canceled:
+                      description: Reason Id for cancellation
+                      type: integer
+                      example: '0'
+                    opportunity_status_canceled:
+                      description: Opportunity status canceled
+                      type: integer
+                      example: ''
+                    id_user_assigned:
+                      description: Opportunity client mamager id
+                      type: array
+                      items:
+                        type: string
+                        example: u213
+                    id_user_assigned_text:
+                      description: Opportunity client mamager name
+                      type: array
+                      items:
+                        type: string
+                        example: Jean Dupont
+                    archived:
+                      description: Opportunity condition
+                      type: integer
+                      example: '0'
                     custom_fields_list:
                       description: List of custom fields
                       type: array
@@ -4037,10 +4709,33 @@ components:
                             description: Custom field value
                             type: string
                       example:
-                        - id: '3407'
-                          title: Contact type
-                          value: '5994'
-                          value_text: Decision-maker contact
+                        - id: '3413'
+                          title: Source
+                          value: '5995'
+                          value_text: Website
+                    proposals:
+                      description: Opportunity proposal
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Proposal Id
+                            type: integer
+                          number:
+                            description: Proposal number
+                            type: integer
+                          description:
+                            description: Proposal description
+                            type: string
+                          files_list:
+                            description: Proposal files list
+                            type: array
+                      example:
+                        - id: '3413'
+                          number: '1'
+                          description: ''
+                          files_list: []
                     creation_date:
                       description: Creation date and time
                       type: string
@@ -4108,7 +4803,13 @@ components:
                 type: integer
                 example: '0'
               id_user_assigned:
-                description: Opportunity client mamager
+                description: Opportunity client mamager id
+                type: array
+                items:
+                  type: string
+                  example: u213
+              id_user_assigned_text:
+                description: Opportunity client mamager name
                 type: array
                 items:
                   type: string
@@ -4199,7 +4900,13 @@ components:
                 type: integer
                 example: ''
               id_user_assigned:
-                description: Opportunity client mamager
+                description: Opportunity client mamager id
+                type: array
+                items:
+                  type: string
+                  example: u213
+              id_user_assigned_text:
+                description: Opportunity client mamager name
                 type: array
                 items:
                   type: string
@@ -4506,6 +5213,730 @@ components:
                     title_es:
                       description: Spanish title of lost opportunity statutes
                       type: string
+    products_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 14
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Product Id
+                      type: integer
+                      example: '4739'
+                    title:
+                      description: Product title
+                      type: string
+                      example: 'Product #1'
+                    reference:
+                      description: Product reference
+                      type: string
+                      example: Ref_product_1
+                    id_product_category:
+                      description: Product category Id
+                      type: integer
+                      example: '0'
+                    description:
+                      description: Product description
+                      type: string
+                      example: A description or note about this product
+                    price_without_tax:
+                      description: Price without tax
+                      type: number
+                      format: float
+                      example: '50.000000'
+                    business_price_per_quantity:
+                      description: Business price per quantity
+                      type: number
+                      format: float
+                      example: '0'
+                    expense_price_per_quantity:
+                      description: Expense price per quantity
+                      type: number
+                      format: float
+                      example: '0'
+                    id_vat:
+                      description: Vat number Id
+                      type: integer
+                      example: '1'
+                    id_unit:
+                      description: Unit Id
+                      type: integer
+                      example: '17'
+                    use_stock:
+                      description: Use stock
+                      type: string
+                      example: '1'
+                    stock:
+                      description: Stock
+                      type: number
+                      format: double
+                      example: '50.00'
+                    stock_min_alert:
+                      description: Stock min alert
+                      type: number
+                      format: double
+                      example: '10.00'
+                    stock_max_alert:
+                      description: Stock max alert
+                      type: number
+                      format: double
+                      example: '100.00'
+                    weighted_average_cost:
+                      description: Weighted average cost
+                      type: number
+                      format: double
+                      example: '0.00'
+                    cost_without_tax:
+                      description: Cost without tax
+                      type: number
+                      format: double
+                      example: '0.00'
+                    id_supplier:
+                      description: Supplier Id
+                      type: integer
+                      example: '28549'
+                    reference_supplier:
+                      description: Supplier reference
+                      type: string
+                      example: Ref_supllier_1
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3430'
+                          title: Conditioning
+                          value: '6019'
+                          value_text: Box
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    products_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Product Id
+                type: integer
+                example: '4739'
+              title:
+                description: Product title
+                type: string
+                example: 'Product #1'
+              reference:
+                description: Product reference
+                type: string
+                example: Ref_product_1
+              id_product_category:
+                description: Product category Id
+                type: integer
+                example: '0'
+              description:
+                description: Product description
+                type: string
+                example: A description or note about this product
+              price_without_tax:
+                description: Sales price HT
+                type: number
+                format: float
+                example: '50.000000'
+              business_price_per_quantity:
+                description: Business price per quantity
+                type: number
+                format: float
+                example: '0'
+              expense_price_per_quantity:
+                description: Expense price per quantity
+                type: number
+                format: float
+                example: '0'
+              id_vat:
+                description: Vat number Id
+                type: integer
+                example: '1'
+              id_unit:
+                description: Unit Id
+                type: integer
+                example: '17'
+              use_stock:
+                description: Use stock
+                type: string
+                example: '1'
+              stock:
+                description: Stock
+                type: number
+                format: double
+                example: '50.00'
+              stock_min_alert:
+                description: Stock min alert
+                type: number
+                format: double
+                example: '10.00'
+              stock_max_alert:
+                description: Stock max alert
+                type: number
+                format: double
+                example: '100.00'
+              weighted_average_cost:
+                description: Weighted average cost
+                type: number
+                format: double
+                example: '0.00'
+              cost_without_tax:
+                description: Cost without tax
+                type: number
+                format: double
+                example: '0.00'
+              id_supplier:
+                description: Supplier Id
+                type: integer
+                example: '28549'
+              reference_supplier:
+                description: Supplier reference
+                type: string
+                example: Ref_supllier_1
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    products_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Product Id
+                type: integer
+                example: '4739'
+              title:
+                description: Product title
+                type: string
+                example: 'Product #1'
+              reference:
+                description: Product reference
+                type: string
+                example: Ref_product_1
+              id_product_category:
+                description: Product category Id
+                type: integer
+                example: '0'
+              description:
+                description: Product description
+                type: string
+                example: A description or note about this product
+              price_without_tax:
+                description: Price without tax
+                type: number
+                format: float
+                example: '50.000000'
+              business_price_per_quantity:
+                description: Business price per quantity
+                type: number
+                format: float
+                example: '0'
+              expense_price_per_quantity:
+                description: Expense price per quantity
+                type: number
+                format: float
+                example: '0'
+              id_vat:
+                description: Vat number Id
+                type: integer
+                example: '1'
+              id_unit:
+                description: Unit Id
+                type: integer
+                example: '17'
+              use_stock:
+                description: Use stock
+                type: string
+                example: '1'
+              stock:
+                description: Stock
+                type: number
+                format: double
+                example: '50.00'
+              stock_min_alert:
+                description: Stock min alert
+                type: number
+                format: double
+                example: '10.00'
+              stock_max_alert:
+                description: Stock max alert
+                type: number
+                format: double
+                example: '100.00'
+              weighted_average_cost:
+                description: Weighted average cost
+                type: number
+                format: double
+                example: '0.00'
+              cost_without_tax:
+                description: Cost without tax
+                type: number
+                format: double
+                example: '0.00'
+              id_supplier:
+                description: Supplier Id
+                type: integer
+                example: '28549'
+              reference_supplier:
+                description: Supplier reference
+                type: string
+                example: Ref_supllier_1
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3430'
+                    title: Conditioning
+                    value: '6019'
+                    value_text: Box
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    products_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Product custom field Id
+                      type: integer
+                      example: '3346'
+                    title:
+                      description: Product custom field title
+                      type: string
+                      example: Conditioning
+                    type:
+                      description: Customer custom field type
+                      type: string
+                      example: Dropdown list
+                    with_values:
+                      description: Custom field with values
+                      type: boolean
+                      example: 'true'
+    products_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Product custom field value Id
+                      type: integer
+                    title:
+                      description: Product custom field value title
+                      type: string
+                example:
+                  - id: '6019'
+                    title: 'Box '
+                  - id": '6021'
+                    title: Cardboard
+                  - id: '6020'
+                    title: Pallet
+    products_cost_price:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              quantity:
+                description: Quantity bearing
+                type: number
+                format: float
+                example: '1'
+              price_without_tax:
+                description: Purchase price HT
+                type: number
+                format: float
+                example: '20'
+              discount_percent:
+                description: Percentage reduction
+                type: number
+                format: double
+                example: '0'
+    products_sell_price:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              quantity:
+                description: Quantity bearing
+                type: number
+                format: float
+                example: '1'
+              price_without_tax:
+                description: Sales price HT
+                type: number
+                format: float
+                example: '50.000000'
+              discount_percent:
+                description: Percentage reduction
+                type: number
+                format: double
+                example: '0'
+    products_sells_prices_categories:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 2
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of sales price category
+                      type: integer
+                    title:
+                      description: Title of sales price category
+                      type: string
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                example:
+                  - id: '16'
+                    title: Individuals
+                    creation_date: '2022-04-13 09:45:42'
+                    created_by: '213'
+                    update_date: '2022-04-13 09:45:51'
+                    updated_by: '213'
+                  - id: '17'
+                    title: Professionals
+                    creation_date: '2022-04-13 09:46:08'
+                    created_by: '213'
+                    update_date: '2022-04-13 09:46:14'
+                    updated_by: '213'
+    products_categories_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 14
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Product category Id
+                      type: integer
+                      example: '510'
+                    title:
+                      description: Product category title
+                      type: string
+                      example: 'Category #1'
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-04-13 12:09:06'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-04-13 12:09:13'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    products_categories_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Product category Id
+                type: integer
+                example: '510'
+              title:
+                description: Product category title
+                type: string
+                example: 'Category #1'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-04-13 12:09:06'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-04-13 12:09:13'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    products_vat:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Product custom field value Id
+                      type: integer
+                    title:
+                      description: Product custom field value title
+                      type: string
+                example:
+                  - id: '6019'
+                    title: 'Box '
+                  - id": '6021'
+                    title: Cardboard
+                  - id: '6020'
+                    title: Pallet
+    products_units:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Product vat Id
+                      type: integer
+                    vat:
+                      description: Product vat value
+                      type: number
+                      format: double
+                    title:
+                      description: Product unit title
+                      type: string
+                example:
+                  - id: '1'
+                    vat: '20.00'
+                    title: VAT 20%
+                  - id: '2'
+                    vat: '10.00'
+                    title: VAT 10%
+                  - id: '3'
+                    vat: '5.50'
+                    title: VAT 5.5%
     events_objects:
       description: OK
       content:
@@ -5110,7 +6541,7 @@ components:
                       description: Opportunity Id
                       type: integer
                       example: '1985'
-                    id_task_type:
+                    id_event_type:
                       description: Task type Id
                       type: integer
                       example: '3021'
@@ -5205,7 +6636,7 @@ components:
                 description: Opportunity Id
                 type: integer
                 example: '1985'
-              id_task_type:
+              id_event_type:
                 description: Task type Id
                 type: integer
                 example: '3021'
@@ -5301,7 +6732,7 @@ components:
                 description: Opportunity Id
                 type: integer
                 example: '1985'
-              id_task_type:
+              id_event_type:
                 description: Task type Id
                 type: integer
                 example: '3021'
@@ -6178,9 +7609,9 @@ components:
                 maxLength: 127
                 example: contact@example.com
               id_client_manager:
-                description: >
-                  [Users with group](/#operation/Users_with_group) Id associated
-                  with the customer
+                description: >-
+                  <u>[Users with group](/#operation/Users_with_group)</u> Id
+                  associated with the customer
                 type: array
                 maxLength: 30
                 items:
@@ -6236,6 +7667,207 @@ components:
                 type: string
                 maxLength: 30
                 example: 123
+              custom_fields:
+                description: >-
+                  <u>[Custom
+                  fields](/#operation/Customers_custom_fields_list)</u>
+                type: object
+                properties:
+                  '3346':
+                    description: Custom field Id
+                    type: string
+                    example: '5900'
+              main_address:
+                description: Main address
+                type: string
+                maxLength: 255
+                example: 55 Av. Louis Breguet
+              main_zip_code:
+                description: ZIP code of main address
+                type: string
+                maxLength: 64
+                example: 31400
+              main_city:
+                description: City of main address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              main_country:
+                description: Country of main address
+                type: string
+                maxLength: 64
+                example: France
+              delivery_title:
+                description: Name or company name of delivery address
+                type: string
+                maxLength: 127
+                example: My delivery address
+              delivery_address:
+                description: Delivery address
+                type: string
+                maxLength: 255
+                example: 1 place du Capitole
+              delivery_zip_code:
+                description: ZIP code of delivery address
+                type: string
+                maxLength: 64
+                example: 31000
+              delivery_city:
+                description: City of delivery address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              delivery_country:
+                description: Country of delivery address
+                type: string
+                maxLength: 64
+                example: France
+              invoice_title:
+                description: Name or company name of invoice address
+                type: string
+                maxLength: 127
+                example: My invoice address
+              invoice_address:
+                description: Invoice address
+                type: string
+                maxLength: 255
+                example: 55 Rue du Faubourg Saint-Honoré
+              invoice_zip_code:
+                description: ZIP code of invoice address
+                type: string
+                maxLength: 64
+                example: 75000
+              invoice_city:
+                description: City of invoice address
+                type: string
+                maxLength: 127
+                example: Paris
+              invoice_country:
+                description: Country of invoice address
+                type: string
+                maxLength: 64
+                example: France
+    customers_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                description: >-
+                  Name for professional customer or lastname for individual
+                  customer
+                type: string
+                maxLength: 127
+                example: Society X
+              individual:
+                description: |
+                  Customer type
+                  > 0 = Professional <br /> 1 = Individual
+                type: integer
+                example: 0
+              id_civility:
+                description: |
+                  Customer civility - **Only for individual customer**
+                  > 1 = Mr <br /> 2 = Ms
+                type: integer
+                example: ''
+              firstname:
+                description: Customer firstname - **Only for individual customer**
+                type: string
+                maxLength: 127
+                example: ''
+              prospect:
+                description: |
+                  Customer status
+                  > 0 = Client <br /> 1 = Prospect
+                type: integer
+                example: 0
+              phone:
+                description: Customer phone number
+                type: string
+                maxLength: 30
+                example: '+33512345678'
+              mobile:
+                description: Customer mobile number
+                type: string
+                maxLength: 30
+                example: 07 98 76 54 32
+              email:
+                description: Customer email address
+                type: string
+                format: email
+                maxLength: 127
+                example: contact@example.com
+              id_client_manager:
+                description: >-
+                  <u>[Users with group](/#operation/Users_with_group)</u> Id
+                  associated with the customer
+                type: array
+                maxLength: 30
+                items:
+                  type: string
+                  example: u213
+              langId:
+                description: |
+                  Customer language
+                  > 1 = French <br /> 2 = English <br /> 3 = Spanish
+                type: integer
+                example: 1
+              siret:
+                description: Customer SIRET
+                type: string
+                maxLength: 30
+                example: 123 568 941 00056
+              siren:
+                description: Customer SIREN
+                type: integer
+                maxLength: 30
+                example: 123 568 941
+              legal_form:
+                description: Customer status
+                type: string
+                maxLength: 255
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: string
+                maxLength: 255
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                maxLength: 30
+                example: FR 32 123456789
+              default_discount_percent:
+                description: Default discount
+                type: number
+                format: double
+                example: 10.5
+              id_document_template:
+                description: Id document template
+                type: integer
+                example: ''
+              description:
+                description: Customer description
+                type: string
+                maxLength: 255
+                example: A description or note about this customer
+              client_number:
+                description: Internal number
+                type: string
+                maxLength: 30
+                example: 123
+              custom_fields:
+                description: >-
+                  <u>[Custom
+                  fields](/#operation/Customers_custom_fields_list)</u>
+                type: object
+                properties:
+                  '3346':
+                    description: Custom field Id
+                    type: string
+                    example: '5900'
               main_address:
                 description: Main address
                 type: string
@@ -6315,9 +7947,10 @@ components:
               - field_value
             properties:
               field_value:
-                description: Custom field value
-                type: string
-                maxLength: 255
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Customers_custom_field_values_list)</u>
+                type: integer
                 example: 5900
     suppliers_create:
       content:
@@ -6349,9 +7982,160 @@ components:
                 maxLength: 127
                 example: contact@example.com
               id_client_manager:
-                description: >
-                  [Users with group](/#operation/Users_with_group) associated
-                  with the supplier
+                description: >-
+                  <u>[Users with group](/#operation/Users_with_group)</u>
+                  associated with the supplier
+                type: array
+                maxLength: 30
+                items:
+                  type: string
+                  example: u213
+              langId:
+                description: |
+                  Supplier language
+                  > 1 = French <br /> 2 = English <br /> 3 = Spanish
+                type: integer
+                example: 1
+              siret:
+                description: Supplier SIRET
+                type: string
+                maxLength: 30
+                example: 123 568 941 00056
+              siren:
+                description: Supplier SIREN
+                type: integer
+                maxLength: 30
+                example: 123 568 941
+              legal_form:
+                description: Supplier status
+                type: string
+                maxLength: 255
+                example: SARL
+              main_activity:
+                description: APE/NAF code
+                type: string
+                maxLength: 255
+                example: 4616C
+              vat_number:
+                description: VAT number
+                type: string
+                maxLength: 30
+                example: FR 32 123456789
+              id_document_template:
+                description: Id document template
+                type: integer
+                example: ''
+              description:
+                description: Supplier description
+                type: string
+                maxLength: 255
+                example: A description or note about this supplier
+              client_number:
+                description: Internal number
+                type: string
+                maxLength: 30
+                example: 123
+              main_address:
+                description: Main address
+                type: string
+                maxLength: 255
+                example: 55 Av. Louis Breguet
+              main_zip_code:
+                description: ZIP code of main address
+                type: string
+                maxLength: 64
+                example: 31400
+              main_city:
+                description: City of main address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              main_country:
+                description: Country of main address
+                type: string
+                maxLength: 64
+                example: France
+              delivery_title:
+                description: Name or company name of delivery address
+                type: string
+                maxLength: 127
+                example: My delivery address
+              delivery_address:
+                description: Delivery address
+                type: string
+                maxLength: 255
+                example: 1 place du Capitole
+              delivery_zip_code:
+                description: ZIP code of delivery address
+                type: string
+                maxLength: 64
+                example: 31000
+              delivery_city:
+                description: City of delivery address
+                type: string
+                maxLength: 127
+                example: Toulouse
+              delivery_country:
+                description: Country of delivery address
+                type: string
+                maxLength: 64
+                example: France
+              invoice_title:
+                description: Name or company name of invoice address
+                type: string
+                maxLength: 127
+                example: My invoice address
+              invoice_address:
+                description: Invoice address
+                type: string
+                maxLength: 255
+                example: 55 Rue du Faubourg Saint-Honoré
+              invoice_zip_code:
+                description: ZIP code of invoice address
+                type: string
+                maxLength: 64
+                example: 75000
+              invoice_city:
+                description: City of invoice address
+                type: string
+                maxLength: 127
+                example: Paris
+              invoice_country:
+                description: Country of invoice address
+                type: string
+                maxLength: 64
+                example: France
+    suppliers_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                description: Supplier name
+                type: string
+                maxLength: 127
+                example: Society Y
+              phone:
+                description: Supplier phone number
+                type: string
+                maxLength: 30
+                example: '+33512345678'
+              mobile:
+                description: Supplier mobile number
+                type: string
+                maxLength: 30
+                example: 07 98 76 54 32
+              email:
+                description: Supplier email address
+                type: string
+                format: email
+                maxLength: 127
+                example: contact@example.com
+              id_client_manager:
+                description: >-
+                  <u>[Users with group](/#operation/Users_with_group)</u>
+                  associated with the supplier
                 type: array
                 maxLength: 30
                 items:
@@ -6481,9 +8265,10 @@ components:
               - field_value
             properties:
               field_value:
-                description: Custom field value
-                type: string
-                maxLength: 255
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Suppliers_custom_field_values_list)</u>
+                type: integer
                 example: 5911
     contacts_create:
       content:
@@ -6494,7 +8279,68 @@ components:
               - id_customer_supplier
             properties:
               id_customer_supplier:
-                description: Customer or supplier Id
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_civility:
+                description: |
+                  Contact civility
+                  > 1 = Mr <br /> 2 = Ms
+                type: integer
+                example: ''
+              lastname:
+                description: Contact lastname
+                type: string
+                maxLength: 127
+                example: Dupont
+              firstname:
+                description: Contact firstname
+                type: string
+                maxLength: 127
+                example: Jean
+              position_title:
+                description: Contact position title
+                type: string
+                maxLength: 127
+                example: CEO
+              email:
+                description: Contact email address
+                type: string
+                format: email
+                maxLength: 127
+                example: contact@example.com
+              phone:
+                description: Contact phone number
+                type: string
+                maxLength: 30
+                example: '+33512345678'
+              mobile:
+                description: Contact mobile number
+                type: string
+                maxLength: 30
+                example: 07 98 76 54 32
+              description:
+                description: Contact description
+                type: string
+                maxLength: 255
+                example: A description or note about this contact
+              client_number:
+                description: Internal number
+                type: string
+                maxLength: 30
+                example: 123
+    contacts_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
                 type: integer
                 example: 28496
               id_civility:
@@ -6553,10 +8399,11 @@ components:
               - field_value
             properties:
               field_value:
-                description: Custom field value
-                type: string
-                maxLength: 255
-                example: 5900
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Contacts_custom_field_values_list)</u>
+                type: integer
+                example: 5994
     opportunities_create:
       content:
         application/json:
@@ -6567,11 +8414,11 @@ components:
               - id_customer
             properties:
               pipeline:
-                description: Pipeline Id
+                description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
                 type: integer
                 example: 1934
               id_customer:
-                description: Customer Id
+                description: <u>[Customer](/#operation/Customers_list)</u> Id
                 type: integer
                 example: 48560
               title:
@@ -6580,28 +8427,102 @@ components:
                 maxLength: 127
                 example: 'Opportunity #1'
               column_number:
-                description: Opportunity stage
+                description: >-
+                  <u>[Pipeline
+                  column](/#operation/Opportunities_list_pipelines_columns)</u>
+                  Id
                 type: integer
                 example: 1
               id_user_assigned:
+                description: >-
+                  <u>[User with group](/#operation/Users_with_group)</u> Id
+                  associated with the opportunity
+                type: array
+                maxLength: 30
+                items:
+                  type: integer
+                  example: u213
+              id_status:
+                description: >-
+                  Opportunity <u>[status](/#operation/Opportunities_status)</u>
+                  Id
+                type: integer
+                example: 0
+              id_status_lost:
+                description: >-
+                  Reason Id for <u>[status
+                  loss](/#operation/Opportunities_status_lost)</u>. **Only if
+                  status is lost**
+                type: integer
+                format: email
+                example: ''
+              id_status_canceled:
+                description: >-
+                  Reason Id for <u>[status
+                  cancellation](/#operation/Opportunities_status_canceled)</u>.
+                  **Only if status is cancelled**
+                type: integer
+                example: ''
+              archived:
                 description: |
-                  [User](/#operation/Users) Id associated with the opportunity
+                  Opportunity condition
+                  > 0 = Active <br /> 1 = Archived
+                type: integer
+                example: 0
+    opportunities_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pipeline:
+                description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
+                type: integer
+                example: 1934
+              id_customer:
+                description: <u>[Customer](/#operation/Customers_list)</u> Id
+                type: integer
+                example: 48560
+              title:
+                description: Opportunity title
+                type: string
+                maxLength: 127
+                example: 'Opportunity #1'
+              column_number:
+                description: >-
+                  <u>[Pipeline
+                  column](/#operation/Opportunities_list_pipelines_columns)</u>
+                  Id
+                type: integer
+                example: 1
+              id_user_assigned:
+                description: >-
+                  <u>[User](/#operation/Users)</u> Id associated with the
+                  opportunity
                 type: array
                 maxLength: 30
                 items:
                   type: string
                   example: u213
               id_status:
-                description: Opportunity Id status
+                description: >-
+                  Opportunity <u>[status](/#operation/Opportunities_status)</u>
+                  Id
                 type: integer
                 example: 0
               id_status_lost:
-                description: Reason Id for loss. **Only if status is lost**
+                description: >-
+                  Reason Id for <u>[status
+                  loss](/#operation/Opportunities_status_lost)</u>. **Only if
+                  status is lost**
                 type: integer
                 format: email
                 example: ''
               id_status_canceled:
-                description: Reason Id for cancellation. **Only if status is cancelled**
+                description: >-
+                  Reason Id for <u>[status
+                  cancellation](/#operation/Opportunities_status_canceled)</u>.
+                  **Only if status is cancelled**
                 type: integer
                 example: ''
               archived:
@@ -6619,10 +8540,127 @@ components:
               - field_value
             properties:
               field_value:
-                description: Custom field value
-                type: string
-                maxLength: 255
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Opportunities_custom_field_values_list)</u>
+                type: integer
                 example: 5995
+    products_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: Product title
+                type: string
+                maxLength: 127
+                example: 'Product #1'
+              reference:
+                description: Product reference
+                type: string
+                maxLength: 30
+                example: Ref_product_1
+              id_product_category:
+                description: >-
+                  Product
+                  <u>[category](/#operation/Products_categories_list)</u> Id
+                type: integer
+                example: 0
+              description:
+                description: Product decription
+                type: string
+                example: A description or note about this product
+              price_without_tax:
+                description: Sell price HT
+                type: number
+                format: float
+                example: 50
+              id_vat:
+                description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+                type: integer
+                example: 0
+              id_unit:
+                description: <u>[Unit](/#operation/Products_units_list)</u> Id
+                type: integer
+                example: 0
+    products_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: Product title
+                type: string
+                maxLength: 127
+                example: 'Product #1'
+              reference:
+                description: Product reference
+                type: string
+                maxLength: 30
+                example: Ref_product_1
+              id_product_category:
+                description: Product category Id
+                type: integer
+                example: 0
+              description:
+                description: Product decription
+                type: string
+                example: A description or note about this product
+              price_without_tax:
+                description: Sell price HT
+                type: number
+                format: float
+                example: 50
+              id_vat:
+                description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+                type: integer
+                example: 0
+              id_unit:
+                description: <u>[Unit](/#operation/Products_units_list)</u> Id
+                type: integer
+                example: 0
+    products_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Products_custom_field_values_list)</u>
+                type: integer
+                example: 6019
+    products_categories_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: Product category title
+                type: string
+                maxLength: 127
+                example: 'Category #1'
+    products_categories_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: Product category title
+                type: string
+                maxLength: 127
+                example: 'Category #1'
     events_create:
       content:
         application/json:
@@ -6632,28 +8670,29 @@ components:
               - id_user_assigned
             properties:
               id_user_assigned:
-                description: https://dev.karlia.fr/
-                type: string
-                maxLength: 127
+                description: <u>[User](/#operation/Users)</u> Id associated with the event
+                type: integer
                 example: 213
               id_customer_supplier:
-                description: Customer or supplier Id
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
                 type: integer
                 example: 28496
               id_opportunity:
-                description: Opportunity Id
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
                 type: integer
                 example: 1985
               id_event_type:
-                description: Event type Id
+                description: Event <u>[type](/#operation/Events_types)</u> Id
                 type: integer
                 example: 3021
               id_project:
-                description: Project Id
+                description: <u>[Project](/#operation/Projects_list)</u> Id
                 type: integer
                 example: ''
               id_project_task:
-                description: Task Id
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
               start_date:
@@ -6694,7 +8733,86 @@ components:
                 type: integer
                 example: 1
               time_id_type:
-                description: Time type Id
+                description: <u>[Time type](/#operation/Times_types)</u> Id
+                type: integer
+                example: 0
+              time_billable:
+                description: |
+                  Billable time
+                  > 0 = No <br /> 1 = Billable
+                type: integer
+                example: 0
+    events_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id associated with the event
+                type: integer
+                example: 213
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_event_type:
+                description: Event <u>[type](/#operation/Events_types)</u> Id
+                type: integer
+                example: 3021
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: ''
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: ''
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Event title
+                type: string
+                maxLength: 255
+                example: 'Event #1'
+              description:
+                description: Event descritpion
+                type: string
+                example: A description or note about this event
+              private:
+                description: |
+                  Event private status
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 0
+              visible_in_agenda:
+                description: |
+                  Visibility in the agenda
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              use_time:
+                description: |
+                  Event used for time
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              time_id_type:
+                description: <u>[Time type](/#operation/Times_types)</u> Id
                 type: integer
                 example: 0
               time_billable:
@@ -6712,24 +8830,67 @@ components:
               - id_user_assigned
             properties:
               id_user_assigned:
-                description: User Id
-                type: string
-                maxLength: 127
+                description: <u>[User](/#operation/Users)</u> Id associated with the note
+                type: integer
                 example: 213
               id_customer_supplier:
-                description: Customer or supplier Id
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
                 type: integer
                 example: 28496
               id_opportunity:
-                description: Opportunity Id
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
                 type: integer
                 example: 1985
               id_project:
-                description: Project Id
+                description: <u>[Project](/#operation/Projects_list)</u> Id
                 type: integer
                 example: ''
               id_project_task:
-                description: Task Id
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: ''
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              title:
+                description: Note title
+                type: string
+                maxLength: 255
+                example: 'Event #1'
+              description:
+                description: Note descritpion
+                type: string
+                example: A description or note about this note
+    notes_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id associated with the note
+                type: integer
+                example: 213
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: ''
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
               date:
@@ -6755,33 +8916,120 @@ components:
               - id_user_assigned
             properties:
               id_user_assigned:
-                description: |
-                  [User](/#operation/Users) associated with the task
-                type: string
-                maxLength: 127
+                description: <u>[User](/#operation/Users)</u> Id associated with the task
+                type: integer
                 example: 213
               status:
-                description: Task status
+                description: |
+                  Task status
+                  > 0 = Open <br /> 1 = Close
                 type: integer
                 example: 0
               id_customer_supplier:
-                description: Customer or supplier Id
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
                 type: integer
                 example: 28496
               id_opportunity:
-                description: Opportunity Id
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
                 type: integer
                 example: 1985
-              id_task_type:
-                description: Task type Id
+              id_event_type:
+                description: <u>[Task type](/#operation/Tasks_types)</u> Id
                 type: integer
                 example: 3021
               id_project:
-                description: Project Id
+                description: <u>[Project](/#operation/Projects_list)</u> Id
                 type: integer
                 example: ''
               id_project_task:
-                description: Project task Id
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: ''
+              start_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              end_date:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-03-15 20:45:00'
+              title:
+                description: Task title
+                type: string
+                maxLength: 255
+                example: 'Task #1'
+              description:
+                description: Task descritpion
+                type: string
+                example: A description or note about this task
+              private:
+                description: |
+                  Task private status
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 0
+              visible_in_agenda:
+                description: |
+                  Visibility in the agenda
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              use_time:
+                description: |
+                  Task used for time
+                  > 0 = No <br /> 1 = Yes
+                type: integer
+                example: 1
+              time_id_type:
+                description: Time type Id
+                type: integer
+                example: 0
+              time_billable:
+                description: |
+                  Billable time
+                  > 0 = No <br /> 1 = Billable
+                type: integer
+                example: 0
+    tasks_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id associated with the task
+                type: integer
+                example: 213
+              status:
+                description: |
+                  Task status
+                  > 0 = Open <br /> 1 = Close
+                type: integer
+                example: 0
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_event_type:
+                description: <u>[Task type](/#operation/Tasks_types)</u> Id
+                type: integer
+                example: 3021
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: ''
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
               start_date:

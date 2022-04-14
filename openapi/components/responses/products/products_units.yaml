@@ -1,0 +1,38 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Product vat Id
+                type: integer
+              vat:
+                description: Product vat value
+                type: number
+                format: double
+              title:
+                description: Product unit title
+                type: string
+          example: 
+            - id: "1"
+              vat: "20.00"
+              title: "VAT 20%"
+            - id: "2"
+              vat: "10.00"
+              title: "VAT 10%"
+            - id: "3"
+              vat: "5.50"
+              title: "VAT 5.5%"
+
+          

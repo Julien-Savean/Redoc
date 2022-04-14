@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Products
+  summary: Units
+  description: Get a list of all units.
+  operationId: Products_units_list
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_units.yaml           
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

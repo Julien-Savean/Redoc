@@ -1,0 +1,65 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 2
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Id of sales price category
+                type: integer
+              title:
+                description: Title of sales price category
+                type: string
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+              created_by:
+                description: Id of the creator
+                type: integer
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+              updated_by: 
+                description: Id of the updater
+                type: integer
+          example: 
+            - id: "16"
+              title: "Individuals"
+              creation_date: "2022-04-13 09:45:42"
+              created_by: "213"
+              update_date: "2022-04-13 09:45:51"
+              updated_by: "213"
+            - id: "17"
+              title: "Professionals"
+              creation_date: "2022-04-13 09:46:08"
+              created_by: "213"
+              update_date: "2022-04-13 09:46:14"
+              updated_by: "213"

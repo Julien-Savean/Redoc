@@ -2,20 +2,20 @@ post:
   tags:
     - Customers
   summary: Add/Update custom fields
-  description:  Values of customers custom field
+  description:  Values of customers custom field.
   operationId: Customers_custom_field_values_add_update
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Customer Id
+    description: <u>[Customer](/#operation/Customers_list)</u> Id
     schema:
       type: integer
     required: true
   - in: path
     name: field_id
-    description: Customer custom field Id
+    description: Customer <u>[custom field](/#operation/Customers_custom_fields_list)</u> Id
     schema:
       type: integer
     required: true
@@ -24,9 +24,9 @@ post:
   responses:
     '200':
       $ref: ../../components/responses/customers/customers_object.yaml
-    '400':
-      $ref: ../../components/responses/errors/400_custom_field.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
     '500':
-      $ref: ../../components/responses/errors/500.yaml
+      $ref: ../../components/responses/errors/500.yaml    

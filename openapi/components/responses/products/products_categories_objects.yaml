@@ -1,0 +1,58 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 14
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Product category Id
+                type: integer
+                example: "510"
+              title:
+                description: Product category title
+                type: string
+                example: "Category #1"
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: "2022-04-13 12:09:06"
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: "213"
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: "2022-04-13 12:09:13"
+              updated_by: 
+                description: Id of the updater
+                type: integer
+                example: "213"

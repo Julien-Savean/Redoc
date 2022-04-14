@@ -56,8 +56,7 @@ content:
             maxLength: 127
             example: contact@example.com
           id_client_manager: 
-            description: > 
-              [Users with group](/#operation/Users_with_group) Id associated with the customer
+            description: <u>[Users with group](/#operation/Users_with_group)</u> Id associated with the customer
             type: array
             maxLength: 30
             items:
@@ -116,6 +115,14 @@ content:
             type: string
             maxLength: 30
             example: 123
+          custom_fields:
+            description: <u>[Custom fields](/#operation/Customers_custom_fields_list)</u>
+            type: object
+            properties:
+              3346:
+                description: Custom field Id  
+                type: string
+                example: "5900"
           main_address:
             description: Main address
             type: string

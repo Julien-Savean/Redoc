@@ -4,15 +4,15 @@
     type: string
     maxLength: 127
   description: >
-    Quick search field. <br />
+    Quick search field <br />
     *If this field is filled in, the other search fields are not taken into account.
     The search is then performed in the entire customer database.*
-# - in: query
-#   name: id_customer_supplier
-#   schema:
-#     type: integer
-#     maxLength: 127
-#   description: Search by customer/supplier Id
+- in: query
+  name: id_customer_supplier
+  schema:
+    type: integer
+    maxLength: 127
+  description: Search by <u>[customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
 - in: query
   name: id_civility
   schema:

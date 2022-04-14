@@ -1,4 +1,0 @@
-type: http
-scheme: bearer 
-in: header
-bearerFormat: xxxxxx-xxxxxx-xxxx-xxxxxx-xxxxxx

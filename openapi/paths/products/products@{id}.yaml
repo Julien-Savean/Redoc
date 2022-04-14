@@ -1,0 +1,72 @@
+get:
+  tags:
+    - Products
+  summary: Show
+  description: Get one product.
+  operationId: Products_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Product](/#operation/Products_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Products
+  summary: Update
+  description: Update a product.
+  operationId: Products_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/products/products_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Product](/#operation/Products_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_object.yaml      
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml      
+delete:
+  tags:
+    - Products
+  summary: Delete
+  description: Delete a product.
+  operationId: Products_delete
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Product](/#operation/Products_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml

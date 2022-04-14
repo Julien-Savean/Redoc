@@ -2,12 +2,14 @@ get:
   tags:
     - Opportunities
   summary: Pipelines
-  description: Get a list of all opportunity pipelines
+  description: Get a list of all opportunity pipelines.
   operationId: Opportunities_list_pipelines
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/opportunities/opportunities_pipelines.yaml
+      $ref: ../../components/responses/opportunities/opportunities_pipelines.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

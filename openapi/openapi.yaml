@@ -19,6 +19,8 @@ tags:
     description: This section lists all contact-related APIs.
   - name: Opportunities
     description: This section lists all opportunity-related APIS.
+  - name: Products
+    description: This section lists all product-related APIS.
   - name: Events
     description: This section lists all event-related APIS.
   - name: Notes
@@ -84,6 +86,30 @@ paths:
     $ref: paths/opportunities/opportunities@status_lost.yaml
   /opportunities/status-canceled:
     $ref: paths/opportunities/opportunities@status_canceled.yaml
+  /products:
+    $ref: paths/products/products.yaml
+  /products/{id}:
+    $ref: paths/products/products@{id}.yaml
+  /products/custom-fields:
+    $ref: paths/products/products@custom_fields.yaml
+  /products/custom-fields/{field_id}:
+    $ref: paths/products/products@custom_fields@{field_id}.yaml
+  /products/{id}/custom-fields/{field_id}:
+    $ref: paths/products/products@{id}@custom_fields@{field_id}.yaml
+  /products/{id}/cost-price: 
+    $ref: paths/products/products@{id}@cost_price.yaml
+  /products/{id}/sell-price: 
+    $ref: paths/products/products@{id}@sell_price.yaml 
+  /products/sells-prices-categories: 
+    $ref: paths/products/products@sells_prices_categories.yaml
+  /products/categories:
+    $ref: paths/products/products@categories.yaml
+  /products/categories/{id}:
+    $ref: paths/products/products@categories@{id}.yaml
+  /products/vat:
+    $ref: paths/products/products@vat.yaml
+  /products/units:
+    $ref: paths/products/products@units.yaml
   /events:
     $ref: paths/events/events.yaml
   /events/{id}:
@@ -132,7 +158,7 @@ components:
           1. Sign in with your existing account. <br />
           2. Once logged in, click on your initial in the upper right corner.  <br />
           3. Select "Settings".  <br />
-          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br />
+          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br /> <br />
 
         The API use Bearer Authorization in request header.
       type: http

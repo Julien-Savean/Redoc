@@ -2,21 +2,23 @@ get:
   tags:
     - Contacts
   summary: Custom field values
-  description: Get values of contacts custom field
+  description: Get values of contacts custom field.
   operationId: Contacts_custom_field_values_list
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: field_id
-    description: Contact custom field Id
+    description: Contact <u>[custom field](/#operation/Contacts_custom_fields_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/contacts/contacts_custom_field_values.yaml    
-    '400':
-      $ref: ../../components/responses/errors/400_custom_field.yaml   
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

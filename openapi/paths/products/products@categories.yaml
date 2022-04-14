@@ -1,0 +1,38 @@
+get:
+  tags:
+    - Products
+  summary: List categories
+  description: Get a list of all categories.
+  operationId: Products_categories_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/products/products_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_categories_objects.yaml           
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Products
+  summary: Create category
+  description: Create a product category
+  operationId: Products_categories_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/products/products_categories_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_categories_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+
+

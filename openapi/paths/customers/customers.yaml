@@ -2,7 +2,7 @@ get:
   tags:
     - Customers
   summary: List
-  description: Get a list of all customers
+  description: Get a list of all customers.
   operationId: Customers_list
   security:
     - Bearer token: []
@@ -11,13 +11,15 @@ get:
   responses:
     '200':
       $ref: ../../components/responses/customers/customers_objects.yaml       
-    '401':
-      $ref: ../../components/responses/errors/401.yaml 
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '500':
+      $ref: ../../components/responses/errors/500.yaml     
 post:
   tags:
     - Customers
   summary: Create
-  description: Create a customer
+  description: Create a customer.
   operationId: Customers_create
   security:
     - Bearer token: []
@@ -31,8 +33,10 @@ post:
     '200':
       $ref: ../../components/responses/customers/customers_new_object.yaml
     '400': 
-      $ref: ../../components/responses/errors/400_name.yaml        
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 
 

@@ -4,7 +4,7 @@
     type: string
     maxLength: 127
   description: >
-    Quick search field. <br />
+    Quick search field <br />
     *If this field is filled in, the other search fields are not taken into account.
     The search is then performed in the entire supplier database.*
 - in: query
@@ -42,7 +42,7 @@
   name: id_client_manager
   schema:
     type: string
-  description: Search by [User with group](/#operation/Users_with_group) associated with the supplier
+  description: Search by <u>[user with group](/#operation/Users_with_group)</u> associated with the supplier
 - in: query
   name: langId
   schema:

@@ -1,0 +1,50 @@
+get:
+  tags:
+    - Products
+  summary: Show category
+  description: Get one product category.
+  operationId: Products_categories_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Category](/#operation/Products_categories_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_categories_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Products
+  summary: Update category
+  description: Update a product category.
+  operationId: Products_categories_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/products/products_categories_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Category](/#operation/Products_categories_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_categories_object.yaml      
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml      

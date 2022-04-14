@@ -1,0 +1,10 @@
+content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            description: Product category title
+            type: string
+            maxLength: 127
+            example: "Category #1"

@@ -3,7 +3,8 @@
   schema:
     type: string
   description: >
-    List of fields to be returned. *By default, all fields are returned.*   
+    List of fields to be returned. *By default, all fields are returned.* <br />
+    **Each field must be separated by a comma without space.**
 - in: query
   name: order
   schema:
@@ -13,12 +14,12 @@
 - in: query
   name: direction
   schema:
-    type: integer
+    type: string
     maxLength: 4
   description: >
     Direction for sorting
 
-    > ASC = Ascending, from A to Z.
+    > ASC = Ascending, from A to Z. <br />
     DESC = Descending, from Z to A.
 - in: query
   name: limit
@@ -31,5 +32,6 @@
   name: offset
   schema:
     type: integer
-    maxLength: 30
+    default: 0
   description: Offset for paging
+

@@ -4,9 +4,9 @@ content:
     schema:
       $ref: ../../requests/error.yaml
     example: 
-      code: "40501"
+      code: "XXXXX"
       status: "error"
-      message: "Custom field has not been found"
-      category_code: "40"
-      category_message: "External error"
+      message: "This field is not completed"
+      category_code: "XX"
+      category_message: "Missing required field"
   

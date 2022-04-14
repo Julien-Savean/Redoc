@@ -2,7 +2,7 @@ get:
   tags:
     - Events
   summary: List
-  description: Get a list of all events
+  description: Get a list of all events.
   operationId: Events_list
   security:
     - Bearer token: []
@@ -11,8 +11,12 @@ get:
   responses:
     '200':
       $ref: ../../components/responses/events/events_objects.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Events
@@ -27,6 +31,8 @@ post:
     '200':
       $ref: ../../components/responses/events/events_new_object.yaml
     '400': 
-      $ref: ../../components/responses/errors/400_name.yaml
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

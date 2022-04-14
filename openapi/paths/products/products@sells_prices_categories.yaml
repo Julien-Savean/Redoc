@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Products
+  summary: List sells prices categories
+  description: Get a list of all sells prices categories of products.
+  operationId: Products_list_sells_prices_categories
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/products/products_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/products/products_sells_prices_categories.yaml          
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

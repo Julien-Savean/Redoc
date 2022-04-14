@@ -2,12 +2,12 @@
   name: pipeline
   schema:
     type: integer
-  description: Search by pipeline Id
+  description: Search by <u>[pipeline](/#operation/Opportunities_list_pipelines)</u> Id
 - in: query
   name: id_customer
   schema:
     type: integer
-  description: Search by customer Id
+  description: Search by <u>[customer](/#operation/Customers_list)</u> Id
 - in: query
   name: title
   schema:
@@ -18,33 +18,37 @@
   name: column_number
   schema:
     type: integer
-  description: Search by opportunity stage
+  description: Search by <u>[pipeline column](/#operation/Opportunities_list_pipelines_columns)</u> Id
 - in: query
   name: id_user_assigned
   schema:
     type: string
     maxLength: 30
-  description:  Search by [User](/#operation/Users) Id associated with the opportunity
+  description: Search by [user with group](/#operation/Users_with_group) Id associated with the opportunity
 - in: query
   name: id_status    
   schema:
     type: integer
-  description: Search by opportunity status Id
+  description: Search by opportunity <u>[status](/#operation/Opportunities_status)</u> Id
 - in: query
   name: id_status_lost
   schema:
     type: integer
-  description: Search by reason Id for cancellation
+  description: Search by reason Id for <u>[status loss](/#operation/Opportunities_status_lost)</u>
 - in: query
   name: id_status_canceled
   schema:
     type: integer
-  description: Search by reason Id for loss
+  description: Search by reason Id for <u>[status cancellation](/#operation/Opportunities_status_canceled)</u>
 - in: query
   name: archived
   schema:
     type: integer
-  description: Search by opportunity condition
+  description: > 
+    Search by opportunity condition
+
+    > 0 = Active <br />
+    1 = Archived
 - in: query
   name: fields
   schema:

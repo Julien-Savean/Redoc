@@ -31,58 +31,74 @@ content:
             type: object
             properties:
               id:
-                description: Contact Id
+                description: Opportunity Id
                 type: integer
-                example: "48560"
-              id_customer_supplier:
-                description: Customer or supplier Id
+                example: "1985"
+              pipeline:
+                description: Pipeline Id
                 type: integer
-                example: "28496"
-              supplier: 
-                description: Supplier status of the contact
+                example: "1934"
+              column_number: 
+                description: Opportunity stage  
                 type: integer 
-                example: "0"
-              title:
-                description: Civility + lastname + firstname contact
+                example: "1"
+              column_number_last_update:
+                description: Last update date of opportunity stage
                 type: string
-                example: "Mr Jean Dupont"
-              id_civility:
-                description: Contact civility
+                format: date-time
+                example: "2022-04-04 09:44:49"
+              position:
+                description: Opportunity position
                 type: integer
                 example: "1"
-              lastname: 
-                description: Contact lastname
+              id_customer:
+                description: Customer Id
                 type: string
-                example: "Dupont"
-              firstname: 
-                description: Contact firstname
-                type: string
-                example: "Jean"
-              position_title: 
+                example: "28496"
+              title: 
                 description: Contact position title
                 type: string
-                example: "CEO"
-              email:
-                description: Contact email
-                type: string
-                format: email
-                example: "jeandupont@example.com"
-              phone:
-                description: Contact phone number
-                type: string
-                example: "02 45 68 37 98"
-              mobile:
-                description: Contact mobile number
-                type: string
-                example: "06 94 31 81 31"
-              description:
-                description: Contact description
-                type: string
-                example: "A description or note about this contact"
-              client_number:
-                description: Internal number
+                example: "Opportunity #1"
+              id_status:
+                description: Opportunity status Id
                 type: integer
-                example: "123"
+                example: "0"
+              opportunity_status:
+                description: Opportunity status
+                type: string
+                example: "Open"
+              id_status_lost:
+                description: Reason Id for loss
+                type: integer
+                example: "0"
+              opportunity_status_lost:
+                description: Opportunity status lost
+                type: string
+                example: ""
+              id_status_canceled:
+                description: Reason Id for cancellation
+                type: integer
+                example: "0"
+              opportunity_status_canceled:
+                description: Opportunity status canceled
+                type: integer
+                example: ""
+              id_user_assigned:
+                description: Opportunity client mamager id
+                type: array
+                items:
+                  type: string
+                  example: "u213"
+              id_user_assigned_text:
+                description: Opportunity client mamager name
+                type: array
+                items:
+                  type: string
+                  example: "Jean Dupont"
+              archived:
+                description: Opportunity condition
+                type: integer
+                example: "0"
               custom_fields_list:
                 description: List of custom fields
                 type: array
@@ -102,10 +118,33 @@ content:
                       description: Custom field value
                       type: string
                 example:
-                  - id: "3407"
-                    title: "Contact type"
-                    value: "5994"
-                    value_text: "Decision-maker contact"
+                  - id: "3413"
+                    title: "Source"
+                    value: "5995"
+                    value_text: "Website"
+              proposals:
+                description: Opportunity proposal
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Proposal Id
+                      type: integer
+                    number:
+                      description:  Proposal number
+                      type: integer
+                    description:
+                      description: Proposal description
+                      type: string
+                    files_list: 
+                      description: Proposal files list
+                      type: array
+                example:
+                  - id: "3413"
+                    number: "1"
+                    description: ""
+                    files_list: []
               creation_date:
                 description: Creation date and time
                 type: string
@@ -124,5 +163,4 @@ content:
                 description: Id of the updater
                 type: integer
                 example: "213"
-
-
+            

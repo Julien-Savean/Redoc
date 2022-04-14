@@ -2,7 +2,7 @@ get:
   tags:
     - Notes
   summary: List
-  description: Get a list of all notes
+  description: Get a list of all notes.
   operationId: Notes_list
   security:
     - Bearer token: []
@@ -11,13 +11,17 @@ get:
   responses:
     '200':
       $ref: ../../components/responses/notes/notes_objects.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Notes
   summary: Create
-  description: Create a note
+  description: Create a note.
   operationId: Notes_create
   security:
     - Bearer token: []
@@ -27,6 +31,8 @@ post:
     '200':
       $ref: ../../components/responses/notes/notes_new_object.yaml
     '400': 
-      $ref: ../../components/responses/errors/400_name.yaml
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

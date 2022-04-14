@@ -6,33 +6,35 @@ content:
           - id_user_assigned
         properties:
           id_user_assigned:
-            description: > 
-              [User](/#operation/Users) associated with the task
-            type: string
-            maxLength: 127
+            description: <u>[User](/#operation/Users)</u> Id associated with the task
+            type: integer
             example: 213
           status: 
-            description: Task status
+            description: >
+              Task status
+
+              > 0 = Open <br />
+              1 = Close
             type: integer
             example: 0
           id_customer_supplier:
-            description: Customer or supplier Id
+            description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
             type: integer
             example: 28496
           id_opportunity:
-            description: Opportunity Id
+            description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
             type: integer
             example: 1985
-          id_task_type:
-            description: Task type Id
+          id_event_type:
+            description: <u>[Task type](/#operation/Tasks_types)</u> Id
             type: integer
             example: 3021
           id_project:
-            description: Project Id
+            description: <u>[Project](/#operation/Projects_list)</u> Id
             type: integer
             example: ""
           id_project_task:
-            description: Project task Id
+            description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
             type: integer
             example: ""
           start_date:

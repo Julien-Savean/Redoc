@@ -2,14 +2,14 @@ get:
   tags:
     - Opportunities
   summary: Show
-  description: Get one opportunity
+  description: Get one opportunity.
   operationId: Opportunities_show
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Opportunity Id
+    description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
     schema:
       type: integer
     required: true
@@ -24,45 +24,49 @@ post:
   tags:
     - Opportunities
   summary: Update
-  description: Update a opportunity
+  description: Update an opportunity.
   operationId: Opportunities_update
   security:
     - Bearer token: []
   requestBody:
-    $ref: ../../components/requests/opportunities/opportunities_create.yaml
+    $ref: ../../components/requests/opportunities/opportunities_update.yaml
   parameters:
   - in: path
     name: id
-    description: Contact Id
+    description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/opportunities/opportunities_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
-    '500': 
-      $ref: ../../components/responses/errors/500.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 delete:
   tags:
     - Opportunities
   summary: Delete
-  description: Delete a opportunity
+  description: Delete an opportunity.
   operationId: Opportunities_delete
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Contact Id
+    description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
-      description: OK    
+      description: OK 
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
-    '500': 
-      $ref: ../../components/responses/errors/500.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

@@ -2,12 +2,14 @@ get:
   tags:
     - Opportunities
   summary: Status canceled
-  description: Get a list of all canceled statuses
+  description: Get a list of all canceled statuses.
   operationId: Opportunities_status_canceled
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/opportunities/opportunities_status_canceled.yaml
+      $ref: ../../components/responses/opportunities/opportunities_status_canceled.yaml    
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

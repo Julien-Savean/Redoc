@@ -2,19 +2,23 @@ get:
   tags:
     - Opportunities
   summary: Pipelines columns
-  description: Get opportunity pipeline columns
+  description: Get opportunity pipeline columns.
   operationId: Opportunities_list_pipelines_columns
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Pipeline Id
+    description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/opportunities/opportunities_pipeline_columns.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

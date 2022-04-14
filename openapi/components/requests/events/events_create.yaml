@@ -6,28 +6,27 @@ content:
           - id_user_assigned
         properties:
           id_user_assigned:
-            description: https://dev.karlia.fr/
-            type: string
-            maxLength: 127
+            description: <u>[User](/#operation/Users)</u> Id associated with the event
+            type: integer
             example: 213
           id_customer_supplier:
-            description: Customer or supplier Id
+            description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
             type: integer
             example: 28496
           id_opportunity:
-            description: Opportunity Id
+            description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
             type: integer
             example: 1985
           id_event_type:
-            description: Event type Id
+            description: Event <u>[type](/#operation/Events_types)</u> Id
             type: integer
             example: 3021
           id_project:
-            description: Project Id
+            description: <u>[Project](/#operation/Projects_list)</u> Id
             type: integer
             example: ""
           id_project_task:
-            description: Task Id
+            description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
             type: integer
             example: ""
           start_date:
@@ -74,7 +73,7 @@ content:
             type: integer
             example: 1
           time_id_type:
-            description: Time type Id
+            description: <u>[Time type](/#operation/Times_types)</u> Id
             type: integer
             example: 0
           time_billable:

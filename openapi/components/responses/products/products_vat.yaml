@@ -1,0 +1,30 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Product custom field value Id
+                type: integer
+              title:
+                description: Product custom field value title
+                type: string
+          example: 
+            - id: "6019"
+              title: "Box "
+            - id": "6021"
+              title: "Cardboard"
+            - id: "6020"
+              title: "Pallet"
+          

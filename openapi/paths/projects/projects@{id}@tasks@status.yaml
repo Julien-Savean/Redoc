@@ -2,21 +2,23 @@ get:
   tags:
     - Projects
   summary: Status of project tasks
-  description: Get a list of all status of one project task
+  description: Get a list of all status of one project task.
   operationId: Projects_tasks_status
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Project Id
+    description: <u>[Project](/#operation/Projects_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/projects/projects_tasks_status.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
     '500':
-      $ref: ../../components/responses/errors/500.yaml
+      $ref: ../../components/responses/errors/500.yaml    

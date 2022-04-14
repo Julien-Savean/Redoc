@@ -1,0 +1,12 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - title
+        properties:
+          title:
+            description: Product category title
+            type: string
+            maxLength: 127
+            example: "Category #1"

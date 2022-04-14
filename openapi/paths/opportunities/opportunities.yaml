@@ -2,7 +2,7 @@ get:
   tags:
     - Opportunities
   summary: List
-  description: Get a list of all opportunities
+  description: Get a list of all opportunities.
   operationId: Opportunities_list
   security:
     - Bearer token: []
@@ -10,14 +10,16 @@ get:
     $ref: ../../components/requests/opportunities/opportunities_list.yaml
   responses:
     '200':
-      $ref: ../../components/responses/opportunities/opportunities_objects.yaml
+      $ref: ../../components/responses/opportunities/opportunities_objects.yaml    
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Opportunities
   summary: Create
-  description: Create a opportunity
+  description: Create an opportunity.
   operationId: Opportunities_create
   security:
     - Bearer token: []
@@ -27,6 +29,8 @@ post:
     '200':
       $ref: ../../components/responses/opportunities/opportunities_new_object.yaml
     '400': 
-      $ref: ../../components/responses/errors/400_name.yaml
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

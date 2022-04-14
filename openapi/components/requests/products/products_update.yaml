@@ -1,0 +1,36 @@
+content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            description: Product title
+            type: string
+            maxLength: 127
+            example: "Product #1"
+          reference:
+            description: Product reference
+            type: string
+            maxLength: 30
+            example: "Ref_product_1"
+          id_product_category:
+            description: Product category Id
+            type: integer
+            example: 0
+          description:
+            description: Product decription
+            type: string
+            example: "A description or note about this product"
+          price_without_tax:
+            description: Sell price HT
+            type: number
+            format: float
+            example: 50.000000
+          id_vat:
+            description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+            type: integer
+            example: 0
+          id_unit:
+            description: <u>[Unit](/#operation/Products_units_list)</u> Id
+            type: integer
+            example: 0

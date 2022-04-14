@@ -2,12 +2,14 @@ get:
   tags:
     - Users
   summary: Groups
-  description: Get a list of all groups
+  description: Get a list of all groups.
   operationId: Users_groups
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/users/groups_objects.yaml
+      $ref: ../../components/responses/users/groups_objects.yaml     
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

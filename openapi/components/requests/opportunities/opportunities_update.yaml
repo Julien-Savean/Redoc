@@ -1,0 +1,50 @@
+content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          pipeline:
+            description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
+            type: integer
+            example: 1934
+          id_customer:
+            description: <u>[Customer](/#operation/Customers_list)</u> Id
+            type: integer
+            example: 48560
+          title:
+            description: Opportunity title
+            type: string
+            maxLength: 127
+            example: "Opportunity #1"
+          column_number:
+            description: <u>[Pipeline column](/#operation/Opportunities_list_pipelines_columns)</u> Id
+            type: integer
+            example: 1
+          id_user_assigned:
+            description: <u>[User](/#operation/Users)</u> Id associated with the opportunity
+            type: array
+            maxLength: 30
+            items:
+              type: string
+              example: u213
+          id_status:
+            description: Opportunity <u>[status](/#operation/Opportunities_status)</u> Id
+            type: integer
+            example: 0
+          id_status_lost:
+            description: Reason Id for <u>[status loss](/#operation/Opportunities_status_lost)</u>. **Only if status is lost**
+            type: integer
+            format: email
+            example: ""
+          id_status_canceled:
+            description: Reason Id for <u>[status cancellation](/#operation/Opportunities_status_canceled)</u>. **Only if status is cancelled**
+            type: integer
+            example: ""
+          archived:
+            description: >
+              Opportunity condition
+
+              > 0 = Active <br />
+              1 = Archived
+            type: integer
+            example: 0

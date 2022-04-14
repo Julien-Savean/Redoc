@@ -58,7 +58,13 @@ content:
           type: integer
           example: ""
         id_user_assigned:
-          description: Opportunity client mamager
+          description: Opportunity client mamager id
+          type: array
+          items:
+            type: string
+            example: "u213"
+        id_user_assigned_text:
+          description: Opportunity client mamager name
           type: array
           items:
             type: string

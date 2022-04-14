@@ -42,7 +42,7 @@ content:
                 description: Opportunity Id
                 type: integer
                 example: "1985"
-              id_task_type:
+              id_event_type:
                 description: Task type Id
                 type: integer
                 example: "3021"

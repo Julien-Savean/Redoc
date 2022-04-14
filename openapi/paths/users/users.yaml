@@ -2,7 +2,7 @@ get:
   tags:
     - Users
   summary: Users
-  description: Get a list of all users
+  description: Get a list of all users.
   operationId: Users
   security:
     - Bearer token: []
@@ -10,4 +10,6 @@ get:
     '200':
       $ref: ../../components/responses/users/users_objects.yaml
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml   

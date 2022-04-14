@@ -2,7 +2,7 @@ get:
   tags:
     - Projects
   summary: List
-  description: Get a list of all projects
+  description: Get a list of all projects.
   operationId: Projects_list
   security:
     - Bearer token: []
@@ -10,6 +10,8 @@ get:
     $ref: ../../components/requests/projects/projects_list.yaml
   responses:
     '200':
-      $ref: ../../components/responses/projects/projects_objects.yaml
+      $ref: ../../components/responses/projects/projects_objects.yaml     
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

@@ -6,7 +6,6 @@ content:
           - field_value
         properties:
           field_value:
-            description: Custom field value
-            type: string
-            maxLength: 255
+            description: <u>[Custom field value](/#operation/Customers_custom_field_values_list)</u>
+            type: integer
             example: 5900

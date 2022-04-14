@@ -1,3 +1,11 @@
 # This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
 # See https://redoc.ly/docs/cli/ for more information.
-
+openapi/openapi.yaml:
+  spec:
+    - '#/info'
+  info-license:
+    - '#/info'
+  no-ambiguous-paths:
+    - '#/paths/~1products~1{id}~1cost-price'
+    - '#/paths/~1products~1{id}~1sell-price'
+    - '#/paths/~1products~1categories~1{id}'

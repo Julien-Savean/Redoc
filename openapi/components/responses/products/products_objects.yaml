@@ -1,0 +1,153 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 14
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Product Id
+                type: integer
+                example: "4739"
+              title:
+                description: Product title
+                type: string
+                example: "Product #1"
+              reference:
+                description: Product reference
+                type: string
+                example: "Ref_product_1"
+              id_product_category: 
+                description:  Product category Id
+                type: integer
+                example: "0"
+              description:
+                description: Product description
+                type: string
+                example: "A description or note about this product"
+              price_without_tax:
+                description: Price without tax
+                type: number
+                format: float
+                example: "50.000000"
+              business_price_per_quantity:
+                description: Business price per quantity
+                type: number
+                format: float
+                example: "0"
+              expense_price_per_quantity:
+                description: Expense price per quantity
+                type: number
+                format: float
+                example: "0"
+              id_vat:
+                description: Vat number Id
+                type: integer
+                example: "1"
+              id_unit:
+                description: Unit Id
+                type: integer
+                example: "17"
+              use_stock:
+                description: Use stock
+                type: string
+                example: "1"
+              stock:
+                description: Stock
+                type: number
+                format: double
+                example: "50.00"
+              stock_min_alert:
+                description: Stock min alert
+                type: number
+                format: double
+                example: "10.00"
+              stock_max_alert:
+                description: Stock max alert
+                type: number
+                format: double
+                example: "100.00"
+              weighted_average_cost:
+                description: Weighted average cost
+                type: number
+                format: double
+                example: "0.00"
+              cost_without_tax:
+                description: Cost without tax
+                type: number
+                format: double
+                example: "0.00"
+              id_supplier:
+                description: Supplier Id
+                type: integer
+                example: "28549"
+              reference_supplier:
+                description: Supplier reference
+                type: string
+                example: "Ref_supllier_1"
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description:  Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text: 
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: "3430"
+                    title: "Conditioning"
+                    value: "6019"
+                    value_text: "Box"
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: "2022-03-25 12:04:24"
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: "213"
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: "2022-03-25 12:04:24"
+              updated_by: 
+                description: Id of the updater
+                type: integer
+                example: "213"

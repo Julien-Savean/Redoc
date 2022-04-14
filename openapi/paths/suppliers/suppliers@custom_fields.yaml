@@ -2,12 +2,14 @@ get:
   tags:
     - Suppliers
   summary: Custom fields
-  description: Get a list of all suppliers custom fields
+  description: Get a list of all suppliers custom fields.
   operationId: Suppliers_custom_fields_list
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/suppliers/suppliers_custom_fields.yaml    
+      $ref: ../../components/responses/suppliers/suppliers_custom_fields.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

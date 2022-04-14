@@ -6,24 +6,23 @@ content:
           - id_user_assigned
         properties:
           id_user_assigned:
-            description: User Id
-            type: string
-            maxLength: 127
+            description: <u>[User](/#operation/Users)</u> Id associated with the note
+            type: integer
             example: 213
           id_customer_supplier:
-            description: Customer or supplier Id
+            description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
             type: integer
             example: 28496
           id_opportunity:
-            description: Opportunity Id
+            description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
             type: integer
             example: 1985
           id_project:
-            description: Project Id
+            description: <u>[Project](/#operation/Projects_list)</u> Id
             type: integer
             example: ""
           id_project_task:
-            description: Task Id
+            description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
             type: integer
             example: ""
           date:

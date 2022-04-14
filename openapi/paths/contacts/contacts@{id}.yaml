@@ -2,45 +2,49 @@ get:
   tags:
     - Contacts
   summary: Show
-  description: Get one contact
+  description: Get one contact.
   operationId: Contacts_show
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: Contact Id
+    description: <u>[Contact](/#operation/Contacts_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/contacts/contacts_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
     '500':
-      $ref: ../../components/responses/errors/500.yaml
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Contacts
   summary: Update
-  description: Update a contact
+  description: Update a contact.
   operationId: Contacts_update
   security:
     - Bearer token: []
   requestBody:
-    $ref: ../../components/requests/contacts/contacts_create.yaml
+    $ref: ../../components/requests/contacts/contacts_update.yaml
   parameters:
   - in: path
     name: id
-    description: Contact Id
+    description: <u>[Contact](/#operation/Contacts_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/contacts/contacts_object.yaml      
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
-    '500': 
-      $ref: ../../components/responses/errors/500.yaml  
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

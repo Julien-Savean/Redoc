@@ -7,11 +7,11 @@ content:
           - id_customer
         properties:
           pipeline:
-            description: Pipeline Id
+            description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
             type: integer
             example: 1934
           id_customer:
-            description: Customer Id
+            description: <u>[Customer](/#operation/Customers_list)</u> Id
             type: integer
             example: 48560
           title:
@@ -20,28 +20,27 @@ content:
             maxLength: 127
             example: "Opportunity #1"
           column_number:
-            description: Opportunity stage
+            description: <u>[Pipeline column](/#operation/Opportunities_list_pipelines_columns)</u> Id
             type: integer
             example: 1
           id_user_assigned:
-            description: > 
-              [User](/#operation/Users) Id associated with the opportunity
+            description: <u>[User with group](/#operation/Users_with_group)</u> Id associated with the opportunity
             type: array
             maxLength: 30
             items:
-              type: string
+              type: integer
               example: u213
           id_status:
-            description: Opportunity Id status
+            description: Opportunity <u>[status](/#operation/Opportunities_status)</u> Id
             type: integer
             example: 0
           id_status_lost:
-            description: Reason Id for loss. **Only if status is lost**
+            description: Reason Id for <u>[status loss](/#operation/Opportunities_status_lost)</u>. **Only if status is lost**
             type: integer
             format: email
             example: ""
           id_status_canceled:
-            description: Reason Id for cancellation. **Only if status is cancelled**
+            description: Reason Id for <u>[status cancellation](/#operation/Opportunities_status_canceled)</u>. **Only if status is cancelled**
             type: integer
             example: ""
           archived:

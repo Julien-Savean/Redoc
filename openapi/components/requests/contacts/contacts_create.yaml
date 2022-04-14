@@ -6,7 +6,7 @@ content:
           - id_customer_supplier
         properties:
           id_customer_supplier:
-            description: Customer or supplier Id
+            description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
             type: integer
             example: 28496
           id_civility:

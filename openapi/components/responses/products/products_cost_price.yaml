@@ -1,0 +1,21 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        quantity:
+          description: Quantity bearing
+          type: number
+          format: float
+          example: "1"
+        price_without_tax:
+          description: Purchase price HT
+          type: number
+          format: float
+          example: "20"
+        discount_percent:
+          description: Percentage reduction
+          type: number
+          format: double
+          example: "0"

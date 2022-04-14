@@ -2,12 +2,14 @@ get:
   tags:
     - Opportunities
   summary: Status lost
-  description: Get a list of all lost statuses 
+  description: Get a list of all lost statuses.
   operationId: Opportunities_status_lost
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/opportunities/opportunities_status_lost.yaml
+      $ref: ../../components/responses/opportunities/opportunities_status_lost.yaml   
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

@@ -2,12 +2,14 @@ get:
   tags:
     - Times
   summary: Types
-  description: Get a list of all times types
+  description: Get a list of all times types.
   operationId: Times_types
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/times/types.yaml
+      $ref: ../../components/responses/times/types.yaml   
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

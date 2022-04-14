@@ -2,21 +2,23 @@ get:
   tags:
     - Suppliers
   summary: Custom field values
-  description: Get values of suppliers custom field
+  description: Get values of suppliers custom field.
   operationId: Suppliers_custom_field_values_list
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: field_id
-    description: Supplier custom field Id
+    description: Supplier <u>[custom field](/#operation/Suppliers_custom_fields_list)</u> Id
     schema:
       type: integer
     required: true
   responses:
     '200':
       $ref: ../../components/responses/suppliers/suppliers_custom_field_values.yaml    
-    '400':
-      $ref: ../../components/responses/errors/400_custom_field.yaml   
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
-      $ref: ../../components/responses/errors/401.yaml
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

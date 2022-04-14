@@ -1,12 +1,12 @@
 description: Internal Server Error
-content:
-  application/json:
-    schema:
-      $ref: ../../requests/error.yaml
-    example: 
-      code: "40101"
-      status: "error"
-      message: "Customer has not been found"
-      category_code: "40"
-      category_message: "External error"
+# content:
+#   application/json:
+#     schema:
+#       $ref: ../../requests/error.yaml
+#     example: 
+#       code: "40101"
+#       status: "error"
+#       message: "Customer has not been found"
+#       category_code: "40"
+#       category_message: "External error"
 

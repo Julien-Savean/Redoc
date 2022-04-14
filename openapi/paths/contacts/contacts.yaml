@@ -2,7 +2,7 @@ get:
   tags:
     - Contacts
   summary: List
-  description: Get a list of all contacts
+  description: Get a list of all contacts.
   operationId: Contacts_list
   security:
     - Bearer token: []
@@ -11,13 +11,15 @@ get:
   responses:
     '200':
       $ref: ../../components/responses/contacts/contacts_objects.yaml       
-    '401':
-      $ref: ../../components/responses/errors/401.yaml 
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
     - Contacts
   summary: Create
-  description: Create a contact
+  description: Create a contact.
   operationId: Contacts_create
   security:
     - Bearer token: []
@@ -27,9 +29,10 @@ post:
     '200':
       $ref: ../../components/responses/contacts/contacts_new_object.yaml
     '400': 
-      $ref: ../../components/responses/errors/400_name.yaml 
-      message: "Customer has not been found"       
+      $ref: ../../components/responses/errors/400.yaml       
     '401':
       $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
 
 

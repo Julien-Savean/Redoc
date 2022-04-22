@@ -1,0 +1,50 @@
+content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          id_supplier:
+            description: <u>[Supplier](/#operation/Suppliers_list)</u> Id
+            type: integer
+            example: 48560
+          id_status:
+            description: >
+              Expense status
+
+              > 0 = Draft <br />
+              1 = Pending
+            type: integer
+            example: 0
+          title:
+            description: Reference of the expense
+            type: string
+            maxLength: 127
+            example: "Expense #1"
+          date:
+            description: Start date
+            type: string
+            format: date-time
+            example: "2022-04-01"
+          date_end:
+            description: End date
+            type: string
+            format: date-time
+            example: "2022-05-01"
+          description:
+            description: Exepnse description
+            type: string
+            maxLength: 255
+            example: A description or note about this expense
+          id_chart_of_account_expenses:
+            description: <u>[Chart of accounts](/#operation/Expenses_chart_of_accounts_list)</u> Id
+            type: string
+            maxLength: 30
+            example: 596
+          total_without_tax:
+            description: Total HT
+            type: number
+            example: 40
+          id_vat:
+            description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+            type: integer
+            example: 0         

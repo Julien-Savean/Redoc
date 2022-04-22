@@ -1,0 +1,38 @@
+get:
+  tags:
+    - Expenses
+  summary: List
+  description: Get a list of all expenses.
+  operationId: Expenses_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/expenses/expenses_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/expenses/expenses_objects.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Expenses
+  summary: Create
+  description: Create an expense.
+  operationId: Expenses_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/expenses/expenses_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/expenses/expenses_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+
+

@@ -1,0 +1,49 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Chart of accounts Id
+                type: integer
+              code:
+                description: Chart of accounts code
+                type: integer
+              title: 
+                description: Chart of accounts title
+                type: string
+              description:
+                description: Chart of accounts description 
+                type: string
+              id_family:
+                description: Family Id of chart of accounts 
+                type: integer
+              family_title:
+                description: Family title of chart of accounts 
+                type: string
+          example: 
+            - id: "596"
+              code: "607"
+              title: "Purchases of goods"
+              description: "Purchases of raw materials that are to be processed for resale."
+              id_family: "1"
+              family_title: "Purchases and subcontracting"
+            - id: "597"
+              code: "601"
+              title: "Purchases of raw materials"
+              description: "Purchases of goods for resale in the same condition as received"
+              id_family: "1"
+              family_title: "Purchases and subcontracting"
+                                      
+                        

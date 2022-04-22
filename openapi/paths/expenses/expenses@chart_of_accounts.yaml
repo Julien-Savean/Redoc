@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Expenses
+  summary: Chart of accounts
+  description: Get a list of all chart of accounts.
+  operationId: Expenses_chart_of_accounts_list
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/expenses/expenses_chart_of_accounts.yaml    
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

@@ -21,6 +21,8 @@ tags:
     description: This section lists all opportunity-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
+  - name: Expenses
+    description: Thois section lists all expenses-related APIS.
   - name: Events
     description: This section lists all event-related APIS.
   - name: Notes
@@ -110,6 +112,14 @@ paths:
     $ref: paths/products/products@vat.yaml
   /products/units:
     $ref: paths/products/products@units.yaml
+  /expenses:
+    $ref: paths/expenses/expenses.yaml
+  /expenses/{id}:
+    $ref: paths/expenses/expenses@{id}.yaml
+  /expenses/chart-of-account:
+    $ref: paths/expenses/expenses@chart_of_accounts.yaml
+  /expenses/chart-of-account-families:
+    $ref: paths/expenses/expenses@chart_of_accounts_families.yaml    
   /events:
     $ref: paths/events/events.yaml
   /events/{id}:

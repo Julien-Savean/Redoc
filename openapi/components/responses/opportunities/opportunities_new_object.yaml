@@ -64,6 +64,26 @@ content:
         custom_fields_list:
           description: List of custom fields
           type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Custom field Id
+                type: integer
+              title:
+                description:  Custom field title
+                type: string
+              value:
+                description: Custom field number
+                type: integer
+              value_text: 
+                description: Custom field value
+                type: string
+          example:
+            - id: "3413"
+              title: "Source"
+              value: "5995"
+              value_text: "Website"
         creation_date:
           description: Creation date and time
           type: string

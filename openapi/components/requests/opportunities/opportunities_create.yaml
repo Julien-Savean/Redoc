@@ -51,4 +51,18 @@ content:
               1 = Archived
             type: integer
             example: 0
+          custom_fields:
+            description: Custom fields
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: <u>[Custom field](/#operation/Opportunities_custom_fields_list)</u> Id
+                  type: integer
+                  example: 3413
+                value:
+                  description: <u>[Custom field value](/#operation/Opportunities_custom_field_values_list)</u> Id
+                  type: string
+                  example: 5995
          

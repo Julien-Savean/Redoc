@@ -32,6 +32,8 @@ tags:
     description: This section lists all opportunity-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
+  - name: Expenses
+    description: Thois section lists all expenses-related APIS.
   - name: Events
     description: This section lists all event-related APIS.
   - name: Notes
@@ -923,7 +925,7 @@ paths:
             type: string
             maxLength: 30
           description: >-
-            Search by [user with group](/#operation/Users_with_group) Id
+            Search by <u>[user with group](/#operation/Users_with_group)</u> Id
             associated with the opportunity
         - in: query
           name: id_status
@@ -1757,6 +1759,183 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/products_units'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /expenses:
+    get:
+      tags:
+        - Expenses
+      summary: List
+      description: Get a list of all expenses.
+      operationId: Expenses_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Search by start date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Search by end date
+        - in: query
+          name: id_supplier
+          schema:
+            type: integer
+          description: Search by <u>[supplier](/#operation/Suppliers_list)</u> Id
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br /> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: >
+            Direction for sorting
+
+            > ASC = Ascending, from A to Z. <br /> DESC = Descending, from Z to
+            A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/expenses_objects'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Expenses
+      summary: Create
+      description: Create an expense.
+      operationId: Expenses_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/expenses_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/expenses_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /expenses/{id}:
+    get:
+      tags:
+        - Expenses
+      summary: Show
+      description: Get one expense.
+      operationId: Expenses_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Expense](/#operation/Expenses_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/expenses_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Expenses
+      summary: Update
+      description: Update an expense.
+      operationId: Expenses_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/expenses_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Expense](/#operation/Expenses_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/expenses_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /expenses/chart-of-account:
+    get:
+      tags:
+        - Expenses
+      summary: Chart of accounts
+      description: Get a list of all chart of accounts.
+      operationId: Expenses_chart_of_accounts_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/expenses_chart_of_accounts'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /expenses/chart-of-account-families:
+    get:
+      tags:
+        - Expenses
+      summary: Families of chart of accounts
+      description: Get a list of all families of chart of accounts .
+      operationId: Expenses_chart_of_accounts_families_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/expenses_chart_of_accounts_families'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -2924,6 +3103,14 @@ components:
                       description: Id document template
                       type: integer
                       example: '0'
+                    id_payment_condition:
+                      description: Id of payment condition
+                      type: integer
+                      example: '0'
+                    id_vat:
+                      description: VAT Id
+                      type: integer
+                      example: '-1'
                     description:
                       description: Customer description
                       type: string
@@ -3170,6 +3357,14 @@ components:
                 description: Id document template
                 type: integer
                 example: '0'
+              id_payment_condition:
+                description: Id of payment condition
+                type: integer
+                example: '0'
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: '-1'
               description:
                 description: Customer description
                 type: string
@@ -3229,6 +3424,26 @@ components:
               custom_fields_list:
                 description: List of custom fields
                 type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3345'
+                    title: Source d'acquisition
+                    value: '5900'
+                    value_text: Facebook
               opportunities_list:
                 description: List of opportunities
                 type: array
@@ -3327,6 +3542,14 @@ components:
                 description: Id document template
                 type: integer
                 example: '0'
+              id_payment_condition:
+                description: Id of payment condition
+                type: integer
+                example: '0'
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: '-1'
               description:
                 description: Customer description
                 type: string
@@ -3650,6 +3873,14 @@ components:
                       description: Id document template
                       type: integer
                       example: '0'
+                    id_payment_condition:
+                      description: Id of payment condition
+                      type: integer
+                      example: '0'
+                    id_vat:
+                      description: VAT Id
+                      type: integer
+                      example: '-1'
                     description:
                       description: Supplier description
                       type: string
@@ -3863,6 +4094,14 @@ components:
                 description: Id document template
                 type: integer
                 example: '0'
+              id_payment_condition:
+                description: Id of payment condition
+                type: integer
+                example: '0'
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: '-1'
               description:
                 description: Supplier description
                 type: string
@@ -3922,6 +4161,26 @@ components:
               custom_fields_list:
                 description: List of custom fields
                 type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3352'
+                    title: Payment condition
+                    value: '5911'
+                    value_text: 30 days
               creation_date:
                 description: Creation date and time
                 type: string
@@ -4007,6 +4266,14 @@ components:
                 description: Id document template
                 type: integer
                 example: '0'
+              id_payment_condition:
+                description: Id of payment condition
+                type: integer
+                example: '0'
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: '-1'
               description:
                 description: Supplier description
                 type: string
@@ -4403,6 +4670,26 @@ components:
               custom_fields_list:
                 description: List of custom fields
                 type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3407'
+                    title: Contact type
+                    value: '5994'
+                    value_text: Decision-maker contact
               creation_date:
                 description: Creation date and time
                 type: string
@@ -4821,6 +5108,26 @@ components:
               custom_fields_list:
                 description: List of custom fields
                 type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3413'
+                    title: Source
+                    value: '5995'
+                    value_text: Website
               creation_date:
                 description: Creation date and time
                 type: string
@@ -5457,6 +5764,26 @@ components:
               custom_fields_list:
                 description: List of custom fields
                 type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3430'
+                    title: Conditioning
+                    value: '6019'
+                    value_text: Box
               creation_date:
                 description: Creation date and time
                 type: string
@@ -5937,6 +6264,378 @@ components:
                   - id: '3'
                     vat: '5.50'
                     title: VAT 5.5%
+    expenses_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 3
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Expense Id
+                      type: integer
+                      example: '961'
+                    id_supplier:
+                      description: Supplier Id
+                      type: integer
+                      example: '48560'
+                    title:
+                      description: Reference of the expense
+                      type: string
+                      example: 'Expense #1'
+                    id_status:
+                      description: Expense status Id
+                      type: integer
+                      example: '0'
+                    status_text:
+                      description: Expense status title
+                      type: string
+                      example: Draft
+                    date:
+                      description: Start date
+                      type: string
+                      format: date-time
+                      example: '2022-04-01'
+                    date_end:
+                      description: End date
+                      type: string
+                      format: date-time
+                      example: '2022-05-01'
+                    id_chart_of_account_expenses:
+                      description: Chart of accounts Id
+                      type: string
+                      example: '596'
+                    total_without_tax:
+                      description: Total HT
+                      type: number
+                      example: '40.00'
+                    total_with_tax:
+                      description: Total TTC
+                      type: number
+                      example: '48.00'
+                    currency_code:
+                      description: Currency code
+                      type: string
+                      example: EUR
+                    currency_exchange_rate:
+                      description: Currency exchange rate
+                      type: number
+                      format: float
+                      example: '1.000000'
+                    total_already_paid:
+                      description: Total already paid
+                      type: number
+                      format: double
+                      example: '0.00'
+    expenses_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Expense Id
+                type: integer
+                example: '961'
+              id_supplier:
+                description: Supplier Id
+                type: integer
+                example: '48560'
+              id_status:
+                description: Expense status Id
+                type: integer
+                example: '0'
+              status_text:
+                description: Expense status title
+                type: string
+                example: Draft
+              title:
+                description: Reference of the expense
+                type: string
+                example: 'Expense #1'
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-04-01'
+              date_end:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-05-01'
+              description:
+                description: Expense description
+                type: string
+                example: A description or note about this expense
+              id_chart_of_account_expenses:
+                description: Chart of accounts Id
+                type: array
+                items:
+                  type: integer
+                  example: '596'
+              total_without_tax:
+                description: Total HT
+                type: number
+                example: '40.00'
+              total_with_tax:
+                description: Total TTC
+                type: number
+                example: '48.00'
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: '2'
+              currency_code:
+                description: Currency code
+                type: string
+                example: EUR
+              currency_exchange_rate:
+                description: Currency exchange rate
+                type: number
+                format: float
+                example: '1.000000'
+              total_already_paid:
+                description: Total already paid
+                type: number
+                format: double
+                example: '0.00'
+              payment_date:
+                description: Payment date
+                type: string
+                format: date-time
+                example: '2022-05-01'
+              attached_file_url:
+                description: Url of attached file
+                type: string
+                example: ''
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    expenses_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Expense Id
+                type: integer
+                example: '961'
+              id_supplier:
+                description: Supplier Id
+                type: integer
+                example: '48560'
+              id_status:
+                description: Expense status Id
+                type: integer
+                example: '0'
+              status_text:
+                description: Expense status title
+                type: string
+                example: Draft
+              title:
+                description: Reference of the expense
+                type: string
+                example: 'Expense #1'
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-04-01'
+              date_end:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-05-01'
+              description:
+                description: Expense description
+                type: string
+                example: A description or note about this expense
+              id_chart_of_account_expenses:
+                description: Chart of accounts Id
+                type: array
+                items:
+                  type: integer
+                  example: '596'
+              total_without_tax:
+                description: Total HT
+                type: number
+                example: '40.00'
+              total_with_tax:
+                description: Total TTC
+                type: number
+                example: '48.00'
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: '2'
+              currency_code:
+                description: Currency code
+                type: string
+                example: EUR
+              currency_exchange_rate:
+                description: Currency exchange rate
+                type: number
+                format: float
+                example: '1.000000'
+              total_already_paid:
+                description: Total already paid
+                type: number
+                format: double
+                example: '0.00'
+              payment_date:
+                description: Payment date
+                type: string
+                format: date-time
+                example: '2022-05-01'
+              attached_file_url:
+                description: Url of attached file
+                type: string
+                example: ''
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    expenses_chart_of_accounts:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Chart of accounts Id
+                      type: integer
+                    code:
+                      description: Chart of accounts code
+                      type: integer
+                    title:
+                      description: Chart of accounts title
+                      type: string
+                    description:
+                      description: Chart of accounts description
+                      type: string
+                    id_family:
+                      description: Family Id of chart of accounts
+                      type: integer
+                    family_title:
+                      description: Family title of chart of accounts
+                      type: string
+                example:
+                  - id: '596'
+                    code: '607'
+                    title: Purchases of goods
+                    description: >-
+                      Purchases of raw materials that are to be processed for
+                      resale.
+                    id_family: '1'
+                    family_title: Purchases and subcontracting
+                  - id: '597'
+                    code: '601'
+                    title: Purchases of raw materials
+                    description: >-
+                      Purchases of goods for resale in the same condition as
+                      received
+                    id_family: '1'
+                    family_title: Purchases and subcontracting
+    expenses_chart_of_accounts_families:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Family Id
+                      type: integer
+                    title:
+                      description: Family title
+                      type: string
+                example:
+                  - id: '1'
+                    title: Purchasing and subcontracting
+                  - id: '2'
+                    title: Running costs
+                  - id: '3'
+                    title: Communication and marketing
     events_objects:
       description: OK
       content:
@@ -7657,6 +8356,20 @@ components:
                 description: Id document template
                 type: integer
                 example: ''
+              id_payment_condition:
+                description: >
+                  Id of <u>[payment
+                  condition](#operation/Documents_payement_conditions_list)</u>
+
+                  > 0 = Not filled in
+                type: integer
+                example: '0'
+              id_vat:
+                description: |
+                  <u>[VAT](#operation/Products_vat_list)</u> Id
+                  > -1 = Not filled in
+                type: integer
+                example: '-1'
               description:
                 description: Customer description
                 type: string
@@ -7668,15 +8381,24 @@ components:
                 maxLength: 30
                 example: 123
               custom_fields:
-                description: >-
-                  <u>[Custom
-                  fields](/#operation/Customers_custom_fields_list)</u>
-                type: object
-                properties:
-                  '3346':
-                    description: Custom field Id
-                    type: string
-                    example: '5900'
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Customers_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3345
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Opportunities_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5900
               main_address:
                 description: Main address
                 type: string
@@ -7848,6 +8570,20 @@ components:
                 description: Id document template
                 type: integer
                 example: ''
+              id_payment_condition:
+                description: >
+                  Id of <u>[payment
+                  condition](#operation/Documents_payement_conditions_list)</u>
+
+                  > 0 = Not filled in
+                type: integer
+                example: '0'
+              id_vat:
+                description: |
+                  <u>[VAT](#operation/Products_vat_list)</u> Id
+                  > -1 = Not filled in
+                type: integer
+                example: '-1'
               description:
                 description: Customer description
                 type: string
@@ -7859,15 +8595,24 @@ components:
                 maxLength: 30
                 example: 123
               custom_fields:
-                description: >-
-                  <u>[Custom
-                  fields](/#operation/Customers_custom_fields_list)</u>
-                type: object
-                properties:
-                  '3346':
-                    description: Custom field Id
-                    type: string
-                    example: '5900'
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Customers_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3345
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Opportunities_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5900
               main_address:
                 description: Main address
                 type: string
@@ -8025,6 +8770,20 @@ components:
                 description: Id document template
                 type: integer
                 example: ''
+              id_payment_condition:
+                description: >
+                  Id of <u>[payment
+                  condition](#operation/Documents_payement_conditions_list)</u>
+
+                  > 0 = Not filled in
+                type: integer
+                example: '0'
+              id_vat:
+                description: |
+                  <u>[VAT](#operation/Products_vat_list)</u> Id
+                  > -1 = Not filled in
+                type: integer
+                example: '-1'
               description:
                 description: Supplier description
                 type: string
@@ -8035,6 +8794,25 @@ components:
                 type: string
                 maxLength: 30
                 example: 123
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Suppliers_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3352
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Suppliers_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5911
               main_address:
                 description: Main address
                 type: string
@@ -8176,6 +8954,20 @@ components:
                 description: Id document template
                 type: integer
                 example: ''
+              id_payment_condition:
+                description: >
+                  Id of <u>[payment
+                  condition](#operation/Documents_payement_conditions_list)</u>
+
+                  > 0 = Not filled in
+                type: integer
+                example: '0'
+              id_vat:
+                description: |
+                  <u>[VAT](#operation/Products_vat_list)</u> Id
+                  > -1 = Not filled in
+                type: integer
+                example: '-1'
               description:
                 description: Supplier description
                 type: string
@@ -8186,6 +8978,25 @@ components:
                 type: string
                 maxLength: 30
                 example: 123
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Suppliers_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3352
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Suppliers_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5911
               main_address:
                 description: Main address
                 type: string
@@ -8331,6 +9142,25 @@ components:
                 type: string
                 maxLength: 30
                 example: 123
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Contacts_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3704
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Contacts_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5994
     contacts_update:
       content:
         application/json:
@@ -8390,6 +9220,25 @@ components:
                 type: string
                 maxLength: 30
                 example: 123
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Contacts_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3704
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Contacts_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5994
     contacts_custom_field:
       content:
         application/json:
@@ -8469,6 +9318,26 @@ components:
                   > 0 = Active <br /> 1 = Archived
                 type: integer
                 example: 0
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Opportunities_custom_fields_list)</u>
+                        Id
+                      type: integer
+                      example: 3413
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Opportunities_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5995
     opportunities_update:
       content:
         application/json:
@@ -8531,6 +9400,26 @@ components:
                   > 0 = Active <br /> 1 = Archived
                 type: integer
                 example: 0
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Opportunities_custom_fields_list)</u>
+                        Id
+                      type: integer
+                      example: 3413
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Opportunities_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 5995
     opportunities_custom_field:
       content:
         application/json:
@@ -8586,6 +9475,25 @@ components:
                 description: <u>[Unit](/#operation/Products_units_list)</u> Id
                 type: integer
                 example: 0
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Products_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3430
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Products_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6019
     products_update:
       content:
         application/json:
@@ -8623,6 +9531,25 @@ components:
                 description: <u>[Unit](/#operation/Products_units_list)</u> Id
                 type: integer
                 example: 0
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Products_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3430
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Products_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6019
     products_custom_field:
       content:
         application/json:
@@ -8661,6 +9588,108 @@ components:
                 type: string
                 maxLength: 127
                 example: 'Category #1'
+    expenses_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_supplier:
+                description: <u>[Supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 48560
+              id_status:
+                description: |
+                  Expense status Id
+                  > 0 = Draft <br /> 1 = Pending
+                type: integer
+                example: 0
+              title:
+                description: Reference of the expense
+                type: string
+                maxLength: 127
+                example: 'Expense #1'
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-04-01'
+              date_end:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-05-01'
+              description:
+                description: Expense description
+                type: string
+                maxLength: 255
+                example: A description or note about this expense
+              id_chart_of_account_expenses:
+                description: >-
+                  <u>[Chart of
+                  accounts](/#operation/Expenses_chart_of_accounts_list)</u> Id
+                type: string
+                maxLength: 30
+                example: 596
+              total_without_tax:
+                description: Total HT
+                type: number
+                example: 40
+              id_vat:
+                description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+                type: integer
+                example: 0
+    expenses_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_supplier:
+                description: <u>[Supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 48560
+              id_status:
+                description: |
+                  Expense status
+                  > 0 = Draft <br /> 1 = Pending
+                type: integer
+                example: 0
+              title:
+                description: Reference of the expense
+                type: string
+                maxLength: 127
+                example: 'Expense #1'
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-04-01'
+              date_end:
+                description: End date
+                type: string
+                format: date-time
+                example: '2022-05-01'
+              description:
+                description: Exepnse description
+                type: string
+                maxLength: 255
+                example: A description or note about this expense
+              id_chart_of_account_expenses:
+                description: >-
+                  <u>[Chart of
+                  accounts](/#operation/Expenses_chart_of_accounts_list)</u> Id
+                type: string
+                maxLength: 30
+                example: 596
+              total_without_tax:
+                description: Total HT
+                type: number
+                example: 40
+              id_vat:
+                description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+                type: integer
+                example: 0
     events_create:
       content:
         application/json:

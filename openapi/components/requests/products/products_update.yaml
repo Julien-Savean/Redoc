@@ -34,3 +34,17 @@ content:
             description: <u>[Unit](/#operation/Products_units_list)</u> Id
             type: integer
             example: 0
+          custom_fields:
+            description: Custom fields
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: <u>[Custom field](/#operation/Products_custom_fields_list)</u> Id
+                  type: integer
+                  example: 3430
+                value:
+                  description: <u>[Custom field value](/#operation/Products_custom_field_values_list)</u> Id
+                  type: string
+                  example: 6019

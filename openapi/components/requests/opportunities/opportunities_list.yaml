@@ -24,7 +24,7 @@
   schema:
     type: string
     maxLength: 30
-  description: Search by [user with group](/#operation/Users_with_group) Id associated with the opportunity
+  description: Search by <u>[user with group](/#operation/Users_with_group)</u> Id associated with the opportunity
 - in: query
   name: id_status    
   schema:

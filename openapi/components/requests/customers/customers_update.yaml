@@ -103,6 +103,20 @@ content:
             description: Id document template
             type: integer
             example: ""
+          id_payment_condition:
+            description: >
+              Id of <u>[payment condition](#operation/Documents_payement_conditions_list)</u>
+
+              > 0 = Not filled in
+            type: integer
+            example: "0"
+          id_vat:
+            description: >
+              <u>[VAT](#operation/Products_vat_list)</u> Id
+
+              > -1 = Not filled in
+            type: integer
+            example: "-1" 
           description:
             description: Customer description
             type: string
@@ -114,13 +128,19 @@ content:
             maxLength: 30
             example: 123
           custom_fields:
-            description: <u>[Custom fields](/#operation/Customers_custom_fields_list)</u>
-            type: object
-            properties:
-              3346:
-                description: Custom field Id  
-                type: string
-                example: "5900"
+            description: Custom fields
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: <u>[Custom field](/#operation/Customers_custom_fields_list)</u> Id
+                  type: integer
+                  example: 3345
+                value:
+                  description: <u>[Custom field value](/#operation/Opportunities_custom_field_values_list)</u> Id
+                  type: string
+                  example: 5900
           main_address:
             description: Main address
             type: string

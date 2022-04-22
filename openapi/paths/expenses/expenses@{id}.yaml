@@ -1,0 +1,50 @@
+get:
+  tags:
+    - Expenses
+  summary: Show
+  description: Get one expense.
+  operationId: Expenses_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Expense](/#operation/Expenses_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/expenses/expenses_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Expenses
+  summary: Update
+  description: Update an expense.
+  operationId: Expenses_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/expenses/expenses_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Expense](/#operation/Expenses_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/expenses/expenses_object.yaml      
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

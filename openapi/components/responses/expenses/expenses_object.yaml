@@ -1,0 +1,100 @@
+description: OK
+content:
+  application/json:
+    schema:
+      description: Response of the request
+      type: object
+      properties:
+        id:
+          description: Expense Id
+          type: integer
+          example: "961"
+        id_supplier:
+          description: Supplier Id
+          type: integer
+          example: "48560"
+        id_status:
+          description: Expense status Id
+          type: integer
+          example: "0"
+        status_text:
+          description: Expense status title
+          type: string
+          example: "Draft"
+        title: 
+          description: Reference of the expense
+          type: string 
+          example: "Expense #1"
+        date:
+          description: Start date
+          type: string
+          format: date-time
+          example: "2022-04-01"
+        date_end: 
+          description: End date
+          type: string
+          format: date-time
+          example: "2022-05-01"
+        description:
+          description: Expense description
+          type: string
+          example: A description or note about this expense 
+        id_chart_of_account_expenses: 
+          description: Chart of accounts Id
+          type: array
+          items:
+            type: integer
+            example: "596"
+        total_without_tax: 
+          description: Total HT
+          type: number
+          example: "40.00"
+        total_with_tax:
+          description: Total TTC
+          type: number
+          example: "48.00"
+        id_vat:
+          description: VAT Id
+          type: integer
+          example: "2"
+        currency_code:
+          description: Currency code
+          type: string
+          example: "EUR"
+        currency_exchange_rate:
+          description: Currency exchange rate
+          type: number
+          format: float
+          example: "1.000000"
+        total_already_paid:
+          description: Total already paid
+          type: number
+          format: double
+          example: "0.00"
+        payment_date:
+          description: Payment date
+          type: string
+          format: date-time
+          example: "2022-05-01"
+        attached_file_url:
+          description: Url of attached file
+          type: string
+          example: ""
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

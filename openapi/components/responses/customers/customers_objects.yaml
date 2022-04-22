@@ -97,6 +97,14 @@ content:
                 description: Id document template
                 type: integer
                 example: "0"
+              id_payment_condition:
+                description: Id of payment condition
+                type: integer
+                example: "0"
+              id_vat:
+                description: VAT Id
+                type: integer
+                example: "-1"
               description:
                 description: Customer description
                 type: string

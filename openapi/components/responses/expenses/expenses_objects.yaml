@@ -1,0 +1,88 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 3
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Expense Id
+                type: integer
+                example: "961"
+              id_supplier:
+                description: Supplier Id
+                type: integer
+                example: "48560"
+              title: 
+                description: Reference of the expense
+                type: string 
+                example: "Expense #1"
+              id_status:
+                description: Expense status Id
+                type: integer
+                example: "0"
+              status_text:
+                description: Expense status title
+                type: string
+                example: "Draft"
+              date:
+                description: Start date
+                type: string
+                format: date-time
+                example: "2022-04-01"
+              date_end: 
+                description: End date
+                type: string
+                format: date-time
+                example: "2022-05-01"
+              id_chart_of_account_expenses: 
+                description: Chart of accounts Id
+                type: string
+                example: "596"
+              total_without_tax: 
+                description: Total HT
+                type: number
+                example: "40.00"
+              total_with_tax:
+                description: Total TTC
+                type: number
+                example: "48.00"
+              currency_code:
+                description: Currency code
+                type: string
+                example: "EUR"
+              currency_exchange_rate:
+                description: Currency exchange rate
+                type: number
+                format: float
+                example: "1.000000"
+              total_already_paid:
+                description: Total already paid
+                type: number
+                format: double
+                example: "0.00"

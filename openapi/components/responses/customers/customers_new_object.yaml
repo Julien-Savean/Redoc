@@ -71,6 +71,14 @@ content:
           description: Id document template
           type: integer
           example: "0"
+        id_payment_condition:
+          description: Id of payment condition
+          type: integer
+          example: "0"
+        id_vat:
+          description: VAT Id
+          type: integer
+          example: "-1"
         description:
           description: Customer description
           type: string
@@ -130,6 +138,26 @@ content:
         custom_fields_list:
           description: List of custom fields
           type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Custom field Id
+                type: integer
+              title:
+                description:  Custom field title
+                type: string
+              value:
+                description: Custom field number
+                type: integer
+              value_text: 
+                description: Custom field value
+                type: string
+          example:
+            - id: "3345"
+              title: "Source d'acquisition"
+              value: "5900"
+              value_text: "Facebook"
         opportunities_list: 
           description: List of opportunities
           type: array

@@ -11,7 +11,7 @@ content:
             description: >
               Contact civility
 
-              > 1 = Mr <br />
+              > 1 = Mr <br>
               2 = Ms
             type: integer
             example: ""

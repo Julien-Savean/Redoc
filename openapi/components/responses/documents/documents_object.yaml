@@ -1,0 +1,265 @@
+description: OK
+content:
+  application/json:
+    schema:
+      description: Response of the request
+      type: object
+      properties:
+        id:
+          description: Document Id
+          type: integer
+          example: "2758"
+        id_document_previous: 
+          description: Previous document Id
+          type: integer
+          example: "2757"
+        id_document_next: 
+          description: Next document Id
+          type: integer
+          example: "2759"
+        id_opportunity:
+          description: Opportunity Id
+          type: integer
+          example: "1985"
+        id_opportunity_proposal:
+          description: Opportunity proposal Id
+          type: integer
+          example: "1835"
+        id_type:
+          description: Document type Id
+          type: integer
+          example: "1"
+        type_text: 
+          description: Document type title
+          type: string
+          example: "Quotes"
+        number:
+          description: Document number
+          type: integer
+          example: ""
+        id_status: 
+          description: Document status Id
+          type: integer
+          example: "0"
+        status_text: 
+          description: Document status title
+          type: string
+          example: "Draft"
+        title:
+          description: Document title
+          type: string
+          example: "Document #1"
+        date:
+          description: Document date
+          type: string
+          format: date-time
+          example: "2022-05-16 16:15:00"
+        date_end:
+          description: Expiration date
+          type: string
+          format: date-time
+          example: "2022-05-30 14:00:00"
+        id_payment_condition:
+          description: Payment condition Id
+          type: integer
+          example: "1"
+        id_document_reference:
+          description: Document reference Id
+          type: integer
+          example: "0"
+        customer_reference:
+          description: Customer reference
+          type: string 
+          example: "C1234"
+        id_customer_supplier_contact:
+          description: Customer Id
+          type: integer
+          example: "48560"
+        description:
+          description: Document description
+          type: string
+          example: A description or note about this document
+        discount_type:
+          description: Discount type
+          type: string
+          example: "percent"
+        discount_value:
+          description: Discount value
+          type: integer       
+          example: 0
+        final_invoice:
+          description: Final Invoice
+          type: integer
+          example: "0"
+        deposit_type:
+          description: Deposit type
+          type: string
+          example: "percent"
+        deposit_value:
+          description: Deposit value
+          type: integer       
+          example: 0         
+        total_without_tax: 
+          description: Total HT
+          type: number
+          example: "125.00"
+        total_with_tax:
+          description: Total TTC
+          type: number
+          example: "150.00"
+        id_currency:
+          description: Currency Id
+          type: integer
+          example: "43"
+        currency_code:
+          description: Currency code
+          type: string
+          example: "EUR"
+        currency_exchange_rate:
+          description: Currency exchange rate
+          type: number
+          format: float
+          example: "1.000000"
+        total_already_paid:
+          description: Total already paid
+          type: number
+          format: double
+          example: "0.00"  
+        payment_date:
+          description: Payment date
+          type: string
+          format: date-time
+          example: "2022-06-16 00:00:00"
+        use_stripe_to_pay:
+          description: Stripe use
+          type: integer 
+          example: "0"
+        canceled:    
+          description: Cancellation
+          type: integer
+          example: "0"   
+        id_document_template:
+          description: Document template Id
+          type: integer
+          example: "0"
+        download_url:
+          description: download url
+          type: string
+          example: ""
+        products_list:
+          description: Products list
+          type: array
+          items:
+            type: object
+            properties:
+              section:
+                description: Section Id
+                type: integer
+              id_product:
+                description: Product Id
+                type: integer
+              title:
+                description: Product title
+                type: string
+              reference:
+                description: Product reference
+                type: string
+              description:
+                description: Product description 
+                type: string
+              price_without_tax:
+                description: Price HT
+                type: number
+              id_vat:
+                description: VAT Id
+                type: integer
+              quantity:
+                description: Product quantity
+                type: number
+                format: float
+              quantity_delivered:
+                description: Product quantity delivered
+                type: number
+                format: float
+              id_unit:
+                description: Unit Id
+                type: integer
+              discount_type:
+                description: Discount type
+                type: string
+              discount_value:
+                description: Discount value
+                type: integer       
+              progress_type:
+                description: Progress type
+                type: string
+              progress_value:
+                description: Progress value
+                type: integer
+              total_without_tax:
+                description: Total HT
+                type: number                  
+              total_cost:
+                description: Total cost
+                type: number
+              hide_in_pdf:
+                description: Visibility
+                type: integer
+              optional:
+                description: Optional
+                type: integer
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+              created_by:
+                description: Id of the creator
+                type: integer
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+              updated_by: 
+                description: Id of the updater
+                type: integer
+          example:
+            section: "0"
+            id_product: "4739"
+            title: "Product #1"
+            reference: "Ref_product_1"
+            description: "A description or note about this product"
+            price_without_tax: "50.000000"
+            id_vat: "1"
+            quantity: "2.50"
+            quantity_delivered: "0"
+            id_unit: "2"
+            discount_type: "percent"
+            discount_value: 0
+            progress_type: "percent"
+            progress_value: 0
+            total_without_tax: "125.00"
+            total_cost: "150.00"
+            hide_in_pdf: "0"
+            optional: "0"
+            creation_date: "2022-04-19 14:45:28"
+            created_by: "213"
+            update_date: "2022-04-19 14:45:28"
+            updated_by: "213"
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

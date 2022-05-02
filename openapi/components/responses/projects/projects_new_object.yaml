@@ -1,0 +1,88 @@
+description: OK
+content:
+  application/json:
+    schema:
+      description: Response of the request
+      type: object
+      properties:
+        id:
+          description: Project Id
+          type: integer
+          example: "435"
+        title:
+          description: Project title
+          type: string
+          example: "Project #1"
+        columns:
+          description: Project columns
+          type: array
+          items: 
+            type: object
+            properties:
+              id:
+                description: Column Id
+                type: integer
+              title:
+                description: Column title
+                type: string
+          example:
+            - id: "1"
+              title: "To do"
+            - id: "2"
+              title: "Pending"
+            - id: "3"
+              title: "In progress"
+            - id: "4"
+              title: "To test"
+            - id: "5"
+              title: "Completed"                  
+        id_customer_supplier:
+          description: Customer or supplier Id
+          type: integer
+          example: "28496"
+        id_opportunity:
+          description: Opportunity Id
+          type: integer
+          example: "1985"
+        starting_date:
+          description: Starting date
+          type: string
+          format: date-time
+          example: "2022-03-15 19:45:00"
+        due_date:
+          description: Due date
+          type: string
+          format: date-time
+          example: null
+        id_status:
+          description: Status Id
+          type: integer
+          example: "1"
+        id_user_assigned:
+          description: User assigned of the project
+          type: array
+          items:
+            type: string
+            example: "213"
+        archived:
+          description: Archived status of the project
+          type: integer
+          example: "0"
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

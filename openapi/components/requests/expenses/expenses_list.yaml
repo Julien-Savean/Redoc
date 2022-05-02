@@ -3,13 +3,13 @@
   schema:
     type: string
     format: date-time
-  description: Search by start date
+  description: Search by expense date
 - in: query
   name: to
   schema:
     type: string
     format: date-time
-  description: Search by end date
+  description: Search by due date
 - in: query
   name: id_supplier
   schema:
@@ -20,7 +20,7 @@
   schema:
     type: string
   description: >
-    List of fields to be returned. *By default, all fields are returned.* <br />
+    List of fields to be returned. *By default, all fields are returned.* <br>
     **Each field must be separated by a comma without space.**
 - in: query
   name: order
@@ -36,7 +36,7 @@
   description: >
     Direction for sorting
 
-    > ASC = Ascending, from A to Z. <br />
+    > ASC = Ascending, from A to Z. <br>
     DESC = Descending, from Z to A.
 - in: query
   name: limit

@@ -21,7 +21,7 @@ post:
   tags:
     - Events
   summary: Create
-  description: Create an event
+  description: Create an event.
   operationId: Events_create
   security:
     - Bearer token: []

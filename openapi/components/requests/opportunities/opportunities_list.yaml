@@ -47,14 +47,14 @@
   description: > 
     Search by opportunity condition
 
-    > 0 = Active <br />
+    > 0 = Active <br>
     1 = Archived
 - in: query
   name: fields
   schema:
     type: string
   description: >
-    List of fields to be returned. *By default, all fields are returned.* <br />
+    List of fields to be returned. *By default, all fields are returned.* <br>
     **Each field must be separated by a comma without space.**
 - in: query
   name: order
@@ -70,7 +70,7 @@
   description: >
     Direction for sorting
 
-    > ASC = Ascending, from A to Z. <br />
+    > ASC = Ascending, from A to Z. <br>
     DESC = Descending, from Z to A.
 - in: query
   name: limit

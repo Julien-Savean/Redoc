@@ -1,0 +1,29 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Project custom field value Id
+                type: integer
+              title:
+                description: Project custom field value title
+                type: string
+          example: 
+            - id: "6089"
+              title: "Low"
+            - id: "6090"
+              title: "Medium"
+            - id: "6091"
+              title: "High"

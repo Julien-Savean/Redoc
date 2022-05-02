@@ -1,0 +1,32 @@
+post:
+  tags:
+    - Projects
+  summary: Tasks - Comments
+  description: Create a project task comment.
+  operationId: Projects_tasks_comments
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/projects/projects_tasks_comment.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Project](/#operation/Projects_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: task_id
+    description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_tasks_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

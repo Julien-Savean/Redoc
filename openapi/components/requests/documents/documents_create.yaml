@@ -1,0 +1,158 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - id_customer
+          - id_opportunity
+        properties:
+          id_type:
+            description: >
+              Document type Id
+
+              > 1 = Quote <br>
+              2 = Order note <br>
+              3 = Delivery note <br>
+              4 = Invoice
+            type: integer
+            example: "1"
+          pipeline:
+            description: >
+              **If added in a new opportunity**: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id 
+            type: integer
+            example: 1934
+          id_customer:
+            description: >
+              **If added in a new opportunity**: <u>[Customer](/#operation/Customers_list)</u> Id 
+            type: integer
+            example: 48560
+          id_opportunity:
+            description: >
+              **If adding in an existing opportunity**: <u>[Opportunity](/#operation/Opportunities_list)</u> Id 
+            type: string
+            example: "2022-04-01"
+          proposal_description:
+            description: Proposal description
+            type: string
+            example: "A description or note about this proposal"
+          id_status:
+            description: >
+              Status Id
+
+              > 0 = Draft <br>
+              1 = Pending 
+            type: integer
+            example: 0
+          title:
+            description: Document title
+            type: string
+            maxLength: 127
+            example: "Document #1"     
+          date:
+            description: Document date
+            type: string
+            format: date-time
+            example: "2022-05-16 16:15:00"
+          date_end:
+            description: Expiration date - **Not editable for invoices**
+            type: string
+            format: date-time
+            example: "2022-05-30 14:00:00"
+          id_payment_condition:
+            description: >
+              Payment condition Id - **Only for invoices** <br>
+              *By defaut, the value of the customer profile, or without, that of the company profile*
+            type: integer
+            example: "1"
+          customer_reference:
+            description: Customer reference
+            type: string 
+            example: "C1234"         
+          description:
+            description: Document description
+            type: string
+            example: A description or note about this document
+          use_stripe_to_pay:
+            description: >
+              Stripe use
+
+              > 0 = Inactive <br>
+              1 = Usable
+            type: integer 
+            example: "0"
+          id_document_template:
+            description: >
+              Document template Id <br>
+              *By defaut, the value of the customer profile*
+            type: integer
+            example: "0"
+          products_list:
+            description: Articles list
+            type: array
+            items:
+              anyOf:
+                - type: object
+                  title: Product
+                  required:
+                    - id_product
+                    - reference
+                  properties:
+                    section:
+                      description: >
+                        Section format
+
+                        > 0 = Product 
+                      type: integer
+                      example: "0"
+                    id_product:
+                      description: >
+                        <u>[Product](/#operation/Products_list)</u> Id - `id_product OR reference required`
+                      type: integer
+                      example: "4739"
+                    reference: 
+                      description: Product reference - `id_product OR reference required`
+                      type: string
+                      maxLength: 30
+                      example: "Ref_product_1"
+                    description:
+                      description: >
+                        Product description <br>
+                        *By defaut, the value of the product sheet* 
+                      type: string
+                      example: "A description or note about this product"
+                    price_without_tax:
+                      description: > 
+                        Price HT <br>
+                        *By defaut, the [value](/#operation/Products_sell_price) of the product sheet* 
+                      type: number 
+                      example: "125.00"
+                    quantity:
+                      description: Product quantity
+                      type: number
+                      format: float
+                      example: "2.50"
+                    quantity_delivered:
+                      description: Product quantity delivered - **Only for deliveries**
+                      type: number
+                      format: float
+                      example: "0"
+                    id_vat:
+                      description: <u>[Vat](/#operation/Products_vat_list)</u> Id
+                      type: integer   
+                      example: "1"    
+                - type: object
+                  title: Section
+                  properties:
+                    section:
+                      description: >
+                        Section format
+
+                        > 1 = Section
+                      type: integer
+                    title:
+                      description: Section title
+                      type: string
+                      maxLength: 255
+                    description:
+                      description: Section description 
+                      type: string        

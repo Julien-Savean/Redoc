@@ -1,0 +1,107 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 2
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Time Id
+                type: integer
+                example: "735"
+              id_user:
+                description: User Id 
+                type: integer
+                example: "213"
+              id_project:
+                description: Project Id
+                type: integer
+                example: "435"
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: "89"
+              id_project_task_subtask:
+                description: Project subtask Id
+                type: integer
+                example: ""
+              id_customer_supplier:
+                description: Customer Id or supplier Id
+                type: integer
+                example: "28496"
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: "1985"
+              id_type:
+                description: Time type Id
+                type: integer
+                example: "8"
+              billable:
+                description: Billable time
+                type: integer
+                example: "0"
+              billed_date:
+                description: Billing date
+                type: string
+                example: null
+              time_date:
+                description: Time date
+                type: string
+                format: date-time
+                example: "2022-07-15 13:29:00"
+              time_done:
+                description: Time done
+                type: string
+                example: "01:30:00"
+              time_planified: 
+                description: Time planned
+                type: string
+                example: "02:00:00"
+              description: 
+                description: Time descritpion
+                type: string
+                example: "A description or note about this time"
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: "2022-03-25 12:04:24"
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: "213"
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: "2022-03-25 12:04:24"
+              updated_by: 
+                description: Id of the updater
+                type: integer
+                example: "213"

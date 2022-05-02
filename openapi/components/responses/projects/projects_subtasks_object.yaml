@@ -1,0 +1,69 @@
+description: OK
+content:
+  application/json:
+    schema:
+      description: Response of the request
+      type: object
+      properties:
+        id:
+          description: Subtask Id
+          type: integer
+          example: "1375"
+        status:
+          description: Subtask status
+          type: string
+          example: "89"
+        section: 
+          description: Subtask nature
+          type: string
+          example: "0"
+        title:
+          description: Subtask title
+          type: string
+          example: "Subtask #1"
+        starting_date:
+          description: Subtask start date 
+          type: string
+          format: date-time 
+          example: "2022-04-23"                     
+        due_date:
+          description: Subtask due date
+          type: string
+          format: date-time 
+          example: null                     
+        working_time:
+          description: Subtask working time
+          type: string      
+          example: 1:50               
+        estimation_time:
+          description: Subtask estimated time  
+          type: string
+          example: 3:00
+        id_user_assigned:
+          description: Subtask client mamager id
+          type: array
+          items:
+            type: string
+            example: "u213"
+        skills:
+          description: Subtask skills
+          type: array
+          example: []
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-04-23 16:22:58"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-04-23 16:22:58"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

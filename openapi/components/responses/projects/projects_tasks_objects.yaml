@@ -47,6 +47,10 @@ content:
                 type: string
                 format: date-time
                 example: "2022-04-04 09:44:49"
+              position:
+                description: Position 
+                type: integer
+                example: "1"
               milestone:
                 description: Milestone
                 type: integer
@@ -55,10 +59,6 @@ content:
                 description: Id status of project task
                 type: integer
                 example: "91"
-              position:
-                description: Position 
-                type: integer
-                example: "1"
               title:
                 description: Project task title
                 type: string
@@ -85,22 +85,22 @@ content:
                 type: string
                 format: date-time
                 example: null
-              estimation_time:
-                description: Estimation time
-                type: number 
-                format: double
-                example: "5.00"
               working_time:
                 description: Working time
                 type: number
                 format: double
                 example: "0.00"
+              estimation_time:
+                description: Estimation time
+                type: number 
+                format: double
+                example: "5.00"
               id_user_assigned:
                 description: User assigned of the project
                 type: array
                 items:
                   type: string
-                  example: "213"
+                  example: "u213"
               id_customer_supplier:
                 description: Customer or supplier Id
                 type: integer
@@ -129,7 +129,7 @@ content:
                 description: Number of subtasks complete
                 type: integer
                 example: "0"
-              nb_comment:
+              nb_comments:
                 description: Number of comments
                 type: integer
                 example: "0"

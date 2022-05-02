@@ -12,7 +12,7 @@ content:
             description: >
               Customer type
 
-              > 0 = Professional <br />
+              > 0 = Professional <br>
               1 = Individual
             type: integer
             example: 0
@@ -20,7 +20,7 @@ content:
             description: >
               Customer civility - **Only for individual customer**
 
-              > 1 = Mr <br />
+              > 1 = Mr <br>
               2 = Ms
             type: integer
             example: ""
@@ -33,7 +33,7 @@ content:
             description: >
               Customer status
 
-              > 0 = Client <br />
+              > 0 = Client <br>
               1 = Prospect
             type: integer
             example: 0
@@ -64,8 +64,8 @@ content:
             description: >
               Customer language
               
-              > 1 = French <br />
-              2 = English <br />
+              > 1 = French <br>
+              2 = English <br>
               3 = Spanish
             type: integer
             example: 1
@@ -138,7 +138,7 @@ content:
                   type: integer
                   example: 3345
                 value:
-                  description: <u>[Custom field value](/#operation/Opportunities_custom_field_values_list)</u> Id
+                  description: <u>[Custom field value](/#operation/Customers_custom_field_values_list)</u> Id
                   type: string
                   example: 5900
           main_address:

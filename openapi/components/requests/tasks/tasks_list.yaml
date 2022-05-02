@@ -11,7 +11,7 @@
   description: >
     Search by task status
 
-    > 0 = Open <br />
+    > 0 = Open <br>
     1 = Close
 - in: query
   name: from
@@ -63,7 +63,7 @@
   description: >
     Search by private status
 
-    > 0 = No <br />
+    > 0 = No <br>
     1 = Yes
 - in: query
   name: visible_in_agenda
@@ -72,7 +72,7 @@
   description: >
     Search by visibility
 
-    > 0 = No <br />
+    > 0 = No <br>
     1 = Yes
 - in: query
   name: synchronized
@@ -81,7 +81,7 @@
   description: >
     Search by synchronization
 
-    > 0 = No <br />
+    > 0 = No <br>
     1 = Yes
 - in: query
   name: use_time
@@ -90,7 +90,7 @@
   description: >
     Search by task used for time
 
-    > 0 = No <br />
+    > 0 = No <br>
     1 = Yes
 - in: query
   name: time_id_type
@@ -104,15 +104,15 @@
   description: >
     Search by time billable
     
-    > 0 = No <br />
-    1 = Billable <br />
+    > 0 = No <br>
+    1 = Billable <br>
     2 = Billed
 - in: query
   name: fields
   schema:
     type: string
   description: >
-    List of fields to be returned. *By default, all fields are returned.* <br />
+    List of fields to be returned. *By default, all fields are returned.* <br>
     **Each field must be separated by a comma without space.**
 - in: query
   name: order
@@ -128,7 +128,7 @@
   description: >
     Direction for sorting
 
-    > ASC = Ascending, from A to Z. <br />
+    > ASC = Ascending, from A to Z. <br>
     DESC = Descending, from Z to A.
 - in: query
   name: limit

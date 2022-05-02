@@ -11,7 +11,7 @@ content:
             description: >
               Task status
 
-              > 0 = Open <br />
+              > 0 = Open <br>
               1 = Close
             type: integer
             example: 0
@@ -58,7 +58,7 @@ content:
             description: >
               Task private status
 
-              > 0 = No <br />
+              > 0 = No <br>
               1 = Yes
             type: integer
             example: 0
@@ -66,7 +66,7 @@ content:
             description: >
               Visibility in the agenda
 
-              > 0 = No <br />
+              > 0 = No <br>
               1 = Yes
             type: integer
             example: 1
@@ -74,7 +74,7 @@ content:
             description: >
               Task used for time
 
-              > 0 = No <br />
+              > 0 = No <br>
               1 = Yes
             type: integer
             example: 1
@@ -86,7 +86,7 @@ content:
             description: >
               Billable time
 
-              > 0 = No <br />
+              > 0 = No <br>
               1 = Billable
             type: integer
             example: 0

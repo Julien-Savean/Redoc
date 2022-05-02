@@ -1,0 +1,50 @@
+get:
+  tags:
+    - Documents
+  summary: Show
+  description: Get one document.
+  operationId: Documents_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Document](/#operation/Documents_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/documents/documents_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml  
+post:
+  tags:
+    - Documents
+  summary: Update
+  description: Update a document.
+  operationId: Documents_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/documents/documents_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Document](/#operation/Documents_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/documents/documents_object.yaml      
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

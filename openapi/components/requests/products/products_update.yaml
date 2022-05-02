@@ -27,7 +27,7 @@ content:
             format: float
             example: 50.000000
           id_vat:
-            description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+            description: <u>[Vat](/#operation/Products_vat_list)</u> Id
             type: integer
             example: 0
           id_unit:

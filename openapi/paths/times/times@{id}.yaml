@@ -1,0 +1,72 @@
+get:
+  tags:
+    - Times
+  summary: Show
+  description: Get one time.
+  operationId: Times_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Time](/#operation/Times_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/times/times_object.yaml
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500':
+      $ref: ../../components/responses/errors/500.yaml
+post:
+  tags:
+    - Times
+  summary: Update
+  description: Update a time.
+  operationId: Times_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/times/times_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Time](/#operation/Times_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/times/times_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+delete:
+  tags:
+    - Times
+  summary: Delete
+  description: Delete a time.
+  operationId: Times_delete
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Time](/#operation/Times_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK 
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

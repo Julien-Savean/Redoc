@@ -19,6 +19,8 @@ tags:
     description: This section lists all contact-related APIs.
   - name: Opportunities
     description: This section lists all opportunity-related APIS.
+  - name: Documents
+    description: This section lists all documents-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
   - name: Expenses
@@ -80,14 +82,20 @@ paths:
     $ref: paths/opportunities/opportunities@{id}@custom_fields@{field_id}.yaml
   /opportunities/pipelines:
     $ref: paths/opportunities/opportunities@pipelines.yaml
-  /opportunities/pipelines/{id}/columns:
-    $ref: paths/opportunities/opportunities@pipelines@{id}@columns.yaml
+  /opportunities/pipelines/{pipeline_id}/columns:
+    $ref: paths/opportunities/opportunities@pipelines@{pipeline_id}@columns.yaml
   /opportunities/status:
     $ref: paths/opportunities/opportunities@status.yaml
   /opportunities/status-lost:
     $ref: paths/opportunities/opportunities@status_lost.yaml
   /opportunities/status-canceled:
     $ref: paths/opportunities/opportunities@status_canceled.yaml
+  /documents:
+    $ref: paths/documents/documents.yaml
+  /documents/{id}:
+    $ref: paths/documents/documents@{id}.yaml
+  /documents/templates:
+    $ref: paths/documents/documents@templates.yaml
   /products:
     $ref: paths/products/products.yaml
   /products/{id}:
@@ -106,8 +114,8 @@ paths:
     $ref: paths/products/products@sells_prices_categories.yaml
   /products/categories:
     $ref: paths/products/products@categories.yaml
-  /products/categories/{id}:
-    $ref: paths/products/products@categories@{id}.yaml
+  /products/categories/{category_id}:
+    $ref: paths/products/products@categories@{category_id}.yaml
   /products/vat:
     $ref: paths/products/products@vat.yaml
   /products/units:
@@ -136,24 +144,42 @@ paths:
     $ref: paths/tasks/tasks@{id}.yaml
   /tasks/types:
     $ref: paths/tasks/tasks@types.yaml
+  /times:
+    $ref: paths/times/times.yaml
+  /times/{id}:
+    $ref: paths/times/times@{id}.yaml
   /times/types:
-    $ref: paths/times/types.yaml
+    $ref: paths/times/times@types.yaml
   /projects:
-   $ref: paths/projects/projects.yaml
+    $ref: paths/projects/projects.yaml
   /projects/{id}:
-   $ref: paths/projects/projects@{id}.yaml
+    $ref: paths/projects/projects@{id}.yaml
   /projects/status:
-   $ref: paths/projects/projects@status.yaml
+    $ref: paths/projects/projects@status.yaml
+  /projects/custom-fields:
+    $ref: paths/projects/projects@custom_fields.yaml
+  /projects/custom-fields/{field_id}:
+    $ref: paths/projects/projects@custom_fields@{field_id}.yaml
   /projects/{id}/tasks:
-   $ref: paths/projects/projects@{id}@tasks.yaml
+    $ref: paths/projects/projects@{id}@tasks.yaml
+  /projects/{id}/tasks/{task_id}:
+    $ref: paths/projects/projects@{id}@tasks@{task_id}.yaml
+  /projects/{id}/tasks/{task_id}/custom-fields/{field_id}:
+    $ref: paths/projects/projects@{id}@tasks@{task_id}@custom_fields@{field_id}.yaml
+  /projects/{id}/tasks/{task_id}/comments:
+    $ref: paths/projects/projects@{id}@tasks@{task_id}@comments.yaml
   /projects/tasks/status:
-   $ref: paths/projects/projects@tasks@status.yaml
+    $ref: paths/projects/projects@tasks@status.yaml
   /projects/{id}/tasks/status:
-   $ref: paths/projects/projects@{id}@tasks@status.yaml
+    $ref: paths/projects/projects@{id}@tasks@status.yaml
   /projects/{id}/tasks/phases:
-   $ref: paths/projects/projects@{id}@tasks@phases.yaml
+    $ref: paths/projects/projects@{id}@tasks@phases.yaml
   /projects/tasks/priorities:
-   $ref: paths/projects/projects@tasks@priorities.yaml
+    $ref: paths/projects/projects@tasks@priorities.yaml
+  /projects/{id}/tasks/{task_id}/subtasks:
+    $ref: paths/projects/projects@{id}@tasks@{task_id}@subtasks.yaml
+  /projects/{id}/tasks/{task_id}/subtasks/{subtask_id}:
+    $ref: paths/projects/projects@{id}@tasks@{task_id}@subtasks@{subtask_id}.yaml
   /users:
     $ref: paths/users/users.yaml
   /users/groups:
@@ -164,11 +190,11 @@ components:
   securitySchemes:
     Bearer token:
       description: >
-        In order to log in, you need to generate an API key via the Karlia website:  <br />
-          1. Sign in with your existing account. <br />
-          2. Once logged in, click on your initial in the upper right corner.  <br />
-          3. Select "Settings".  <br />
-          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br /> <br />
+        In order to log in, you need to generate an API key via the Karlia website:  <br>
+          1. Sign in with your existing account. <br>
+          2. Once logged in, click on your initial in the upper right corner.  <br>
+          3. Select "Settings".  <br>
+          4. In the "API" section, click on the "Use API" button. Then a unique API key will then be generated.  <br> <br>
 
         The API use Bearer Authorization in request header.
       type: http

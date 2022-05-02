@@ -1,0 +1,16 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - id_user
+          - comment
+        properties:
+          id_user:
+            description: <u>[User](/#operation/Users_list)</u> Id
+            type: integer
+            example: 213
+          comment:
+            description: Comment
+            type: string
+            example: "Comment #1"

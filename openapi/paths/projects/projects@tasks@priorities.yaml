@@ -1,15 +1,15 @@
 get:
   tags:
     - Projects
-  summary: Priorities of projects tasks
+  summary: Tasks - Priorities
   description: Get a list of all priorities.
-  operationId: Projects_priorities
+  operationId: Projects_tasks_priorities
   security:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/projects/projects_tasks_priorities.yaml      
+      $ref: ../../components/responses/projects/projects_tasks_priorities.yaml
     '401':
-      $ref: ../../components/responses/errors/401.yaml 
+      $ref: ../../components/responses/errors/401.yaml
     '500':
-      $ref: ../../components/responses/errors/500.yaml    
+      $ref: ../../components/responses/errors/500.yaml

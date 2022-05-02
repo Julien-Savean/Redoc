@@ -44,7 +44,7 @@ content:
             description: >
               Opportunity condition
 
-              > 0 = Active <br />
+              > 0 = Active <br>
               1 = Archived
             type: integer
             example: 0

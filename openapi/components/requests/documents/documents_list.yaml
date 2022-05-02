@@ -1,0 +1,81 @@
+- in: query
+  name: from
+  schema:
+    type: string
+    format: date-time
+  description: Search by document date
+- in: query
+  name: to
+  schema:
+    type: string
+    format: date-time
+  description: Search by expiration date
+- in: query
+  name: type
+  schema: 
+    type: integer
+  description: >
+    Document type
+
+    > 1 => Quotes <br>
+    2 => Orders <br>
+    3 => Deliveries <br>
+    4 => Invoices
+- in: query
+  name: id_customer
+  schema:
+    type: integer
+  description: Search by <u>[customer](/#operation/Customers_list)</u> Id
+- in: query
+  name: id_user_assigned
+  schema:
+    type: string
+  description: <u>[Users with group](/#operation/Users_with_group)</u> Id associated with the oportunity
+- in: query
+  name: document_number
+  schema:
+    type: string
+    maxLength: 30
+  description: Document number
+- in: query
+  name: pipeline
+  schema:
+    type: integer
+  description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.* <br>
+    **Each field must be separated by a comma without space.**
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: string
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z. <br>
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    default: 0
+  description: Offset for paging
+

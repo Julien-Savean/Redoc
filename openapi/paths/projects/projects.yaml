@@ -15,3 +15,22 @@ get:
       $ref: ../../components/responses/errors/401.yaml 
     '500':
       $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Projects
+  summary: Create
+  description: Create a project.
+  operationId: Projects_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/projects/projects_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

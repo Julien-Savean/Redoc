@@ -1,7 +1,7 @@
 get:
   tags:
     - Projects
-  summary: Status of project tasks
+  summary: Tasks - Status of one project
   description: Get a list of all status of one project task.
   operationId: Projects_tasks_status
   security:

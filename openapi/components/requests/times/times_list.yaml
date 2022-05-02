@@ -1,0 +1,84 @@
+- in: query
+  name: id_user
+  schema:
+    type: integer
+  description: <u>[User](/#operation/Users)</u> Id
+- in: query
+  name: id_project
+  schema:
+    type: integer
+  description: Search by <u>[project](/#operation/Projects_list)</u> Id
+- in: query
+  name: id_project_task
+  schema:
+    type: integer
+  description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
+- in: query
+  name: id_customer_supplier
+  schema:
+    type: integer
+  description: Search by <u>[customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
+- in: query
+  name: id_type
+  schema:
+    type: integer
+  description: Search by <u>[time type](/#operation/Times_types)</u> Id
+- in: query
+  name: billable
+  schema:
+    type: integer
+  description: >
+    Search by time billable
+    
+    > 0 = No <br>
+    1 = Billable <br>
+    2 = Billed
+- in: query
+  name: from
+  schema:
+    type: string
+    format: date-time
+  description: Search by min date
+- in: query
+  name: to
+  schema:
+    type: string
+    format: date-time
+  description: Search by max date
+- in: query
+  name: fields
+  schema:
+    type: string
+  description: >
+    List of fields to be returned. *By default, all fields are returned.* <br>
+    **Each field must be separated by a comma without space.**
+- in: query
+  name: order
+  schema:
+    type: string
+    maxLength: 64
+  description: Name of the field to sort on
+- in: query
+  name: direction
+  schema:
+    type: string
+    maxLength: 4
+  description: >
+    Direction for sorting
+
+    > ASC = Ascending, from A to Z. <br>
+    DESC = Descending, from Z to A.
+- in: query
+  name: limit
+  schema:
+    type: integer
+    default: 100
+  description: >
+    Number of objects to be returned for paging
+- in: query
+  name: offset
+  schema:
+    type: integer
+    default: 0
+  description: Offset for paging
+

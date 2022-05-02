@@ -1,0 +1,110 @@
+get:
+  tags:
+    - Projects
+  summary: Subtasks - Show
+  description: Get one subtask of a project task.
+  operationId: Projects_subtasks_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Project](/#operation/Projects_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: task_id
+    description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+    schema:
+      type: integer
+    required: true 
+  - in: path
+    name: subtask_id
+    description: <u>[Subtask of a project task](/#operation/Projects_subtasks_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_subtasks_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Projects
+  summary: Subtasks - Update
+  description: Update a subtask of a project task.
+  operationId: Projects_subtasks_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/projects/projects_subtasks_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Project](/#operation/Projects_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: task_id
+    description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: subtask_id
+    description: <u>[Subtask of a project task](/#operation/Projects_subtasks_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_subtasks_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+delete:
+  tags:
+    - Projects
+  summary: Subtasks - Delete
+  description: Delete a subtask of a project task.
+  operationId: Projects_subtasks_delete
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Project](/#operation/Projects_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: task_id
+    description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: subtask_id
+    description: <u>[Subtask of a project task](/#operation/Projects_subtasks_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK    
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

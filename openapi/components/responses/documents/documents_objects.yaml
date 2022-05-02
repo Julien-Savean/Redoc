@@ -1,0 +1,129 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 14
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Document Id
+                type: integer
+                example: "2758"
+              id_customer_supplier:
+                description: Customer Id
+                type: integer
+                example: "48560"
+              pipeline: 
+                description: Pipeline Id
+                type: integer
+                example: "1934"
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: "1985"
+              id_type:
+                description: Document type Id
+                type: integer
+                example: "1"
+              type_text: 
+                description: Document type title
+                type: string
+                example: "Quotes"
+              number:
+                description: Document number
+                type: integer
+                example: ""
+              date:
+                description: Document date
+                type: string
+                format: date-time
+                example: "2022-05-16 16:15:00"
+              date_end:
+                description: Expiration date
+                type: string
+                format: date-time
+                example: "2022-05-30 14:00:00"
+              id_user_assigned:
+                description: Document client mamager id
+                type: array
+                items:
+                  type: string
+                  example: "u213"
+              id_user_assigned_text:
+                description: Document client mamager name
+                type: array
+                items:
+                  type: string
+                  example: "Jean Dupont"
+              total_without_tax: 
+                description: Total HT
+                type: number
+                example: "125.00"
+              total_with_tax:
+                description: Total TTC
+                type: number
+                example: "150.00"
+              currency_code:
+                description: Currency code
+                type: string
+                example: "EUR"
+              currency_exchange_rate:
+                description: Currency exchange rate
+                type: number
+                format: float
+                example: "1.000000"
+              total_already_paid:
+                description: Total already paid
+                type: number
+                format: double
+                example: "0.00"  
+              payment_date:
+                description: Payment date
+                type: string
+                format: date-time
+                example: "2022-06-16 00:00:00"
+              id_document_previous: 
+                description: Previous document Id
+                type: integer
+                example: "2757"
+              id_document_next: 
+                description: Next document Id
+                type: integer
+                example: "2759"
+              id_status: 
+                description: Document status Id
+                type: integer
+                example: "0"
+              status_text: 
+                description: Document status title
+                type: string
+                example: "Draft"
+              canceled:    
+                description: Cancellation
+                type: integer
+                example: "0"                  

@@ -1,0 +1,25 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Template Id
+                type: integer
+              title:
+                description: Template title
+                type: string
+          example: 
+            - id: "36"
+              title: "Template #1"

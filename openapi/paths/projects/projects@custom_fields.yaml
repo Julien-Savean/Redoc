@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Projects
+  summary: Custom fields
+  description: Get a list of all projects custom fields.
+  operationId: Projects_custom_fields_list
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_custom_fields.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

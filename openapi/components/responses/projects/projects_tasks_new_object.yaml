@@ -1,0 +1,183 @@
+description: OK
+content:
+  application/json:
+    schema:
+      description: Response of the request
+      type: object
+      properties:
+        id:
+          description: Task Id
+          type: integer
+          example: "435"
+        number:
+          description: Number
+          type: integer
+          example: "1"
+        column_number:
+          description: Column number
+          type: integer 
+          example:  "5"
+        column_number_last_update:
+          description: Update date of column number
+          type: string
+          format: date-time
+          example: "2022-04-04 09:44:49"
+        position:
+          description: Position 
+          type: integer
+          example: "1"
+        milestone:
+          description: Milestone
+          type: integer
+          example: "0"     
+        status:
+          description: Id status of project task
+          type: integer
+          example: "91"
+        title:
+          description: Project task title
+          type: string
+          example: "Project task #1"
+        description: 
+          description: Description
+          type: string
+          example: "A description or note about this project task"
+        priority:
+          description: Priority Id
+          type: integer
+          example: "0"
+        color:
+          description: Color
+          type: string
+          example: "95a5a6"
+        starting_date:
+          description: Starting date
+          type: string
+          format: date-time
+          example: "2022-03-15 19:45:00"
+        due_date:
+          description: Due date
+          type: string
+          format: date-time
+          example: null
+        working_time:
+          description: Working time
+          type: number
+          format: double
+          example: "0.00"
+        estimation_time:
+          description: Estimation time
+          type: number 
+          format: double
+          example: "5.00"
+        id_user_assigned:
+          description: User assigned of the project
+          type: array
+          items:
+            type: string
+            example: "u213"
+        id_customer_supplier:
+          description: Customer or supplier Id
+          type: integer
+          example: "28496"
+        id_opportunity:
+          description: Opportunity Id
+          type: integer
+          example: "1985"
+        id_phase:
+          description: Phase Id
+          type: integer
+          example: "0"
+        skills:
+          description: Skills
+          type: array
+          example: [] 
+        nb_subtask:
+          description: Number of subtasks
+          type: integer
+          example: "0"
+        nb_subtask_complete:
+          description: Number of subtasks complete
+          type: integer
+          example: "0"
+        nb_comments:
+          description: Number of comments
+          type: integer
+          example: "0"
+        nb_files:
+          description: Number of files
+          type: integer
+          example: "0"
+        nb_events:
+          description: Number of events
+          type: integer
+          example: "0"
+        nb_events_notes:
+          description: Number of events notes
+          type: integer
+          example: "0"
+        nb_events_tasks:
+          description: Number of events tasks
+          type: integer
+          example: "0"
+        nb_conversations_emails:       
+          description: Number of conversations emails
+          type: integer
+          example: "0"
+        archived:
+          description: Archived status of the project tasks
+          type: integer
+          example: "0"
+        custom_fields_list:
+          description: List of custom fields
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Custom field Id
+                type: integer
+              title:
+                description:  Custom field title
+                type: string
+              value:
+                description: Custom field number
+                type: integer
+              value_text: 
+                description: Custom field value
+                type: string
+          example:
+            - id: "3483"
+              title: "Priority"
+              value: "6089"
+              value_text: "Low"
+        subtasks_list:
+          description: List of subtasks
+          type: array
+          example: []
+        comments_list:
+          description: List of comments
+          type: array
+          example: []
+        files_list:
+          description: List of files
+          type: array
+          example: []
+        creation_date:
+          description: Creation date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        created_by:
+          description: Id of the creator
+          type: integer
+          example: "213"
+        update_date:
+          description: Update date and time
+          type: string
+          format: date-time
+          example: "2022-03-25 12:04:24"
+        updated_by: 
+          description: Id of the updater
+          type: integer
+          example: "213"

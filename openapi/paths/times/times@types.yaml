@@ -8,7 +8,7 @@ get:
     - Bearer token: []
   responses:
     '200':
-      $ref: ../../components/responses/times/types.yaml   
+      $ref: ../../components/responses/times/times_types.yaml   
     '401':
       $ref: ../../components/responses/errors/401.yaml 
     '500':

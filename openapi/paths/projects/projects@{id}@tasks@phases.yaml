@@ -1,7 +1,7 @@
 get:
   tags:
     - Projects
-  summary: Phases of project tasks
+  summary: Tasks - Phases
   description: Get a list of all phases of project tasks.
   operationId: Projects_tasks_phases
   security:

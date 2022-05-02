@@ -35,8 +35,8 @@ content:
             description: >
               Supplier language
               
-              > 1 = French <br />
-              2 = English <br />
+              > 1 = French <br>
+              2 = English <br>
               3 = Spanish
             type: integer
             example: 1

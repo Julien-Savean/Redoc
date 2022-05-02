@@ -1,0 +1,36 @@
+get:
+  tags:
+    - Times
+  summary: List
+  description: Get a list of all times.
+  operationId: Times_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/times/times_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/times/times_objects.yaml    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Times
+  summary: Create
+  description: Create a time.
+  operationId: Times_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/times/times_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/times/times_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

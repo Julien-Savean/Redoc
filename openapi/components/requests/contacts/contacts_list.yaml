@@ -4,7 +4,7 @@
     type: string
     maxLength: 127
   description: >
-    Quick search field <br />
+    Quick search field <br>
     *If this field is filled in, the other search fields are not taken into account.
     The search is then performed in the entire customer database.*
 - in: query
@@ -20,7 +20,7 @@
   description: >
     Search by status
 
-    > 1 = Mr <br />
+    > 1 = Mr <br>
     2 = Ms
 - in: query
   name: lastname
@@ -70,7 +70,7 @@
   schema:
     type: string
   description: >
-    List of fields to be returned. *By default, all fields are returned.* <br />
+    List of fields to be returned. *By default, all fields are returned.* <br>
     **Each field must be separated by a comma without space.**
 - in: query
   name: order
@@ -86,7 +86,7 @@
   description: >
     Direction for sorting
 
-    > ASC = Ascending, from A to Z. <br />
+    > ASC = Ascending, from A to Z. <br>
     DESC = Descending, from Z to A.
 - in: query
   name: limit

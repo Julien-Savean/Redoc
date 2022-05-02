@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Documents
+  summary: Templates
+  description: Get a list of all documents templates.
+  operationId: Documents_templates
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/documents/documents_templates.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

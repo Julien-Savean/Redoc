@@ -1,0 +1,45 @@
+content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            description: <u>[Project](/#operation/Projects_list)</u> title
+            type: string
+            example: "Project #1"
+          status: 
+            description: <u>[Tasks status](/#operation/Projects_tasks_status)</u> Id
+            type: integer
+            example: 89
+          section:
+            description: >
+              Nature of the subtask
+
+              > 0 = Subtask <br>
+              1 = Section
+            type: integer
+            example: 0
+          starting_date:
+            description: Start date
+            type: string
+            format: date-time
+            example: "2022-07-01 12:00:00"
+          due_date:
+            description: >
+              Due date <br>
+
+              ***
+
+              **Working_time is not editable, this field is linked to times.** <br>
+              **Please add or edit times on this task to update working_time**
+            type: string
+            format: date-time
+            example: "2022-09-31 00:00:00"
+          estimation_time:
+            description: Time estimated
+            type: string
+            example: 2:00
+          id_user_assigned:
+            description: <u>[User with group](/#operation/Users_groups)</u> Id associated with the task
+            type: integer
+            example: 213

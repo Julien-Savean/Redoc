@@ -1,7 +1,7 @@
 get:
   tags:
     - Projects
-  summary: Project tasks
+  summary: Tasks - List
   description: Get a list of all project tasks.
   operationId: Projects_tasks_list
   security:
@@ -16,6 +16,25 @@ get:
   responses:
     '200':
       $ref: ../../components/responses/projects/projects_tasks_objects.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml  
+post:
+  tags:
+    - Projects
+  summary: Tasks - Create
+  description: Create a project task.
+  operationId: Projects_tasks_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/projects/projects_tasks_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/projects/projects_tasks_new_object.yaml
     '400': 
       $ref: ../../components/responses/errors/400.yaml       
     '401':

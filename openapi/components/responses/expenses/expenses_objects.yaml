@@ -51,12 +51,12 @@ content:
                 type: string
                 example: "Draft"
               date:
-                description: Start date
+                description: Expense date
                 type: string
                 format: date-time
                 example: "2022-04-01"
               date_end: 
-                description: End date
+                description: Due date
                 type: string
                 format: date-time
                 example: "2022-05-01"

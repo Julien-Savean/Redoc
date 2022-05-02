@@ -8,7 +8,7 @@ get:
     - Bearer token: []
   parameters:
   - in: path
-    name: id
+    name: category_id
     description: <u>[Category](/#operation/Products_categories_list)</u> Id
     schema:
       type: integer
@@ -34,7 +34,7 @@ post:
     $ref: ../../components/requests/products/products_categories_update.yaml
   parameters:
   - in: path
-    name: id
+    name: category_id
     description: <u>[Category](/#operation/Products_categories_list)</u> Id
     schema:
       type: integer

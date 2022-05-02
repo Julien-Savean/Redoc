@@ -1,0 +1,83 @@
+content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            description: <u>[Project](/#operation/Projects_list)</u> title
+            type: string
+            example: "Project #1"
+          column_number:
+            description: Column number in the project
+            type: integer        
+            example: "1"
+          status: 
+            description: <u>[Tasks status](/#operation/Projects_tasks_status)</u> Id
+            type: integer
+            example: 89
+          description: 
+            description: Task descritpion
+            type: string
+            example: "A description or note about this task"
+          priority:
+            description: <u>[Task priority](/#operation/Projects_tasks_priorities)</u> Id
+            type: integer
+            example: "0"
+          starting_date:
+            description: Start date
+            type: string
+            format: date-time
+            example: "2022-07-01 12:00:00"
+          due_date:
+            description: >
+              Due date <br>
+
+              ***
+
+              **Working_time is not editable, this field is linked to times.** <br>
+              **Please add or edit times on this task to update working_time**
+            type: string
+            format: date-time
+            example: "2022-09-31 00:00:00"
+          estimation_time:
+            description: Time estimated
+            type: string
+            example: 2:00
+          id_user_assigned:
+            description: <u>[User with group](/#operation/Users_groups)</u> Id associated with the task
+            type: integer
+            example: 213
+          id_customer_supplier:
+            description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
+            type: integer
+            example: 28496
+          id_opportunity:
+            description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+            type: integer
+            example: 1985
+          id_phase:
+            description: <u>[Task phase](/#operation/Projects_tasks_phases)</u> Id
+            type: integer
+            example: 10
+          archived:
+            description: >
+              Project condition
+
+              > 0 = Active <br>
+              1 = Archived
+            type: integer
+            example: 0
+          custom_fields:
+            description: Custom fields
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: <u>[Custom field](/#operation/Projects_custom_fields_list)</u> Id
+                  type: integer
+                  example: 3383
+                value:
+                  description: <u>[Custom field value](/#operation/Projects_custom_field_values_list)</u> Id
+                  type: string
+                  example: 6089

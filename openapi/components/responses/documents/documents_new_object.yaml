@@ -52,12 +52,12 @@ content:
           description: Document date
           type: string
           format: date-time
-          example: "2022-05-16 16:15:00"
+          example: "2022-05-16"
         date_end:
           description: Expiration date
           type: string
           format: date-time
-          example: "2022-05-30 14:00:00"
+          example: "2022-05-30"
         id_payment_condition:
           description: Payment condition Id
           type: integer
@@ -244,6 +244,28 @@ content:
               created_by: "213"
               update_date: "2022-04-19 14:45:28"
               updated_by: "213"
+            - section: "1"
+              id_product: "0"
+              title: "Section #1"
+              reference: ""
+              description: "A description or note about this section"
+              price_without_tax: "0.000000"
+              id_vat: "0"
+              quantity: "1.00"
+              quantity_delivered: "1.00"
+              id_unit: "0"
+              discount_type: "percent"
+              discount_value: 0
+              progress_type: "percent"
+              progress_value: 0
+              total_without_tax: "0.000"
+              total_cost: "0.00"
+              hide_in_pdf: "0"
+              optional: "0"
+              creation_date: "2022-04-19 14:45:28"
+              created_by: "213"
+              update_date: "2022-04-19 14:45:28"
+              updated_by: "213"              
         creation_date:
           description: Creation date and time
           type: string

@@ -129,7 +129,7 @@ content:
           description: Payment date
           type: string
           format: date-time
-          example: "2022-06-16 00:00:00"
+          example: "2022-06-16"
         use_stripe_to_pay:
           description: Stripe use
           type: integer 
@@ -223,28 +223,50 @@ content:
                 description: Id of the updater
                 type: integer
           example:
-            section: "0"
-            id_product: "4739"
-            title: "Product #1"
-            reference: "Ref_product_1"
-            description: "A description or note about this product"
-            price_without_tax: "50.000000"
-            id_vat: "1"
-            quantity: "2.50"
-            quantity_delivered: "0"
-            id_unit: "2"
-            discount_type: "percent"
-            discount_value: 0
-            progress_type: "percent"
-            progress_value: 0
-            total_without_tax: "125.00"
-            total_cost: "150.00"
-            hide_in_pdf: "0"
-            optional: "0"
-            creation_date: "2022-04-19 14:45:28"
-            created_by: "213"
-            update_date: "2022-04-19 14:45:28"
-            updated_by: "213"
+            - section: "0"
+              id_product: "4739"
+              title: "Product #1"
+              reference: "Ref_product_1"
+              description: "A description or note about this product"
+              price_without_tax: "50.000000"
+              id_vat: "1"
+              quantity: "2.50"
+              quantity_delivered: "0"
+              id_unit: "2"
+              discount_type: "percent"
+              discount_value: 0
+              progress_type: "percent"
+              progress_value: 0
+              total_without_tax: "125.00"
+              total_cost: "150.00"
+              hide_in_pdf: "0"
+              optional: "0"
+              creation_date: "2022-04-19 14:45:28"
+              created_by: "213"
+              update_date: "2022-04-19 14:45:28"
+              updated_by: "213"
+            - section: "1"
+              id_product: "0"
+              title: "Section #1"
+              reference: ""
+              description: "A description or note about this section"
+              price_without_tax: "0.000000"
+              id_vat: "0"
+              quantity: "1.00"
+              quantity_delivered: "1.00"
+              id_unit: "0"
+              discount_type: "percent"
+              discount_value: 0
+              progress_type: "percent"
+              progress_value: 0
+              total_without_tax: "0.000"
+              total_cost: "0.00"
+              hide_in_pdf: "0"
+              optional: "0"
+              creation_date: "2022-04-19 14:45:28"
+              created_by: "213"
+              update_date: "2022-04-19 14:45:28"
+              updated_by: "213"              
         creation_date:
           description: Creation date and time
           type: string

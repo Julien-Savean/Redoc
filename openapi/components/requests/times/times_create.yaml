@@ -46,7 +46,7 @@ content:
             description: Time date
             type: string
             format: date-time
-            example: "2022-07-15 13:29:00"
+            example: "2022-07-15"
           time_done:
             description: Time done
             type: string

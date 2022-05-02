@@ -62,12 +62,12 @@ content:
                 description: Document date
                 type: string
                 format: date-time
-                example: "2022-05-16 16:15:00"
+                example: "2022-05-16"
               date_end:
                 description: Expiration date
                 type: string
                 format: date-time
-                example: "2022-05-30 14:00:00"
+                example: "2022-05-30"
               id_user_assigned:
                 description: Document client mamager id
                 type: array
@@ -106,7 +106,7 @@ content:
                 description: Payment date
                 type: string
                 format: date-time
-                example: "2022-06-16 00:00:00"
+                example: "2022-06-16"
               id_document_previous: 
                 description: Previous document Id
                 type: integer

@@ -20,12 +20,12 @@ content:
             description: Document date
             type: string
             format: date-time
-            example: "2022-05-16 16:15:00"
+            example: "2022-05-16"
           date_end:
             description: Expiration date - **Not editable for invoices**
             type: string
             format: date-time
-            example: "2022-05-30 14:00:00"
+            example: "2022-05-30"
           id_payment_condition:
             description: >
               Payment condition Id - **Only for invoices** <br>
@@ -71,43 +71,35 @@ content:
 
                         > 0 = Product
                       type: integer
-                      example: "0"
                     id_product:
                       description: >
                         <u>[Product](/#operation/Products_list)</u> Id - `id_product OR reference required`
                       type: integer
-                      example: "4739"
                     reference: 
                       description: Product reference - `id_product OR reference required`
                       type: string
                       maxLength: 30
-                      example: "Ref_product_1"
                     description:
                       description: >
                         Product description <br>
                         *By defaut, the value of the product sheet* 
                       type: string
-                      example: "A description or note about this product"
                     price_without_tax:
                       description: > 
                         Price HT <br>
                         *By defaut, the [value](/#operation/Products_sell_price) of the product sheet* 
-                      type: number 
-                      example: "125.00"
+                      type: number
                     quantity:
                       description: Product quantity
                       type: number
                       format: float
-                      example: "2.50"
                     quantity_delivered:
                       description: Product quantity delivered - **Only for deliveries**
                       type: number
                       format: float
-                      example: "0"
                     id_vat:
                       description: <u>[Vat](/#operation/Products_vat_list)</u> Id
-                      type: integer   
-                      example: "1"    
+                      type: integer
                 - type: object
                   title: Section
                   properties:
@@ -123,4 +115,16 @@ content:
                       maxLength: 255
                     description:
                       description: Section description 
-                      type: string        
+                      type: string 
+            example:
+              - section: "0"
+                id_product: "4739"
+                reference: "Ref_product_1"
+                description: "A description or note about this product"
+                price_without_tax: "125.00"
+                quantity: "2.50"
+                quantity_delivered: "0"
+                id_vat: "1"  
+              - section: "1"
+                title: "Section #1"
+                description: "A description or note about this section"  

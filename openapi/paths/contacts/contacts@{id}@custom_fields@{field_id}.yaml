@@ -1,8 +1,8 @@
 post:
   tags:
     - Contacts
-  summary: Add/Update custom fields
-  description:  Values of contacts custom field.
+  summary: Add/Update custom field
+  description:  Add or update a contact custom field.
   operationId: Contacts_custom_field_values_add_update
   security:
     - Bearer token: []

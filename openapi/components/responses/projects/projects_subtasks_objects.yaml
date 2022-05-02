@@ -29,7 +29,7 @@ content:
           type: array
           items:
             type: object
-             properties:
+            properties:
               id:
                 description: Subtask Id
                 type: integer

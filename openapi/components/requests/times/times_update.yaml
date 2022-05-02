@@ -2,58 +2,58 @@ content:
     application/json:
       schema:
         type: object
-          properties:
-            id_user:
-              description: <u>[User](/#operation/Users)</u> Id 
-              type: integer
-              example: 213
-            id_project:
-              description: <u>[Project](/#operation/Projects_list)</u> Id
-              type: integer
-              example: 435
-            id_project_task:
-              description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
-              type: integer
-              example: 89
-            id_project_task_subtask:
-              description: <u>[Project subtask](/#operation/Projects_subtasks_list)</u> Id
-              type: integer
-              example: ""
-            id_customer_supplier:
-              description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
-              type: integer
-              example: 28496
-            id_opportunity:
-              description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
-              type: integer
-              example: 1985
-            id_type:
-              description: <u>[Time type](/#operation/Times_types)</u> Id
-              type: integer
-              example: 8
-            billable:
-              description: >
-                Billable time
+        properties:
+          id_user:
+            description: <u>[User](/#operation/Users)</u> Id 
+            type: integer
+            example: 213
+          id_project:
+            description: <u>[Project](/#operation/Projects_list)</u> Id
+            type: integer
+            example: 435
+          id_project_task:
+            description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+            type: integer
+            example: 89
+          id_project_task_subtask:
+            description: <u>[Project subtask](/#operation/Projects_subtasks_list)</u> Id
+            type: integer
+            example: ""
+          id_customer_supplier:
+            description: <u>[Customer](/#operation/Customers_list)</u> Id or <u>[supplier](/#operation/Suppliers_list)</u> Id
+            type: integer
+            example: 28496
+          id_opportunity:
+            description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+            type: integer
+            example: 1985
+          id_type:
+            description: <u>[Time type](/#operation/Times_types)</u> Id
+            type: integer
+            example: 8
+          billable:
+            description: >
+              Billable time
 
-                > 0 = No <br>
-                1 = Billable <br>
-                2 = Billed
-              type: integer
-              example: 0
-            time_date:
-              description: Time date
-              type: string
-              format: date-time
-              example: "2022-07-15 13:29:00"
-            time_done:
-              description: Time done
-              type: string
-              example: "01:30"
-            time_planified: 
-              description: Time planned
-              type: string
-              example: "02:00"
-            description: 
-              description: Time descritpion
-              type: string
-              example: "A description or note about this time"
+              > 0 = No <br>
+              1 = Billable <br>
+              2 = Billed
+            type: integer
+            example: 0
+          time_date:
+            description: Time date
+            type: string
+            format: date-time
+            example: "2022-07-15 13:29:00"
+          time_done:
+            description: Time done
+            type: string
+            example: "01:30"
+          time_planified: 
+            description: Time planned
+            type: string
+            example: "02:00"
+          description: 
+            description: Time descritpion
+            type: string
+            example: "A description or note about this time"

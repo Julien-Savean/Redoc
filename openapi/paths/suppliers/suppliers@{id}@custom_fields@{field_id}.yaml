@@ -1,8 +1,8 @@
 post:
   tags:
     - Suppliers
-  summary: Add/Update custom fields
-  description:  Values of suppliers custom field.
+  summary: Add/Update custom field
+  description:  Add or update a supplier custom field.
   operationId: Suppliers_custom_field_values_add_update
   security:
     - Bearer token: []

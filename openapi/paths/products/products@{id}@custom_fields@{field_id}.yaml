@@ -1,8 +1,8 @@
 post:
   tags:
     - Products
-  summary: Add/Update custom fields
-  description:  Values of products custom field.
+  summary: Add/Update custom field
+  description:  Add or update a product custom field.
   operationId: Products_custom_field_values_add_update
   security:
     - Bearer token: []

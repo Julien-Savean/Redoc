@@ -30,6 +30,8 @@ tags:
     description: This section lists all contact-related APIs.
   - name: Opportunities
     description: This section lists all opportunity-related APIS.
+  - name: Documents
+    description: This section lists all documents-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
   - name: Expenses
@@ -164,11 +166,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -308,8 +308,8 @@ paths:
     post:
       tags:
         - Customers
-      summary: Add/Update custom fields
-      description: Values of customers custom field.
+      summary: Add/Update custom field
+      description: Add or update a customer custom field.
       operationId: Customers_custom_field_values_add_update
       security:
         - Bearer token: []
@@ -440,11 +440,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -469,7 +467,7 @@ paths:
       tags:
         - Suppliers
       summary: Create
-      description: Create a supplier
+      description: Create a supplier.
       operationId: Suppliers_create
       security:
         - Bearer token: []
@@ -582,8 +580,8 @@ paths:
     post:
       tags:
         - Suppliers
-      summary: Add/Update custom fields
-      description: Values of suppliers custom field.
+      summary: Add/Update custom field
+      description: Add or update a supplier custom field.
       operationId: Suppliers_custom_field_values_add_update
       security:
         - Bearer token: []
@@ -709,11 +707,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -853,8 +849,8 @@ paths:
     post:
       tags:
         - Contacts
-      summary: Add/Update custom fields
-      description: Values of contacts custom field.
+      summary: Add/Update custom field
+      description: Add or update a contact custom field.
       operationId: Contacts_custom_field_values_add_update
       security:
         - Bearer token: []
@@ -974,11 +970,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -1085,6 +1079,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                example: null
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1140,8 +1138,8 @@ paths:
     post:
       tags:
         - Opportunities
-      summary: Add/Update custom fields
-      description: Values of opportunities custom field.
+      summary: Add/Update custom field
+      description: Add or update a opportunity custom field.
       operationId: Opportunities_custom_field_values_add_update
       security:
         - Bearer token: []
@@ -1176,7 +1174,7 @@ paths:
       tags:
         - Opportunities
       summary: Pipelines
-      description: Get a list of all opportunity pipelines.
+      description: Get a list of all opportunities pipelines.
       operationId: Opportunities_list_pipelines
       security:
         - Bearer token: []
@@ -1187,18 +1185,18 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
-  /opportunities/pipelines/{id}/columns:
+  /opportunities/pipelines/{pipeline_id}/columns:
     get:
       tags:
         - Opportunities
       summary: Pipelines columns
-      description: Get opportunity pipeline columns.
+      description: Get opportunities pipeline columns.
       operationId: Opportunities_list_pipelines_columns
       security:
         - Bearer token: []
       parameters:
         - in: path
-          name: id
+          name: pipeline_id
           description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
           schema:
             type: integer
@@ -1260,6 +1258,188 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+  /documents:
+    get:
+      tags:
+        - Documents
+      summary: List
+      description: Get a list of all documents.
+      operationId: Documents_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Search by document date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Search by expiration date
+        - in: query
+          name: type
+          schema:
+            type: integer
+          description: >
+            Document type
+
+            > 1 => Quotes <br> 2 => Orders <br> 3 => Deliveries <br> 4 =>
+            Invoices
+        - in: query
+          name: id_customer
+          schema:
+            type: integer
+          description: Search by <u>[customer](/#operation/Customers_list)</u> Id
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: string
+          description: >-
+            <u>[Users with group](/#operation/Users_with_group)</u> Id
+            associated with the oportunity
+        - in: query
+          name: document_number
+          schema:
+            type: string
+            maxLength: 30
+          description: Document number
+        - in: query
+          name: pipeline
+          schema:
+            type: integer
+          description: <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u> Id
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: |
+            Direction for sorting
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/documents_objects'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Documents
+      summary: Create
+      description: Create a document.
+      operationId: Documents_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/documents_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/documents_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /documents/{id}:
+    get:
+      tags:
+        - Documents
+      summary: Show
+      description: Get one document.
+      operationId: Documents_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Document](/#operation/Documents_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/documents_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Documents
+      summary: Update
+      description: Update a document.
+      operationId: Documents_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/documents_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Document](/#operation/Documents_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/documents_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /documents/templates:
+    get:
+      tags:
+        - Documents
+      summary: Templates
+      description: Get a list of all documents templates.
+      operationId: Documents_templates
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/documents_templates'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /products:
     get:
       tags:
@@ -1289,11 +1469,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -1318,7 +1496,7 @@ paths:
       tags:
         - Products
       summary: Create
-      description: Create a product
+      description: Create a product.
       operationId: Products_create
       security:
         - Bearer token: []
@@ -1402,6 +1580,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                example: null
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -1453,8 +1635,8 @@ paths:
     post:
       tags:
         - Products
-      summary: Add/Update custom fields
-      description: Values of products custom field.
+      summary: Add/Update custom field
+      description: Add or update a product custom field.
       operationId: Products_custom_field_values_add_update
       security:
         - Bearer token: []
@@ -1582,11 +1764,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -1636,11 +1816,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -1680,7 +1858,7 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
-  /products/categories/{id}:
+  /products/categories/{category_id}:
     get:
       tags:
         - Products
@@ -1691,7 +1869,7 @@ paths:
         - Bearer token: []
       parameters:
         - in: path
-          name: id
+          name: category_id
           description: <u>[Category](/#operation/Products_categories_list)</u> Id
           schema:
             type: integer
@@ -1717,7 +1895,7 @@ paths:
         $ref: '#/components/requestBodies/products_categories_update'
       parameters:
         - in: path
-          name: id
+          name: category_id
           description: <u>[Category](/#operation/Products_categories_list)</u> Id
           schema:
             type: integer
@@ -1778,13 +1956,13 @@ paths:
           schema:
             type: string
             format: date-time
-          description: Search by start date
+          description: Search by expense date
         - in: query
           name: to
           schema:
             type: string
             format: date-time
-          description: Search by end date
+          description: Search by due date
         - in: query
           name: id_supplier
           schema:
@@ -1809,11 +1987,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -2060,11 +2236,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -2091,7 +2265,7 @@ paths:
       tags:
         - Events
       summary: Create
-      description: Create an event
+      description: Create an event.
       operationId: Events_create
       security:
         - Bearer token: []
@@ -2175,6 +2349,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                example: null
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2274,11 +2452,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -2389,6 +2565,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                example: null
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2522,11 +2702,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -2551,7 +2729,7 @@ paths:
       tags:
         - Tasks
       summary: Create
-      description: Create a task
+      description: Create a task.
       operationId: Tasks_create
       security:
         - Bearer token: []
@@ -2635,6 +2813,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                example: null
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2657,6 +2839,200 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+  /times:
+    get:
+      tags:
+        - Times
+      summary: List
+      description: Get a list of all times.
+      operationId: Times_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: id_user
+          schema:
+            type: integer
+          description: <u>[User](/#operation/Users)</u> Id
+        - in: query
+          name: id_project
+          schema:
+            type: integer
+          description: Search by <u>[project](/#operation/Projects_list)</u> Id
+        - in: query
+          name: id_project_task
+          schema:
+            type: integer
+          description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
+        - in: query
+          name: id_type
+          schema:
+            type: integer
+          description: Search by <u>[time type](/#operation/Times_types)</u> Id
+        - in: query
+          name: billable
+          schema:
+            type: integer
+          description: |
+            Search by time billable
+            > 0 = No <br> 1 = Billable <br> 2 = Billed
+        - in: query
+          name: from
+          schema:
+            type: string
+            format: date-time
+          description: Search by min date
+        - in: query
+          name: to
+          schema:
+            type: string
+            format: date-time
+          description: Search by max date
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: |
+            Direction for sorting
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/times_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Times
+      summary: Create
+      description: Create a time.
+      operationId: Times_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/times_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/times_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /times/{id}:
+    get:
+      tags:
+        - Times
+      summary: Show
+      description: Get one time.
+      operationId: Times_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Time](/#operation/Times_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/times_object'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Times
+      summary: Update
+      description: Update a time.
+      operationId: Times_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/times_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Time](/#operation/Times_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/times_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Times
+      summary: Delete
+      description: Delete a time.
+      operationId: Times_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Time](/#operation/Times_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example: null
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /times/types:
     get:
       tags:
@@ -2668,7 +3044,7 @@ paths:
         - Bearer token: []
       responses:
         '200':
-          $ref: '#/components/responses/types'
+          $ref: '#/components/responses/times_types'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -2738,11 +3114,9 @@ paths:
           schema:
             type: string
             maxLength: 4
-          description: >
+          description: |
             Direction for sorting
-
-            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to
-            A.
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
         - in: query
           name: limit
           schema:
@@ -2759,6 +3133,25 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/projects_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Projects
+      summary: Create
+      description: Create a project.
+      operationId: Projects_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/projects_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_new_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -2788,6 +3181,60 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Projects
+      summary: Update
+      description: Update a project.
+      operationId: Projects_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/projects_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Projects
+      summary: Delete
+      description: Delete a project.
+      operationId: Projects_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example: null
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects/status:
     get:
       tags:
@@ -2804,11 +3251,56 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+  /projects/custom-fields:
+    get:
+      tags:
+        - Projects
+      summary: Custom fields
+      description: Get a list of all projects custom fields.
+      operationId: Projects_custom_fields_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_custom_fields'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/custom-fields/{field_id}:
+    get:
+      tags:
+        - Projects
+      summary: Custom field values
+      description: Get values of projects custom field.
+      operationId: Projects_custom_field_values_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: >-
+            Project <u>[custom
+            field](/#operation/Projects_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects/{id}/tasks:
     get:
       tags:
         - Projects
-      summary: Project tasks
+      summary: Tasks - List
       description: Get a list of all project tasks.
       operationId: Projects_tasks_list
       security:
@@ -2829,12 +3321,209 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Projects
+      summary: Tasks - Create
+      description: Create a project task.
+      operationId: Projects_tasks_create
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/projects_tasks_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}/tasks/{task_id}:
+    get:
+      tags:
+        - Projects
+      summary: Tasks - Show
+      description: Get one project task.
+      operationId: Projects_tasks_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Projects
+      summary: Tasks - Update
+      description: Update a project task.
+      operationId: Projects_tasks_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/projects_tasks_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Projects
+      summary: Tasks - Delete
+      description: Delete a project task.
+      operationId: Projects_tasks_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example: null
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}/tasks/{task_id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Projects
+      summary: Tasks - Add/Update custom fields
+      description: Values of projects custom field.
+      operationId: Projects_tasks_custom_field_values_add_update
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: >-
+            Project <u>[custom
+            field](/#operation/Projects_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/projects_tasks_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}/tasks/{task_id}/comments:
+    post:
+      tags:
+        - Projects
+      summary: Tasks - Comments
+      description: Create a project task comment.
+      operationId: Projects_tasks_comments
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/projects_tasks_comment'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_tasks_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /projects/tasks/status:
     get:
       tags:
         - Projects
-      summary: Status of projects tasks
-      description: Get a list of all status of projects tasks.
+      summary: Tasks - Status of all projects
+      description: Get a list of all status of all projects tasks.
       operationId: Projects_tasks_status_list
       security:
         - Bearer token: []
@@ -2849,7 +3538,7 @@ paths:
     get:
       tags:
         - Projects
-      summary: Status of project tasks
+      summary: Tasks - Status of one project
       description: Get a list of all status of one project task.
       operationId: Projects_tasks_status
       security:
@@ -2874,7 +3563,7 @@ paths:
     get:
       tags:
         - Projects
-      summary: Phases of project tasks
+      summary: Tasks - Phases
       description: Get a list of all phases of project tasks.
       operationId: Projects_tasks_phases
       security:
@@ -2899,14 +3588,198 @@ paths:
     get:
       tags:
         - Projects
-      summary: Priorities of projects tasks
+      summary: Tasks - Priorities
       description: Get a list of all priorities.
-      operationId: Projects_priorities
+      operationId: Projects_tasks_priorities
       security:
         - Bearer token: []
       responses:
         '200':
           $ref: '#/components/responses/projects_tasks_priorities'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}/tasks/{task_id}/subtasks:
+    get:
+      tags:
+        - Projects
+      summary: Subtasks - List
+      description: Get a list of all subtasks of a project task.
+      operationId: Projects_subtasks_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_subtasks_objects'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Projects
+      summary: Subtasks - Create
+      description: Create a subtask of a project task.
+      operationId: Projects_subtasks_create
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/projects_subtasks_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_subtasks_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /projects/{id}/tasks/{task_id}/subtasks/{subtask_id}:
+    get:
+      tags:
+        - Projects
+      summary: Subtasks - Show
+      description: Get one subtask of a project task.
+      operationId: Projects_subtasks_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: subtask_id
+          description: >-
+            <u>[Subtask of a project
+            task](/#operation/Projects_subtasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_subtasks_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Projects
+      summary: Subtasks - Update
+      description: Update a subtask of a project task.
+      operationId: Projects_subtasks_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/projects_subtasks_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: subtask_id
+          description: >-
+            <u>[Subtask of a project
+            task](/#operation/Projects_subtasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/projects_subtasks_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Projects
+      summary: Subtasks - Delete
+      description: Delete a subtask of a project task.
+      operationId: Projects_subtasks_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Project](/#operation/Projects_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: task_id
+          description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: subtask_id
+          description: >-
+            <u>[Subtask of a project
+            task](/#operation/Projects_subtasks_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example: null
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -5520,6 +6393,693 @@ components:
                     title_es:
                       description: Spanish title of lost opportunity statutes
                       type: string
+    documents_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 14
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Document Id
+                      type: integer
+                      example: '2758'
+                    id_customer_supplier:
+                      description: Customer Id
+                      type: integer
+                      example: '48560'
+                    pipeline:
+                      description: Pipeline Id
+                      type: integer
+                      example: '1934'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_type:
+                      description: Document type Id
+                      type: integer
+                      example: '1'
+                    type_text:
+                      description: Document type title
+                      type: string
+                      example: Quotes
+                    number:
+                      description: Document number
+                      type: integer
+                      example: ''
+                    date:
+                      description: Document date
+                      type: string
+                      format: date-time
+                      example: '2022-05-16 16:15:00'
+                    date_end:
+                      description: Expiration date
+                      type: string
+                      format: date-time
+                      example: '2022-05-30 14:00:00'
+                    id_user_assigned:
+                      description: Document client mamager id
+                      type: array
+                      items:
+                        type: string
+                        example: u213
+                    id_user_assigned_text:
+                      description: Document client mamager name
+                      type: array
+                      items:
+                        type: string
+                        example: Jean Dupont
+                    total_without_tax:
+                      description: Total HT
+                      type: number
+                      example: '125.00'
+                    total_with_tax:
+                      description: Total TTC
+                      type: number
+                      example: '150.00'
+                    currency_code:
+                      description: Currency code
+                      type: string
+                      example: EUR
+                    currency_exchange_rate:
+                      description: Currency exchange rate
+                      type: number
+                      format: float
+                      example: '1.000000'
+                    total_already_paid:
+                      description: Total already paid
+                      type: number
+                      format: double
+                      example: '0.00'
+                    payment_date:
+                      description: Payment date
+                      type: string
+                      format: date-time
+                      example: '2022-06-16 00:00:00'
+                    id_document_previous:
+                      description: Previous document Id
+                      type: integer
+                      example: '2757'
+                    id_document_next:
+                      description: Next document Id
+                      type: integer
+                      example: '2759'
+                    id_status:
+                      description: Document status Id
+                      type: integer
+                      example: '0'
+                    status_text:
+                      description: Document status title
+                      type: string
+                      example: Draft
+                    canceled:
+                      description: Cancellation
+                      type: integer
+                      example: '0'
+    documents_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Document Id
+                type: integer
+                example: '2758'
+              id_document_previous:
+                description: Previous document Id
+                type: integer
+                example: '2757'
+              id_document_next:
+                description: Next document Id
+                type: integer
+                example: '2759'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_opportunity_proposal:
+                description: Opportunity proposal Id
+                type: integer
+                example: '1835'
+              id_type:
+                description: Document type Id
+                type: integer
+                example: '1'
+              type_text:
+                description: Document type title
+                type: string
+                example: Quotes
+              number:
+                description: Document number
+                type: integer
+                example: ''
+              id_status:
+                description: Document status Id
+                type: integer
+                example: '0'
+              status_text:
+                description: Document status title
+                type: string
+                example: Draft
+              title:
+                description: Document title
+                type: string
+                example: 'Document #1'
+              date:
+                description: Document date
+                type: string
+                format: date-time
+                example: '2022-05-16 16:15:00'
+              date_end:
+                description: Expiration date
+                type: string
+                format: date-time
+                example: '2022-05-30 14:00:00'
+              id_payment_condition:
+                description: Payment condition Id
+                type: integer
+                example: '1'
+              id_document_reference:
+                description: Document reference Id
+                type: integer
+                example: '0'
+              customer_reference:
+                description: Customer reference
+                type: string
+                example: C1234
+              id_customer_supplier_contact:
+                description: Customer Id
+                type: integer
+                example: '48560'
+              description:
+                description: Document description
+                type: string
+                example: A description or note about this document
+              discount_type:
+                description: Discount type
+                type: string
+                example: percent
+              discount_value:
+                description: Discount value
+                type: integer
+                example: 0
+              final_invoice:
+                description: Final Invoice
+                type: integer
+                example: '0'
+              deposit_type:
+                description: Deposit type
+                type: string
+                example: percent
+              deposit_value:
+                description: Deposit value
+                type: integer
+                example: 0
+              total_without_tax:
+                description: Total HT
+                type: number
+                example: '125.00'
+              total_with_tax:
+                description: Total TTC
+                type: number
+                example: '150.00'
+              id_currency:
+                description: Currency Id
+                type: integer
+                example: '43'
+              currency_code:
+                description: Currency code
+                type: string
+                example: EUR
+              currency_exchange_rate:
+                description: Currency exchange rate
+                type: number
+                format: float
+                example: '1.000000'
+              total_already_paid:
+                description: Total already paid
+                type: number
+                format: double
+                example: '0.00'
+              payment_date:
+                description: Payment date
+                type: string
+                format: date-time
+                example: '2022-06-16 00:00:00'
+              use_stripe_to_pay:
+                description: Stripe use
+                type: integer
+                example: '0'
+              canceled:
+                description: Cancellation
+                type: integer
+                example: '0'
+              id_document_template:
+                description: Document template Id
+                type: integer
+                example: '0'
+              download_url:
+                description: download url
+                type: string
+                example: ''
+              products_list:
+                description: Products list
+                type: array
+                items:
+                  type: object
+                  properties:
+                    section:
+                      description: Section Id
+                      type: integer
+                    id_product:
+                      description: Product Id
+                      type: integer
+                    title:
+                      description: Product title
+                      type: string
+                    reference:
+                      description: Product reference
+                      type: string
+                    description:
+                      description: Product description
+                      type: string
+                    price_without_tax:
+                      description: Price HT
+                      type: number
+                    id_vat:
+                      description: VAT Id
+                      type: integer
+                    quantity:
+                      description: Product quantity
+                      type: number
+                      format: float
+                    quantity_delivered:
+                      description: Product quantity delivered
+                      type: number
+                      format: float
+                    id_unit:
+                      description: Unit Id
+                      type: integer
+                    discount_type:
+                      description: Discount type
+                      type: string
+                    discount_value:
+                      description: Discount value
+                      type: integer
+                    progress_type:
+                      description: Progress type
+                      type: string
+                    progress_value:
+                      description: Progress value
+                      type: integer
+                    total_without_tax:
+                      description: Total HT
+                      type: number
+                    total_cost:
+                      description: Total cost
+                      type: number
+                    hide_in_pdf:
+                      description: Visibility
+                      type: integer
+                    optional:
+                      description: Optional
+                      type: integer
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                example:
+                  - section: '0'
+                    id_product: '4739'
+                    title: 'Product #1'
+                    reference: Ref_product_1
+                    description: A description or note about this product
+                    price_without_tax: '50.000000'
+                    id_vat: '1'
+                    quantity: '2.50'
+                    quantity_delivered: '0'
+                    id_unit: '2'
+                    discount_type: percent
+                    discount_value: 0
+                    progress_type: percent
+                    progress_value: 0
+                    total_without_tax: '125.00'
+                    total_cost: '150.00'
+                    hide_in_pdf: '0'
+                    optional: '0'
+                    creation_date: '2022-04-19 14:45:28'
+                    created_by: '213'
+                    update_date: '2022-04-19 14:45:28'
+                    updated_by: '213'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    documents_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Document Id
+                type: integer
+                example: '2758'
+              id_document_previous:
+                description: Previous document Id
+                type: integer
+                example: '2757'
+              id_document_next:
+                description: Next document Id
+                type: integer
+                example: '2759'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_opportunity_proposal:
+                description: Opportunity proposal Id
+                type: integer
+                example: '1835'
+              id_type:
+                description: Document type Id
+                type: integer
+                example: '1'
+              type_text:
+                description: Document type title
+                type: string
+                example: Quotes
+              number:
+                description: Document number
+                type: integer
+                example: ''
+              id_status:
+                description: Document status Id
+                type: integer
+                example: '0'
+              status_text:
+                description: Document status title
+                type: string
+                example: Draft
+              title:
+                description: Document title
+                type: string
+                example: 'Document #1'
+              date:
+                description: Document date
+                type: string
+                format: date-time
+                example: '2022-05-16 16:15:00'
+              date_end:
+                description: Expiration date
+                type: string
+                format: date-time
+                example: '2022-05-30 14:00:00'
+              id_payment_condition:
+                description: Payment condition Id
+                type: integer
+                example: '1'
+              id_document_reference:
+                description: Document reference Id
+                type: integer
+                example: '0'
+              customer_reference:
+                description: Customer reference
+                type: string
+                example: C1234
+              id_customer_supplier_contact:
+                description: Customer Id
+                type: integer
+                example: '48560'
+              description:
+                description: Document description
+                type: string
+                example: A description or note about this document
+              discount_type:
+                description: Discount type
+                type: string
+                example: percent
+              discount_value:
+                description: Discount value
+                type: integer
+                example: 0
+              final_invoice:
+                description: Final Invoice
+                type: integer
+                example: '0'
+              deposit_type:
+                description: Deposit type
+                type: string
+                example: percent
+              deposit_value:
+                description: Deposit value
+                type: integer
+                example: 0
+              total_without_tax:
+                description: Total HT
+                type: number
+                example: '125.00'
+              total_with_tax:
+                description: Total TTC
+                type: number
+                example: '150.00'
+              id_currency:
+                description: Currency Id
+                type: integer
+                example: '43'
+              currency_code:
+                description: Currency code
+                type: string
+                example: EUR
+              currency_exchange_rate:
+                description: Currency exchange rate
+                type: number
+                format: float
+                example: '1.000000'
+              total_already_paid:
+                description: Total already paid
+                type: number
+                format: double
+                example: '0.00'
+              payment_date:
+                description: Payment date
+                type: string
+                format: date-time
+                example: '2022-06-16 00:00:00'
+              use_stripe_to_pay:
+                description: Stripe use
+                type: integer
+                example: '0'
+              canceled:
+                description: Cancellation
+                type: integer
+                example: '0'
+              id_document_template:
+                description: Document template Id
+                type: integer
+                example: '0'
+              download_url:
+                description: download url
+                type: string
+                example: ''
+              products_list:
+                description: Products list
+                type: array
+                items:
+                  type: object
+                  properties:
+                    section:
+                      description: Section Id
+                      type: integer
+                    id_product:
+                      description: Product Id
+                      type: integer
+                    title:
+                      description: Product title
+                      type: string
+                    reference:
+                      description: Product reference
+                      type: string
+                    description:
+                      description: Product description
+                      type: string
+                    price_without_tax:
+                      description: Price HT
+                      type: number
+                    id_vat:
+                      description: VAT Id
+                      type: integer
+                    quantity:
+                      description: Product quantity
+                      type: number
+                      format: float
+                    quantity_delivered:
+                      description: Product quantity delivered
+                      type: number
+                      format: float
+                    id_unit:
+                      description: Unit Id
+                      type: integer
+                    discount_type:
+                      description: Discount type
+                      type: string
+                    discount_value:
+                      description: Discount value
+                      type: integer
+                    progress_type:
+                      description: Progress type
+                      type: string
+                    progress_value:
+                      description: Progress value
+                      type: integer
+                    total_without_tax:
+                      description: Total HT
+                      type: number
+                    total_cost:
+                      description: Total cost
+                      type: number
+                    hide_in_pdf:
+                      description: Visibility
+                      type: integer
+                    optional:
+                      description: Optional
+                      type: integer
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                example:
+                  section: '0'
+                  id_product: '4739'
+                  title: 'Product #1'
+                  reference: Ref_product_1
+                  description: A description or note about this product
+                  price_without_tax: '50.000000'
+                  id_vat: '1'
+                  quantity: '2.50'
+                  quantity_delivered: '0'
+                  id_unit: '2'
+                  discount_type: percent
+                  discount_value: 0
+                  progress_type: percent
+                  progress_value: 0
+                  total_without_tax: '125.00'
+                  total_cost: '150.00'
+                  hide_in_pdf: '0'
+                  optional: '0'
+                  creation_date: '2022-04-19 14:45:28'
+                  created_by: '213'
+                  update_date: '2022-04-19 14:45:28'
+                  updated_by: '213'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    documents_templates:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Template Id
+                      type: integer
+                    title:
+                      description: Template title
+                      type: string
+                example:
+                  - id: '36'
+                    title: 'Template #1'
     products_objects:
       description: OK
       content:
@@ -6318,12 +7878,12 @@ components:
                       type: string
                       example: Draft
                     date:
-                      description: Start date
+                      description: Expense date
                       type: string
                       format: date-time
                       example: '2022-04-01'
                     date_end:
-                      description: End date
+                      description: Due date
                       type: string
                       format: date-time
                       example: '2022-05-01'
@@ -6381,12 +7941,12 @@ components:
                 type: string
                 example: 'Expense #1'
               date:
-                description: Start date
+                description: Expense date
                 type: string
                 format: date-time
                 example: '2022-04-01'
               date_end:
-                description: End date
+                description: Due date
                 type: string
                 format: date-time
                 example: '2022-05-01'
@@ -6482,12 +8042,12 @@ components:
                 type: string
                 example: 'Expense #1'
               date:
-                description: Start date
+                description: Expense date
                 type: string
                 format: date-time
                 example: '2022-04-01'
               date_end:
-                description: End date
+                description: Due date
                 type: string
                 format: date-time
                 example: '2022-05-01'
@@ -7553,7 +9113,281 @@ components:
                     title: Echange de courrier
                     title_en: Letter exchange
                     title_es: Intercambio de correo
-    types:
+    times_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 2
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Time Id
+                      type: integer
+                      example: '735'
+                    id_user:
+                      description: User Id
+                      type: integer
+                      example: '213'
+                    id_project:
+                      description: Project Id
+                      type: integer
+                      example: '435'
+                    id_project_task:
+                      description: Project task Id
+                      type: integer
+                      example: '89'
+                    id_project_task_subtask:
+                      description: Project subtask Id
+                      type: integer
+                      example: ''
+                    id_customer_supplier:
+                      description: Customer Id or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_type:
+                      description: Time type Id
+                      type: integer
+                      example: '8'
+                    billable:
+                      description: Billable time
+                      type: integer
+                      example: '0'
+                    billed_date:
+                      description: Billing date
+                      type: string
+                      example: null
+                    time_date:
+                      description: Time date
+                      type: string
+                      format: date-time
+                      example: '2022-07-15 13:29:00'
+                    time_done:
+                      description: Time done
+                      type: string
+                      example: '01:30:00'
+                    time_planified:
+                      description: Time planned
+                      type: string
+                      example: '02:00:00'
+                    description:
+                      description: Time descritpion
+                      type: string
+                      example: A description or note about this time
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    times_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Response of the request
+            properties:
+              id:
+                description: Time Id
+                type: integer
+                example: '735'
+              id_user:
+                description: User Id
+                type: integer
+                example: '213'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '435'
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: '89'
+              id_project_task_subtask:
+                description: Project subtask Id
+                type: integer
+                example: ''
+              id_customer_supplier:
+                description: Customer Id or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_type:
+                description: Time type Id
+                type: integer
+                example: '8'
+              billable:
+                description: Billable time
+                type: integer
+                example: '0'
+              billed_date:
+                description: Billing date
+                type: string
+                example: null
+              time_date:
+                description: Time date
+                type: string
+                format: date-time
+                example: '2022-07-15 13:29:00'
+              time_done:
+                description: Time done
+                type: string
+                example: '01:30:00'
+              time_planified:
+                description: Time planned
+                type: string
+                example: '02:00:00'
+              description:
+                description: Time descritpion
+                type: string
+                example: A description or note about this time
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    times_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Time Id
+                type: integer
+                example: '735'
+              id_user:
+                description: User Id
+                type: integer
+                example: '213'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '435'
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: '89'
+              id_project_task_subtask:
+                description: Project subtask Id
+                type: integer
+                example: ''
+              id_customer_supplier:
+                description: Customer Id or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_type:
+                description: Time type Id
+                type: integer
+                example: '8'
+              billable:
+                description: Billable time
+                type: integer
+                example: '0'
+              billed_date:
+                description: Billing date
+                type: string
+                example: null
+              time_date:
+                description: Time date
+                type: string
+                format: date-time
+                example: '2022-07-15 13:29:00'
+              time_done:
+                description: Time done
+                type: string
+                example: '01:30:00'
+              time_planified:
+                description: Time planned
+                type: string
+                example: '02:00:00'
+              description:
+                description: Time descritpion
+                type: string
+                example: A description or note about this time
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    times_types:
       description: OK
       content:
         application/json:
@@ -7705,6 +9539,95 @@ components:
                       description: Id of the updater
                       type: integer
                       example: '213'
+    projects_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Project Id
+                type: integer
+                example: '435'
+              title:
+                description: Project title
+                type: string
+                example: 'Project #1'
+              columns:
+                description: Project columns
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Column Id
+                      type: integer
+                    title:
+                      description: Column title
+                      type: string
+                example:
+                  - id: '1'
+                    title: To do
+                  - id: '2'
+                    title: Pending
+                  - id: '3'
+                    title: In progress
+                  - id: '4'
+                    title: To test
+                  - id: '5'
+                    title: Completed
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              starting_date:
+                description: Starting date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              due_date:
+                description: Due date
+                type: string
+                format: date-time
+                example: null
+              id_status:
+                description: Status Id
+                type: integer
+                example: '1'
+              id_user_assigned:
+                description: User assigned of the project
+                type: array
+                items:
+                  type: string
+                  example: '213'
+              archived:
+                description: Archived status of the project
+                type: integer
+                example: '0'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
     projects_object:
       description: OK
       content:
@@ -7826,6 +9749,69 @@ components:
                     title: In progress
                   - id: '4'
                     title: Closed
+    projects_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Project custom field Id
+                      type: integer
+                      example: '3483'
+                    title:
+                      description: Project custom field title
+                      type: string
+                      example: Priority
+                    type:
+                      description: Project custom field type
+                      type: string
+                      example: Dropdown list
+                    with_values:
+                      description: Project field with values
+                      type: boolean
+                      example: 'true'
+    projects_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Project custom field value Id
+                      type: integer
+                    title:
+                      description: Project custom field value title
+                      type: string
+                example:
+                  - id: '6089'
+                    title: Low
+                  - id: '6090'
+                    title: Medium
+                  - id: '6091'
+                    title: High
     projects_tasks_objects:
       description: OK
       content:
@@ -7876,6 +9862,10 @@ components:
                       type: string
                       format: date-time
                       example: '2022-04-04 09:44:49'
+                    position:
+                      description: Position
+                      type: integer
+                      example: '1'
                     milestone:
                       description: Milestone
                       type: integer
@@ -7884,10 +9874,6 @@ components:
                       description: Id status of project task
                       type: integer
                       example: '91'
-                    position:
-                      description: Position
-                      type: integer
-                      example: '1'
                     title:
                       description: Project task title
                       type: string
@@ -7914,22 +9900,22 @@ components:
                       type: string
                       format: date-time
                       example: null
-                    estimation_time:
-                      description: Estimation time
-                      type: number
-                      format: double
-                      example: '5.00'
                     working_time:
                       description: Working time
                       type: number
                       format: double
                       example: '0.00'
+                    estimation_time:
+                      description: Estimation time
+                      type: number
+                      format: double
+                      example: '5.00'
                     id_user_assigned:
                       description: User assigned of the project
                       type: array
                       items:
                         type: string
-                        example: '213'
+                        example: u213
                     id_customer_supplier:
                       description: Customer or supplier Id
                       type: integer
@@ -7958,7 +9944,7 @@ components:
                       description: Number of subtasks complete
                       type: integer
                       example: '0'
-                    nb_comment:
+                    nb_comments:
                       description: Number of comments
                       type: integer
                       example: '0'
@@ -8004,6 +9990,505 @@ components:
                       description: Id of the updater
                       type: integer
                       example: '213'
+    projects_tasks_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Task Id
+                type: integer
+                example: '435'
+              number:
+                description: Number
+                type: integer
+                example: '1'
+              column_number:
+                description: Column number
+                type: integer
+                example: '5'
+              column_number_last_update:
+                description: Update date of column number
+                type: string
+                format: date-time
+                example: '2022-04-04 09:44:49'
+              position:
+                description: Position
+                type: integer
+                example: '1'
+              milestone:
+                description: Milestone
+                type: integer
+                example: '0'
+              status:
+                description: Id status of project task
+                type: integer
+                example: '91'
+              title:
+                description: Project task title
+                type: string
+                example: 'Project task #1'
+              description:
+                description: Description
+                type: string
+                example: A description or note about this project task
+              priority:
+                description: Priority Id
+                type: integer
+                example: '0'
+              color:
+                description: Color
+                type: string
+                example: 95a5a6
+              starting_date:
+                description: Starting date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              due_date:
+                description: Due date
+                type: string
+                format: date-time
+                example: null
+              working_time:
+                description: Working time
+                type: number
+                format: double
+                example: '0.00'
+              estimation_time:
+                description: Estimation time
+                type: number
+                format: double
+                example: '5.00'
+              id_user_assigned:
+                description: User assigned of the project
+                type: array
+                items:
+                  type: string
+                  example: u213
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_phase:
+                description: Phase Id
+                type: integer
+                example: '0'
+              skills:
+                description: Skills
+                type: array
+                example: []
+              nb_subtask:
+                description: Number of subtasks
+                type: integer
+                example: '0'
+              nb_subtask_complete:
+                description: Number of subtasks complete
+                type: integer
+                example: '0'
+              nb_comments:
+                description: Number of comments
+                type: integer
+                example: '0'
+              nb_files:
+                description: Number of files
+                type: integer
+                example: '0'
+              nb_events:
+                description: Number of events
+                type: integer
+                example: '0'
+              nb_events_notes:
+                description: Number of events notes
+                type: integer
+                example: '0'
+              nb_events_tasks:
+                description: Number of events tasks
+                type: integer
+                example: '0'
+              nb_conversations_emails:
+                description: Number of conversations emails
+                type: integer
+                example: '0'
+              archived:
+                description: Archived status of the project tasks
+                type: integer
+                example: '0'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3483'
+                    title: Priority
+                    value: '6089'
+                    value_text: Low
+              subtasks_list:
+                description: List of subtasks
+                type: array
+                example: []
+              comments_list:
+                description: List of comments
+                type: array
+                example: []
+              files_list:
+                description: List of files
+                type: array
+                example: []
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    projects_tasks_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Project Id
+                type: integer
+                example: '435'
+              number:
+                description: Number
+                type: integer
+                example: '1'
+              column_number:
+                description: Column number
+                type: integer
+                example: '5'
+              column_number_last_update:
+                description: Update date of column number
+                type: string
+                format: date-time
+                example: '2022-04-04 09:44:49'
+              position:
+                description: Position
+                type: integer
+                example: '1'
+              milestone:
+                description: Milestone
+                type: integer
+                example: '0'
+              status:
+                description: Id status of project task
+                type: integer
+                example: '91'
+              title:
+                description: Project task title
+                type: string
+                example: 'Project task #1'
+              description:
+                description: Description
+                type: string
+                example: A description or note about this project task
+              priority:
+                description: Priority Id
+                type: integer
+                example: '0'
+              color:
+                description: Color
+                type: string
+                example: 95a5a6
+              starting_date:
+                description: Starting date
+                type: string
+                format: date-time
+                example: '2022-03-15 19:45:00'
+              due_date:
+                description: Due date
+                type: string
+                format: date-time
+                example: null
+              working_time:
+                description: Working time
+                type: number
+                format: double
+                example: '0.00'
+              estimation_time:
+                description: Estimation time
+                type: number
+                format: double
+                example: '5.00'
+              id_user_assigned:
+                description: User assigned of the project
+                type: array
+                items:
+                  type: string
+                  example: u213
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_phase:
+                description: Phase Id
+                type: integer
+                example: '0'
+              skills:
+                description: Skills
+                type: array
+                example: []
+              nb_subtask:
+                description: Number of subtasks
+                type: integer
+                example: '0'
+              nb_subtask_complete:
+                description: Number of subtasks complete
+                type: integer
+                example: '0'
+              nb_comments:
+                description: Number of comments
+                type: integer
+                example: '0'
+              nb_files:
+                description: Number of files
+                type: integer
+                example: '0'
+              nb_events:
+                description: Number of events
+                type: integer
+                example: '0'
+              nb_events_notes:
+                description: Number of events notes
+                type: integer
+                example: '0'
+              nb_events_tasks:
+                description: Number of events tasks
+                type: integer
+                example: '0'
+              nb_conversations_emails:
+                description: Number of conversations emails
+                type: integer
+                example: '0'
+              archived:
+                description: Archived status of the project tasks
+                type: integer
+                example: '0'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3483'
+                    title: Priority
+                    value: '6089'
+                    value_text: Low
+              subtasks_list:
+                description: List of subtasks
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Subtask Id
+                      type: integer
+                    status:
+                      description: Subtask status
+                      type: string
+                    section:
+                      description: Subtask section
+                      type: string
+                    title:
+                      description: Subtask title
+                      type: string
+                    starting_date:
+                      description: Subtask start date
+                      type: string
+                      format: date-time
+                    due_date:
+                      description: Subtask due date
+                      type: string
+                      format: date-time
+                    working_time:
+                      description: Subtask working time
+                      type: string
+                    estimation_time:
+                      description: Subtask estimated time
+                      type: string
+                    id_user_assigned:
+                      description: Subtask client mamager id
+                      type: array
+                      items:
+                        type: string
+                        example: u213
+                    skills:
+                      description: Subtask skills
+                      type: array
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                example:
+                  - id: '1375'
+                    status: '89'
+                    section: '0'
+                    title: 'Subtask #1'
+                    starting_date: '2022-04-23'
+                    due_date: null
+                    working_date: '1:50'
+                    estimation_time: '3:00'
+                    skills: []
+                    creation_date: '2022-04-23 16:22:58'
+                    created_by: '213'
+                    update_date: '2022-04-23 16:22:58'
+                    updated_by: '213'
+              comments_list:
+                description: List of comments
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Comment Id
+                      type: integer
+                    comment:
+                      description: Comment title
+                      type: string
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                example:
+                  - id: '56'
+                    comment: '<p>Comment #1</p>'
+                    creation_date: '2022-04-23 16:23:27'
+                    created_by: '213'
+                    update_date: '2022-04-23 16:25:38'
+                    updated_by: '213'
+              files_list:
+                description: List of files
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: File Id
+                      type: integer
+                    name:
+                      description: File name
+                      type: string
+                    size:
+                      description: File size
+                      type: integer
+                    download_url:
+                      description: File url
+                      type: string
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                example:
+                  - id: '21'
+                    name: ticket.pdf
+                    size: '64'
+                    download_url: https://karlia.fr/...
+                    creation_date: '2022-04-23 16:20:24'
+                    created_by: '213'
+                    update_date: '2022-04-23 16:29:31'
+                    updated_by: '213'
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
     projects_tasks_status:
       description: OK
       content:
@@ -8144,6 +10629,241 @@ components:
                     title: Medium
                   - id: '3'
                     title: High
+    projects_subtasks_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: '14'
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: '100'
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: '0'
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Subtask Id
+                      type: integer
+                      example: '1375'
+                    status:
+                      description: Subtask status
+                      type: string
+                      example: '89'
+                    section:
+                      description: Subtask nature
+                      type: string
+                      example: '0'
+                    title:
+                      description: Subtask title
+                      type: string
+                      example: 'Subtask #1'
+                    starting_date:
+                      description: Subtask start date
+                      type: string
+                      format: date-time
+                      example: '2022-04-23'
+                    due_date:
+                      description: Subtask due date
+                      type: string
+                      format: date-time
+                      example: null
+                    working_time:
+                      description: Subtask working time
+                      type: string
+                      example: '1:50'
+                    estimation_time:
+                      description: Subtask estimated time
+                      type: string
+                      example: '3:00'
+                    id_user_assigned:
+                      description: Subtask client mamager id
+                      type: array
+                      items:
+                        type: string
+                        example: u213
+                    skills:
+                      description: Subtask skills
+                      type: array
+                      example: []
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-04-23 16:22:58'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-04-23 16:22:58'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    projects_subtasks_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Subtask Id
+                type: integer
+                example: '1375'
+              status:
+                description: Subtask status
+                type: string
+                example: '89'
+              section:
+                description: Subtask nature
+                type: string
+                example: '0'
+              title:
+                description: Subtask title
+                type: string
+                example: 'Subtask #1'
+              starting_date:
+                description: Subtask start date
+                type: string
+                format: date-time
+                example: '2022-04-23'
+              due_date:
+                description: Subtask due date
+                type: string
+                format: date-time
+                example: null
+              working_time:
+                description: Subtask working time
+                type: string
+                example: '1:50'
+              estimation_time:
+                description: Subtask estimated time
+                type: string
+                example: '3:00'
+              id_user_assigned:
+                description: Subtask client mamager id
+                type: array
+                items:
+                  type: string
+                  example: u213
+              skills:
+                description: Subtask skills
+                type: array
+                example: []
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-04-23 16:22:58'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-04-23 16:22:58'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    projects_subtasks_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Subtask Id
+                type: integer
+                example: '1375'
+              status:
+                description: Subtask status
+                type: string
+                example: '89'
+              section:
+                description: Subtask nature
+                type: string
+                example: '0'
+              title:
+                description: Subtask title
+                type: string
+                example: 'Subtask #1'
+              starting_date:
+                description: Subtask start date
+                type: string
+                format: date-time
+                example: '2022-04-23'
+              due_date:
+                description: Subtask due date
+                type: string
+                format: date-time
+                example: null
+              working_time:
+                description: Subtask working time
+                type: string
+                example: '1:50'
+              estimation_time:
+                description: Subtask estimated time
+                type: string
+                example: '3:00'
+              id_user_assigned:
+                description: Subtask client mamager id
+                type: array
+                items:
+                  type: string
+                  example: u213
+              skills:
+                description: Subtask skills
+                type: array
+                example: []
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-04-23 16:22:58'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-04-23 16:22:58'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
     users_objects:
       description: OK
       content:
@@ -8353,7 +11073,7 @@ components:
                 format: double
                 example: 10.5
               id_document_template:
-                description: Id document template
+                description: <u>[Document template](#operation/Documents_templates)</u> Id
                 type: integer
                 example: ''
               id_payment_condition:
@@ -8395,7 +11115,7 @@ components:
                     value:
                       description: >-
                         <u>[Custom field
-                        value](/#operation/Opportunities_custom_field_values_list)</u>
+                        value](/#operation/Customers_custom_field_values_list)</u>
                         Id
                       type: string
                       example: 5900
@@ -8567,7 +11287,7 @@ components:
                 format: double
                 example: 10.5
               id_document_template:
-                description: Id document template
+                description: <u>[Document template](#operation/Documents_templates)</u> Id
                 type: integer
                 example: ''
               id_payment_condition:
@@ -8609,7 +11329,7 @@ components:
                     value:
                       description: >-
                         <u>[Custom field
-                        value](/#operation/Opportunities_custom_field_values_list)</u>
+                        value](/#operation/Customers_custom_field_values_list)</u>
                         Id
                       type: string
                       example: 5900
@@ -8767,7 +11487,7 @@ components:
                 maxLength: 30
                 example: FR 32 123456789
               id_document_template:
-                description: Id document template
+                description: <u>[Document template](#operation/Documents_templates)</u> Id
                 type: integer
                 example: ''
               id_payment_condition:
@@ -8951,7 +11671,7 @@ components:
                 maxLength: 30
                 example: FR 32 123456789
               id_document_template:
-                description: Id document template
+                description: <u>[Document template](#operation/Documents_templates)</u> Id
                 type: integer
                 example: ''
               id_payment_condition:
@@ -9434,6 +12154,292 @@ components:
                   value](/#operation/Opportunities_custom_field_values_list)</u>
                 type: integer
                 example: 5995
+    documents_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_customer
+              - id_opportunity
+            properties:
+              id_type:
+                description: >
+                  Document type Id
+
+                  > 1 = Quote <br> 2 = Order note <br> 3 = Delivery note <br> 4
+                  = Invoice
+                type: integer
+                example: '1'
+              pipeline:
+                description: >
+                  **If added in a new opportunity**:
+                  <u>[Pipeline](/#operation/Opportunities_list_pipelines)</u>
+                  Id 
+                type: integer
+                example: 1934
+              id_customer:
+                description: >
+                  **If added in a new opportunity**:
+                  <u>[Customer](/#operation/Customers_list)</u> Id 
+                type: integer
+                example: 48560
+              id_opportunity:
+                description: >
+                  **If adding in an existing opportunity**:
+                  <u>[Opportunity](/#operation/Opportunities_list)</u> Id 
+                type: string
+                example: '2022-04-01'
+              proposal_description:
+                description: Proposal description
+                type: string
+                example: A description or note about this proposal
+              id_status:
+                description: |
+                  Status Id
+                  > 0 = Draft <br> 1 = Pending 
+                type: integer
+                example: 0
+              title:
+                description: Document title
+                type: string
+                maxLength: 127
+                example: 'Document #1'
+              date:
+                description: Document date
+                type: string
+                format: date-time
+                example: '2022-05-16 16:15:00'
+              date_end:
+                description: Expiration date - **Not editable for invoices**
+                type: string
+                format: date-time
+                example: '2022-05-30 14:00:00'
+              id_payment_condition:
+                description: >
+                  Payment condition Id - **Only for invoices** <br> *By defaut,
+                  the value of the customer profile, or without, that of the
+                  company profile*
+                type: integer
+                example: '1'
+              customer_reference:
+                description: Customer reference
+                type: string
+                example: C1234
+              description:
+                description: Document description
+                type: string
+                example: A description or note about this document
+              use_stripe_to_pay:
+                description: |
+                  Stripe use
+                  > 0 = Inactive <br> 1 = Usable
+                type: integer
+                example: '0'
+              id_document_template:
+                description: >
+                  <u>[Document template](#operation/Documents_templates)</u> Id
+                  <br> *By defaut, the value of the customer profile*
+                type: integer
+                example: '0'
+              products_list:
+                description: Articles list
+                type: array
+                items:
+                  anyOf:
+                    - type: object
+                      title: Product
+                      required:
+                        - id_product
+                        - reference
+                      properties:
+                        section:
+                          description: |
+                            Section format
+                            > 0 = Product 
+                          type: integer
+                          example: '0'
+                        id_product:
+                          description: >
+                            <u>[Product](/#operation/Products_list)</u> Id -
+                            `id_product OR reference required`
+                          type: integer
+                          example: '4739'
+                        reference:
+                          description: >-
+                            Product reference - `id_product OR reference
+                            required`
+                          type: string
+                          maxLength: 30
+                          example: Ref_product_1
+                        description:
+                          description: >
+                            Product description <br> *By defaut, the value of
+                            the product sheet* 
+                          type: string
+                          example: A description or note about this product
+                        price_without_tax:
+                          description: >
+                            Price HT <br> *By defaut, the
+                            [value](/#operation/Products_sell_price) of the
+                            product sheet* 
+                          type: number
+                          example: '125.00'
+                        quantity:
+                          description: Product quantity
+                          type: number
+                          format: float
+                          example: '2.50'
+                        quantity_delivered:
+                          description: Product quantity delivered - **Only for deliveries**
+                          type: number
+                          format: float
+                          example: '0'
+                        id_vat:
+                          description: <u>[Vat](/#operation/Products_vat_list)</u> Id
+                          type: integer
+                          example: '1'
+                    - type: object
+                      title: Section
+                      properties:
+                        section:
+                          description: |
+                            Section format
+                            > 1 = Section
+                          type: integer
+                        title:
+                          description: Section title
+                          type: string
+                          maxLength: 255
+                        description:
+                          description: Section description
+                          type: string
+    documents_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_status:
+                description: |
+                  Status Id
+                  > 0 = Draft <br> 1 = Pending 
+                type: integer
+                example: 0
+              title:
+                description: Document title
+                type: string
+                maxLength: 127
+                example: 'Document #1'
+              date:
+                description: Document date
+                type: string
+                format: date-time
+                example: '2022-05-16 16:15:00'
+              date_end:
+                description: Expiration date - **Not editable for invoices**
+                type: string
+                format: date-time
+                example: '2022-05-30 14:00:00'
+              id_payment_condition:
+                description: >
+                  Payment condition Id - **Only for invoices** <br> *By defaut,
+                  the value of the customer profile, or without, that of the
+                  company profile*
+                type: integer
+                example: '1'
+              customer_reference:
+                description: Customer reference
+                type: string
+                example: C1234
+              description:
+                description: Document description
+                type: string
+                example: A description or note about this document
+              use_stripe_to_pay:
+                description: |
+                  Stripe use
+                  > 0 = Inactive <br> 1 = Usable
+                type: integer
+                example: '0'
+              id_document_template:
+                description: >
+                  <u>[Document template](#operation/Documents_templates)</u> Id
+                  <br> *By defaut, the value of the customer profile*
+                type: integer
+                example: '0'
+              products_list:
+                description: Articles list
+                type: array
+                items:
+                  anyOf:
+                    - type: object
+                      title: Product
+                      required:
+                        - id_product
+                        - reference
+                      properties:
+                        section:
+                          description: |
+                            Section format
+                            > 0 = Product
+                          type: integer
+                          example: '0'
+                        id_product:
+                          description: >
+                            <u>[Product](/#operation/Products_list)</u> Id -
+                            `id_product OR reference required`
+                          type: integer
+                          example: '4739'
+                        reference:
+                          description: >-
+                            Product reference - `id_product OR reference
+                            required`
+                          type: string
+                          maxLength: 30
+                          example: Ref_product_1
+                        description:
+                          description: >
+                            Product description <br> *By defaut, the value of
+                            the product sheet* 
+                          type: string
+                          example: A description or note about this product
+                        price_without_tax:
+                          description: >
+                            Price HT <br> *By defaut, the
+                            [value](/#operation/Products_sell_price) of the
+                            product sheet* 
+                          type: number
+                          example: '125.00'
+                        quantity:
+                          description: Product quantity
+                          type: number
+                          format: float
+                          example: '2.50'
+                        quantity_delivered:
+                          description: Product quantity delivered - **Only for deliveries**
+                          type: number
+                          format: float
+                          example: '0'
+                        id_vat:
+                          description: <u>[Vat](/#operation/Products_vat_list)</u> Id
+                          type: integer
+                          example: '1'
+                    - type: object
+                      title: Section
+                      properties:
+                        section:
+                          description: |
+                            Section format 
+                            > 1 = Section
+                          type: integer
+                        title:
+                          description: Section title
+                          type: string
+                          maxLength: 255
+                        description:
+                          description: Section description
+                          type: string
     products_create:
       content:
         application/json:
@@ -9468,7 +12474,7 @@ components:
                 format: float
                 example: 50
               id_vat:
-                description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+                description: <u>[Vat](/#operation/Products_vat_list)</u> Id
                 type: integer
                 example: 0
               id_unit:
@@ -9524,7 +12530,7 @@ components:
                 format: float
                 example: 50
               id_vat:
-                description: <u>[Vat number](/#operation/Products_vat_list)</u> Id
+                description: <u>[Vat](/#operation/Products_vat_list)</u> Id
                 type: integer
                 example: 0
               id_unit:
@@ -9610,12 +12616,12 @@ components:
                 maxLength: 127
                 example: 'Expense #1'
               date:
-                description: Start date
+                description: Expense date
                 type: string
                 format: date-time
                 example: '2022-04-01'
               date_end:
-                description: End date
+                description: Due date
                 type: string
                 format: date-time
                 example: '2022-05-01'
@@ -9661,12 +12667,12 @@ components:
                 maxLength: 127
                 example: 'Expense #1'
               date:
-                description: Start date
+                description: Expense date
                 type: string
                 format: date-time
                 example: '2022-04-01'
               date_end:
-                description: End date
+                description: Due date
                 type: string
                 format: date-time
                 example: '2022-05-01'
@@ -10014,7 +13020,7 @@ components:
                 type: integer
                 example: 1
               time_id_type:
-                description: Time type Id
+                description: <u>[Time type Id](-#operation/Times_types)</u> Id
                 type: integer
                 example: 0
               time_billable:
@@ -10099,7 +13105,7 @@ components:
                 type: integer
                 example: 1
               time_id_type:
-                description: Time type Id
+                description: <u>[Time type Id](-#operation/Times_types)</u> Id
                 type: integer
                 example: 0
               time_billable:
@@ -10108,3 +13114,553 @@ components:
                   > 0 = No <br> 1 = Billable
                 type: integer
                 example: 0
+    times_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_user
+            properties:
+              id_user:
+                description: <u>[User](/#operation/Users)</u> Id
+                type: integer
+                example: 213
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: 435
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: 89
+              id_project_task_subtask:
+                description: >-
+                  <u>[Project subtask](/#operation/Projects_subtasks_list)</u>
+                  Id
+                type: integer
+                example: ''
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_type:
+                description: <u>[Time type](/#operation/Times_types)</u> Id
+                type: integer
+                example: 8
+              billable:
+                description: |
+                  Billable time
+                  > 0 = No <br> 1 = Billable <br> 2 = Billed
+                type: integer
+                example: 0
+              time_date:
+                description: Time date
+                type: string
+                format: date-time
+                example: '2022-07-15 13:29:00'
+              time_done:
+                description: Time done
+                type: string
+                example: '01:30'
+              time_planified:
+                description: Time planned
+                type: string
+                example: '02:00'
+              description:
+                description: Time descritpion
+                type: string
+                example: A description or note about this time
+    times_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_user:
+                description: <u>[User](/#operation/Users)</u> Id
+                type: integer
+                example: 213
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: 435
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: 89
+              id_project_task_subtask:
+                description: >-
+                  <u>[Project subtask](/#operation/Projects_subtasks_list)</u>
+                  Id
+                type: integer
+                example: ''
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_type:
+                description: <u>[Time type](/#operation/Times_types)</u> Id
+                type: integer
+                example: 8
+              billable:
+                description: |
+                  Billable time
+                  > 0 = No <br> 1 = Billable <br> 2 = Billed
+                type: integer
+                example: 0
+              time_date:
+                description: Time date
+                type: string
+                format: date-time
+                example: '2022-07-15 13:29:00'
+              time_done:
+                description: Time done
+                type: string
+                example: '01:30'
+              time_planified:
+                description: Time planned
+                type: string
+                example: '02:00'
+              description:
+                description: Time descritpion
+                type: string
+                example: A description or note about this time
+    projects_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: <u>[Project](/#operation/Projects_list)</u> title
+                type: string
+                example: 'Project #1'
+              columns:
+                description: List of columns
+                type: array
+                items:
+                  description: Column title
+                  minimum: 2
+                  type: string
+                example:
+                  - 'Column #1'
+                  - 'Column #2'
+                  - 'Column #3'
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              starting_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-07-01 12:00:00'
+              due_date:
+                description: Due date
+                type: string
+                format: date-time
+                example: '2022-09-31 00:00:00'
+              id_status:
+                description: <u>[Project status](/#operation/Projects_status)</u> Id
+                type: integer
+                example: 1
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id associated with the task
+                type: integer
+                example: 213
+              archived:
+                description: |
+                  Project condition
+                  > 0 = Active <br> 1 = Archived
+                type: integer
+                example: 0
+    projects_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: <u>[Project](/#operation/Projects_list)</u> title
+                type: string
+                example: 'Project #1'
+              columns:
+                description: List of columns
+                type: array
+                items:
+                  description: Column title
+                  minimum: 2
+                  type: string
+                  example: 'Column #1, Column #2, Column #3'
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              starting_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-07-01 12:00:00'
+              due_date:
+                description: Due date
+                type: string
+                format: date-time
+                example: '2022-09-31 00:00:00'
+              id_status:
+                description: <u>[Project status](/#operation/Projects_status)</u> Id
+                type: integer
+                example: 1
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id associated with the task
+                type: integer
+                example: 213
+              archived:
+                description: |
+                  Project condition
+                  > 0 = Active <br> 1 = Archived
+                type: integer
+                example: 0
+    projects_tasks_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: <u>[Task](/#operation/Projects_tasks_list)</u> title
+                type: string
+                example: 'Task #1'
+              column_number:
+                description: Column number in the project
+                type: integer
+                example: '1'
+              status:
+                description: <u>[Task status](/#operation/Projects_tasks_status)</u> Id
+                type: integer
+                example: 89
+              description:
+                description: Task descritpion
+                type: string
+                example: A description or note about this task
+              priority:
+                description: >-
+                  <u>[Task priority](/#operation/Projects_tasks_priorities)</u>
+                  Id
+                type: integer
+                example: '0'
+              starting_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-07-01 12:00:00'
+              due_date:
+                description: >
+                  Due date <br>
+
+                  ***
+
+                  **Working_time is not editable, this field is linked to
+                  times.** <br> **Please add or edit times on this task to
+                  update working_time**
+                type: string
+                format: date-time
+                example: '2022-09-31 00:00:00'
+              estimation_time:
+                description: Time estimated
+                type: string
+                example: '2:00'
+              id_user_assigned:
+                description: >-
+                  <u>[User with group](/#operation/Users_groups)</u> Id
+                  associated with the task
+                type: integer
+                example: 213
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_phase:
+                description: <u>[Task phase](/#operation/Projects_tasks_phases)</u> Id
+                type: integer
+                example: 10
+              archived:
+                description: |
+                  Project condition
+                  > 0 = Active <br> 1 = Archived
+                type: integer
+                example: 0
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Projects_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3383
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Projects_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6089
+    projects_tasks_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: <u>[Task](/#operation/Projects_tasks_list)</u> title
+                type: string
+                example: 'Project #1'
+              column_number:
+                description: Column number in the project
+                type: integer
+                example: '1'
+              status:
+                description: <u>[Tasks status](/#operation/Projects_tasks_status)</u> Id
+                type: integer
+                example: 89
+              description:
+                description: Task descritpion
+                type: string
+                example: A description or note about this task
+              priority:
+                description: >-
+                  <u>[Task priority](/#operation/Projects_tasks_priorities)</u>
+                  Id
+                type: integer
+                example: '0'
+              starting_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-07-01 12:00:00'
+              due_date:
+                description: >
+                  Due date <br>
+
+                  ***
+
+                  **Working_time is not editable, this field is linked to
+                  times.** <br> **Please add or edit times on this task to
+                  update working_time**
+                type: string
+                format: date-time
+                example: '2022-09-31 00:00:00'
+              estimation_time:
+                description: Time estimated
+                type: string
+                example: '2:00'
+              id_user_assigned:
+                description: >-
+                  <u>[User with group](/#operation/Users_groups)</u> Id
+                  associated with the task
+                type: integer
+                example: 213
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list)</u> Id
+                type: integer
+                example: 28496
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_phase:
+                description: <u>[Task phase](/#operation/Projects_tasks_phases)</u> Id
+                type: integer
+                example: 10
+              archived:
+                description: |
+                  Project condition
+                  > 0 = Active <br> 1 = Archived
+                type: integer
+                example: 0
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Projects_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3383
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Projects_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6089
+    projects_tasks_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Projects_custom_field_values_list)</u>
+                type: integer
+                example: 6089
+    projects_tasks_comment:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id_user
+              - comment
+            properties:
+              id_user:
+                description: <u>[User](/#operation/Users_list)</u> Id
+                type: integer
+                example: 213
+              comment:
+                description: Comment
+                type: string
+                example: 'Comment #1'
+    projects_subtasks_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: <u>[Project](/#operation/Projects_list)</u> title
+                type: string
+                example: 'Subtask #1'
+              status:
+                description: <u>[Subtask status](/#operation/Projects_tasks_status)</u> Id
+                type: integer
+                example: 89
+              section:
+                description: |
+                  Nature of the subtask
+                  > 0 = Subtask <br> 1 = Section
+                type: integer
+                example: 0
+              starting_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-07-01 12:00:00'
+              due_date:
+                description: >
+                  Due date <br>
+
+                  ***
+
+                  **Working_time is not editable, this field is linked to
+                  times.** <br> **Please add or edit times on this task to
+                  update working_time**
+                type: string
+                format: date-time
+                example: '2022-09-31 00:00:00'
+              estimation_time:
+                description: Time estimated
+                type: string
+                example: '2:00'
+              id_user_assigned:
+                description: >-
+                  <u>[User with group](/#operation/Users_groups)</u> Id
+                  associated with the task
+                type: integer
+                example: 213
+    projects_subtasks_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: <u>[Project](/#operation/Projects_list)</u> title
+                type: string
+                example: 'Project #1'
+              status:
+                description: <u>[Tasks status](/#operation/Projects_tasks_status)</u> Id
+                type: integer
+                example: 89
+              section:
+                description: |
+                  Nature of the subtask
+                  > 0 = Subtask <br> 1 = Section
+                type: integer
+                example: 0
+              starting_date:
+                description: Start date
+                type: string
+                format: date-time
+                example: '2022-07-01 12:00:00'
+              due_date:
+                description: >
+                  Due date <br>
+
+                  ***
+
+                  **Working_time is not editable, this field is linked to
+                  times.** <br> **Please add or edit times on this task to
+                  update working_time**
+                type: string
+                format: date-time
+                example: '2022-09-31 00:00:00'
+              estimation_time:
+                description: Time estimated
+                type: string
+                example: '2:00'
+              id_user_assigned:
+                description: >-
+                  <u>[User with group](/#operation/Users_groups)</u> Id
+                  associated with the task
+                type: integer
+                example: 213

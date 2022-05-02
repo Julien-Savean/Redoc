@@ -2,7 +2,7 @@ get:
   tags:
     - Opportunities
   summary: Pipelines
-  description: Get a list of all opportunity pipelines.
+  description: Get a list of all opportunities pipelines.
   operationId: Opportunities_list_pipelines
   security:
     - Bearer token: []

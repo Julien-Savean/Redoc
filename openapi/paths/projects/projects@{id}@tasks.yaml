@@ -28,6 +28,13 @@ post:
   summary: Tasks - Create
   description: Create a project task.
   operationId: Projects_tasks_create
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Project](/#operation/Projects_list)</u> Id
+    schema:
+      type: integer
+    required: true
   security:
     - Bearer token: []
   requestBody:

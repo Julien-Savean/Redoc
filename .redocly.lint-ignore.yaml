@@ -8,4 +8,5 @@ openapi/openapi.yaml:
   no-ambiguous-paths:
     - '#/paths/~1products~1{id}~1cost-price'
     - '#/paths/~1products~1{id}~1sell-price'
-    - '#/paths/~1products~1categories~1{id}'
+    - '#/paths/~1products~1categories~1{category_id}'
+    - '#/paths/~1projects~1{id}~1tasks'

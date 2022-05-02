@@ -100,7 +100,7 @@ content:
             format: double
             example: 10.5
           id_document_template:
-            description: Id document template
+            description: <u>[Document template](#operation/Documents_templates)</u> Id
             type: integer
             example: ""
           id_payment_condition:

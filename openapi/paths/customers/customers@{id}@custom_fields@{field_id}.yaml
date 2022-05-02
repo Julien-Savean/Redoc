@@ -1,8 +1,8 @@
 post:
   tags:
     - Customers
-  summary: Add/Update custom fields
-  description:  Values of customers custom field.
+  summary: Add/Update custom field
+  description:  Add or update a customer custom field.
   operationId: Customers_custom_field_values_add_update
   security:
     - Bearer token: []

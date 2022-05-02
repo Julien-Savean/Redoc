@@ -79,7 +79,7 @@ content:
             type: integer
             example: 1
           time_id_type:
-            description: Time type Id
+            description: <u>[Time type Id](-#operation/Times_types)</u> Id
             type: integer
             example: 0
           time_billable:

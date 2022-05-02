@@ -2,7 +2,7 @@ get:
   tags:
     - Opportunities
   summary: Pipelines columns
-  description: Get opportunity pipeline columns.
+  description: Get opportunities pipeline columns.
   operationId: Opportunities_list_pipelines_columns
   security:
     - Bearer token: []

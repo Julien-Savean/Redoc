@@ -66,7 +66,7 @@ content:
             maxLength: 30
             example: FR 32 123456789
           id_document_template:
-            description: Id document template
+            description: <u>[Document template](#operation/Documents_templates)</u> Id
             type: integer
             example: ""
           id_payment_condition:

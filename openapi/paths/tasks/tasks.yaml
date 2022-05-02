@@ -19,7 +19,7 @@ post:
   tags:
     - Tasks
   summary: Create
-  description: Create a task
+  description: Create a task.
   operationId: Tasks_create
   security:
     - Bearer token: []

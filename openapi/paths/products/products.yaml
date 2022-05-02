@@ -19,7 +19,7 @@ post:
   tags:
     - Products
   summary: Create
-  description: Create a product
+  description: Create a product.
   operationId: Products_create
   security:
     - Bearer token: []

@@ -1,8 +1,8 @@
 post:
   tags:
     - Opportunities
-  summary: Add/Update custom fields
-  description:  Values of opportunities custom field.
+  summary: Add/Update custom field
+  description: Add or update a opportunity custom field.
   operationId: Opportunities_custom_field_values_add_update
   security:
     - Bearer token: []

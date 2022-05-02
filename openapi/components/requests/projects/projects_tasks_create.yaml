@@ -6,7 +6,7 @@ content:
           - title
         properties:
           title:
-            description: <u>[Project](/#operation/Projects_list)</u> title
+            description: <u>[Task](/#operation/Projects_tasks_list)</u> title
             type: string
             example: "Task #1"
           column_number:

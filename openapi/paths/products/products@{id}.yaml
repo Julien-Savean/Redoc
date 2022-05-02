@@ -65,7 +65,11 @@ delete:
     required: true
   responses:
     '200':
-      description: OK    
+      description: OK
+      content:
+        application/json:
+          schema:
+            example:   
     '401':
       $ref: ../../components/responses/errors/401.yaml
     '500': 

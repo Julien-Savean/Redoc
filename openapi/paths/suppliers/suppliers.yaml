@@ -19,7 +19,7 @@ post:
   tags:
     - Suppliers
   summary: Create
-  description: Create a supplier
+  description: Create a supplier.
   operationId: Suppliers_create
   security:
     - Bearer token: []

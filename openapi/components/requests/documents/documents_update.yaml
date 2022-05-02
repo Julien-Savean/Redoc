@@ -50,7 +50,7 @@ content:
             example: "0"
           id_document_template:
             description: >
-              Document template Id <br>
+              <u>[Document template](#operation/Documents_templates)</u> Id <br>
               *By defaut, the value of the customer profile*
             type: integer
             example: "0"

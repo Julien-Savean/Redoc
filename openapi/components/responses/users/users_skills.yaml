@@ -1,0 +1,42 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Id of user skill
+                type: integer
+              title:
+                description: French title of user skill
+                type: string
+              title_en:
+                description: English title of user skill
+                type: string
+              title_es:
+                description: Spanish title of user skill
+                type: string
+          example: 
+            - id: "52"
+              title: "Commercial"
+              title_en: "Commercial"
+              title_es: "Comercial"
+            - id: "53"
+              title: "Support"
+              title_en: "Support"
+              title_es: "Soporte"
+            - id: "54"
+              title: "Design"
+              title_en: "Design"
+              title_es: "Diseño"
+            

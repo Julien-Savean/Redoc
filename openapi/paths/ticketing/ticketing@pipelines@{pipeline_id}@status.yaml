@@ -1,0 +1,24 @@
+get:
+  tags:
+    - Ticketing
+  summary: Pipeline status
+  description: Get status of a pipeline.
+  operationId: Ticketing_status
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: pipeline_id
+    description: <u>[Pipeline](/#operation/Pipelines_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_status.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

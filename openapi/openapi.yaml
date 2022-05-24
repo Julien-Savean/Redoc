@@ -35,6 +35,8 @@ tags:
     description: This section lists all time-related APIS.
   - name: Projects
     description: This section lists all project-related APIS.
+  - name: Ticketing
+    description: This section lists all ticket-related APIS.    
   - name: Users
     description: This section lists all user-related APIS.
 servers:
@@ -180,12 +182,32 @@ paths:
     $ref: paths/projects/projects@{id}@tasks@{task_id}@subtasks.yaml
   /projects/{id}/tasks/{task_id}/subtasks/{subtask_id}:
     $ref: paths/projects/projects@{id}@tasks@{task_id}@subtasks@{subtask_id}.yaml
+  /ticketing:
+    $ref: paths/ticketing/ticketing.yaml
+  /ticketing/{id}:
+    $ref: paths/ticketing/ticketing@{id}.yaml
+  /ticketing/pipelines:
+    $ref: paths/ticketing/ticketing@pipelines.yaml
+  /ticketing/pipelines/{pipeline_id}/types:
+    $ref: paths/ticketing/ticketing@pipelines@{pipeline_id}@types.yaml
+  /ticketing/pipelines/{pipeline_id}/status:
+    $ref: paths/ticketing/ticketing@pipelines@{pipeline_id}@status.yaml
+  /ticketing/priorities:
+    $ref: paths/ticketing/ticketing@priorities.yaml
+  /ticketing/custom-fields:
+    $ref: paths/ticketing/ticketing@custom_fields.yaml
+  /ticketing/custom-fields/{field_id}:
+    $ref: paths/ticketing/ticketing@custom_fields@{field_id}.yaml
+  /ticketing/{id}/custom-fields/{field_id}:
+    $ref: paths/ticketing/ticketing@{id}@custom_fields@{field_id}.yaml
   /users:
     $ref: paths/users/users.yaml
   /users/groups:
     $ref: paths/users/groups.yaml
   /users/list-with-groups:
     $ref: paths/users/users_with_groups.yaml
+  /users/skills:
+    $ref: paths/users/skills.yaml
 components:
   securitySchemes:
     Bearer token:

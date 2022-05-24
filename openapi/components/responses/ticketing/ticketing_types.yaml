@@ -1,0 +1,59 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Id of the ticket type
+                type: integer
+              title:
+                description: French title of the ticket type
+                type: string
+              title_en:
+                description: English title of the ticket type
+                type: string
+              title_es:
+                description: Spanish title of the ticket type
+                type: string
+              customer_title:
+                description: Customer french title of the ticket type
+                type: string
+              customer_title_en:
+                description: Customer english title of the ticket type
+                type: string
+              customer_title_es:
+                description: Customer spanish title of the ticket type
+                type: string                                  
+          example: 
+            - id: "30"
+              title: "Incident"
+              title_en: "Incident"
+              title_es: "Incidente"
+              customer_title: "Incident"
+              customer_title_en: "Incident"
+              customer_title_es: "Incidente"
+            - id: "31"
+              title: "Bug"
+              title_en: "Bug"
+              title_es: "Bug"
+              customer_title: "Bug"
+              customer_title_en: "Bug"
+              customer_title_es: "Bug"
+            - id: "32"
+              title: "Demande d'amélioration"
+              title_en: "Request for improvement"
+              title_es: "Solicitud de mejora"
+              customer_title: "Demande d'amélioration"
+              customer_title_en: "Request for improvement"
+              customer_title_es: "Solicitud de mejora"

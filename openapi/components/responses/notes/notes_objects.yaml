@@ -50,6 +50,14 @@ content:
                 description: Task Id
                 type: integer
                 example: "0"
+              id_ticketing_pipeline: 
+                description: Ticket pipeline Id
+                type: integer
+                example: "0"
+              id_ticketing_ticket:      
+                description: Ticket Id
+                type: integer
+                example: "0"
               date:
                 description: Note date
                 type: string

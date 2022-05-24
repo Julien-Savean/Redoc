@@ -35,6 +35,10 @@ content:
             description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
             type: integer
             example: ""
+          id_ticketing_ticket:
+            description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+            type: integer
+            example: ""
           start_date:
             description: Start date
             type: string

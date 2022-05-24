@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Ticketing
+  summary: Pipelines
+  description: Get a list of all pipelines.
+  operationId: Ticketing_pipelines
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_pipelines.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

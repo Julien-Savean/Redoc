@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Ticketing
+  summary: Priorities
+  description: Get a list of all priorities.
+  operationId: Ticketing_priorities
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_priorities.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

@@ -1,0 +1,11 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - field_value
+        properties:
+          field_value:
+            description: <u>[Custom field value](/#operation/Ticketing_custom_field_values_list)</u>
+            type: integer
+            example: 3526

@@ -1,0 +1,32 @@
+post:
+  tags:
+    - Ticketing
+  summary: Add/Update custom fields
+  description: Values of ticketing custom field.
+  operationId: Ticketing_custom_field_values_add_update
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: field_id
+    description: Ticket <u>[custom field](/#operation/Ticketing_custom_fields_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  requestBody:
+    $ref: ../../components/requests/ticketing/ticketing_custom_field.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

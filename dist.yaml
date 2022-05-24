@@ -46,6 +46,8 @@ tags:
     description: This section lists all time-related APIS.
   - name: Projects
     description: This section lists all project-related APIS.
+  - name: Ticketing
+    description: This section lists all ticket-related APIS.
   - name: Users
     description: This section lists all user-related APIS.
 servers:
@@ -3784,6 +3786,385 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
+  /ticketing:
+    get:
+      tags:
+        - Ticketing
+      summary: List
+      description: Get a list of all tickets.
+      operationId: Ticketing_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: pipeline
+          schema:
+            type: integer
+          description: Search by <u>[pipeline](/#operation/Ticketing_pipelines)</u> Id
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Search by title
+        - in: query
+          name: id_type
+          schema:
+            type: integer
+          description: Search by <u>[type](/#operation/Ticketing_types)</u> Id
+        - in: query
+          name: id_status
+          schema:
+            type: integer
+          description: Search by <u>[status](/#operation/Ticketing_status)</u> Id
+        - in: query
+          name: id_priority
+          schema:
+            type: integer
+          description: Search by <u>[priority](/#operation/Ticketing_priorities)</u> Id
+        - in: query
+          name: id_group
+          schema:
+            type: integer
+          description: Search by <u>[group](/#operation/Users_groups)</u> Id
+        - in: query
+          name: id_user_assigned
+          schema:
+            type: integer
+          description: Search by <u>[user](/#operation/Users)</u> Id
+        - in: query
+          name: skills
+          schema:
+            type: integer
+          description: Search by <u>[skill](/#operation/Users_skills)</u> Id
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: >-
+            Search by <u>[customer](/#operation/Customers_list)</u> Id or
+            <u>[supplier](/#operation/Suppliers_list)</u> Id
+        - in: query
+          name: id_customer_supplier_contact
+          schema:
+            type: integer
+          description: Search by <u>[contact](/#operation/Contacts_list)</u> Id
+        - in: query
+          name: id_opportunity
+          schema:
+            type: integer
+          description: Search by <u>[opportunity](/#operation/Opportunities_list)</u> Id
+        - in: query
+          name: id_project
+          schema:
+            type: integer
+          description: Search by <u>[project](/#operation/Projects_list)</u> Id
+        - in: query
+          name: id_project_task
+          schema:
+            type: integer
+          description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: |
+            Direction for sorting
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Ticketing
+      summary: Create
+      description: Create a ticket.
+      operationId: Ticketing_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/ticketing_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/{id}:
+    get:
+      tags:
+        - Ticketing
+      summary: Show
+      description: Get one ticket.
+      operationId: Ticketing_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Ticketing
+      summary: Update
+      description: Update a ticket.
+      operationId: Ticketing_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/ticketing_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Ticketing
+      summary: Delete
+      description: Delete a ticket.
+      operationId: Ticketing_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example: null
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/pipelines:
+    get:
+      tags:
+        - Ticketing
+      summary: Pipelines
+      description: Get a list of all pipelines.
+      operationId: Ticketing_pipelines
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_pipelines'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/pipelines/{pipeline_id}/types:
+    get:
+      tags:
+        - Ticketing
+      summary: Pipeline types
+      description: Get types of a pipeline.
+      operationId: Ticketing_types
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: pipeline_id
+          description: <u>[Pipeline](/#operation/Pipelines_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_types'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/pipelines/{pipeline_id}/status:
+    get:
+      tags:
+        - Ticketing
+      summary: Pipeline status
+      description: Get status of a pipeline.
+      operationId: Ticketing_status
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: pipeline_id
+          description: <u>[Pipeline](/#operation/Pipelines_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/priorities:
+    get:
+      tags:
+        - Ticketing
+      summary: Priorities
+      description: Get a list of all priorities.
+      operationId: Ticketing_priorities
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_priorities'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/custom-fields:
+    get:
+      tags:
+        - Ticketing
+      summary: Custom fields
+      description: Get a list of all ticketing custom fields.
+      operationId: Ticketing_custom_fields_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_custom_fields'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/custom-fields/{field_id}:
+    get:
+      tags:
+        - Ticketing
+      summary: Custom field values
+      description: Get values of ticketing custom field.
+      operationId: Ticketing_custom_field_values_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: >-
+            Ticketing <u>[custom
+            field](/#operation/Ticketing_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /ticketing/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Ticketing
+      summary: Add/Update custom fields
+      description: Values of ticketing custom field.
+      operationId: Ticketing_custom_field_values_add_update
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: >-
+            Ticket <u>[custom
+            field](/#operation/Ticketing_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/ticketing_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/ticketing_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
   /users:
     get:
       tags:
@@ -3828,6 +4209,22 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/users_with_groups_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /users/skills:
+    get:
+      tags:
+        - Users
+      summary: Skills
+      description: Get a list of all skills.
+      operationId: Users_skills
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/users_skills'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -3910,7 +4307,7 @@ components:
                     id:
                       description: Customer Id
                       type: integer
-                      example: '48560'
+                      example: '28496'
                     title:
                       description: >-
                         Name for professional customer *or civility + lastname +
@@ -4164,7 +4561,7 @@ components:
               id:
                 description: Customer Id
                 type: integer
-                example: '48560'
+                example: '28496'
               title:
                 description: >-
                   Name for professional customer *or civility + lastname +
@@ -4349,7 +4746,7 @@ components:
               id:
                 description: Customer Id
                 type: integer
-                example: '48560'
+                example: '28496'
               title:
                 description: >-
                   Name for professional customer *or civility + lastname +
@@ -6458,12 +6855,12 @@ components:
                       description: Document date
                       type: string
                       format: date-time
-                      example: '2022-05-16 16:15:00'
+                      example: '2022-05-16'
                     date_end:
                       description: Expiration date
                       type: string
                       format: date-time
-                      example: '2022-05-30 14:00:00'
+                      example: '2022-05-30'
                     id_user_assigned:
                       description: Document client mamager id
                       type: array
@@ -6502,7 +6899,7 @@ components:
                       description: Payment date
                       type: string
                       format: date-time
-                      example: '2022-06-16 00:00:00'
+                      example: '2022-06-16'
                     id_document_previous:
                       description: Previous document Id
                       type: integer
@@ -6578,12 +6975,12 @@ components:
                 description: Document date
                 type: string
                 format: date-time
-                example: '2022-05-16 16:15:00'
+                example: '2022-05-16'
               date_end:
                 description: Expiration date
                 type: string
                 format: date-time
-                example: '2022-05-30 14:00:00'
+                example: '2022-05-30'
               id_payment_condition:
                 description: Payment condition Id
                 type: integer
@@ -6770,6 +7167,28 @@ components:
                     created_by: '213'
                     update_date: '2022-04-19 14:45:28'
                     updated_by: '213'
+                  - section: '1'
+                    id_product: '0'
+                    title: 'Section #1'
+                    reference: ''
+                    description: A description or note about this section
+                    price_without_tax: '0.000000'
+                    id_vat: '0'
+                    quantity: '1.00'
+                    quantity_delivered: '1.00'
+                    id_unit: '0'
+                    discount_type: percent
+                    discount_value: 0
+                    progress_type: percent
+                    progress_value: 0
+                    total_without_tax: '0.000'
+                    total_cost: '0.00'
+                    hide_in_pdf: '0'
+                    optional: '0'
+                    creation_date: '2022-04-19 14:45:28'
+                    created_by: '213'
+                    update_date: '2022-04-19 14:45:28'
+                    updated_by: '213'
               creation_date:
                 description: Creation date and time
                 type: string
@@ -6920,7 +7339,7 @@ components:
                 description: Payment date
                 type: string
                 format: date-time
-                example: '2022-06-16 00:00:00'
+                example: '2022-06-16'
               use_stripe_to_pay:
                 description: Stripe use
                 type: integer
@@ -7014,28 +7433,50 @@ components:
                       description: Id of the updater
                       type: integer
                 example:
-                  section: '0'
-                  id_product: '4739'
-                  title: 'Product #1'
-                  reference: Ref_product_1
-                  description: A description or note about this product
-                  price_without_tax: '50.000000'
-                  id_vat: '1'
-                  quantity: '2.50'
-                  quantity_delivered: '0'
-                  id_unit: '2'
-                  discount_type: percent
-                  discount_value: 0
-                  progress_type: percent
-                  progress_value: 0
-                  total_without_tax: '125.00'
-                  total_cost: '150.00'
-                  hide_in_pdf: '0'
-                  optional: '0'
-                  creation_date: '2022-04-19 14:45:28'
-                  created_by: '213'
-                  update_date: '2022-04-19 14:45:28'
-                  updated_by: '213'
+                  - section: '0'
+                    id_product: '4739'
+                    title: 'Product #1'
+                    reference: Ref_product_1
+                    description: A description or note about this product
+                    price_without_tax: '50.000000'
+                    id_vat: '1'
+                    quantity: '2.50'
+                    quantity_delivered: '0'
+                    id_unit: '2'
+                    discount_type: percent
+                    discount_value: 0
+                    progress_type: percent
+                    progress_value: 0
+                    total_without_tax: '125.00'
+                    total_cost: '150.00'
+                    hide_in_pdf: '0'
+                    optional: '0'
+                    creation_date: '2022-04-19 14:45:28'
+                    created_by: '213'
+                    update_date: '2022-04-19 14:45:28'
+                    updated_by: '213'
+                  - section: '1'
+                    id_product: '0'
+                    title: 'Section #1'
+                    reference: ''
+                    description: A description or note about this section
+                    price_without_tax: '0.000000'
+                    id_vat: '0'
+                    quantity: '1.00'
+                    quantity_delivered: '1.00'
+                    id_unit: '0'
+                    discount_type: percent
+                    discount_value: 0
+                    progress_type: percent
+                    progress_value: 0
+                    total_without_tax: '0.000'
+                    total_cost: '0.00'
+                    hide_in_pdf: '0'
+                    optional: '0'
+                    creation_date: '2022-04-19 14:45:28'
+                    created_by: '213'
+                    update_date: '2022-04-19 14:45:28'
+                    updated_by: '213'
               creation_date:
                 description: Creation date and time
                 type: string
@@ -8253,6 +8694,14 @@ components:
                       description: Project task Id
                       type: integer
                       example: '0'
+                    id_ticketing_pipeline:
+                      description: Ticket pipeline Id
+                      type: integer
+                      example: '0'
+                    id_ticketing_ticket:
+                      description: Ticket Id
+                      type: integer
+                      example: '0'
                     start_date:
                       description: Start date
                       type: string
@@ -8346,6 +8795,14 @@ components:
                 example: '0'
               id_project_task:
                 description: Project task Id
+                type: integer
+                example: '0'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
                 type: integer
                 example: '0'
               start_date:
@@ -8442,6 +8899,14 @@ components:
                 example: '0'
               id_project_task:
                 description: Project task Id
+                type: integer
+                example: '0'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
                 type: integer
                 example: '0'
               start_date:
@@ -8607,6 +9072,14 @@ components:
                       description: Task Id
                       type: integer
                       example: '0'
+                    id_ticketing_pipeline:
+                      description: Ticket pipeline Id
+                      type: integer
+                      example: '0'
+                    id_ticketing_ticket:
+                      description: Ticket Id
+                      type: integer
+                      example: '0'
                     date:
                       description: Note date
                       type: string
@@ -8663,6 +9136,14 @@ components:
                 example: '0'
               id_project_task:
                 description: Task Id
+                type: integer
+                example: '0'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
                 type: integer
                 example: '0'
               date:
@@ -8722,6 +9203,14 @@ components:
                 example: '0'
               id_project_task:
                 description: Task Id
+                type: integer
+                example: '0'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
                 type: integer
                 example: '0'
               date:
@@ -8810,6 +9299,14 @@ components:
                       example: '0'
                     id_project_task:
                       description: Project task Id
+                      type: integer
+                      example: '0'
+                    id_ticketing_pipeline:
+                      description: Ticket pipeline Id
+                      type: integer
+                      example: '0'
+                    id_ticketing_ticket:
+                      description: Ticket Id
                       type: integer
                       example: '0'
                     start_date:
@@ -8907,6 +9404,14 @@ components:
                 description: Project task Id
                 type: integer
                 example: '0'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
+                type: integer
+                example: '0'
               start_date:
                 description: Start date
                 type: string
@@ -9001,6 +9506,14 @@ components:
                 example: '0'
               id_project_task:
                 description: Project task Id
+                type: integer
+                example: '0'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
                 type: integer
                 example: '0'
               start_date:
@@ -9174,6 +9687,14 @@ components:
                       description: Opportunity Id
                       type: integer
                       example: '1985'
+                    id_ticketing_pipeline:
+                      description: Ticket pipeline Id
+                      type: integer
+                      example: '0'
+                    id_ticketing_ticket:
+                      description: Ticket Id
+                      type: integer
+                      example: '0'
                     id_type:
                       description: Time type Id
                       type: integer
@@ -9190,7 +9711,7 @@ components:
                       description: Time date
                       type: string
                       format: date-time
-                      example: '2022-07-15 13:29:00'
+                      example: '2022-07-15'
                     time_done:
                       description: Time done
                       type: string
@@ -9257,6 +9778,14 @@ components:
                 description: Opportunity Id
                 type: integer
                 example: '1985'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
+                type: integer
+                example: '0'
               id_type:
                 description: Time type Id
                 type: integer
@@ -9273,7 +9802,7 @@ components:
                 description: Time date
                 type: string
                 format: date-time
-                example: '2022-07-15 13:29:00'
+                example: '2022-07-15'
               time_done:
                 description: Time done
                 type: string
@@ -9340,6 +9869,14 @@ components:
                 description: Opportunity Id
                 type: integer
                 example: '1985'
+              id_ticketing_pipeline:
+                description: Ticket pipeline Id
+                type: integer
+                example: '0'
+              id_ticketing_ticket:
+                description: Ticket Id
+                type: integer
+                example: '0'
               id_type:
                 description: Time type Id
                 type: integer
@@ -9356,7 +9893,7 @@ components:
                 description: Time date
                 type: string
                 format: date-time
-                example: '2022-07-15 13:29:00'
+                example: '2022-07-15'
               time_done:
                 description: Time done
                 type: string
@@ -9846,9 +10383,9 @@ components:
                   type: object
                   properties:
                     id:
-                      description: Project Id
+                      description: Task Id
                       type: integer
-                      example: '435'
+                      example: '486'
                     number:
                       description: Number
                       type: integer
@@ -10001,7 +10538,7 @@ components:
               id:
                 description: Task Id
                 type: integer
-                example: '435'
+                example: '486'
               number:
                 description: Number
                 type: integer
@@ -10183,9 +10720,9 @@ components:
             type: object
             properties:
               id:
-                description: Project Id
+                description: Task Id
                 type: integer
-                example: '435'
+                example: '486'
               number:
                 description: Number
                 type: integer
@@ -10864,6 +11401,735 @@ components:
                 description: Id of the updater
                 type: integer
                 example: '213'
+    ticketing_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 3
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Ticket Id
+                      type: integer
+                      example: '42'
+                    pipeline:
+                      description: Pipeline Id
+                      type: integer
+                      example: '8'
+                    number:
+                      description: Ticket stage
+                      type: integer
+                      example: '1'
+                    id_type:
+                      description: Ticket type Id
+                      type: integer
+                      example: '31'
+                    id_status:
+                      description: Ticket status Id
+                      type: integer
+                      example: '1'
+                    id_status_last_update:
+                      description: Last update date of ticket status
+                      type: string
+                      format: date-time
+                      example: '2022-05-23 09:37:49'
+                    position:
+                      description: Ticket position
+                      type: integer
+                      example: '1'
+                    title:
+                      description: Ticket title
+                      type: string
+                      example: 'Ticket #1'
+                    id_priority:
+                      description: Ticket priority Id
+                      type: integer
+                      example: '1'
+                    id_group:
+                      description: Group Id
+                      type: integer
+                      example: '18'
+                    id_user_assigned:
+                      description: Opportunity client mamager id
+                      type: string
+                      example: '213'
+                    list_id_user_shared:
+                      description: Reason Id for cancellation
+                      type: array
+                      example: []
+                    description:
+                      description: Ticket description
+                      type: string
+                      example: A description or note about this ticket
+                    id_customer_supplier:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '28496'
+                    id_customer_supplier_contact:
+                      description: Customer or supplier Id
+                      type: integer
+                      example: '48560'
+                    id_opportunity:
+                      description: Opportunity Id
+                      type: integer
+                      example: '1985'
+                    id_project:
+                      description: Project Id
+                      type: integer
+                      example: '435'
+                    id_project_task:
+                      description: Project task Id
+                      type: integer
+                      example: '486'
+                    skills:
+                      description: Skills Id
+                      type: array
+                      items:
+                        example: '52'
+                    date_first_answer_expected:
+                      description: Date of first expected response
+                      type: string
+                      format: date-time
+                      example: null
+                    date_first_answer_real:
+                      description: Actual date of first response
+                      type: string
+                      format: date-time
+                      example: null
+                    date_resolve_answer_expected:
+                      description: Date of resolution expected response
+                      type: string
+                      format: date-time
+                      example: null
+                    date_resolve_answer_real:
+                      description: Actual date of resolution response
+                      type: string
+                      format: date-time
+                      example: null
+                    creation_source:
+                      description: Creation source Id
+                      type: integer
+                      example: '3'
+                    creation_source_title:
+                      description: Creation source title
+                      type: string
+                      example: API
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3526'
+                          title: Client satisfaction
+                          value: '6144'
+                          value_text: Low
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-03-25 12:04:24'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    ticketing_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Ticket Id
+                type: integer
+                example: '42'
+              pipeline:
+                description: Pipeline Id
+                type: integer
+                example: '8'
+              number:
+                description: Ticket stage
+                type: integer
+                example: '1'
+              id_type:
+                description: Ticket type Id
+                type: integer
+                example: '31'
+              id_status:
+                description: Ticket status Id
+                type: integer
+                example: '1'
+              id_status_last_update:
+                description: Last update date of ticket status
+                type: string
+                format: date-time
+                example: '2022-05-23 09:37:49'
+              position:
+                description: Ticket position
+                type: integer
+                example: '1'
+              title:
+                description: Ticket title
+                type: string
+                example: 'Ticket #1'
+              id_priority:
+                description: Ticket priority Id
+                type: integer
+                example: '1'
+              id_group:
+                description: Group Id
+                type: integer
+                example: '18'
+              id_user_assigned:
+                description: Opportunity client mamager id
+                type: string
+                example: '213'
+              list_id_user_shared:
+                description: Reason Id for cancellation
+                type: array
+                example: []
+              description:
+                description: Ticket description
+                type: string
+                example: A description or note about this ticket
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_customer_supplier_contact:
+                description: Customer or supplier Id
+                type: integer
+                example: '48560'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '435'
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: '486'
+              skills:
+                description: Skills Id
+                type: array
+                items:
+                  example: '52'
+              date_first_answer_expected:
+                description: Date of first expected response
+                type: string
+                format: date-time
+                example: null
+              date_first_answer_real:
+                description: Actual date of first response
+                type: string
+                format: date-time
+                example: null
+              date_resolve_answer_expected:
+                description: Date of resolution expected response
+                type: string
+                format: date-time
+                example: null
+              date_resolve_answer_real:
+                description: Actual date of resolution response
+                type: string
+                format: date-time
+                example: null
+              creation_source:
+                description: Creation source Id
+                type: integer
+                example: '3'
+              creation_source_title:
+                description: Creation source title
+                type: string
+                example: API
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3526'
+                    title: Client satisfaction
+                    value: '6144'
+                    value_text: Low
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    ticketing_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Ticket Id
+                type: integer
+                example: '42'
+              pipeline:
+                description: Pipeline Id
+                type: integer
+                example: '8'
+              number:
+                description: Ticket stage
+                type: integer
+                example: '1'
+              id_type:
+                description: Ticket type Id
+                type: integer
+                example: '31'
+              id_status:
+                description: Ticket status Id
+                type: integer
+                example: '1'
+              id_status_last_update:
+                description: Last update date of ticket status
+                type: string
+                format: date-time
+                example: '2022-05-23 09:37:49'
+              position:
+                description: Ticket position
+                type: integer
+                example: '1'
+              title:
+                description: Ticket title
+                type: string
+                example: 'Ticket #1'
+              id_priority:
+                description: Ticket priority Id
+                type: integer
+                example: '1'
+              id_group:
+                description: Group Id
+                type: integer
+                example: '18'
+              id_user_assigned:
+                description: Opportunity client mamager id
+                type: string
+                example: '213'
+              list_id_user_shared:
+                description: Reason Id for cancellation
+                type: array
+                example: []
+              description:
+                description: Ticket description
+                type: string
+                example: A description or note about this ticket
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: '28496'
+              id_customer_supplier_contact:
+                description: Customer or supplier Id
+                type: integer
+                example: '48560'
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: '1985'
+              id_project:
+                description: Project Id
+                type: integer
+                example: '435'
+              id_project_task:
+                description: Project task Id
+                type: integer
+                example: '486'
+              skills:
+                description: Skills Id
+                type: array
+                items:
+                  example: '52'
+              date_first_answer_expected:
+                description: Date of first expected response
+                type: string
+                format: date-time
+                example: null
+              date_first_answer_real:
+                description: Actual date of first response
+                type: string
+                format: date-time
+                example: null
+              date_resolve_answer_expected:
+                description: Date of resolution expected response
+                type: string
+                format: date-time
+                example: null
+              date_resolve_answer_real:
+                description: Actual date of resolution response
+                type: string
+                format: date-time
+                example: null
+              creation_source:
+                description: Creation source Id
+                type: integer
+                example: '3'
+              creation_source_title:
+                description: Creation source title
+                type: string
+                example: API
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3526'
+                    title: Client satisfaction
+                    value: '6144'
+                    value_text: Low
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-03-25 12:04:24'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    ticketing_pipelines:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Pipeline Id
+                      type: integer
+                    title:
+                      description: Pipeline title
+                      type: string
+                example:
+                  - id: '8'
+                    title: 'Pipeline #1'
+    ticketing_types:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of the ticket type
+                      type: integer
+                    title:
+                      description: French title of the ticket type
+                      type: string
+                    title_en:
+                      description: English title of the ticket type
+                      type: string
+                    title_es:
+                      description: Spanish title of the ticket type
+                      type: string
+                    customer_title:
+                      description: Customer french title of the ticket type
+                      type: string
+                    customer_title_en:
+                      description: Customer english title of the ticket type
+                      type: string
+                    customer_title_es:
+                      description: Customer spanish title of the ticket type
+                      type: string
+                example:
+                  - id: '30'
+                    title: Incident
+                    title_en: Incident
+                    title_es: Incidente
+                    customer_title: Incident
+                    customer_title_en: Incident
+                    customer_title_es: Incidente
+                  - id: '31'
+                    title: Bug
+                    title_en: Bug
+                    title_es: Bug
+                    customer_title: Bug
+                    customer_title_en: Bug
+                    customer_title_es: Bug
+                  - id: '32'
+                    title: Demande d'amélioration
+                    title_en: Request for improvement
+                    title_es: Solicitud de mejora
+                    customer_title: Demande d'amélioration
+                    customer_title_en: Request for improvement
+                    customer_title_es: Solicitud de mejora
+    ticketing_status:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of the ticket status
+                      type: integer
+                    title:
+                      description: French title of the ticket status
+                      type: string
+                    title_en:
+                      description: English title of the ticket status
+                      type: string
+                    title_es:
+                      description: Spanish title of the ticket status
+                      type: string
+                    customer_title:
+                      description: Customer french title of the ticket status
+                      type: string
+                    customer_title_en:
+                      description: Customer english title of the ticket status
+                      type: string
+                    customer_title_es:
+                      description: Customer spanish title of the ticket status
+                      type: string
+                example:
+                  - id: '1'
+                    title: En attente
+                    title_en: Pending
+                    title_es: En espera
+                    customer_title: En attente
+                    customer_title_en: Pending
+                    customer_title_es: En espera
+                  - id: '2'
+                    title: En cours
+                    title_en: In progress
+                    title_es: En progreso
+                    customer_title: En cours
+                    customer_title_en: In progress
+                    customer_title_es: En progreso
+                  - id: '3'
+                    title: Cloturé
+                    title_en: Closed
+                    title_es: Cerrado
+                    customer_title: Cloturé
+                    customer_title_en: Closed
+                    customer_title_es: Cerrado
+    ticketing_priorities:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Priority Id
+                      type: integer
+                    title:
+                      description: Priority title
+                      type: string
+                example:
+                  - id: '1'
+                    title: Urgent
+                  - id: '2'
+                    title: High
+                  - id: '3'
+                    title: Medium
+                  - id: '4'
+                    title: Low
+    ticketing_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Ticket custom field Id
+                      type: integer
+                      example: '3526'
+                    title:
+                      description: Ticket custom field title
+                      type: string
+                      example: Client satisfaction
+                    type:
+                      description: Ticket custom field type
+                      type: string
+                      example: Dropdown list
+                    with_values:
+                      description: Ticket field with values
+                      type: boolean
+                      example: 'true'
+    ticketing_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Ticket custom field value Id
+                      type: integer
+                    title:
+                      description: Ticket custom field value title
+                      type: string
+                example:
+                  - id: '6144'
+                    title: Low
+                  - id: '6145'
+                    title: Medium
+                  - id: '6146'
+                    title: High
     users_objects:
       description: OK
       content:
@@ -10952,6 +12218,48 @@ components:
                     title: Business
                   - id: g19
                     title: Support
+    users_skills:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Id of user skill
+                      type: integer
+                    title:
+                      description: French title of user skill
+                      type: string
+                    title_en:
+                      description: English title of user skill
+                      type: string
+                    title_es:
+                      description: Spanish title of user skill
+                      type: string
+                example:
+                  - id: '52'
+                    title: Commercial
+                    title_en: Commercial
+                    title_es: Comercial
+                  - id: '53'
+                    title: Support
+                    title_en: Support
+                    title_es: Soporte
+                  - id: '54'
+                    title: Design
+                    title_en: Design
+                    title_es: Diseño
   schemas:
     error:
       type: object
@@ -12189,7 +13497,7 @@ components:
                   **If adding in an existing opportunity**:
                   <u>[Opportunity](/#operation/Opportunities_list)</u> Id 
                 type: string
-                example: '2022-04-01'
+                example: '1985'
               proposal_description:
                 description: Proposal description
                 type: string
@@ -12209,12 +13517,12 @@ components:
                 description: Document date
                 type: string
                 format: date-time
-                example: '2022-05-16 16:15:00'
+                example: '2022-05-16'
               date_end:
                 description: Expiration date - **Not editable for invoices**
                 type: string
                 format: date-time
-                example: '2022-05-30 14:00:00'
+                example: '2022-05-30'
               id_payment_condition:
                 description: >
                   Payment condition Id - **Only for invoices** <br> *By defaut,
@@ -12258,47 +13566,39 @@ components:
                             Section format
                             > 0 = Product 
                           type: integer
-                          example: '0'
                         id_product:
                           description: >
                             <u>[Product](/#operation/Products_list)</u> Id -
                             `id_product OR reference required`
                           type: integer
-                          example: '4739'
                         reference:
                           description: >-
                             Product reference - `id_product OR reference
                             required`
                           type: string
                           maxLength: 30
-                          example: Ref_product_1
                         description:
                           description: >
                             Product description <br> *By defaut, the value of
                             the product sheet* 
                           type: string
-                          example: A description or note about this product
                         price_without_tax:
                           description: >
                             Price HT <br> *By defaut, the
                             [value](/#operation/Products_sell_price) of the
                             product sheet* 
                           type: number
-                          example: '125.00'
                         quantity:
                           description: Product quantity
                           type: number
                           format: float
-                          example: '2.50'
                         quantity_delivered:
                           description: Product quantity delivered - **Only for deliveries**
                           type: number
                           format: float
-                          example: '0'
                         id_vat:
                           description: <u>[Vat](/#operation/Products_vat_list)</u> Id
                           type: integer
-                          example: '1'
                     - type: object
                       title: Section
                       properties:
@@ -12307,13 +13607,27 @@ components:
                             Section format
                             > 1 = Section
                           type: integer
+                          example: '1'
                         title:
                           description: Section title
                           type: string
                           maxLength: 255
+                          example: null
                         description:
                           description: Section description
                           type: string
+                example:
+                  - section: '0'
+                    id_product: '4739'
+                    reference: Ref_product_1
+                    description: A description or note about this product
+                    price_without_tax: '125.00'
+                    quantity: '2.50'
+                    quantity_delivered: '0'
+                    id_vat: '1'
+                  - section: '1'
+                    title: 'Section #1'
+                    description: A description or note about this section
     documents_update:
       content:
         application/json:
@@ -12335,12 +13649,12 @@ components:
                 description: Document date
                 type: string
                 format: date-time
-                example: '2022-05-16 16:15:00'
+                example: '2022-05-16'
               date_end:
                 description: Expiration date - **Not editable for invoices**
                 type: string
                 format: date-time
-                example: '2022-05-30 14:00:00'
+                example: '2022-05-30'
               id_payment_condition:
                 description: >
                   Payment condition Id - **Only for invoices** <br> *By defaut,
@@ -12384,47 +13698,39 @@ components:
                             Section format
                             > 0 = Product
                           type: integer
-                          example: '0'
                         id_product:
                           description: >
                             <u>[Product](/#operation/Products_list)</u> Id -
                             `id_product OR reference required`
                           type: integer
-                          example: '4739'
                         reference:
                           description: >-
                             Product reference - `id_product OR reference
                             required`
                           type: string
                           maxLength: 30
-                          example: Ref_product_1
                         description:
                           description: >
                             Product description <br> *By defaut, the value of
                             the product sheet* 
                           type: string
-                          example: A description or note about this product
                         price_without_tax:
                           description: >
                             Price HT <br> *By defaut, the
                             [value](/#operation/Products_sell_price) of the
                             product sheet* 
                           type: number
-                          example: '125.00'
                         quantity:
                           description: Product quantity
                           type: number
                           format: float
-                          example: '2.50'
                         quantity_delivered:
                           description: Product quantity delivered - **Only for deliveries**
                           type: number
                           format: float
-                          example: '0'
                         id_vat:
                           description: <u>[Vat](/#operation/Products_vat_list)</u> Id
                           type: integer
-                          example: '1'
                     - type: object
                       title: Section
                       properties:
@@ -12440,6 +13746,18 @@ components:
                         description:
                           description: Section description
                           type: string
+                example:
+                  - section: '0'
+                    id_product: '4739'
+                    reference: Ref_product_1
+                    description: A description or note about this product
+                    price_without_tax: '125.00'
+                    quantity: '2.50'
+                    quantity_delivered: '0'
+                    id_vat: '1'
+                  - section: '1'
+                    title: 'Section #1'
+                    description: A description or note about this section
     products_create:
       content:
         application/json:
@@ -12730,6 +14048,10 @@ components:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+                type: integer
+                example: ''
               start_date:
                 description: Start date
                 type: string
@@ -12809,6 +14131,10 @@ components:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+                type: integer
+                example: ''
               start_date:
                 description: Start date
                 type: string
@@ -12886,6 +14212,10 @@ components:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+                type: integer
+                example: ''
               date:
                 description: Start date
                 type: string
@@ -12926,6 +14256,10 @@ components:
                 example: ''
               id_project_task:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: ''
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
                 type: integer
                 example: ''
               date:
@@ -12980,6 +14314,10 @@ components:
                 example: ''
               id_project_task:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: ''
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
                 type: integer
                 example: ''
               start_date:
@@ -13067,6 +14405,10 @@ components:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: ''
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+                type: integer
+                example: ''
               start_date:
                 description: Start date
                 type: string
@@ -13150,6 +14492,10 @@ components:
                 description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
                 type: integer
                 example: 1985
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+                type: integer
+                example: ''
               id_type:
                 description: <u>[Time type](/#operation/Times_types)</u> Id
                 type: integer
@@ -13164,7 +14510,7 @@ components:
                 description: Time date
                 type: string
                 format: date-time
-                example: '2022-07-15 13:29:00'
+                example: '2022-07-15'
               time_done:
                 description: Time done
                 type: string
@@ -13211,6 +14557,10 @@ components:
                 description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
                 type: integer
                 example: 1985
+              id_ticketing_ticket:
+                description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+                type: integer
+                example: ''
               id_type:
                 description: <u>[Time type](/#operation/Times_types)</u> Id
                 type: integer
@@ -13225,7 +14575,7 @@ components:
                 description: Time date
                 type: string
                 format: date-time
-                example: '2022-07-15 13:29:00'
+                example: '2022-07-15'
               time_done:
                 description: Time done
                 type: string
@@ -13664,3 +15014,179 @@ components:
                   associated with the task
                 type: integer
                 example: 213
+    ticketing_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pipeline:
+                description: <u>[pipeline](/#operation/Ticketing_pipelines)</u> Id
+                type: integer
+                example: 42
+              title:
+                description: Ticket title
+                type: string
+                example: 'Ticket #1'
+              id_type:
+                description: Ticket <u>[type](/#operation/Ticketing_types)</u> Id
+                type: integer
+                example: 31
+              id_status:
+                description: Ticket <u>[status](/#operation/Ticketing_status)</u> Id
+                type: integer
+                example: 1
+              id_priority:
+                description: <u>[Priority](/#operation/Ticketing_priorities)</u> Id
+                type: integer
+                example: 1
+              id_group:
+                description: <u>[Group](/#operation/Users_groups)</u> Id
+                type: integer
+                example: 18
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id
+                type: integer
+                example: 213
+              skills:
+                description: <u>[Skill](/#operation/Users_skills)</u> Id
+                type: integer
+                example: 52
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list) Id
+                type: integer
+                example: 28496
+              id_customer_supplier_contact:
+                description: <u>[Contact](/#operation/Contacts_list)</u> Id
+                type: integer
+                example: 48560
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: 435
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: 486
+              list_id_user_shared:
+                description: <u>[User](/#operation/Users)</u> shared Id
+                type: integer
+                example: null
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Ticketing_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3526
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Ticketing_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6144
+    ticketing_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: Ticket title
+                type: string
+                example: 'Ticket #1'
+              id_type:
+                description: Ticket <u>[type](/#operation/Ticketing_types)</u> Id
+                type: integer
+                example: 31
+              id_status:
+                description: Ticket <u>[status](/#operation/Ticketing_status)</u> Id
+                type: integer
+                example: 1
+              id_priority:
+                description: <u>[Priority](/#operation/Ticketing_priorities)</u> Id
+                type: integer
+                example: 1
+              id_group:
+                description: <u>[Group](/#operation/Users_groups)</u> Id
+                type: integer
+                example: 18
+              id_user_assigned:
+                description: <u>[User](/#operation/Users)</u> Id
+                type: integer
+                example: 213
+              skills:
+                description: <u>[Skill](/#operation/Users_skil)</u> Id
+                type: integer
+                example: 52
+              id_customer_supplier:
+                description: >-
+                  <u>[Customer](/#operation/Customers_list)</u> Id or
+                  <u>[supplier](/#operation/Suppliers_list) Id
+                type: integer
+                example: 28496
+              id_customer_supplier_contact:
+                description: <u>[Contact](/#operation/Contacts_list)</u> Id
+                type: integer
+                example: 48560
+              id_opportunity:
+                description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
+                type: integer
+                example: 1985
+              id_project:
+                description: <u>[Project](/#operation/Projects_list)</u> Id
+                type: integer
+                example: 435
+              id_project_task:
+                description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
+                type: integer
+                example: 486
+              list_id_user_shared:
+                description: <u>[User](/#operation/Users)</u> shared Id
+                type: integer
+                example: null
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Ticketing_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3526
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Ticketing_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6144
+    ticketing_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Ticketing_custom_field_values_list)</u>
+                type: integer
+                example: 3526

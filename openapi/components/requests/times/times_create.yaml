@@ -29,6 +29,10 @@ content:
             description: <u>[Opportunity](/#operation/Opportunities_list)</u> Id
             type: integer
             example: 1985
+          id_ticketing_ticket:
+            description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+            type: integer
+            example: ""
           id_type:
             description: <u>[Time type](/#operation/Times_types)</u> Id
             type: integer

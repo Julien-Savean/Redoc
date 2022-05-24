@@ -31,9 +31,9 @@ content:
             type: object
             properties:
               id:
-                description: Project Id
+                description: Task Id
                 type: integer
-                example: "435"
+                example: "486"
               number:
                 description: Number
                 type: integer

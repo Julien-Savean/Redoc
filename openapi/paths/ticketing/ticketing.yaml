@@ -1,0 +1,36 @@
+get:
+  tags:
+    - Ticketing
+  summary: List
+  description: Get a list of all tickets.
+  operationId: Ticketing_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/ticketing/ticketing_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_objects.yaml     
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Ticketing
+  summary: Create
+  description: Create a ticket.
+  operationId: Ticketing_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/ticketing/ticketing_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

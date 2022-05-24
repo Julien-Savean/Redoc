@@ -1,0 +1,78 @@
+get:
+  tags:
+    - Ticketing
+  summary: Show
+  description: Get one ticket.
+  operationId: Ticketing_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Ticketing
+  summary: Update
+  description: Update a ticket.
+  operationId: Ticketing_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/ticketing/ticketing_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/ticketing/ticketing_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+delete:
+  tags:
+    - Ticketing
+  summary: Delete
+  description: Delete a ticket.
+  operationId: Ticketing_delete
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Ticket](/#operation/Ticketing_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            example:    
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

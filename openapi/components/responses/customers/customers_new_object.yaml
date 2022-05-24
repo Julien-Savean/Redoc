@@ -7,7 +7,7 @@ content:
         id:
           description: Customer Id
           type: integer
-          example: "48560"
+          example: "28496"
         title:
           description: Name for professional customer *or civility + lastname + firstname for individual customer*
           type: string

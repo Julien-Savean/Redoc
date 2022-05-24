@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Users
+  summary: Skills
+  description: Get a list of all skills.
+  operationId: Users_skills
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/users/users_skills.yaml     
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

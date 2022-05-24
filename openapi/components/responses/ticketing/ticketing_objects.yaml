@@ -1,0 +1,181 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        pagination:
+          description: Pagination of results
+          type: object
+          properties:
+            total: 
+              description: Number of results objects per response
+              type: integer
+              example: 3
+            limit: 
+              description: Limit of objects per response
+              type: integer
+              example: 100
+            offset: 
+              description: Offset of objects in the response
+              type: integer
+              example: 0
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Ticket Id
+                type: integer
+                example: "42"
+              pipeline:
+                description: Pipeline Id
+                type: integer
+                example: "8"
+              number: 
+                description: Ticket stage  
+                type: integer 
+                example: "1"
+              id_type:
+                description: Ticket type Id
+                type: integer
+                example: "31"
+              id_status:
+                description: Ticket status Id
+                type: integer
+                example: "1"
+              id_status_last_update:
+                description: Last update date of ticket status
+                type: string
+                format: date-time
+                example: "2022-05-23 09:37:49"
+              position:
+                description: Ticket position
+                type: integer
+                example: "1"
+              title: 
+                description: Ticket title
+                type: string
+                example: "Ticket #1"
+              id_priority:
+                description: Ticket priority Id
+                type: integer
+                example: "1"
+              id_group:
+                description: Group Id
+                type: integer
+                example: "18"
+              id_user_assigned:
+                description: Opportunity client mamager id
+                type: string
+                example: "213"
+              list_id_user_shared:
+                description: Reason Id for cancellation
+                type: array
+                example: []
+              description:
+                description: Ticket description
+                type: string
+                example: "A description or note about this ticket"
+              id_customer_supplier:
+                description: Customer or supplier Id
+                type: integer
+                example: "28496"
+              id_customer_supplier_contact:
+                description: Customer or supplier Id
+                type: integer
+                example: "48560"
+              id_opportunity:
+                description: Opportunity Id
+                type: integer
+                example: "1985"
+              id_project:
+                description: Project Id
+                type: integer
+                example: "435"
+              id_project_task: 
+                description: Project task Id
+                type: integer
+                example: "486"
+              skills:
+                description: Skills Id
+                type: array
+                items:
+                  example: "52"
+              date_first_answer_expected:
+                description: Date of first expected response
+                type: string
+                format: date-time
+                example: null
+              date_first_answer_real:
+                description: Actual date of first response
+                type: string
+                format: date-time
+                example: null
+              date_resolve_answer_expected:
+                description: Date of resolution expected response
+                type: string
+                format: date-time
+                example: null
+              date_resolve_answer_real:
+                description: Actual date of resolution response
+                type: string
+                format: date-time
+                example: null
+              creation_source:
+                description: Creation source Id
+                type: integer
+                example: "3"
+              creation_source_title:
+                description: Creation source title
+                type: string
+                example: "API"
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description:  Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text: 
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: "3526"
+                    title: "Client satisfaction"
+                    value: "6144"
+                    value_text: "Low"
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: "2022-03-25 12:04:24"
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: "213"
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: "2022-03-25 12:04:24"
+              updated_by: 
+                description: Id of the updater
+                type: integer
+                example: "213"
+
+

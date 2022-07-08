@@ -31,7 +31,7 @@ content:
             type: object
             properties:
               id:
-                description: Expense Id
+                description: Purchase Id
                 type: integer
                 example: "961"
               id_supplier:
@@ -39,19 +39,19 @@ content:
                 type: integer
                 example: "48560"
               title: 
-                description: Reference of the expense
+                description: Reference of the purchase
                 type: string 
-                example: "Expense #1"
+                example: "Purchase #1"
               id_status:
-                description: Expense status Id
+                description: Purchase status Id
                 type: integer
                 example: "0"
               status_text:
-                description: Expense status title
+                description: Purchase status title
                 type: string
                 example: "Draft"
               date:
-                description: Expense date
+                description: Purchase date
                 type: string
                 format: date-time
                 example: "2022-04-01"

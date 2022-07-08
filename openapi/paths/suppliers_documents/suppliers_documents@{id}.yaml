@@ -1,0 +1,24 @@
+get:
+  tags:
+    - Suppliers Documents
+  summary: Show
+  description: Get one supplier document.
+  operationId: Suppliers_Documents_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Supplier document](/#operation/Suppliers_Documents_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/suppliers_documents/suppliers_documents_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml

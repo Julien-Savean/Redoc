@@ -1,0 +1,2784 @@
+description: OK
+content:
+  application/json:
+    schema:
+      anyOf:
+        - title: Customer
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "customer"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "customer.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "28496"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Customer Id
+                    type: integer
+                    example: "28496"
+                  title:
+                    description: Name for professional customer *or civility + lastname + firstname for individual customer*
+                    type: string
+                    example: "Society X"
+                  individual:
+                    description: Customer type
+                    type: integer
+                    example: "0"
+                  prospect:
+                    description: Customer status
+                    type: integer
+                    example: "0"
+                  id_client_manager: 
+                    description:  Customer manager
+                    type: array
+                    items:
+                      type: string
+                      example: "u213"
+                  phone:
+                    description: Customer phone number
+                    type: string
+                    example: "+33512345678"
+                  mobile:
+                    description: Customer mobile number
+                    type: string
+                    example: "07 98 76 54 32"
+                  email:
+                    description: Customer email address
+                    type: string
+                    format: email
+                    example: "contact@example.com"
+                  langId:
+                    description: Customer language
+                    type: integer
+                    example: "1"
+                  siret:
+                    description: Customer SIRET
+                    type: string
+                    example: "123 568 941 00056"
+                  siren:
+                    description: Customer SIREN
+                    type: integer
+                    example: "123 568 941"
+                  legal_form:
+                    description: Customer status
+                    type: string
+                    example: "SARL"
+                  main_activity:
+                    description: APE/NAF code
+                    type: string
+                    example: "4616C"
+                  vat_number:
+                    description: VAT number
+                    type: string
+                    example: "FR 32 123456789"
+                  id_parent:
+                    description: Id parent
+                    type: integer
+                    example: "0"
+                  id_products_prices_category:
+                    description: Id document template
+                    type: integer
+                    example: "0"
+                  id_payment_condition:
+                    description: Id of payment condition
+                    type: integer
+                    example: "0"
+                  id_vat:
+                    description: VAT Id
+                    type: integer
+                    example: "-1"          
+                  description:
+                    description: Customer description
+                    type: string
+                    example: "A description or note about this customer"
+                  client_number:
+                    description: Internal number
+                    type: integer
+                    example: "123"
+                  address_list:
+                    description: List of main address, delivery address and/or invoince address
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Address Id
+                          type: integer
+                        type:
+                          description: Address type
+                          type: string
+                        address:
+                          description: Number of the house and name of the road
+                          type: string
+                        zip_code: 
+                          description: ZIP code
+                          type: string
+                        city:
+                          description: City name
+                          type: string
+                        country: 
+                          description: Country name
+                          type: string
+                        is_default:
+                          description: Default choice
+                          type: boolean
+                    example:
+                      - id: "17894"
+                        type: "main"
+                        title: ""
+                        address: "55 Av. Louis Breguet"
+                        zip_code: "31400"
+                        city: "Toulouse"
+                        country: "France"
+                        is_defaut: true
+                      - id: "17895"
+                        type: "delivery"
+                        title: "My delivery address"
+                        address: "1 place du Capitole"
+                        zip_code: "31000"
+                        city: "Toulouse"
+                        country: "France"
+                        is_defaut: false
+                      - id: "17896"
+                        type: "invoice"
+                        title: "My invoice address"
+                        address: "55 Rue du Faubourg Saint-Honoré"
+                        zip_code: "75000"
+                        city: "Paris"
+                        country:  "France"
+                        is_defaut: false
+                  contacts_list:
+                    description: List of contacts
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Contact Id
+                          type: integer
+                        civility:
+                          description: Civility of contact
+                          type: string
+                        lastname: 
+                          description: Contact lastname
+                          type: string
+                        firstname:
+                          description: Contact firstname
+                          type: string
+                        position_title:
+                          description: Contact position title
+                          type: string
+                        email:
+                          description: Contact email address
+                          type: string
+                          format: email
+                        phone:
+                          description: Contact phone number
+                          type: string
+                        mobile:
+                          description: Contact mobile number
+                          type: string
+                        description:
+                          description: Contact description
+                          type: string
+                    example:
+                      - id: "4700"
+                        civility: "Mr"
+                        lastname: "Dupont"
+                        firstname: "Jean"
+                        position_title: "CEO"
+                        email: jeandupont@example.com
+                        phone: "02 45 68 37 98"
+                        mobile: "06 94 31 81 31"
+                        description: "A description or note about this contact"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3345"
+                        title: "Source d'acquisition"
+                        value: "5900"
+                        value_text: "Facebook"
+                  opportunities_list: 
+                    description: List of opportunities
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Opportunity Id
+                          type: integer
+                        pipeline:
+                          description: Pipeline number 
+                          type: integer
+                        title:
+                          description: Opportunity title
+                          type: string
+                        archived:
+                          description: Opportunity status
+                          type: integer
+                    example:
+                      - id: "1947"
+                        pipeline: "1924"
+                        title: "Opportunity #1"
+                        archived: "0"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Supplier
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "supplier"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "supplier.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "48560"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Supplier Id
+                    type: integer
+                    example: "48560"
+                  title:
+                    description: Supplier name
+                    type: string
+                    example: "Society Y"
+                  id_client_manager: 
+                    description:  Supplier manager
+                    type: array
+                    items:
+                      type: string
+                      example: "u213"
+                  phone:
+                    description: Supplier phone number
+                    type: string
+                    example: "+33512345678"
+                  mobile:
+                    description: Supplier mobile number
+                    type: string
+                    example: "07 98 76 54 32"
+                  email:
+                    description: Supplier email address
+                    type: string
+                    format: email
+                    example: "contact@example.com"
+                  langId:
+                    description: Supplier language
+                    type: integer
+                    example: "1"
+                  siret:
+                    description: Supplier SIRET
+                    type: string
+                    example: "123 568 941 00056"
+                  siren:
+                    description: Supplier SIREN
+                    type: integer
+                    example: "123 568 941"
+                  legal_form:
+                    description: Supplier status
+                    type: string
+                    example: "SARL"
+                  main_activity:
+                    description: APE/NAF code
+                    type: string
+                    example: "4616C"
+                  vat_number:
+                    description: VAT number
+                    type: string
+                    example: "FR 32 123456789"
+                  id_parent:
+                    description: Id parent
+                    type: integer
+                    example: "0"
+                  id_products_prices_category:
+                    description: Id document template
+                    type: integer
+                    example: "0"
+                  id_payment_condition:
+                    description: Id of payment condition
+                    type: integer
+                    example: "0"
+                  id_vat:
+                    description: VAT Id
+                    type: integer
+                    example: "-1"          
+                  description:
+                    description: Supplier description
+                    type: string
+                    example: "A description or note about this supplier"
+                  client_number:
+                    description: Internal number
+                    type: integer
+                    example: "123"
+                  address_list:
+                    description: List of main address, delivery address and/or invoince address
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Address Id
+                          type: integer
+                        type:
+                          description: Address type
+                          type: string
+                        address:
+                          description: Number of the house and name of the road
+                          type: string
+                        zip_code: 
+                          description: ZIP code
+                          type: string
+                        city:
+                          description: City name
+                          type: string
+                        country: 
+                          description: Country name
+                          type: string
+                        is_default:
+                          description: Default choice
+                          type: boolean
+                    example:
+                      - id: "17894"
+                        type: "main"
+                        title: ""
+                        address: "55 Av. Louis Breguet"
+                        zip_code: "31400"
+                        city: "Toulouse"
+                        country: "France"
+                        is_defaut: true
+                      - id: "17895"
+                        type: "delivery"
+                        title: "My delivery address"
+                        address: "1 place du Capitole"
+                        zip_code: "31000"
+                        city: "Toulouse"
+                        country: "France"
+                        is_defaut: false
+                      - id: "17896"
+                        type: "invoice"
+                        title: "My invoice address"
+                        address: "55 Rue du Faubourg Saint-Honoré"
+                        zip_code: "75000"
+                        city: "Paris"
+                        country:  "France"
+                        is_defaut: false
+                  contacts_list:
+                    description: List of contacts
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Contact Id
+                          type: integer
+                        civility:
+                          description: Civility of contact
+                          type: string
+                        lastname: 
+                          description: Contact lastname
+                          type: string
+                        firstname:
+                          description: Contact firstname
+                          type: string
+                        position_title:
+                          description: Contact position title
+                          type: string
+                        email:
+                          description: Contact email address
+                          type: string
+                          format: email
+                        phone:
+                          description: Contact phone number
+                          type: string
+                        mobile:
+                          description: Contact mobile number
+                          type: string
+                        description:
+                          description: Contact description
+                          type: string
+                    example:
+                      - id: "4700"
+                        civility: "Mr"
+                        lastname: "Dupont"
+                        firstname: "Jean"
+                        position_title: "CEO"
+                        email: jeandupont@example.com
+                        phone: "02 45 68 37 98"
+                        mobile: "06 94 31 81 31"
+                        description: "A description or note about this contact"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3352"
+                        title: "Payment condition"
+                        value: "5911"
+                        value_text: "30 days"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Contact
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "contact"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "contact.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "48560"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Contact Id
+                    type: integer
+                    example: "48560"
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  supplier: 
+                    description: Supplier status of the contact
+                    type: integer 
+                    example: "0"
+                  title:
+                    description: Civility + lastname + firstname contact
+                    type: string
+                    example: "Mr Jean Dupont"
+                  id_civility:
+                    description: Contact civility
+                    type: integer
+                    example: "1"
+                  lastname: 
+                    description: Contact lastname
+                    type: string
+                    example: "Dupont"
+                  firstname: 
+                    description: Contact firstname
+                    type: string
+                    example: "Jean"
+                  position_title: 
+                    description: Contact position title
+                    type: string
+                    example: "CEO"
+                  email:
+                    description: Contact email
+                    type: string
+                    format: email
+                    example: "jeandupont@example.com"
+                  phone:
+                    description: Contact phone number
+                    type: string
+                    example: "02 45 68 37 98"
+                  mobile:
+                    description: Contact mobile number
+                    type: string
+                    example: "06 94 31 81 31"
+                  description:
+                    description: Contact description
+                    type: string
+                    example: "A description or note about this contact"
+                  client_number:
+                    description: Internal number
+                    type: integer
+                    example: "123"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3407"
+                        title: "Contact type"
+                        value: "5994"
+                        value_text: "Decision-maker contact"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"        
+        - title: Opportutnity
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "opportunity"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "opportunity.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "1985"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  pipeline:
+                    description: Pipeline Id
+                    type: integer
+                    example: "1934"
+                  column_number: 
+                    description: Opportunity stage  
+                    type: integer 
+                    example: "1"
+                  column_number_last_update:
+                    description: Last update date of opportunity stage
+                    type: string
+                    format: date-time
+                    example: "2022-04-04 09:44:49"
+                  position:
+                    description: Opportunity position
+                    type: integer
+                    example: "1"
+                  id_customer:
+                    description: Customer Id
+                    type: string
+                    example: "28496"
+                  title: 
+                    description: Contact position title
+                    type: string
+                    example: "Opportunity #1"
+                  id_status:
+                    description: Opportunity status Id
+                    type: integer
+                    example: "0"
+                  opportunity_status:
+                    description: Opportunity status
+                    type: string
+                    example: "Open"
+                  id_status_lost:
+                    description: Reason Id for loss
+                    type: integer
+                    example: "0"
+                  opportunity_status_lost:
+                    description: Opportunity status lost
+                    type: string
+                    example: ""
+                  id_status_canceled:
+                    description: Reason Id for cancellation
+                    type: integer
+                    example: "0"
+                  opportunity_status_canceled:
+                    description: Opportunity status canceled
+                    type: integer
+                    example: ""
+                  id_user_assigned:
+                    description: Opportunity client mamager id
+                    type: array
+                    items:
+                      type: string
+                      example: "u213"
+                  id_user_assigned_text:
+                    description: Opportunity client mamager name
+                    type: array
+                    items:
+                      type: string
+                      example: "Jean Dupont"
+                  archived:
+                    description: Opportunity condition
+                    type: integer
+                    example: "0"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3413"
+                        title: "Source"
+                        value: "5995"
+                        value_text: "Website"
+                  proposals:
+                    description: Opportunity proposal
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Proposal Id
+                          type: integer
+                        number:
+                          description:  Proposal number
+                          type: integer
+                        description:
+                          description: Proposal description
+                          type: string
+                        files_list: 
+                          description: Proposal files list
+                          type: array
+                    example:
+                      - id: "3413"
+                        number: "1"
+                        description: ""
+                        files_list: []
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"          
+        - title: Document
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "quote"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "quote.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "2758"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Document Id
+                    type: integer
+                    example: "2758"
+                  id_document_previous: 
+                    description: Previous document Id
+                    type: integer
+                    example: "2757"
+                  id_document_next: 
+                    description: Next document Id
+                    type: integer
+                    example: "2759"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_opportunity_proposal:
+                    description: Opportunity proposal Id
+                    type: integer
+                    example: "1835"
+                  id_type:
+                    description: Document type Id
+                    type: integer
+                    example: "1"
+                  type_text: 
+                    description: Document type title
+                    type: string
+                    example: "Quotes"
+                  number:
+                    description: Document number
+                    type: integer
+                    example: ""
+                  id_status: 
+                    description: Document status Id
+                    type: integer
+                    example: "0"
+                  status_text: 
+                    description: Document status title
+                    type: string
+                    example: "Draft"
+                  title:
+                    description: Document title
+                    type: string
+                    example: "Document #1"
+                  date:
+                    description: Document date
+                    type: string
+                    format: date-time
+                    example: "2022-05-16 16:15:00"
+                  date_end:
+                    description: Expiration date
+                    type: string
+                    format: date-time
+                    example: "2022-05-30 14:00:00"
+                  id_payment_condition:
+                    description: Payment condition Id
+                    type: integer
+                    example: "1"
+                  id_document_reference:
+                    description: Document reference Id
+                    type: integer
+                    example: "0"
+                  customer_reference:
+                    description: Customer reference
+                    type: string 
+                    example: "C1234"
+                  id_customer_supplier_contact:
+                    description: Customer Id
+                    type: integer
+                    example: "48560"
+                  description:
+                    description: Document description
+                    type: string
+                    example: A description or note about this document
+                  discount_type:
+                    description: Discount type
+                    type: string
+                    example: "percent"
+                  discount_value:
+                    description: Discount value
+                    type: integer       
+                    example: 0
+                  final_invoice:
+                    description: Final Invoice
+                    type: integer
+                    example: "0"
+                  deposit_type:
+                    description: Deposit type
+                    type: string
+                    example: "percent"
+                  deposit_value:
+                    description: Deposit value
+                    type: integer       
+                    example: 0         
+                  total_without_tax: 
+                    description: Total HT
+                    type: number
+                    example: "125.00"
+                  total_with_tax:
+                    description: Total TTC
+                    type: number
+                    example: "150.00"
+                  id_currency:
+                    description: Currency Id
+                    type: integer
+                    example: "43"
+                  currency_code:
+                    description: Currency code
+                    type: string
+                    example: "EUR"
+                  currency_exchange_rate:
+                    description: Currency exchange rate
+                    type: number
+                    format: float
+                    example: "1.000000"
+                  total_already_paid:
+                    description: Total already paid
+                    type: number
+                    format: double
+                    example: "0.00"  
+                  payment_date:
+                    description: Payment date
+                    type: string
+                    format: date-time
+                    example: "2022-06-16"
+                  use_stripe_to_pay:
+                    description: Stripe use
+                    type: integer 
+                    example: "0"
+                  canceled:    
+                    description: Cancellation
+                    type: integer
+                    example: "0"   
+                  id_document_template:
+                    description: Document template Id
+                    type: integer
+                    example: "0"
+                  download_url:
+                    description: download url
+                    type: string
+                    example: ""
+                  products_list:
+                    description: Products list
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        section:
+                          description: Section Id
+                          type: integer
+                        id_product:
+                          description: Product Id
+                          type: integer
+                        title:
+                          description: Product title
+                          type: string
+                        reference:
+                          description: Product reference
+                          type: string
+                        description:
+                          description: Product description 
+                          type: string
+                        price_without_tax:
+                          description: Price HT
+                          type: number
+                        id_vat:
+                          description: VAT Id
+                          type: integer
+                        quantity:
+                          description: Product quantity
+                          type: number
+                          format: float
+                        quantity_delivered:
+                          description: Product quantity delivered
+                          type: number
+                          format: float
+                        id_unit:
+                          description: Unit Id
+                          type: integer
+                        discount_type:
+                          description: Discount type
+                          type: string
+                        discount_value:
+                          description: Discount value
+                          type: integer       
+                        progress_type:
+                          description: Progress type
+                          type: string
+                        progress_value:
+                          description: Progress value
+                          type: integer
+                        total_without_tax:
+                          description: Total HT
+                          type: number                  
+                        total_cost:
+                          description: Total cost
+                          type: number
+                        hide_in_pdf:
+                          description: Visibility
+                          type: integer
+                        optional:
+                          description: Optional
+                          type: integer
+                        creation_date:
+                          description: Creation date and time
+                          type: string
+                          format: date-time
+                        created_by:
+                          description: Id of the creator
+                          type: integer
+                        update_date:
+                          description: Update date and time
+                          type: string
+                          format: date-time
+                        updated_by: 
+                          description: Id of the updater
+                          type: integer
+                    example:
+                      - section: "0"
+                        id_product: "4739"
+                        title: "Product #1"
+                        reference: "Ref_product_1"
+                        description: "A description or note about this product"
+                        price_without_tax: "50.000000"
+                        id_vat: "1"
+                        quantity: "2.50"
+                        quantity_delivered: "0"
+                        id_unit: "2"
+                        discount_type: "percent"
+                        discount_value: 0
+                        progress_type: "percent"
+                        progress_value: 0
+                        total_without_tax: "125.00"
+                        total_cost: "150.00"
+                        hide_in_pdf: "0"
+                        optional: "0"
+                        creation_date: "2022-04-19 14:45:28"
+                        created_by: "213"
+                        update_date: "2022-04-19 14:45:28"
+                        updated_by: "213"
+                      - section: "1"
+                        id_product: "0"
+                        title: "Section #1"
+                        reference: ""
+                        description: "A description or note about this section"
+                        price_without_tax: "0.000000"
+                        id_vat: "0"
+                        quantity: "1.00"
+                        quantity_delivered: "1.00"
+                        id_unit: "0"
+                        discount_type: "percent"
+                        discount_value: 0
+                        progress_type: "percent"
+                        progress_value: 0
+                        total_without_tax: "0.000"
+                        total_cost: "0.00"
+                        hide_in_pdf: "0"
+                        optional: "0"
+                        creation_date: "2022-04-19 14:45:28"
+                        created_by: "213"
+                        update_date: "2022-04-19 14:45:28"
+                        updated_by: "213"              
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Product
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "product"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "product.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "4739"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Product Id
+                    type: integer
+                    example: "4739"
+                  title:
+                    description: Product title
+                    type: string
+                    example: "Product #1"
+                  reference:
+                    description: Product reference
+                    type: string
+                    example: "Ref_product_1"
+                  id_product_category: 
+                    description:  Product category Id
+                    type: integer
+                    example: "0"
+                  description:
+                    description: Product description
+                    type: string
+                    example: "A description or note about this product"
+                  price_without_tax:
+                    description: Price without tax
+                    type: number
+                    format: float
+                    example: "50.000000"
+                  business_price_per_quantity:
+                    description: Business price per quantity
+                    type: number
+                    format: float
+                    example: "0"
+                  expense_price_per_quantity:
+                    description: Expense price per quantity
+                    type: number
+                    format: float
+                    example: "0"
+                  id_vat:
+                    description: Vat number Id
+                    type: integer
+                    example: "1"
+                  id_unit:
+                    description: Unit Id
+                    type: integer
+                    example: "17"
+                  use_stock:
+                    description: Use stock
+                    type: string
+                    example: "1"
+                  stock:
+                    description: Stock
+                    type: number
+                    format: double
+                    example: "50.00"
+                  stock_min_alert:
+                    description: Stock min alert
+                    type: number
+                    format: double
+                    example: "10.00"
+                  stock_max_alert:
+                    description: Stock max alert
+                    type: number
+                    format: double
+                    example: "100.00"
+                  weighted_average_cost:
+                    description: Weighted average cost
+                    type: number
+                    format: double
+                    example: "0.00"
+                  cost_without_tax:
+                    description: Cost without tax
+                    type: number
+                    format: double
+                    example: "0.00"
+                  id_supplier:
+                    description: Supplier Id
+                    type: integer
+                    example: "28549"
+                  reference_supplier:
+                    description: Supplier reference
+                    type: string
+                    example: "Ref_supllier_1"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3430"
+                        title: "Conditioning"
+                        value: "6019"
+                        value_text: "Box"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Purchase
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "purchase"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "purchase.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "961"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Purchase Id
+                    type: integer
+                    example: "961"
+                  id_supplier:
+                    description: Supplier Id
+                    type: integer
+                    example: "48560"
+                  id_status:
+                    description: Purchase status Id
+                    type: integer
+                    example: "0"
+                  status_text:
+                    description: Purchase status title
+                    type: string
+                    example: "Draft"
+                  title: 
+                    description: Reference of the purchase
+                    type: string 
+                    example: "Purchase #1"
+                  date:
+                    description: Purchase date
+                    type: string
+                    format: date-time
+                    example: "2022-04-01"
+                  date_end: 
+                    description: Due date
+                    type: string
+                    format: date-time
+                    example: "2022-05-01"
+                  description:
+                    description: Purchase description
+                    type: string
+                    example: A description or note about this purchase 
+                  id_chart_of_account_expenses: 
+                    description: Chart of accounts Id
+                    type: array
+                    items:
+                      type: integer
+                      example: "596"
+                  total_without_tax: 
+                    description: Total HT
+                    type: number
+                    example: "40.00"
+                  total_with_tax:
+                    description: Total TTC
+                    type: number
+                    example: "48.00"
+                  id_vat:
+                    description: VAT Id
+                    type: integer
+                    example: "2"
+                  currency_code:
+                    description: Currency code
+                    type: string
+                    example: "EUR"
+                  currency_exchange_rate:
+                    description: Currency exchange rate
+                    type: number
+                    format: float
+                    example: "1.000000"
+                  total_already_paid:
+                    description: Total already paid
+                    type: number
+                    format: double
+                    example: "0.00"
+                  payment_date:
+                    description: Payment date
+                    type: string
+                    format: date-time
+                    example: "2022-05-01"
+                  attached_file_url:
+                    description: Url of attached file
+                    type: string
+                    example: ""
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Supplier Document
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "supplier_order"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "supplier_order.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "85"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Document Id
+                    type: integer
+                    example: "85"
+                  id_document_previous: 
+                    description: Previous document Id
+                    type: integer
+                    example: "2757"
+                  id_document_next: 
+                    description: Next document Id
+                    type: integer
+                    example: "2759"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_opportunity_proposal:
+                    description: Opportunity proposal Id
+                    type: integer
+                    example: "1835"
+                  id_type:
+                    description: Document type Id
+                    type: integer
+                    example: "2"
+                  type_text: 
+                    description: Document type title
+                    type: string
+                    example: "Order"
+                  number:
+                    description: Document number
+                    type: integer
+                    example: ""
+                  id_status: 
+                    description: Document status Id
+                    type: integer
+                    example: "0"
+                  status_text: 
+                    description: Document status title
+                    type: string
+                    example: "Draft"
+                  title:
+                    description: Document title
+                    type: string
+                    example: "Document #1"
+                  date:
+                    description: Document date
+                    type: string
+                    format: date-time
+                    example: "2022-05-16 16:15:00"
+                  date_end:
+                    description: Expiration date
+                    type: string
+                    format: date-time
+                    example: "2022-05-30 14:00:00"
+                  id_payment_condition:
+                    description: Payment condition Id
+                    type: integer
+                    example: "1"
+                  id_document_reference:
+                    description: Document reference Id
+                    type: integer
+                    example: "0"
+                  customer_reference:
+                    description: Customer reference
+                    type: string 
+                    example: ""
+                  id_customer_supplier_contact:
+                    description: Customer Id
+                    type: integer
+                    example: "48560"
+                  description:
+                    description: Document description
+                    type: string
+                    example: A description or note about this document
+                  discount_type:
+                    description: Discount type
+                    type: string
+                    example: "percent"
+                  discount_value:
+                    description: Discount value
+                    type: integer       
+                    example: 0
+                  total_without_tax: 
+                    description: Total HT
+                    type: number
+                    example: "125.00"
+                  total_with_tax:
+                    description: Total TTC
+                    type: number
+                    example: "150.00"
+                  id_currency:
+                    description: Currency Id
+                    type: integer
+                    example: "43"
+                  currency_code:
+                    description: Currency code
+                    type: string
+                    example: "EUR"
+                  currency_exchange_rate:
+                    description: Currency exchange rate
+                    type: number
+                    format: float
+                    example: "1.000000"
+                  total_already_paid:
+                    description: Total already paid
+                    type: number
+                    format: double
+                    example: "0.00"  
+                  payment_date:
+                    description: Payment date
+                    type: string
+                    format: date-time
+                    example: "2022-06-16"
+                  id_document_template:
+                    description: Document template Id
+                    type: integer
+                    example: "0"
+                  products_list:
+                    description: Products list
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        section:
+                          description: Section Id
+                          type: integer
+                        id_product:
+                          description: Product Id
+                          type: integer
+                        title:
+                          description: Product title
+                          type: string
+                        reference:
+                          description: Product reference
+                          type: string
+                        description:
+                          description: Product description 
+                          type: string
+                        price_without_tax:
+                          description: Price HT
+                          type: number
+                        id_vat:
+                          description: VAT Id
+                          type: integer
+                        quantity:
+                          description: Product quantity
+                          type: number
+                          format: float
+                        quantity_delivered:
+                          description: Product quantity delivered
+                          type: number
+                          format: float
+                        id_unit:
+                          description: Unit Id
+                          type: integer
+                        discount_type:
+                          description: Discount type
+                          type: string
+                        discount_value:
+                          description: Discount value
+                          type: integer       
+                        progress_type:
+                          description: Progress type
+                          type: string
+                        progress_value:
+                          description: Progress value
+                          type: integer
+                        total_without_tax:
+                          description: Total HT
+                          type: number                  
+                        total_cost:
+                          description: Total cost
+                          type: number
+                        hide_in_pdf:
+                          description: Visibility
+                          type: integer
+                        optional:
+                          description: Optional
+                          type: integer
+                        creation_date:
+                          description: Creation date and time
+                          type: string
+                          format: date-time
+                        created_by:
+                          description: Id of the creator
+                          type: integer
+                        update_date:
+                          description: Update date and time
+                          type: string
+                          format: date-time
+                        updated_by: 
+                          description: Id of the updater
+                          type: integer
+                    example:
+                      - section: "0"
+                        id_product: "4739"
+                        title: "Product #1"
+                        reference: "Ref_product_1"
+                        description: "A description or note about this product"
+                        price_without_tax: "50.000000"
+                        id_vat: "1"
+                        quantity: "2.50"
+                        quantity_delivered: "0"
+                        id_unit: "2"
+                        discount_type: "percent"
+                        discount_value: 0
+                        progress_type: "percent"
+                        progress_value: 0
+                        total_without_tax: "125.00"
+                        total_cost: "150.00"
+                        hide_in_pdf: "0"
+                        optional: "0"
+                        creation_date: "2022-04-19 14:45:28"
+                        created_by: "213"
+                        update_date: "2022-04-19 14:45:28"
+                        updated_by: "213"
+                      - section: "1"
+                        id_product: "0"
+                        title: "Section #1"
+                        reference: ""
+                        description: "A description or note about this section"
+                        price_without_tax: "0.000000"
+                        id_vat: "0"
+                        quantity: "1.00"
+                        quantity_delivered: "1.00"
+                        id_unit: "0"
+                        discount_type: "percent"
+                        discount_value: 0
+                        progress_type: "percent"
+                        progress_value: 0
+                        total_without_tax: "0.000"
+                        total_cost: "0.00"
+                        hide_in_pdf: "0"
+                        optional: "0"
+                        creation_date: "2022-04-19 14:45:28"
+                        created_by: "213"
+                        update_date: "2022-04-19 14:45:28"
+                        updated_by: "213"              
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Event
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "event"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "event.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "10722"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Event Id
+                    type: integer
+                    example: "10722"
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_event_type:
+                    description: Event type Id
+                    type: integer
+                    example: "3021"
+                  id_project:
+                    description: Project Id
+                    type: integer
+                    example: "0"
+                  id_project_task: 
+                    description: Project task Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_pipeline: 
+                    description: Ticket pipeline Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_ticket:      
+                    description: Ticket Id
+                    type: integer
+                    example: "0"
+                  start_date:
+                    description: Start date
+                    type: string
+                    format: date-time
+                    example: "2022-03-15 19:45:00"
+                  end_date:
+                    description: End date
+                    type: string
+                    format: date-time
+                    example: "2022-03-15 20:45:00"
+                  title:
+                    description: Event title
+                    type: string
+                    example: "Event #1"
+                  description: 
+                    description: Event description
+                    type: string
+                    example: "A description or note about this event"
+                  private:
+                    description: Event private status
+                    type: string
+                    example: "0"
+                  visible_in_agenda:
+                    description: Visibility in the agenda
+                    type: integer
+                    example: "1"
+                  synchronized:
+                    description: Event synchronization 
+                    type: string
+                    example: "0"
+                  use_time:
+                    description: Event used for time
+                    type: integer
+                    example: "1"
+                  time_duration:
+                    description: Time duration
+                    type: string
+                    example: "01:00:00"
+                  time_id_type:
+                    description: Time type Id
+                    type: integer
+                    example: "0"
+                  time_billable:
+                    description: Billable time
+                    type: integer
+                    example: "0"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Note
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "note"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "note.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "10730"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Note Id
+                    type: integer
+                    example: "10730"
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_project:
+                    description: Project Id
+                    type: integer
+                    example: "0"
+                  id_project_task: 
+                    description: Task Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_pipeline: 
+                    description: Ticket pipeline Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_ticket:       
+                    description: Ticket Id
+                    type: integer
+                    example: "0"
+                  date:
+                    description: Note date
+                    type: string
+                    format: date-time
+                    example: "2022-04-06 16:15:00"
+                  title:
+                    description: Note title
+                    type: string
+                    example: "Note #1"
+                  description: 
+                    description: Note description
+                    type: string
+                    example: "A description or note about this note"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Task
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "task"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "task.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "10722"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Task Id
+                    type: integer
+                    example: "10722"
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_event_type:
+                    description: Task type Id
+                    type: integer
+                    example: "3021"
+                  id_project:
+                    description: Project Id
+                    type: integer
+                    example: "0"
+                  id_project_task: 
+                    description: Project task Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_pipeline:
+                    description: Ticket pipeline Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_ticket:       
+                    description: Ticket Id
+                    type: integer
+                    example: "0"
+                  start_date:
+                    description: Start date
+                    type: string
+                    format: date-time
+                    example: "2022-03-15 19:45:00"
+                  end_date:
+                    description: End date
+                    type: string
+                    format: date-time
+                    example: "2022-03-15 20:45:00"
+                  title:
+                    description: Task title
+                    type: string
+                    example: "Task #1"
+                  description: 
+                    description: Task description
+                    type: string
+                    example: "A description or note about this task"
+                  private:
+                    description: Task private status
+                    type: string
+                    example: "0"
+                  visible_in_agenda:
+                    description: Visibility in the agenda
+                    type: integer
+                    example: "1"
+                  synchronized:
+                    description: Task synchronization 
+                    type: string
+                    example: "0"
+                  use_time:
+                    description: Task used for time
+                    type: integer
+                    example: "1"
+                  time_duration:
+                    description: Time duration
+                    type: string
+                    example: "01:00:00"
+                  time_id_type:
+                    description: Time type Id
+                    type: integer
+                    example: "0"
+                  time_billable:
+                    description: Billable time
+                    type: integer
+                    example: "0"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Time
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "time"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "time.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "735"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Time Id
+                    type: integer
+                    example: "735"
+                  id_user:
+                    description: User Id 
+                    type: integer
+                    example: "213"
+                  id_project:
+                    description: Project Id
+                    type: integer
+                    example: "435"
+                  id_project_task:
+                    description: Project task Id
+                    type: integer
+                    example: "89"
+                  id_project_task_subtask:
+                    description: Project subtask Id
+                    type: integer
+                    example: ""
+                  id_customer_supplier:
+                    description: Customer Id or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_ticketing_pipeline:
+                    description: Ticket pipeline Id
+                    type: integer
+                    example: "0"
+                  id_ticketing_ticket:       
+                    description: Ticket Id
+                    type: integer
+                    example: "0"
+                  id_type:
+                    description: Time type Id
+                    type: integer
+                    example: "8"
+                  billable:
+                    description: Billable time
+                    type: integer
+                    example: "0"
+                  billed_date:
+                    description: Billing date
+                    type: string
+                    example: null
+                  time_date:
+                    description: Time date
+                    type: string
+                    format: date-time
+                    example: "2022-07-15"
+                  time_done:
+                    description: Time done
+                    type: string
+                    example: "01:30:00"
+                  time_planified: 
+                    description: Time planned
+                    type: string
+                    example: "02:00:00"
+                  description: 
+                    description: Time descritpion
+                    type: string
+                    example: "A description or note about this time"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Project
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "project"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "project.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "435"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Project Id
+                    type: integer
+                    example: "435"
+                  title:
+                    description: Project title
+                    type: string
+                    example: "Project #1"
+                  columns:
+                    description: Project columns
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        id:
+                          description: Column Id
+                          type: integer
+                        title:
+                          description: Column title
+                          type: string
+                    example:
+                      - id: "1"
+                        title: "To do"
+                      - id: "2"
+                        title: "Pending"
+                      - id: "3"
+                        title: "In progress"
+                      - id: "4"
+                        title: "To test"
+                      - id: "5"
+                        title: "Completed"                  
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  starting_date:
+                    description: Starting date
+                    type: string
+                    format: date-time
+                    example: "2022-03-15 19:45:00"
+                  due_date:
+                    description: Due date
+                    type: string
+                    format: date-time
+                    example: null
+                  id_status:
+                    description: Status Id
+                    type: integer
+                    example: "1"
+                  id_user_assigned:
+                    description: User assigned of the project
+                    type: array
+                    items:
+                      type: string
+                      example: "213"
+                  archived:
+                    description: Archived status of the project
+                    type: integer
+                    example: "0"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Project Task
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "project task"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "project_task.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "486"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Task Id
+                    type: integer
+                    example: "486"
+                  number:
+                    description: Number
+                    type: integer
+                    example: "1"
+                  column_number:
+                    description: Column number
+                    type: integer 
+                    example:  "5"
+                  column_number_last_update:
+                    description: Update date of column number
+                    type: string
+                    format: date-time
+                    example: "2022-04-04 09:44:49"
+                  position:
+                    description: Position 
+                    type: integer
+                    example: "1"
+                  milestone:
+                    description: Milestone
+                    type: integer
+                    example: "0"     
+                  status:
+                    description: Id status of project task
+                    type: integer
+                    example: "91"
+                  title:
+                    description: Project task title
+                    type: string
+                    example: "Project task #1"
+                  description: 
+                    description: Description
+                    type: string
+                    example: "A description or note about this project task"
+                  priority:
+                    description: Priority Id
+                    type: integer
+                    example: "0"
+                  color:
+                    description: Color
+                    type: string
+                    example: "95a5a6"
+                  starting_date:
+                    description: Starting date
+                    type: string
+                    format: date-time
+                    example: "2022-03-15 19:45:00"
+                  due_date:
+                    description: Due date
+                    type: string
+                    format: date-time
+                    example: null
+                  working_time:
+                    description: Working time
+                    type: number
+                    format: double
+                    example: "0.00"
+                  estimation_time:
+                    description: Estimation time
+                    type: number 
+                    format: double
+                    example: "5.00"
+                  id_user_assigned:
+                    description: User assigned of the project
+                    type: array
+                    items:
+                      type: string
+                      example: "u213"
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_phase:
+                    description: Phase Id
+                    type: integer
+                    example: "0"
+                  skills:
+                    description: Skills
+                    type: array
+                    example: [] 
+                  nb_subtask:
+                    description: Number of subtasks
+                    type: integer
+                    example: "0"
+                  nb_subtask_complete:
+                    description: Number of subtasks complete
+                    type: integer
+                    example: "0"
+                  nb_comments:
+                    description: Number of comments
+                    type: integer
+                    example: "0"
+                  nb_files:
+                    description: Number of files
+                    type: integer
+                    example: "0"
+                  nb_events:
+                    description: Number of events
+                    type: integer
+                    example: "0"
+                  nb_events_notes:
+                    description: Number of events notes
+                    type: integer
+                    example: "0"
+                  nb_events_tasks:
+                    description: Number of events tasks
+                    type: integer
+                    example: "0"
+                  nb_conversations_emails:       
+                    description: Number of conversations emails
+                    type: integer
+                    example: "0"
+                  archived:
+                    description: Archived status of the project tasks
+                    type: integer
+                    example: "0"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3483"
+                        title: "Priority"
+                        value: "6089"
+                        value_text: "Low"
+                  subtasks_list:
+                    description: List of subtasks
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Subtask Id
+                          type: integer
+                        status:
+                          description: Subtask status
+                          type: string
+                        section: 
+                          description: Subtask section
+                          type: string
+                        title:
+                          description: Subtask title
+                          type: string
+                        starting_date:
+                          description: Subtask start date 
+                          type: string
+                          format: date-time                      
+                        due_date:
+                          description: Subtask due date
+                          type: string
+                          format: date-time                      
+                        working_time:
+                          description: Subtask working time
+                          type: string                     
+                        estimation_time:
+                          description: Subtask estimated time  
+                          type: string
+                        id_user_assigned:
+                          description: Subtask client mamager id
+                          type: array
+                          items:
+                            type: string
+                            example: "u213"
+                        skills:
+                          description: Subtask skills
+                          type: array
+                        creation_date:
+                          description: Creation date and time
+                          type: string
+                          format: date-time
+                        created_by:
+                          description: Id of the creator
+                          type: integer
+                        update_date:
+                          description: Update date and time
+                          type: string
+                          format: date-time
+                        updated_by: 
+                          description: Id of the updater
+                          type: integer
+                    example:
+                      - id: "1375"
+                        status: "89"
+                        section: "0"
+                        title: "Subtask #1"
+                        starting_date: "2022-04-23"
+                        due_date: null
+                        working_date: 1:50
+                        estimation_time: 3:00
+                        skills: []
+                        creation_date: "2022-04-23 16:22:58"
+                        created_by: "213"
+                        update_date: "2022-04-23 16:22:58"
+                        updated_by: "213"
+                  comments_list:
+                    description: List of comments
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Comment Id
+                          type: integer
+                        comment:
+                          description:  Comment title
+                          type: string
+                        creation_date:
+                          description: Creation date and time
+                          type: string
+                          format: date-time
+                        created_by:
+                          description: Id of the creator
+                          type: integer
+                        update_date:
+                          description: Update date and time
+                          type: string
+                          format: date-time
+                        updated_by: 
+                          description: Id of the updater
+                          type: integer
+                    example:
+                      - id: "56"
+                        comment: "<p>Comment #1</p>"
+                        creation_date: "2022-04-23 16:23:27"
+                        created_by: "213"
+                        update_date: "2022-04-23 16:25:38"
+                        updated_by: "213"
+                  files_list:
+                    description: List of files
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: File Id
+                          type: integer
+                        name:
+                          description:  File name
+                          type: string
+                        size:
+                          description: File size
+                          type: integer
+                        download_url: 
+                          description: File url
+                          type: string
+                        creation_date:
+                          description: Creation date and time
+                          type: string
+                          format: date-time
+                        created_by:
+                          description: Id of the creator
+                          type: integer
+                        update_date:
+                          description: Update date and time
+                          type: string
+                          format: date-time
+                        updated_by: 
+                          description: Id of the updater
+                          type: integer
+                    example:
+                      - id: "21"
+                        name: "ticket.pdf"
+                        size: "64"
+                        download_url: "https://karlia.fr/..."
+                        creation_date: "2022-04-23 16:20:24"
+                        created_by: "213"
+                        update_date: "2022-04-23 16:29:31"
+                        updated_by: "213"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Project Subtask
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "project subtask"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "project_subtask.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "1375"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Subtask Id
+                    type: integer
+                    example: "1375"
+                  status:
+                    description: Subtask status
+                    type: string
+                    example: "89"
+                  section: 
+                    description: Subtask nature
+                    type: string
+                    example: "0"
+                  title:
+                    description: Subtask title
+                    type: string
+                    example: "Subtask #1"
+                  starting_date:
+                    description: Subtask start date 
+                    type: string
+                    format: date-time 
+                    example: "2022-04-23"                     
+                  due_date:
+                    description: Subtask due date
+                    type: string
+                    format: date-time 
+                    example: null                     
+                  working_time:
+                    description: Subtask working time
+                    type: string      
+                    example: 1:50               
+                  estimation_time:
+                    description: Subtask estimated time  
+                    type: string
+                    example: 3:00
+                  id_user_assigned:
+                    description: Subtask client mamager id
+                    type: array
+                    items:
+                      type: string
+                      example: "u213"
+                  skills:
+                    description: Subtask skills
+                    type: array
+                    example: []
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-04-23 16:22:58"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-04-23 16:22:58"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"
+        - title: Ticket
+          type: object
+          properties:
+            object:
+              description: Object of the webhook
+              type: string
+              example: "ticket"
+            trigger:
+              description: Trigger name
+              type: object
+              example: "ticket.updated"
+            id:
+              description: Object Id
+              type: integer
+              example: "42"
+            update_date:
+              description: Object date
+              type: string
+              format: date-time
+              example: "2022-06-27 12:30:24"
+            data:
+              description: Response of the request
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: Ticket Id
+                    type: integer
+                    example: "42"
+                  pipeline:
+                    description: Pipeline Id
+                    type: integer
+                    example: "8"
+                  number: 
+                    description: Ticket stage  
+                    type: integer 
+                    example: "1"
+                  id_type:
+                    description: Ticket type Id
+                    type: integer
+                    example: "31"
+                  id_status:
+                    description: Ticket status Id
+                    type: integer
+                    example: "1"
+                  id_status_last_update:
+                    description: Last update date of ticket status
+                    type: string
+                    format: date-time
+                    example: "2022-05-23 09:37:49"
+                  position:
+                    description: Ticket position
+                    type: integer
+                    example: "1"
+                  title: 
+                    description: Ticket title
+                    type: string
+                    example: "Ticket #1"
+                  id_priority:
+                    description: Ticket priority Id
+                    type: integer
+                    example: "1"
+                  id_group:
+                    description: Group Id
+                    type: integer
+                    example: "18"
+                  id_user_assigned:
+                    description: Opportunity client mamager id
+                    type: string
+                    example: "213"
+                  list_id_user_shared:
+                    description: Reason Id for cancellation
+                    type: array
+                    example: []
+                  description:
+                    description: Ticket description
+                    type: string
+                    example: "A description or note about this ticket"
+                  id_customer_supplier:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "28496"
+                  id_customer_supplier_contact:
+                    description: Customer or supplier Id
+                    type: integer
+                    example: "48560"
+                  id_opportunity:
+                    description: Opportunity Id
+                    type: integer
+                    example: "1985"
+                  id_project:
+                    description: Project Id
+                    type: integer
+                    example: "435"
+                  id_project_task: 
+                    description: Project task Id
+                    type: integer
+                    example: "486"
+                  skills:
+                    description: Skills Id
+                    type: array
+                    items:
+                      example: "52"
+                  date_first_answer_expected:
+                    description: Date of first expected response
+                    type: string
+                    format: date-time
+                    example: null
+                  date_first_answer_real:
+                    description: Actual date of first response
+                    type: string
+                    format: date-time
+                    example: null
+                  date_resolve_answer_expected:
+                    description: Date of resolution expected response
+                    type: string
+                    format: date-time
+                    example: null
+                  date_resolve_answer_real:
+                    description: Actual date of resolution response
+                    type: string
+                    format: date-time
+                    example: null
+                  creation_source:
+                    description: Creation source Id
+                    type: integer
+                    example: "3"
+                  creation_source_title:
+                    description: Creation source title
+                    type: string
+                    example: "API"
+                  custom_fields_list:
+                    description: List of custom fields
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        id:
+                          description: Custom field Id
+                          type: integer
+                        title:
+                          description:  Custom field title
+                          type: string
+                        value:
+                          description: Custom field number
+                          type: integer
+                        value_text: 
+                          description: Custom field value
+                          type: string
+                    example:
+                      - id: "3526"
+                        title: "Client satisfaction"
+                        value: "6144"
+                        value_text: "Low"
+                  creation_date:
+                    description: Creation date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  created_by:
+                    description: Id of the creator
+                    type: integer
+                    example: "213"
+                  update_date:
+                    description: Update date and time
+                    type: string
+                    format: date-time
+                    example: "2022-03-25 12:04:24"
+                  updated_by: 
+                    description: Id of the updater
+                    type: integer
+                    example: "213"

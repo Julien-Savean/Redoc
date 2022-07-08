@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Webhooks
+  summary: Tests
+  description: Get a example response for differents objects.
+  operationId: Webhooks_tests
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/webhooks/webhooks_tests.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/webhooks/webhooks_tests.yaml    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml 

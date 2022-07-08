@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Webhooks
+  summary: List
+  description: Get a list of all webhooks.
+  operationId: Webhooks_list
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/webhooks/webhooks_objects.yaml    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml  

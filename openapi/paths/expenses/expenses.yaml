@@ -1,8 +1,8 @@
 get:
   tags:
-    - Expenses
+    - Purchases
   summary: List
-  description: Get a list of all expenses.
+  description: Get a list of all purchases.
   operationId: Expenses_list
   security:
     - Bearer token: []
@@ -17,9 +17,9 @@ get:
       $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
-    - Expenses
+    - Purchases
   summary: Create
-  description: Create an expense.
+  description: Create a purchase.
   operationId: Expenses_create
   security:
     - Bearer token: []

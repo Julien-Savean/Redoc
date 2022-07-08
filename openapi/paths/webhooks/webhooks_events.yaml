@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Webhooks
+  summary: Events
+  description: Get a list of all events of webhooks.
+  operationId: Webhooks_events
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/webhooks/webhooks_events.yaml    
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml  

@@ -1,20 +1,29 @@
 - in: query
-  name: from
-  schema:
-    type: string
-    format: date-time
-  description: Search by purchase date
-- in: query
-  name: to
-  schema:
-    type: string
-    format: date-time
-  description: Search by due date
+  name: type
+  schema: 
+    type: integer
+  description: >
+    Document type
+
+    > 2 => Orders <br>
+    3 => Deliveries <br>
+    4 => Invoices
 - in: query
   name: id_supplier
   schema:
     type: integer
   description: Search by <u>[supplier](/#operation/Suppliers_list)</u> Id
+- in: query
+  name: id_user_assigned
+  schema:
+    type: string
+  description: <u>[Users with group](/#operation/Users_with_group)</u> Id associated with the oportunity
+- in: query
+  name: document_number
+  schema:
+    type: string
+    maxLength: 30
+  description: Document number
 - in: query
   name: fields
   schema:

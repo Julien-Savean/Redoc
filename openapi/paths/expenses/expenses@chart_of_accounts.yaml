@@ -1,6 +1,6 @@
 get:
   tags:
-    - Expenses
+    - Purchases
   summary: Chart of accounts
   description: Get a list of all chart of accounts.
   operationId: Expenses_chart_of_accounts_list

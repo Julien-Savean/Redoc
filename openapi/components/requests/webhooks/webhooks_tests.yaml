@@ -1,0 +1,60 @@
+- in: path
+  name: object
+  schema:
+    type: string
+    format: url
+  description: >
+    <table>
+      <tr> 
+        <td> Customer: </td><td> <code>/customers/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Supplier: </td><td> <code>/suppliers/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Contact: </td><td> <code>/contacts/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Opportunity: </td><td> <code>/opportunities/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Document: </td><td><code>/documents/test-webhook.php?id_type=1</code> <i>(quote)</i> <br>
+                                <code>/documents/test-webhook.php?id_type=2</code> <i>(order)</i> <br>
+                                <code>/documents/test-webhook.php?id_type=3</code> <i>(delivery)</i> <br>
+                                <code>/documents/test-webhook.php?id_type=4</code> <i>(invoice)</i> <br>
+                            </td>
+      </tr> 
+      <tr> 
+        <td> Product: </td><td> <code>/products/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Purchases: </td><td> <code>/expenses/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Supplier Document: </td><td><code>/suppliers-documents/test-webhook.php?id_type=2</code> <i>(order)</i> <br>
+                                         <code>/suppliers-documents/test-webhook.php?id_type=3</code> <i>(delivery)</i> <br>
+                                         <code>/suppliers-documents/test-webhook.php?id_type=4</code> <i>(invoice)</i> <br>
+                                      </td>
+      </tr> 
+      <tr> 
+        <td> Event: </td><td> <code>/events/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Note: </td><td> <code>/note/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Task: </td><td> <code>/tasks/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Time: </td><td> <code>/times/test-webhook.php</code> </td>
+      </tr> 
+      <tr> 
+        <td> Project: </td><td> <code>/projects/test-webhook.php-project</code> <i>(project)</i> <br> 
+                                <code>/projects/test-webhook.php-task</code> <i>(task)</i> <br>
+                                <code>/projects/test-webhook.php-subtask</code> <i>(subtask)</i> <br>
+                           </td>
+      </tr>  
+      <tr> 
+        <td> Ticket: </td><td> <code>/ticketing/test-webhook.php</code> </td>
+      </tr> 
+    </table>

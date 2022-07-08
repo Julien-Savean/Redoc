@@ -9,19 +9,19 @@ content:
             example: 48560
           id_status:
             description: >
-              Expense status Id
+              Purchase status Id
 
               > 0 = Draft <br>
               1 = Pending
             type: integer
             example: 0
           title:
-            description: Reference of the expense
+            description: Reference of the purchase
             type: string
             maxLength: 127
-            example: "Expense #1"
+            example: "Purchase #1"
           date:
-            description: Expense date
+            description: Purchase date
             type: string
             format: date-time
             example: "2022-04-01"
@@ -31,10 +31,10 @@ content:
             format: date-time
             example: "2022-05-01"
           description:
-            description: Expense description
+            description: Purchase description
             type: string
             maxLength: 255
-            example: A description or note about this expense
+            example: A description or note about this purchase
           id_chart_of_account_expenses:
             description:  <u>[Chart of accounts](/#operation/Expenses_chart_of_accounts_list)</u> Id
             type: string

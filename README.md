@@ -22,6 +22,9 @@ Bundles the definition to the dist folder.
 #### `npm test`
 Validates the definition.
 
+### `npx redoc-cli bundle dist.yaml`
+File to html.
+
 ## Contribution Guide
 
 Below is a sample contribution guide. The tools

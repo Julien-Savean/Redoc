@@ -23,8 +23,10 @@ tags:
     description: This section lists all documents-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
-  - name: Expenses
-    description: Thois section lists all expenses-related APIS.
+  - name: Purchases
+    description: This section lists all purchases-related APIS.
+  - name: Suppliers Documents
+    description: This section lists all suppliers documents-related APIS.
   - name: Events
     description: This section lists all event-related APIS.
   - name: Notes
@@ -39,6 +41,8 @@ tags:
     description: This section lists all ticket-related APIS.    
   - name: Users
     description: This section lists all user-related APIS.
+  - name: Webhooks
+    description: This section lists all webhooks-related APIs. 
 servers:
   - url: 'https://karlia.fr/app/api/v2'
 paths:
@@ -129,7 +133,11 @@ paths:
   /expenses/chart-of-account:
     $ref: paths/expenses/expenses@chart_of_accounts.yaml
   /expenses/chart-of-account-families:
-    $ref: paths/expenses/expenses@chart_of_accounts_families.yaml    
+    $ref: paths/expenses/expenses@chart_of_accounts_families.yaml 
+  /suppliers-documents:
+    $ref: paths/suppliers_documents/suppliers_documents.yaml
+  /suppliers-documents/{id}:
+    $ref: paths/suppliers_documents/suppliers_documents@{id}.yaml   
   /events:
     $ref: paths/events/events.yaml
   /events/{id}:
@@ -208,6 +216,12 @@ paths:
     $ref: paths/users/users_with_groups.yaml
   /users/skills:
     $ref: paths/users/skills.yaml
+  /webhooks:
+    $ref: paths/webhooks/webhooks.yaml
+  /webhooks/events:
+    $ref: paths/webhooks/webhooks_events.yaml
+  /{object}/test-webhook.php:
+    $ref: paths/webhooks/webhooks_tests.yaml
 components:
   securitySchemes:
     Bearer token:

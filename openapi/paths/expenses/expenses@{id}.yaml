@@ -1,15 +1,15 @@
 get:
   tags:
-    - Expenses
+    - Purchases
   summary: Show
-  description: Get one expense.
+  description: Get one purchase.
   operationId: Expenses_show
   security:
     - Bearer token: []
   parameters:
   - in: path
     name: id
-    description: <u>[Expense](/#operation/Expenses_list)</u> Id
+    description: <u>[Purchase](/#operation/Expenses_list)</u> Id
     schema:
       type: integer
     required: true
@@ -24,9 +24,9 @@ get:
       $ref: ../../components/responses/errors/500.yaml    
 post:
   tags:
-    - Expenses
+    - Purchases
   summary: Update
-  description: Update an expense.
+  description: Update a purchase.
   operationId: Expenses_update
   security:
     - Bearer token: []

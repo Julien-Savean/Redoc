@@ -1,0 +1,34 @@
+description: OK
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          description: Status of response
+          type: string
+          example: "success"
+        data:
+          description: Response of the request
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                description: Webhook Id
+                type: integer
+                example: "2"
+              callback_url:
+                description: Callback URL name
+                type: string
+                example: "Callback url name"
+              events:
+                description: List of webhook events
+                type: array
+                items:
+                  type: string
+                  example: "customer.created"
+              canceled:
+                description: Webhook canceled status
+                type: integer
+                

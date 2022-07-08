@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Suppliers Documents
+  summary: List
+  description: Get a list of all suppliers documents.
+  operationId: Suppliers_Documents_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/suppliers_documents/suppliers_documents_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/suppliers_documents/suppliers_documents_objects.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

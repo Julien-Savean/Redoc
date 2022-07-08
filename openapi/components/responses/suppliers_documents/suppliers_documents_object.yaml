@@ -8,7 +8,7 @@ content:
         id:
           description: Document Id
           type: integer
-          example: "2758"
+          example: "85"
         id_document_previous: 
           description: Previous document Id
           type: integer
@@ -28,11 +28,11 @@ content:
         id_type:
           description: Document type Id
           type: integer
-          example: "1"
+          example: "2"
         type_text: 
           description: Document type title
           type: string
-          example: "Quotes"
+          example: "Order"
         number:
           description: Document number
           type: integer
@@ -70,7 +70,7 @@ content:
         customer_reference:
           description: Customer reference
           type: string 
-          example: "C1234"
+          example: ""
         id_customer_supplier_contact:
           description: Customer Id
           type: integer
@@ -87,18 +87,6 @@ content:
           description: Discount value
           type: integer       
           example: 0
-        final_invoice:
-          description: Final Invoice
-          type: integer
-          example: "0"
-        deposit_type:
-          description: Deposit type
-          type: string
-          example: "percent"
-        deposit_value:
-          description: Deposit value
-          type: integer       
-          example: 0         
         total_without_tax: 
           description: Total HT
           type: number
@@ -130,22 +118,10 @@ content:
           type: string
           format: date-time
           example: "2022-06-16"
-        use_stripe_to_pay:
-          description: Stripe use
-          type: integer 
-          example: "0"
-        canceled:    
-          description: Cancellation
-          type: integer
-          example: "0"   
         id_document_template:
           description: Document template Id
           type: integer
           example: "0"
-        download_url:
-          description: download url
-          type: string 
-          example: ""
         products_list:
           description: Products list
           type: array

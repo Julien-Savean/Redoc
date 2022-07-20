@@ -34,6 +34,8 @@ tags:
     description: This section lists all documents-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
+  - name: Equipments
+    description: This section lists all product-related APIS.
   - name: Purchases
     description: This section lists all purchases-related APIS.
   - name: Suppliers Documents
@@ -1943,6 +1945,255 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/products_units'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /equipments:
+    get:
+      tags:
+        - Equipments
+      summary: List
+      description: Get a list of all equipments.
+      operationId: Equipments_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by title
+        - in: query
+          name: reference
+          schema:
+            type: string
+            maxLength: 30
+          description: Search by reference
+        - in: query
+          name: serial_number
+          schema:
+            type: string
+            maxLength: 127
+          description: Search by serial number
+        - in: query
+          name: id_customer_supplier
+          schema:
+            type: integer
+          description: Search by <u>[customer](/#operation/Customers_list)</u> Id
+        - in: query
+          name: fields
+          schema:
+            type: string
+          description: >
+            List of fields to be returned. *By default, all fields are
+            returned.* <br> **Each field must be separated by a comma without
+            space.**
+        - in: query
+          name: order
+          schema:
+            type: string
+            maxLength: 64
+          description: Name of the field to sort on
+        - in: query
+          name: direction
+          schema:
+            type: string
+            maxLength: 4
+          description: |
+            Direction for sorting
+            > ASC = Ascending, from A to Z. <br> DESC = Descending, from Z to A.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 100
+          description: |
+            Number of objects to be returned for paging
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Offset for paging
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_objects'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Equipments
+      summary: Create
+      description: Create an equipment.
+      operationId: Equipments_create
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/equipments_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_new_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /equipments/{id}:
+    get:
+      tags:
+        - Equipments
+      summary: Show
+      description: Get one equipment.
+      operationId: Equipments_show
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Equipments
+      summary: Update
+      description: Update an equipment.
+      operationId: Equipments_update
+      security:
+        - Bearer token: []
+      requestBody:
+        $ref: '#/components/requestBodies/equipments_update'
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_object'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      tags:
+        - Equipments
+      summary: Delete
+      description: Delete an equipment.
+      operationId: Equipments_delete
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example: null
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /equipments/custom-fields:
+    get:
+      tags:
+        - Equipments
+      summary: Custom fields
+      description: Get a list of all equipments custom fields.
+      operationId: Equipments_custom_fields_list
+      security:
+        - Bearer token: []
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_custom_fields'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /equipments/custom-fields/{field_id}:
+    get:
+      tags:
+        - Equipments
+      summary: Custom field values
+      description: Get values of equipments custom field.
+      operationId: Equipments_custom_field_values_list
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: field_id
+          description: >-
+            Equipment <u>[custom
+            field](/#operation/Equipments_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_custom_field_values'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+  /equipments/{id}/custom-fields/{field_id}:
+    post:
+      tags:
+        - Equipments
+      summary: Add/Update custom field
+      description: Add or update an equipment custom field.
+      operationId: Equipments_custom_field_values_add_update
+      security:
+        - Bearer token: []
+      parameters:
+        - in: path
+          name: id
+          description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: field_id
+          description: >-
+            Equipment <u>[custom
+            field](/#operation/Equipments_custom_fields_list)</u> Id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        $ref: '#/components/requestBodies/equipments_custom_field'
+      responses:
+        '200':
+          $ref: '#/components/responses/equipments_object'
+        '400':
+          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '500':
@@ -8498,6 +8749,310 @@ components:
                   - id: '3'
                     vat: '5.50'
                     title: VAT 5.5%
+    equipments_objects:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              pagination:
+                description: Pagination of results
+                type: object
+                properties:
+                  total:
+                    description: Number of results objects per response
+                    type: integer
+                    example: 14
+                  limit:
+                    description: Limit of objects per response
+                    type: integer
+                    example: 100
+                  offset:
+                    description: Offset of objects in the response
+                    type: integer
+                    example: 0
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Equipment Id
+                      type: integer
+                      example: '1'
+                    title:
+                      description: Equipment title
+                      type: string
+                      example: 'Equipment #1'
+                    reference:
+                      description: Equipment reference
+                      type: string
+                      example: Ref_equipment_1
+                    description:
+                      description: Equipment description
+                      type: string
+                      example: A description or note about this equipment
+                    serial_number:
+                      description: Equipment serial number
+                      type: string
+                      example: SN1234
+                    id_customer_supplier:
+                      description: Customer Id
+                      type: integer
+                      example: '28496'
+                    custom_fields_list:
+                      description: List of custom fields
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: Custom field Id
+                            type: integer
+                          title:
+                            description: Custom field title
+                            type: string
+                          value:
+                            description: Custom field number
+                            type: integer
+                          value_text:
+                            description: Custom field value
+                            type: string
+                      example:
+                        - id: '3671'
+                          title: tag
+                          value: '6338'
+                          value_text: tag1
+                    creation_date:
+                      description: Creation date and time
+                      type: string
+                      format: date-time
+                      example: '2022-07-20 12:38:28'
+                    created_by:
+                      description: Id of the creator
+                      type: integer
+                      example: '213'
+                    update_date:
+                      description: Update date and time
+                      type: string
+                      format: date-time
+                      example: '2022-07-20 12:38:28'
+                    updated_by:
+                      description: Id of the updater
+                      type: integer
+                      example: '213'
+    equipments_new_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: Equipment Id
+                type: integer
+                example: '1'
+              title:
+                description: Equipment title
+                type: string
+                example: 'Equipment #1'
+              reference:
+                description: Equipment reference
+                type: string
+                example: Ref_equipment_1
+              description:
+                description: Equipment description
+                type: string
+                example: A description or note about this equipment
+              serial_number:
+                description: Equipment serial number
+                type: string
+                example: SN1234
+              id_customer_supplier:
+                description: Customer Id
+                type: integer
+                example: '28496'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3671'
+                    title: tag
+                    value: '6338'
+                    value_text: tag1
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-07-20 12:38:28'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-07-20 12:38:28'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    equipments_object:
+      description: OK
+      content:
+        application/json:
+          schema:
+            description: Response of the request
+            type: object
+            properties:
+              id:
+                description: Equipment Id
+                type: integer
+                example: '1'
+              title:
+                description: Equipment title
+                type: string
+                example: 'Equipment #1'
+              reference:
+                description: Equipment reference
+                type: string
+                example: Ref_equipment_1
+              description:
+                description: Equipment description
+                type: string
+                example: A description or note about this equipment
+              serial_number:
+                description: Equipment serial number
+                type: string
+                example: SN1234
+              id_customer_supplier:
+                description: Customer Id
+                type: integer
+                example: '28496'
+              custom_fields_list:
+                description: List of custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Custom field Id
+                      type: integer
+                    title:
+                      description: Custom field title
+                      type: string
+                    value:
+                      description: Custom field number
+                      type: integer
+                    value_text:
+                      description: Custom field value
+                      type: string
+                example:
+                  - id: '3671'
+                    title: tag
+                    value: '6338'
+                    value_text: tag1
+              creation_date:
+                description: Creation date and time
+                type: string
+                format: date-time
+                example: '2022-07-20 12:38:28'
+              created_by:
+                description: Id of the creator
+                type: integer
+                example: '213'
+              update_date:
+                description: Update date and time
+                type: string
+                format: date-time
+                example: '2022-07-20 12:38:28'
+              updated_by:
+                description: Id of the updater
+                type: integer
+                example: '213'
+    equipments_custom_fields:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Equipment custom field Id
+                      type: integer
+                      example: '3671'
+                    title:
+                      description: Equipment custom field title
+                      type: string
+                      example: tag
+                    type:
+                      description: Equipment custom field type
+                      type: string
+                      example: Tags
+                    with_values:
+                      description: Custom field with values
+                      type: boolean
+                      example: 'true'
+    equipments_custom_field_values:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                description: Status of response
+                type: string
+                example: success
+              data:
+                description: Response of the request
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: Equipment custom field value Id
+                      type: integer
+                    title:
+                      description: Equipment custom field value title
+                      type: string
+                example:
+                  - id: '3671'
+                    title: 'tag '
+                  - id": '6338'
+                    title: tag1
     expenses_objects:
       description: OK
       content:
@@ -17395,6 +17950,116 @@ components:
                 type: string
                 maxLength: 127
                 example: 'Category #1'
+    equipments_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: Equipment title
+                type: string
+                maxLength: 127
+                example: 'Equipment #1'
+              reference:
+                description: Equipment reference
+                type: string
+                maxLength: 30
+                example: Ref_equipment_1
+              description:
+                description: Equipment description
+                type: string
+                example: A description or note about this equipment
+              serial_number:
+                description: Equipment serial number
+                type: integer
+                example: SN1234
+              id_customer_supplier:
+                description: <u>[Customer](/#operation/Customers_list)</u> Id
+                type: integer
+                example: 28496
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Equipments_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3671
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Equipments_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6338
+    equipments_update:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                description: Equipment title
+                type: string
+                maxLength: 127
+                example: 'Equipment #1'
+              reference:
+                description: Equipment reference
+                type: string
+                maxLength: 30
+                example: Ref_equipment_1
+              description:
+                description: Equipment description
+                type: string
+                example: A description or note about this equipment
+              serial_number:
+                description: Equipment serial number
+                type: integer
+                example: SN1234
+              id_customer_supplier:
+                description: <u>[Customer](/#operation/Customers_list)</u> Id
+                type: integer
+                example: 28496
+              custom_fields:
+                description: Custom fields
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      description: >-
+                        <u>[Custom
+                        field](/#operation/Equipments_custom_fields_list)</u> Id
+                      type: integer
+                      example: 3671
+                    value:
+                      description: >-
+                        <u>[Custom field
+                        value](/#operation/Equipments_custom_field_values_list)</u>
+                        Id
+                      type: string
+                      example: 6338
+    equipments_custom_field:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - field_value
+            properties:
+              field_value:
+                description: >-
+                  <u>[Custom field
+                  value](/#operation/Equipments_custom_field_values_list)</u>
+                type: integer
+                example: 6338
     expenses_create:
       content:
         application/json:

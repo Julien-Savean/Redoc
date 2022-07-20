@@ -4660,10 +4660,13 @@ paths:
                 <td>Document - Invoice</td> <td><code>/documents/test-webhook.php?id_type=4</code></td>
               </tr> 
               <tr> 
-                <td>Product</td> <td><code>/products/test-webhook.php</code> </td>
+                <td>Product</td> <td><code>/products/test-webhook.php</code></td>
               </tr> 
               <tr> 
-                <td>Purchases</td> <td><code>/expenses/test-webhook.php</code> </td>
+                <td>Equipment</td> <td><code>/equipments/test-webhook.php</code></td>
+              </tr> 
+              <tr> 
+                <td>Purchases</td> <td><code>/expenses/test-webhook.php</code></td>
               </tr> 
               <tr> 
                 <td>Supplier Document - Order</td> <td><code>/suppliers-documents/test-webhook.php?id_type=2</code></td>
@@ -14146,7 +14149,7 @@ components:
                           description: Id of the updater
                           type: integer
                           example: '213'
-              - title: Opportutnity
+              - title: Opportunity
                 type: object
                 properties:
                   object:
@@ -14754,6 +14757,97 @@ components:
                           type: string
                           format: date-time
                           example: '2022-03-25 12:04:24'
+                        updated_by:
+                          description: Id of the updater
+                          type: integer
+                          example: '213'
+              - title: Equipment
+                type: object
+                properties:
+                  object:
+                    description: Object of the webhook
+                    type: string
+                    example: equipment
+                  trigger:
+                    description: Trigger name
+                    type: object
+                    example: equipment.updated
+                  id:
+                    description: Object Id
+                    type: integer
+                    example: '2'
+                  update_date:
+                    description: Object date
+                    type: string
+                    format: date-time
+                    example: '2022-07-20 10:29:02'
+                  data:
+                    description: Response of the request
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: Equipment Id
+                          type: integer
+                          example: '1'
+                        title:
+                          description: Equipment title
+                          type: string
+                          example: 'Equipment #1'
+                        reference:
+                          description: Equipment reference
+                          type: string
+                          example: Ref_equipment_1
+                        description:
+                          description: Equipment description
+                          type: string
+                          example: A description or note about this equipment
+                        serial_number:
+                          description: Equipment serial number
+                          type: string
+                          example: SN1234
+                        id_customer_supplier:
+                          description: Customer Id
+                          type: integer
+                          example: '28496'
+                        custom_fields_list:
+                          description: List of custom fields
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                description: Custom field Id
+                                type: integer
+                              title:
+                                description: Custom field title
+                                type: string
+                              value:
+                                description: Custom field number
+                                type: integer
+                              value_text:
+                                description: Custom field value
+                                type: string
+                          example:
+                            - id: '3671'
+                              title: tag
+                              value: '6338'
+                              value_text: tag1
+                        creation_date:
+                          description: Creation date and time
+                          type: string
+                          format: date-time
+                          example: '2022-07-20 12:38:28'
+                        created_by:
+                          description: Id of the creator
+                          type: integer
+                          example: '213'
+                        update_date:
+                          description: Update date and time
+                          type: string
+                          format: date-time
+                          example: '2022-07-20 12:38:28'
                         updated_by:
                           description: Id of the updater
                           type: integer
@@ -17975,6 +18069,7 @@ components:
               serial_number:
                 description: Equipment serial number
                 type: integer
+                maxLength: 127
                 example: SN1234
               id_customer_supplier:
                 description: <u>[Customer](/#operation/Customers_list)</u> Id
@@ -18022,6 +18117,7 @@ components:
               serial_number:
                 description: Equipment serial number
                 type: integer
+                maxLength: 127
                 example: SN1234
               id_customer_supplier:
                 description: <u>[Customer](/#operation/Customers_list)</u> Id

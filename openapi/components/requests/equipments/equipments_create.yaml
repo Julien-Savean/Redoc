@@ -22,6 +22,7 @@ content:
           serial_number:
             description: Equipment serial number
             type: integer
+            maxLength: 127
             example: "SN1234"
           id_customer_supplier:
             description: <u>[Customer](/#operation/Customers_list)</u> Id

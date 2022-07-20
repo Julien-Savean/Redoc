@@ -30,10 +30,13 @@
         <td>Document - Invoice</td> <td><code>/documents/test-webhook.php?id_type=4</code></td>
       </tr> 
       <tr> 
-        <td>Product</td> <td><code>/products/test-webhook.php</code> </td>
+        <td>Product</td> <td><code>/products/test-webhook.php</code></td>
       </tr> 
       <tr> 
-        <td>Purchases</td> <td><code>/expenses/test-webhook.php</code> </td>
+        <td>Equipment</td> <td><code>/equipments/test-webhook.php</code></td>
+      </tr> 
+      <tr> 
+        <td>Purchases</td> <td><code>/expenses/test-webhook.php</code></td>
       </tr> 
       <tr> 
         <td>Supplier Document - Order</td> <td><code>/suppliers-documents/test-webhook.php?id_type=2</code></td>

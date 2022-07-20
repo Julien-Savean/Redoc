@@ -1,0 +1,76 @@
+get:
+  tags:
+    - Equipments
+  summary: Show
+  description: Get one equipment.
+  operationId: Equipments_show
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/equipments/equipments_object.yaml       
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Equipments
+  summary: Update
+  description: Update an equipment.
+  operationId: Equipments_update
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/equipments/equipments_update.yaml
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      $ref: ../../components/responses/equipments/equipments_object.yaml      
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml      
+delete:
+  tags:
+    - Equipments
+  summary: Delete
+  description: Delete an equipment.
+  operationId: Equipments_delete
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            example:   
+    '401':
+      $ref: ../../components/responses/errors/401.yaml
+    '500': 
+      $ref: ../../components/responses/errors/500.yaml

@@ -1,0 +1,32 @@
+post:
+  tags:
+    - Equipments
+  summary: Add/Update custom field
+  description:  Add or update an equipment custom field.
+  operationId: Equipments_custom_field_values_add_update
+  security:
+    - Bearer token: []
+  parameters:
+  - in: path
+    name: id
+    description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  - in: path
+    name: field_id
+    description: Equipment <u>[custom field](/#operation/Equipments_custom_fields_list)</u> Id
+    schema:
+      type: integer
+    required: true
+  requestBody:
+    $ref: ../../components/requests/equipments/equipments_custom_field.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/equipments/equipments_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

@@ -2,7 +2,7 @@ get:
   tags:
     - Webhooks
   summary: Tests
-  description: Get a example response for differents objects.
+  description: Get an example response for differents objects.
   operationId: Webhooks_tests
   security:
     - Bearer token: []

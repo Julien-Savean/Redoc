@@ -1,0 +1,38 @@
+get:
+  tags:
+    - Equipments
+  summary: List
+  description: Get a list of all equipments.
+  operationId: Equipments_list
+  security:
+    - Bearer token: []
+  parameters:
+    $ref: ../../components/requests/equipments/equipments_list.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/equipments/equipments_objects.yaml           
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+post:
+  tags:
+    - Equipments
+  summary: Create
+  description: Create an equipment.
+  operationId: Equipments_create
+  security:
+    - Bearer token: []
+  requestBody:
+    $ref: ../../components/requests/equipments/equipments_create.yaml
+  responses:
+    '200':
+      $ref: ../../components/responses/equipments/equipments_new_object.yaml
+    '400': 
+      $ref: ../../components/responses/errors/400.yaml       
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    
+
+

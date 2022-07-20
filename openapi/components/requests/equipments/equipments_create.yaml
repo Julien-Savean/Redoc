@@ -1,0 +1,43 @@
+content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - title
+        properties:
+          title:
+            description: Equipment title
+            type: string
+            maxLength: 127
+            example: "Equipment #1"
+          reference:
+            description: Equipment reference
+            type: string
+            maxLength: 30
+            example: "Ref_equipment_1"
+          description:
+            description: Equipment description
+            type: string
+            example: "A description or note about this equipment"
+          serial_number:
+            description: Equipment serial number
+            type: integer
+            example: "SN1234"
+          id_customer_supplier:
+            description: <u>[Customer](/#operation/Customers_list)</u> Id
+            type: integer
+            example: 28496
+          custom_fields:
+            description: Custom fields
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  description: <u>[Custom field](/#operation/Equipments_custom_fields_list)</u> Id
+                  type: integer
+                  example: 3671
+                value:
+                  description: <u>[Custom field value](/#operation/Equipments_custom_field_values_list)</u> Id
+                  type: string
+                  example: 6338

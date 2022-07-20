@@ -1,0 +1,15 @@
+get:
+  tags:
+    - Equipments
+  summary: Custom fields
+  description: Get a list of all equipments custom fields.
+  operationId: Equipments_custom_fields_list
+  security:
+    - Bearer token: []
+  responses:
+    '200':
+      $ref: ../../components/responses/equipments/equipments_custom_fields.yaml          
+    '401':
+      $ref: ../../components/responses/errors/401.yaml 
+    '500':
+      $ref: ../../components/responses/errors/500.yaml    

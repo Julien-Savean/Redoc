@@ -23,6 +23,8 @@ tags:
     description: This section lists all documents-related APIS.
   - name: Products
     description: This section lists all product-related APIS.
+  - name: Equipments
+    description: This section lists all product-related APIS.
   - name: Purchases
     description: This section lists all purchases-related APIS.
   - name: Suppliers Documents
@@ -126,6 +128,16 @@ paths:
     $ref: paths/products/products@vat.yaml
   /products/units:
     $ref: paths/products/products@units.yaml
+  /equipments:
+    $ref: paths/equipments/equipments.yaml
+  /equipments/{id}:
+    $ref: paths/equipments/equipments@{id}.yaml
+  /equipments/custom-fields:
+    $ref: paths/equipments/equipments@custom_fields.yaml
+  /equipments/custom-fields/{field_id}:
+    $ref: paths/equipments/equipments@custom_fields@{field_id}.yaml
+  /equipments/{id}/custom-fields/{field_id}:
+    $ref: paths/equipments/equipments@{id}@custom_fields@{field_id}.yaml
   /expenses:
     $ref: paths/expenses/expenses.yaml
   /expenses/{id}:

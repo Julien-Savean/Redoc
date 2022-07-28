@@ -51,6 +51,10 @@ content:
             description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
             type: integer
             example: 486
+          id_equipment:
+            description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+            type: integer
+            example: "1"
           list_id_user_shared:
             description: <u>[User](/#operation/Users)</u> shared Id
             type: integer

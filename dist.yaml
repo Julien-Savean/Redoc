@@ -4221,6 +4221,11 @@ paths:
             type: integer
           description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
         - in: query
+          name: id_equipment
+          schema:
+            type: integer
+          description: Search by <u>[Equipment](/#operation/Equipments_list)</u> Id
+        - in: query
           name: fields
           schema:
             type: string
@@ -12684,6 +12689,10 @@ components:
                       description: Project task Id
                       type: integer
                       example: '486'
+                    id_equipment:
+                      description: Equipment Id
+                      type: integer
+                      example: '1'
                     skills:
                       description: Skills Id
                       type: array
@@ -12838,6 +12847,10 @@ components:
                 description: Project task Id
                 type: integer
                 example: '486'
+              id_equipment:
+                description: Equipment Id
+                type: integer
+                example: '1'
               skills:
                 description: Skills Id
                 type: array
@@ -12992,6 +13005,10 @@ components:
                 description: Project task Id
                 type: integer
                 example: '486'
+              id_equipment:
+                description: Equipment Id
+                type: integer
+                example: '1'
               skills:
                 description: Skills Id
                 type: array
@@ -19318,6 +19335,10 @@ components:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: 486
+              id_equipment:
+                description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+                type: integer
+                example: '1'
               list_id_user_shared:
                 description: <u>[User](/#operation/Users)</u> shared Id
                 type: integer
@@ -19397,6 +19418,10 @@ components:
                 description: <u>[Project task](/#operation/Projects_tasks_list)</u> Id
                 type: integer
                 example: 486
+              id_equipment:
+                description: <u>[Equipment](/#operation/Equipments_list)</u> Id
+                type: integer
+                example: '1'
               list_id_user_shared:
                 description: <u>[User](/#operation/Users)</u> shared Id
                 type: integer

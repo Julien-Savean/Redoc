@@ -77,6 +77,10 @@ content:
           description: Project task Id
           type: integer
           example: "486"
+        id_equipment:
+            description: Equipment Id
+            type: integer
+            example: "1"
         skills:
           description: Skills Id
           type: array

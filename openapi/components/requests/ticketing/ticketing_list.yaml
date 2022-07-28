@@ -64,6 +64,11 @@
     type: integer
   description: Search by <u>[project task](/#operation/Projects_tasks_list)</u> Id
 - in: query
+  name: id_equipment
+  schema:
+    type: integer
+  description: Search by <u>[Equipment](/#operation/Equipments_list)</u> Id
+- in: query
   name: fields
   schema:
     type: string
